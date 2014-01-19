@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        menu.cpp
+        menu.cpp \
+    mainlocator.cpp \
+    indicatordrl.cpp
 
-HEADERS  += menu.h
+HEADERS  += menu.h \
+    mainlocator.h \
+    indicatordrl.h
 
-FORMS    += menu.ui
+FORMS    += menu.ui \
+    indicatordrl.ui

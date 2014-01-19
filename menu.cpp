@@ -14,5 +14,8 @@ Menu::~Menu()
 
 void Menu::on_ButtonIndicatorDRL_clicked()
 {
-
+    if(DRL)
+        return;
+    DRL=new IndicatorDRL;
+    DRL->show();
 }
