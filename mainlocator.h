@@ -27,6 +27,7 @@ class MainLocator : public QGLWidget
         qreal GetRandomCoord(const quint8,const bool rsign=false);
         qint8 GetRandomSign();
     private:
+        bool not_clean;
         quint16 seconds;
         QTimer* timer;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
