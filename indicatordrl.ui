@@ -18,17 +18,49 @@
   <property name="windowTitle">
    <string>Индикатор ДРЛ</string>
   </property>
-  <widget class="QWidget" name="RenderIndicator" native="true">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>500</width>
-     <height>500</height>
+     <width>503</width>
+     <height>503</height>
     </rect>
    </property>
+   <layout class="QGridLayout" name="RenderLayout">
+    <item row="0" column="0">
+     <widget class="MainLocator" name="RenderIndicator" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>501</width>
+        <height>501</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>800</width>
+        <height>800</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MainLocator</class>
+   <extends>QWidget</extends>
+   <header>mainlocator.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

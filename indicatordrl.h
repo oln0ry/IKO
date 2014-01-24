@@ -3,20 +3,21 @@
 
 #include <QWidget>
 
-namespace Ui {
-class IndicatorDRL;
+namespace Ui
+{
+    class IndicatorDRL;
 }
 
 class IndicatorDRL : public QWidget
 {
     Q_OBJECT
 
-public:
-    explicit IndicatorDRL(QWidget *parent = 0);
-    ~IndicatorDRL();
+    public:
+        explicit IndicatorDRL(QWidget *parent = 0);
+        ~IndicatorDRL();
 
-private:
-    Ui::IndicatorDRL *ui;
+    private:
+        Ui::IndicatorDRL *ui;
 };
 
 #endif // INDICATORDRL_H
