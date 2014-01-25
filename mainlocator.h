@@ -13,6 +13,8 @@ class MainLocator : public QGLWidget
         void ChangeFPS(qreal fps);
         void SetSettings(const QString,const quint8);
         QColor SelectColor(const QString,const QString);
+        bool IsActive();
+        bool show;
 
     signals:
 

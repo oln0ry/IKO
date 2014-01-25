@@ -3,6 +3,11 @@
 #include<QTime>
 #include<QTimer>
 #include"QDebug"
+
+#ifndef GL_MULTISAMPLE
+#define GL_MULTISAMPLE  0x809D
+#endif
+
 #define GetRadianValue(radian) M_PI*radian/180
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
@@ -87,8 +92,10 @@ void MainLocator::paintGL()
         glVertex2d((**line_position)["x"],(**line_position)["y"]);
     glEnd();
 
-    DrawTrash();
-    DrawRange();
+    if(!trash.isEmpty())
+        DrawTrash();
+    if(!range.isEmpty())
+        DrawRange();
     if(!azimuth.isEmpty())
         DrawAzimuth();
     glPopMatrix();
@@ -97,25 +104,26 @@ void MainLocator::paintGL()
 
 void MainLocator::ChangeFPS(qreal fps)
 {
-    if(fps<=0)
-            fps=24;
-    if(timer->isActive())
+    if(IsActive())
         timer->stop();
-    timer->start(fps);
+    if(fps>0)
+        timer->start(fps);
+}
+
+bool MainLocator::IsActive()
+{
+    return timer->isActive();
 }
 
 void MainLocator::SetSettings(const QString option,const quint8 v)
 {
+    settings[option]=v;
     if(option=="azimuth_marks")
-    {
-        settings[option]=v;
         GenerationAzimuth();
-    }
     else if(option=="range_marks")
-    {
-        settings[option]=v;
         GenerationRange();
-    }
+    else if(option=="scale")
+        GenerationRange();
 }
 
 QColor MainLocator::SelectColor(const QString option,const QString title="")
@@ -155,21 +163,43 @@ void MainLocator::GenerationTrash()
 void MainLocator::GenerationRange()
 {
     QHash<QString,qreal>cache;
-    qreal i=0,delta;
+    qreal i=0.0f,delta,distance;
+    quint8 j=0,k=0;
     range.clear();
-    switch(settings["range_marks"])
+
+    switch(settings["scale"])
     {
-        case 0:
-            return;
+        case 2:
+            distance=1.0f/400;
+            break;
         case 1:
-            delta=0.2;
+            distance=1.0f/300;
             break;
         default:
-            delta=10;
+            distance=1.0f/150;
+    }
+
+    switch(settings["range_marks"])
+    {
+        case 1:
+            delta=distance*10;
+            j=5;
+            break;
+        case 0:
+            return;
+        default:
+            delta=distance*50;
+            j=1;
     }
 
     while(i<=1)
     {
+        if(k%j==0)
+            cache["width"]=3.5f;
+        else
+            cache["width"]=1.0f;
+        k++;
+
         for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
         {
             cache["angle"]=(*it)["angle"];
@@ -177,7 +207,7 @@ void MainLocator::GenerationRange()
             cache["y"]=i*(*it)["y"];
             range[i*250].append(cache);
         }
-        i+=0.2;
+        i+=delta;
     }
 }
 
@@ -188,11 +218,11 @@ void MainLocator::GenerationAzimuth()
     azimuth.clear();
     switch(settings["azimuth_marks"])
     {
-        case 0:
-            return;
         case 1:
             delta=30;
             break;
+        case 0:
+            return;
         default:
             delta=10;
     }
@@ -203,7 +233,6 @@ void MainLocator::GenerationAzimuth()
         cache["x"]=(*it)["x"];
         cache["y"]=(*it)["y"];
         cache["width"]=(it-radians.begin())%30>0 ? 1.0 : 3.5;
-        //qDebug()<<cache["width"];
         azimuth.append(cache);
     }
 }
@@ -257,12 +286,14 @@ void MainLocator::DrawTrash()
     qreal alpha;
     for(QVector<QHash<QString,qreal> >::const_iterator it=trash.begin();it<trash.end();it++)
     {
-        alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
-        if(not_clean && alpha<0)
+        if(show)
+            alpha=1;
+        else
         {
-            alpha+=2*M_PI;
+            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
+            if(not_clean && alpha<0)
+                alpha+=2*M_PI;
         }
-
 
         if(alpha>0)
         {
@@ -282,21 +313,24 @@ void MainLocator::DrawTrash()
  */
 void MainLocator::DrawRange()
 {
-    glLineWidth(1.0);
     qreal alpha;
     for(QHash<quint16,QVector<QHash<QString,qreal> > >::const_iterator it=range.begin();it!=range.end();it++)
     {
         glBegin(GL_LINE_STRIP);
+        //glLineWidth((*ct)["width"]);
         for(QVector<QHash<QString,qreal> >::const_iterator ct=(*it).begin();ct<(*it).end();ct++)
         {
-            alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01);
-            if(not_clean && alpha<0)
+            if(show)
+                alpha=1;
+            else
             {
-                alpha+=2*M_PI;
+                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01);
+                if(not_clean && alpha<0)
+                    alpha+=2*M_PI;
             }
-
             if(alpha>0)
             {
+
                 alpha=alpha<0.4 ? 1 : 0.4/alpha;
                 glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
                 //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
@@ -316,12 +350,14 @@ void MainLocator::DrawAzimuth()
     qreal alpha;
     for(QVector<QHash<QString,qreal> >::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
-        alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
-        if(not_clean && alpha<0)
+        if(show)
+            alpha=1;
+        else
         {
-            alpha+=2*M_PI;
+            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
+            if(not_clean && alpha<0)
+                alpha+=2*M_PI;
         }
-
         if(alpha>0)
         {
             glLineWidth((*it)["width"]);

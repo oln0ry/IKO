@@ -27,6 +27,10 @@ private slots:
 
     void on_SelectScale_currentIndexChanged(int index);
 
+    void on_ChangeLocatorState_clicked();
+
+    void on_ChangeViewStateAll_clicked();
+
 private:
         Ui::IndicatorDRL *ui;
 };
