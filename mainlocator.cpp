@@ -8,7 +8,8 @@
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
     not_clean=false;
-    qsrand(seconds=QTime(0,0,0).secsTo(QTime::currentTime()));
+    Color=new QColorDialog(this);
+    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     //Переведём все используемые градусы в радианы
     QHash<QString,qreal>radians;
@@ -34,11 +35,9 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     GenerationAzimuth();
 
     timer=new QTimer(this);
-    //if(!timer || !timer->isActive())
-    //{
-        connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
-        timer->start(30);
-    //}
+
+    connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
+    ChangeFPS(fps);
 }
 
 MainLocator::~MainLocator()
@@ -90,9 +89,40 @@ void MainLocator::paintGL()
 
     DrawTrash();
     DrawRange();
-    DrawAzimuth();
+    if(!azimuth.isEmpty())
+        DrawAzimuth();
     glPopMatrix();
     //swapBuffers();
+}
+
+void MainLocator::ChangeFPS(qreal fps)
+{
+    if(fps<=0)
+            fps=24;
+    if(timer->isActive())
+        timer->stop();
+    timer->start(fps);
+}
+
+void MainLocator::SetSettings(const QString option,const quint8 v)
+{
+    if(option=="azimuth_marks")
+    {
+        settings[option]=v;
+        GenerationAzimuth();
+    }
+    else if(option=="range_marks")
+    {
+        settings[option]=v;
+        GenerationRange();
+    }
+}
+
+QColor MainLocator::SelectColor(const QString option,const QString title="")
+{
+    if(!title.isEmpty())
+        Color->setWindowTitle("title");
+    return color[option]=Color->getColor();
 }
 
 /**
@@ -125,7 +155,19 @@ void MainLocator::GenerationTrash()
 void MainLocator::GenerationRange()
 {
     QHash<QString,qreal>cache;
-    qreal i=0;
+    qreal i=0,delta;
+    range.clear();
+    switch(settings["range_marks"])
+    {
+        case 0:
+            return;
+        case 1:
+            delta=0.2;
+            break;
+        default:
+            delta=10;
+    }
+
     while(i<=1)
     {
         for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
@@ -142,11 +184,26 @@ void MainLocator::GenerationRange()
 void MainLocator::GenerationAzimuth()
 {
     QHash<QString,qreal>cache;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it+=10)
+    quint8 delta;
+    azimuth.clear();
+    switch(settings["azimuth_marks"])
+    {
+        case 0:
+            return;
+        case 1:
+            delta=30;
+            break;
+        default:
+            delta=10;
+    }
+
+    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it+=delta)
     {
         cache["angle"]=(*it)["angle"];
         cache["x"]=(*it)["x"];
         cache["y"]=(*it)["y"];
+        cache["width"]=(it-radians.begin())%30>0 ? 1.0 : 3.5;
+        //qDebug()<<cache["width"];
         azimuth.append(cache);
     }
 }
@@ -169,7 +226,7 @@ qint8 MainLocator::GetRandomSign()
 void MainLocator::LocatorArea()
 {
     //glColor3f(static_cast<GLfloat>(255/255.0),static_cast<GLfloat>(153/255.0),static_cast<GLfloat>(0/255.0));// Цвет выделенной области
-    qglColor(Qt::black);
+    color["locator"].isValid() ? qglColor(color["locator"]) : qglColor(Qt::black);
     glBegin(GL_TRIANGLE_FAN);
         for(QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator it=circle.begin();it<circle.end();it++)
             glVertex2d((**it)["x"],(**it)["y"]);
@@ -257,7 +314,6 @@ void MainLocator::DrawRange()
 void MainLocator::DrawAzimuth()
 {
     qreal alpha;
-    glLineWidth(1.0);
     for(QVector<QHash<QString,qreal> >::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
         alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
@@ -268,11 +324,12 @@ void MainLocator::DrawAzimuth()
 
         if(alpha>0)
         {
+            glLineWidth((*it)["width"]);
             alpha=alpha<0.6 ? 1 : 0.6/alpha;
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
             //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
-            glVertex2d(0.0, 0.0);
+            glVertex2d(0.0,0.0);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
         }
