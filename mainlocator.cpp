@@ -13,12 +13,17 @@
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
     not_clean=false;
+    show=false;
+    show_trash=true;
+    options["brightness"]=1.0f;
+    options["interval"]=0.6f;
+    options["focus"]=1.0f;
     Color=new QColorDialog(this);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     //Переведём все используемые градусы в радианы
     QHash<QString,qreal>radians;
-    for(quint16 i=0;i<360;i++)
+    for(quint16 i=0;i<=360;i++)
     {
         radians["angle"]=GetRadianValue(i);
         radians["x"]=qFastCos(radians["angle"]);
@@ -69,7 +74,7 @@ void MainLocator::resizeGL(int nWidth, int nHeight)
     glLoadIdentity();
 
     qreal ratio=static_cast<GLfloat>(nHeight)/static_cast<GLfloat>(nWidth);
-    glOrtho(-1.0/ratio, 1.0/ratio, -1.0, 1.0, 0.0, 0.0);
+    glOrtho(-1.0f/ratio, 1.0f/ratio, -1.0f, 1.0f, 0.0f, 0.0f);
     glViewport(0,0,static_cast<GLint>(nWidth),static_cast<GLint>(nHeight));
 }
 
@@ -78,21 +83,21 @@ void MainLocator::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // чистим буфер изображения и буфер глубины
     glLoadIdentity(); // загружаем матрицу
     glPushMatrix();
-    glLineWidth(2.0);
+    glLineWidth(2.0f*options["focus"]);
     //glOrtho(0,wax,way,0,1,0); // подготавливаем плоскости для матрицы
     //glOrtho(0,wax,way,0,1,0);
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     LocatorArea();
 
-    glColor3f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262));//перерисовка линии
+    glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),options["brightness"]);//перерисовка линии
     //glColor3f(static_cast<GLfloat>(153/255.0),static_cast<GLfloat>(204/255.0),static_cast<GLfloat>(153/255.0));//перерисовка линии
     glBegin(GL_LINES);
         glVertex2d(static_cast<GLdouble>(0.0),static_cast<GLdouble>(0.0));
         glVertex2d((**line_position)["x"],(**line_position)["y"]);
     glEnd();
 
-    if(!trash.isEmpty())
+    if(show_trash && !trash.isEmpty())
         DrawTrash();
     if(!range.isEmpty())
         DrawRange();
@@ -123,8 +128,23 @@ void MainLocator::SetSettings(const QString option,const quint8 v)
     else if(option=="range_marks")
         GenerationRange();
     else if(option=="scale")
-        GenerationRange();
+      GenerationRange();
+    updateGL();
 }
+
+void MainLocator::SetSettings(const QString option,const qreal v)
+{
+    options[option]=v;
+    if(option=="brightness");
+    else if(option=="interval");
+    else if(option=="focus");
+    else if(option=="varu");
+    else if(option=="trahs_begin");
+    else if(option=="trahs_end");
+    else return;
+    updateGL();
+}
+
 
 QColor MainLocator::SelectColor(const QString option,const QString title="")
 {
@@ -144,17 +164,17 @@ void MainLocator::GenerationTrash()
 {
     quint8 density=20; //Плотность (густота, кучность) помех
     QHash<QString,qreal>cache;
-    qreal begin=0,
-          end=30,
-          rand;
+    qreal rand;
+    trash.clear();
+
     for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
     {
         cache["angle"]=(*it)["angle"];
         for(qint8 k=0,t=qrand()%density;k<t;k++)
         {
             rand=GetRandomCoord(6);
-            cache["x"]=end*(*it)["x"]*(rand+begin);
-            cache["y"]=end*(*it)["y"]*(rand+begin);
+            cache["x"]=settings["trash_end"]*(*it)["x"]*(rand+settings["trash_begin"]);
+            cache["y"]=settings["trash_end"]*(*it)["y"]*(rand+settings["trash_begin"]);
             trash.append(cache);
         }
     }
@@ -232,7 +252,7 @@ void MainLocator::GenerationAzimuth()
         cache["angle"]=(*it)["angle"];
         cache["x"]=(*it)["x"];
         cache["y"]=(*it)["y"];
-        cache["width"]=(it-radians.begin())%30>0 ? 1.0 : 3.5;
+        cache["width"]=(it-radians.begin())%30>0 ? 1.0f : 3.5f;
         azimuth.append(cache);
     }
 }
@@ -248,8 +268,8 @@ qreal MainLocator::GetRandomCoord(const quint8 accuracy,const bool rsign)
 qint8 MainLocator::GetRandomSign()
 {
     if(rand()%2)
-        return 1.0;
-    return-1.0;
+        return 1.0f;
+    return-1.0f;
 }
 
 void MainLocator::LocatorArea()
@@ -281,25 +301,25 @@ void MainLocator::ContinueSearch()
  */
 void MainLocator::DrawTrash()
 {
-    glPointSize(2);
+    glPointSize(2*options["focus"]);
     glEnable(GL_ALPHA_TEST);
     qreal alpha;
     for(QVector<QHash<QString,qreal> >::const_iterator it=trash.begin();it<trash.end();it++)
     {
         if(show)
-            alpha=1;
+            alpha=1.0f;
         else
         {
-            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
+            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
 
         if(alpha>0)
         {
-            alpha=alpha<0.6 ? 1 : 0.6/alpha;
+            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
             glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
+            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
             //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
@@ -321,18 +341,18 @@ void MainLocator::DrawRange()
         for(QVector<QHash<QString,qreal> >::const_iterator ct=(*it).begin();ct<(*it).end();ct++)
         {
             if(show)
-                alpha=1;
+                alpha=1.0f;
             else
             {
-                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01);
+                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01f);
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
             if(alpha>0)
             {
 
-                alpha=alpha<0.4 ? 1 : 0.4/alpha;
-                glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
+                alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
+                glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
                 //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
                 glVertex2d((*ct)["x"],(*ct)["y"]);
             }
@@ -351,21 +371,21 @@ void MainLocator::DrawAzimuth()
     for(QVector<QHash<QString,qreal> >::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
         if(show)
-            alpha=1;
+            alpha=1.0f;
         else
         {
-            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01);
+            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
         if(alpha>0)
         {
-            glLineWidth((*it)["width"]);
-            alpha=alpha<0.6 ? 1 : 0.6/alpha;
+            glLineWidth((*it)["width"]*options["focus"]);
+            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
             glBegin(GL_LINES);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
+            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
             //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
-            glVertex2d(0.0,0.0);
+            glVertex2d(0.0f,0.0f);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
         }

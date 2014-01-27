@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>860</width>
-    <height>664</height>
+    <width>869</width>
+    <height>822</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,7 +53,7 @@
      <x>550</x>
      <y>16</y>
      <width>301</width>
-     <height>411</height>
+     <height>519</height>
     </rect>
    </property>
    <property name="title">
@@ -98,7 +98,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>263</y>
+      <y>303</y>
       <width>91</width>
       <height>16</height>
      </rect>
@@ -114,13 +114,13 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>260</y>
+      <y>300</y>
       <width>131</width>
       <height>23</height>
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="text">
      <string/>
@@ -152,7 +152,7 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
    </widget>
    <widget class="QComboBox" name="SelectRangeMarks">
@@ -165,7 +165,7 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="LabelRangeMarks">
@@ -210,7 +210,7 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="LabelBrightness">
@@ -233,10 +233,13 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>181</y>
+      <y>182</y>
       <width>131</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="maximum">
      <number>100</number>
@@ -255,10 +258,13 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>220</y>
+      <y>242</y>
       <width>131</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="maximum">
      <number>100</number>
@@ -277,7 +283,7 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>219</y>
+      <y>240</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -293,10 +299,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>360</y>
+      <y>470</y>
       <width>281</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="text">
      <string>Стоп</string>
@@ -306,13 +315,162 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>300</y>
+      <y>420</y>
       <width>281</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
     <property name="text">
      <string>Отобразить все скрытые метки</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="ChangeDisplayLightning">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>212</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="singleStep">
+     <number>1</number>
+    </property>
+    <property name="value">
+     <number>60</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelDisplayLightning">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>210</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Подсветка:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelVARU">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>270</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ВАРУ:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QSlider" name="ChangeIndicatorVARU">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>271</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="singleStep">
+     <number>1</number>
+    </property>
+    <property name="value">
+     <number>100</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonChangeColorRay">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>340</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelColorRay">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>341</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Цвет луча:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonChangeColorMarks">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>380</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelColorMarks">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>381</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Цвет отметок:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>
@@ -322,12 +480,401 @@
      <x>530</x>
      <y>20</y>
      <width>20</width>
-     <height>501</height>
+     <height>513</height>
     </rect>
    </property>
    <property name="orientation">
     <enum>Qt::Vertical</enum>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="BoxTrashSettings">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>540</y>
+     <width>241</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Настройки пассивных помех</string>
+   </property>
+   <widget class="QCheckBox" name="CheckShowTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>231</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Отображать пассивные помехи</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonChangeColorTrash">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>180</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelColorTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>182</y>
+      <width>81</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Цвет помех:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelScatterTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>181</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Разброс помех по радиусу:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelScatterTrashFrom">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>91</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>от:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="InputScatterTrashFrom">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>87</y>
+      <width>81</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="suffix">
+     <string> км.</string>
+    </property>
+    <property name="maximum">
+     <double>400.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelScatterTrashTo">
+    <property name="geometry">
+     <rect>
+      <x>129</x>
+      <y>91</y>
+      <width>21</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>до:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="InputScatterTrashTo">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>87</y>
+      <width>81</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="suffix">
+     <string> км.</string>
+    </property>
+    <property name="maximum">
+     <double>400.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="CheckShowLocalItems">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Местные предметы</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="RegenerateTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>Перегенерировать помехи</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="SelectTrashIntensity">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>150</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelTrashIntensity">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>152</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Интенсивность:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>524</y>
+     <width>520</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="BoxActiveTrashSettings">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>540</y>
+     <width>571</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Настройки активных помех</string>
+   </property>
+   <widget class="QGroupBox" name="BoxActiveNoiseTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>261</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Шумовая помеха</string>
+    </property>
+    <widget class="QLabel" name="LabelActiveNoiseAzimuth">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Азимут:</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="InputActiveNoiseAzimuth">
+     <property name="geometry">
+      <rect>
+       <x>68</x>
+       <y>26</y>
+       <width>71</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string>°</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LabelActiveNoiseIntensity">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Интенсивность:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="SelectActiveNoiseIntensity">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>58</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CheckActiveNoiseShow">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>28</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отображать</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="BoxActiveAnswerTrash">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>261</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Ответно-импульсная помеха</string>
+    </property>
+    <widget class="QDoubleSpinBox" name="InputActiveAnswerAzimuth">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>30</y>
+       <width>71</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string>°</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LabelActiveAnswerAzimuth">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>34</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Азимут:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="LabelActiveAnswerDistance">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Дистанция:</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="InputActiveAnswerDistance">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>67</y>
+       <width>81</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="suffix">
+      <string> км.</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CheckActiveAnswerShow">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>32</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отображать</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="BoxActiveInSyncTrash">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>29</y>
+      <width>251</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Несинхронно-импульсная помеха</string>
+    </property>
+    <widget class="QCheckBox" name="CheckActiveInSyncShow">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отображать</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <customwidgets>

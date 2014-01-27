@@ -10,11 +10,15 @@ class MainLocator : public QGLWidget
     public:
         explicit MainLocator(QWidget *parent = 0);
         ~MainLocator();
+        void GenerationTrash();
+        void GenerationRange();
+        void GenerationAzimuth();
         void ChangeFPS(qreal fps);
         void SetSettings(const QString,const quint8);
+        void SetSettings(const QString,const qreal);
         QColor SelectColor(const QString,const QString);
         bool IsActive();
-        bool show;
+        bool show,show_trash;
 
     signals:
 
@@ -23,9 +27,6 @@ class MainLocator : public QGLWidget
         void initializeGL();
         void resizeGL(int nWidth, int nHeight);
         void paintGL();
-        void GenerationTrash();
-        void GenerationRange();
-        void GenerationAzimuth();
         void LocatorArea();
         void DrawTrash();
         void DrawRange();
@@ -43,6 +44,7 @@ class MainLocator : public QGLWidget
         QHash<quint16,QVector<QHash<QString,qreal> > >range;
         QMap<QString,QColor>color;
         QMap<QString,quint8>settings;
+        QMap<QString,qreal>options;
         QColorDialog* Color;
 
     private slots:
