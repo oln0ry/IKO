@@ -15,6 +15,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     not_clean=false;
     show=false;
     show_trash=true;
+    fps=1000/24;
     options["brightness"]=1.0f;
     options["interval"]=0.6f;
     options["focus"]=1.0f;
@@ -109,9 +110,9 @@ void MainLocator::paintGL()
 
 void MainLocator::ChangeFPS(qreal fps)
 {
-    if(IsActive())
+    if(fps<=0.0f && IsActive())
         timer->stop();
-    if(fps>0)
+    if(fps>0.0f)
         timer->start(fps);
 }
 
@@ -128,7 +129,10 @@ void MainLocator::SetSettings(const QString option,const quint8 v)
     else if(option=="range_marks")
         GenerationRange();
     else if(option=="scale")
-      GenerationRange();
+    {
+        GenerationRange();
+        GenerationTrash();
+    }
     updateGL();
 }
 
@@ -139,8 +143,10 @@ void MainLocator::SetSettings(const QString option,const qreal v)
     else if(option=="interval");
     else if(option=="focus");
     else if(option=="varu");
-    else if(option=="trahs_begin");
-    else if(option=="trahs_end");
+    else if(option=="trash_begin")
+        GenerationTrash();
+    else if(option=="trash_end")
+        GenerationTrash();
     else return;
     updateGL();
 }
@@ -164,17 +170,35 @@ void MainLocator::GenerationTrash()
 {
     quint8 density=20; //Плотность (густота, кучность) помех
     QHash<QString,qreal>cache;
-    qreal rand;
+    qreal rand,begin,end;
     trash.clear();
 
+    switch(settings["scale"])
+    {
+        case 2:
+            begin=static_cast<qreal>(options["trash_begin"])/400;
+            end=static_cast<qreal>(options["trash_end"])/400;
+            //distance=1.0f/400;
+            break;
+        case 1:
+            begin=static_cast<qreal>(options["trash_begin"])/300;
+            end=static_cast<qreal>(options["trash_end"])/300;
+            //distance=1.0f/300;
+            break;
+        default:
+            begin=static_cast<qreal>(options["trash_begin"])/150;
+            end=static_cast<qreal>(options["trash_end"])/150;
+            //distance=1.0f/150;
+    }
     for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
     {
         cache["angle"]=(*it)["angle"];
         for(qint8 k=0,t=qrand()%density;k<t;k++)
         {
-            rand=GetRandomCoord(6);
-            cache["x"]=settings["trash_end"]*(*it)["x"]*(rand+settings["trash_begin"]);
-            cache["y"]=settings["trash_end"]*(*it)["y"]*(rand+settings["trash_begin"]);
+            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
+            //qDebug()<<rand;
+            cache["x"]=(*it)["x"]*rand;
+            cache["y"]=(*it)["y"]*rand;
             trash.append(cache);
         }
     }

@@ -6,7 +6,7 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->setupUi(this);
     ui->InputFrameFrequency->valueChanged(ui->InputFrameFrequency->value());
     //setLayout(ui->RenderLayout);
-    QStringList azimuth_marks,range_marks,scale;
+    QStringList azimuth_marks,range_marks,scale,intensity;
     azimuth_marks<<"Не отображать"<<"30°"<<"10°";
     ui->SelectAzimuthMarks->addItems(azimuth_marks);
     ui->SelectAzimuthMarks->setCurrentIndex(1);
@@ -16,6 +16,11 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     scale<<"150 километров"<<"300 километров"<<"400 километров";
     ui->SelectScale->addItems(scale);
     ui->SelectScale->setCurrentIndex(0);
+    intensity<<"Слабая"<<"Умеренная"<<"Сильная";
+    ui->SelectTrashIntensity->addItems(intensity);
+    ui->SelectTrashIntensity->setCurrentIndex(1);
+    ui->SelectActiveNoiseIntensity->addItems(intensity);
+    ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
     ui->RenderIndicator->show=false;
 }
 
@@ -48,19 +53,37 @@ void IndicatorDRL::on_SelectRangeMarks_currentIndexChanged(int index)
 void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 {
     ui->RenderIndicator->SetSettings("scale",static_cast<quint8>(index));
+    qreal max;
+    switch(index)
+    {
+        case 2:
+            max=400.0f;
+            break;
+        case 1:
+            max=300.0f;
+            break;
+        default:
+            max=150.0f;
+    }
+    if(ui->InputScatterTrashFrom->value()>max)
+        ui->InputScatterTrashFrom->setValue(max);
+    if(ui->InputScatterTrashTo->value()>max)
+        ui->InputScatterTrashTo->setValue(max);
+    ui->InputScatterTrashFrom->setMaximum(max);
+    ui->InputScatterTrashTo->setMaximum(max);
 }
 
 void IndicatorDRL::on_ChangeLocatorState_clicked()
 {
-    quint8 fps;
+    qreal fps;
     if(ui->RenderIndicator->IsActive())
     {
-        fps=0;
+        fps=0.0f;
         ui->ChangeLocatorState->setText("Продолжить");
     }
     else
     {
-        fps=ui->InputFrameFrequency->value();
+        fps=static_cast<qreal>(ui->InputFrameFrequency->value());
         ui->ChangeLocatorState->setText("Стоп");
     }
     ui->RenderIndicator->ChangeFPS(fps);
@@ -112,12 +135,22 @@ void IndicatorDRL::on_RegenerateTrash_clicked()
 
 void IndicatorDRL::on_InputScatterTrashFrom_valueChanged(double arg1)
 {
-    ui->RenderIndicator->SetSettings("trash_start",static_cast<qreal>(arg1));
+    qreal from=static_cast<qreal>(arg1),
+          to=static_cast<qreal>(ui->InputScatterTrashTo->value());
+    if(from>=to)
+        ui->InputScatterTrashFrom->setMaximum(to);
+    ui->InputScatterTrashTo->setMinimum(from);
+    ui->RenderIndicator->SetSettings("trash_begin",from);
 }
 
 void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
 {
-    ui->RenderIndicator->SetSettings("trash_end",static_cast<qreal>(arg1));
+    qreal from=static_cast<qreal>(ui->InputScatterTrashFrom->value()),
+          to=static_cast<qreal>(arg1);
+    if(to<=from)
+        ui->InputScatterTrashTo->setMinimum(from);
+    ui->InputScatterTrashFrom->setMaximum(to);
+    ui->RenderIndicator->SetSettings("trash_end",to);
 }
 
 void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)

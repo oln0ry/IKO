@@ -62,7 +62,7 @@
    <widget class="QLabel" name="LabelFrameFrequency">
     <property name="geometry">
      <rect>
-      <x>49</x>
+      <x>42</x>
       <y>30</y>
       <width>111</width>
       <height>21</height>
@@ -129,7 +129,7 @@
    <widget class="QLabel" name="LabelAzimuthMarks">
     <property name="geometry">
      <rect>
-      <x>37</x>
+      <x>31</x>
       <y>65</y>
       <width>121</width>
       <height>16</height>
@@ -171,7 +171,7 @@
    <widget class="QLabel" name="LabelRangeMarks">
     <property name="geometry">
      <rect>
-      <x>21</x>
+      <x>20</x>
       <y>102</y>
       <width>131</width>
       <height>16</height>
