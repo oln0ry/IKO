@@ -14,12 +14,14 @@ class MainLocator : public QGLWidget
         void GenerationRange();
         void GenerationAzimuth();
         void GenerationLocalItems();
+        void GenerationActiveNoiseTrash();
+        void GenerationActiveAnswerTrash();
         void ChangeFPS(qreal fps);
-        void SetSettings(const QString,const quint8);
+        void SetSettings(const QString,const quint16);
         void SetSettings(const QString,const qreal);
         QColor SelectColor(const QString,const QString);
         bool IsActive();
-        bool show,show_trash,show_local_items;
+        bool show,show_trash,show_local_items,show_active_ntrash,show_active_atrash;
 
     signals:
 
@@ -33,6 +35,8 @@ class MainLocator : public QGLWidget
         void DrawRange();
         void DrawAzimuth();
         void DrawLocalItems();
+        void DrawActiveNoiseTrash();
+        void DrawActiveAnswerTrash();
         qreal GetRandomCoord(const quint8,const bool rsign=false);
         qint8 GetRandomSign();
 
@@ -41,11 +45,11 @@ class MainLocator : public QGLWidget
         bool not_clean;
         QTimer* timer;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
-        QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items;
+        QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>circle,line;
-        QHash<quint16,QVector<QHash<QString,qreal> > >range;
+        QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash;
         QMap<QString,QColor>color;
-        QMap<QString,quint8>settings;
+        QMap<QString,quint16>settings;
         QMap<QString,qreal>options;
         QColorDialog* Color;
 

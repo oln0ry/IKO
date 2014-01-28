@@ -53,6 +53,18 @@ private slots:
 
     void on_CheckActiveNoiseShow_stateChanged(int arg1);
 
+    void on_InputActiveNoiseAzimuth_valueChanged(double arg1);
+
+    void on_InputActiveNoiseAzimuth_valueChanged(int arg1);
+
+    void on_SelectActiveNoiseIntensity_currentIndexChanged(int index);
+
+    void on_CheckActiveAnswerShow_stateChanged(int arg1);
+
+    void on_InputActiveAnswerAzimuth_valueChanged(int arg1);
+
+    void on_InputActiveAnswerDistance_valueChanged(double arg1);
+
 private:
         Ui::IndicatorDRL *ui;
 };

@@ -21,6 +21,10 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->SelectTrashIntensity->setCurrentIndex(1);
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
+
+    ui->InputScatterTrashFrom->setValue(0.0f);
+    ui->InputScatterTrashTo->setValue(150.0f);
+
     ui->RenderIndicator->show=false;
 }
 
@@ -42,17 +46,17 @@ void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
 
 void IndicatorDRL::on_SelectAzimuthMarks_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("azimuth_marks",static_cast<quint8>(index));
+    ui->RenderIndicator->SetSettings("azimuth_marks",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_SelectRangeMarks_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("range_marks",static_cast<quint8>(index));
+    ui->RenderIndicator->SetSettings("range_marks",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("scale",static_cast<quint8>(index));
+    ui->RenderIndicator->SetSettings("scale",static_cast<quint16>(index));
     qreal max;
     switch(index)
     {
@@ -155,18 +159,45 @@ void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
 
 void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
 {
-    if(arg1==2)
-        ui->RenderIndicator->show_local_items=true;
-    else
-        ui->RenderIndicator->show_local_items=false;
+    ui->RenderIndicator->show_local_items=arg1==2 ? true : false;
 }
 
 void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint8>(index));
+    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
+{
+    ui->RenderIndicator->show_active_ntrash=arg1==2 ? true : false;
+}
+
+void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(double arg1)
+{
+    //ui->RenderIndicator->SetSettings("active_ntrash_azimuth",static_cast<quint16>(arg1));
+}
+
+void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
+{
+    ui->RenderIndicator->SetSettings("active_ntrash_azimuth",static_cast<quint16>(arg1));
+}
+
+void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
+{
+    ui->RenderIndicator->SetSettings("active_noise_intensity",static_cast<quint16>(index));
+}
+
+void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
+{
+    ui->RenderIndicator->show_active_atrash=arg1==2 ? true : false;
+}
+
+void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
+{
+
+}
+
+void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
 {
 
 }
