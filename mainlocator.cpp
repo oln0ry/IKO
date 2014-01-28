@@ -15,10 +15,13 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     not_clean=false;
     show=false;
     show_trash=true;
+    show_local_items=false;
     fps=1000/24;
     options["brightness"]=1.0f;
     options["interval"]=0.6f;
     options["focus"]=1.0f;
+    settings["trash_intensity"]=0;
+    settings["scale"]=0;
     Color=new QColorDialog(this);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
@@ -44,6 +47,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     GenerationTrash();
     GenerationRange();
     GenerationAzimuth();
+    GenerationLocalItems();
 
     timer=new QTimer(this);
 
@@ -64,8 +68,8 @@ void MainLocator::initializeGL()
     glShadeModel(GL_SMOOTH);//GL_FLAT
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_POINT_SMOOTH);
-    //glEnable(GL_BLEND);
-    //glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
+    glEnable(GL_BLEND);
+    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST);
     //glEnable(GL_DEPTH_TEST);
 }
 
@@ -104,6 +108,8 @@ void MainLocator::paintGL()
         DrawRange();
     if(!azimuth.isEmpty())
         DrawAzimuth();
+    if(show_local_items && !local_items.isEmpty())
+        DrawLocalItems();
     glPopMatrix();
     //swapBuffers();
 }
@@ -132,7 +138,11 @@ void MainLocator::SetSettings(const QString option,const quint8 v)
     {
         GenerationRange();
         GenerationTrash();
+        GenerationLocalItems();
     }
+    else if(option=="trash_intensity")
+        GenerationTrash();
+    else return;
     updateGL();
 }
 
@@ -168,7 +178,7 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
  */
 void MainLocator::GenerationTrash()
 {
-    quint8 density=20; //Плотность (густота, кучность) помех
+    quint8 density; //Плотность (густота, кучность) помех
     QHash<QString,qreal>cache;
     qreal rand,begin,end;
     trash.clear();
@@ -190,13 +200,25 @@ void MainLocator::GenerationTrash()
             end=static_cast<qreal>(options["trash_end"])/150;
             //distance=1.0f/150;
     }
+
+    switch(settings["trash_intensity"])
+    {
+        case 2:
+            density=20;
+            break;
+        case 1:
+            density=10;
+            break;
+        default:
+            density=5;
+    }
+
     for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
     {
         cache["angle"]=(*it)["angle"];
         for(qint8 k=0,t=qrand()%density;k<t;k++)
         {
             rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
-            //qDebug()<<rand;
             cache["x"]=(*it)["x"]*rand;
             cache["y"]=(*it)["y"]*rand;
             trash.append(cache);
@@ -278,6 +300,43 @@ void MainLocator::GenerationAzimuth()
         cache["y"]=(*it)["y"];
         cache["width"]=(it-radians.begin())%30>0 ? 1.0f : 3.5f;
         azimuth.append(cache);
+    }
+}
+
+void MainLocator::GenerationLocalItems()
+{
+    quint8 density=3;
+    QHash<QString,qreal>cache;
+    qreal rand,begin=0.0f,end=28.0f;
+    local_items.clear();
+    switch(settings["scale"])
+    {
+        case 2:
+            begin=static_cast<qreal>(begin)/400;
+            end=static_cast<qreal>(end)/400;
+            //distance=1.0f/400;
+            break;
+        case 1:
+            begin=static_cast<qreal>(begin)/300;
+            end=static_cast<qreal>(end)/300;
+            //distance=1.0f/300;
+            break;
+        default:
+            begin=static_cast<qreal>(begin)/150;
+            end=static_cast<qreal>(end)/150;
+            //distance=1.0f/150;
+    }
+
+    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
+    {
+        cache["angle"]=(*it)["angle"];
+        for(qint8 k=0,t=qrand()%density;k<t;k++)
+        {
+            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
+            cache["x"]=(*it)["x"]*rand;
+            cache["y"]=(*it)["y"]*rand;
+            local_items.append(cache);
+        }
     }
 }
 
@@ -410,6 +469,34 @@ void MainLocator::DrawAzimuth()
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
             //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2d(0.0f,0.0f);
+            glVertex2f((*it)["x"],(*it)["y"]);
+            glEnd();
+        }
+    }
+}
+
+void MainLocator::DrawLocalItems()
+{
+    glPointSize(8*options["focus"]);
+    glEnable(GL_ALPHA_TEST);
+    qreal alpha;
+    for(QVector<QHash<QString,qreal> >::const_iterator it=local_items.begin();it<local_items.end();it++)
+    {
+        if(show)
+            alpha=1.0f;
+        else
+        {
+            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
+            if(not_clean && alpha<0)
+                alpha+=2*M_PI;
+        }
+
+        if(alpha>0)
+        {
+            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
+            glBegin(GL_POINTS);
+            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
+            //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
         }

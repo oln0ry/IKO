@@ -155,5 +155,18 @@ void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
 
 void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
 {
+    if(arg1==2)
+        ui->RenderIndicator->show_local_items=true;
+    else
+        ui->RenderIndicator->show_local_items=false;
+}
+
+void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
+{
+    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint8>(index));
+}
+
+void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
+{
 
 }

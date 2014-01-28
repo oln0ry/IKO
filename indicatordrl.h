@@ -49,6 +49,10 @@ private slots:
 
     void on_CheckShowLocalItems_stateChanged(int arg1);
 
+    void on_SelectTrashIntensity_currentIndexChanged(int index);
+
+    void on_CheckActiveNoiseShow_stateChanged(int arg1);
+
 private:
         Ui::IndicatorDRL *ui;
 };
