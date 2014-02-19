@@ -16,12 +16,17 @@ class MainLocator : public QGLWidget
         void GenerationLocalItems();
         void GenerationActiveNoiseTrash();
         void GenerationActiveAnswerTrash();
+        void GenerationActiveInSyncTrash();
+        void GenerationTargetPaths();
         void ChangeFPS(qreal fps);
+        void CleanDataBuffer();
+        void ChangeTargetsState();
         void SetSettings(const QString,const quint16);
         void SetSettings(const QString,const qreal);
         QColor SelectColor(const QString,const QString);
         bool IsActive();
-        bool show,show_trash,show_local_items,show_active_ntrash,show_active_atrash;
+        bool show,show_trash,show_local_items,show_active_ntrash,show_active_atrash,show_active_isynctrash;
+        qint8 targets_pos;
 
     signals:
 
@@ -30,6 +35,7 @@ class MainLocator : public QGLWidget
         void initializeGL();
         void resizeGL(int nWidth, int nHeight);
         void paintGL();
+        void DrawStation();
         void LocatorArea();
         void DrawTrash();
         void DrawRange();
@@ -37,7 +43,9 @@ class MainLocator : public QGLWidget
         void DrawLocalItems();
         void DrawActiveNoiseTrash();
         void DrawActiveAnswerTrash();
-        qreal GetRandomCoord(const quint8,const bool rsign=false);
+        void DrawActiveInSyncTrash();
+        void DrawTargets();
+        qreal GetRandomCoord(quint8,const bool rsign=false);
         qint8 GetRandomSign();
 
     private:
@@ -47,7 +55,7 @@ class MainLocator : public QGLWidget
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
         QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>circle,line;
-        QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash;
+        QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash,active_insync_trash,targets;
         QMap<QString,QColor>color;
         QMap<QString,quint16>settings;
         QMap<QString,qreal>options;

@@ -5,6 +5,8 @@ Menu::Menu(QWidget *parent) : QMainWindow(parent),ui(new Ui::Menu)
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->verticalLayout);
+    ui->ButtonIndicatorPRL->hide();
+    ui->ButtonRSP->hide();
 }
 
 Menu::~Menu()
@@ -14,8 +16,8 @@ Menu::~Menu()
 
 void Menu::on_ButtonIndicatorDRL_clicked()
 {
-    if(DRL)
-        return;
+    //if(DRL)
+      //  return;
     DRL=new IndicatorDRL;
     DRL->show();
 }

@@ -1,0 +1,3899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TargetsSettings</class>
+ <widget class="QWidget" name="TargetsSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>433</width>
+    <height>444</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Настройки целей</string>
+  </property>
+  <widget class="QScrollArea" name="ScrollTargets">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>431</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>431</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <widget class="QStackedWidget" name="Targets">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>411</width>
+       <height>381</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="Target1">
+      <widget class="QGroupBox" name="TargetExtremums">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_2">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_3">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_4">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №1</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target2">
+      <widget class="QCheckBox" name="TargetGoHome_2">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_2">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_2">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_2">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_5">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_6">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_6">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_7">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_7">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_8">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_8">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №2</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target3">
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №3</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_9">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_9">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_3">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_10">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_10">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_11">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_11">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_3">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_12">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_12">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_3">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_3">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_3">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_3">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_3">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="Line" name="line_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target4">
+      <widget class="Line" name="line_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_4">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №4</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_13">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_13">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_4">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_14">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_14">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_15">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_15">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_4">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_16">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_16">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_4">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_4">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_4">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_4">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target5">
+      <widget class="Line" name="line_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_5">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_5">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_5">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №5</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_17">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_17">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_5">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_18">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_18">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_19">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_19">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_5">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_20">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_20">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_5">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_5">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target6">
+      <widget class="QGroupBox" name="TargetStart_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_6">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_6">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_6">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_6">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №6</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_21">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_21">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_6">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_22">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_22">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_23">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_23">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_6">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_24">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_24">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_6">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="Line" name="line_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target7">
+      <widget class="Line" name="line_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_7">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_25">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_25">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_7">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_26">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_26">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_27">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_27">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_7">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_28">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_28">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_7">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №7</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_7">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_7">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_7">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target8">
+      <widget class="QGroupBox" name="TargetExtremums_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_9">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_33">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_33">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_9">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_34">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_34">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_9">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_35">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_35">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_9">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_36">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_36">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_9">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_9">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_9">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_9">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_9">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="Line" name="line_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_8">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №8</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target9">
+      <widget class="QGroupBox" name="TargetExtremums_9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_10">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_37">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_37">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_10">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_38">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_38">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_10">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_39">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_39">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_10">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_40">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_40">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_10">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_10">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_10">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_10">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_10">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="Line" name="line_9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_9">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №9</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Target10">
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Цель №10</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>391</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="TargetExtremums_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>391</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Точки перегиба</string>
+       </property>
+       <widget class="QGroupBox" name="TargetExtremumFirst_12">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Первая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_45">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_45">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumSecond_12">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>30</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Вторая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_46">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_46">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumThird_12">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Третья точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_47">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_47">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="TargetExtremumFourth_12">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>130</y>
+          <width>181</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Четвёртая точка</string>
+        </property>
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_48">
+         <property name="geometry">
+          <rect>
+           <x>33</x>
+           <y>32</y>
+           <width>57</width>
+           <height>15</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Азимут:</string>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>27</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string>°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelTargetRangeFinish_48">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>58</y>
+           <width>71</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Дальность:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_12">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>55</y>
+           <width>81</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="suffix">
+          <string> км.</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="TargetStart_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>181</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Начало траектории</string>
+       </property>
+       <widget class="QLabel" name="LabelTargetAzimuthStart_12">
+        <property name="geometry">
+         <rect>
+          <x>33</x>
+          <y>32</y>
+          <width>57</width>
+          <height>15</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Азимут:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="TargetAzimuthStart_12">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>27</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string>°</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="LabelTargetRangeStart_12">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>58</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Дальность:</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_12">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>55</y>
+          <width>81</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="suffix">
+         <string> км.</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="TargetGoHome_10">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>91</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>На посадку</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="SwitchTargetNext">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>390</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>-&gt;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SwitchTargetPrev">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;-</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SaveTargets">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>390</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ок</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <zorder>ScrollTargets</zorder>
+  <zorder>Targets</zorder>
+  <zorder>SwitchTargetNext</zorder>
+  <zorder>SwitchTargetPrev</zorder>
+  <zorder>SaveTargets</zorder>
+  <zorder>Targets</zorder>
+  <zorder>SwitchTargetNext</zorder>
+  <zorder>SwitchTargetPrev</zorder>
+  <zorder>SaveTargets</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

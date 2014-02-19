@@ -2,6 +2,8 @@
 #define INDICATORDRL_H
 
 #include <QWidget>
+#include<QPointer>
+#include"targetssettings.h"
 
 namespace Ui
 {
@@ -53,7 +55,6 @@ private slots:
 
     void on_CheckActiveNoiseShow_stateChanged(int arg1);
 
-    void on_InputActiveNoiseAzimuth_valueChanged(double arg1);
 
     void on_InputActiveNoiseAzimuth_valueChanged(int arg1);
 
@@ -65,7 +66,18 @@ private slots:
 
     void on_InputActiveAnswerDistance_valueChanged(double arg1);
 
+    void on_CheckActiveInSyncShow_stateChanged(int arg1);
+
+    void on_ButtonTargetsSettings_clicked();
+
+    void on_ChangeTargetsState_clicked();
+
+    void on_CleanLocatorDataBuffer_clicked();
+
+    void on_ChangeTrashIntensity_valueChanged(int value);
+
 private:
+        QPointer<TargetsSettings>tsettings;
         Ui::IndicatorDRL *ui;
 };
 

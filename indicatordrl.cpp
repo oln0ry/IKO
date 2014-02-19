@@ -6,27 +6,42 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->setupUi(this);
     ui->InputFrameFrequency->valueChanged(ui->InputFrameFrequency->value());
     //setLayout(ui->RenderLayout);
-    QStringList azimuth_marks,range_marks,scale,intensity;
+    QStringList azimuth_marks,range_marks,scale,intensity,work_variants;
     azimuth_marks<<"Не отображать"<<"30°"<<"10°";
     ui->SelectAzimuthMarks->addItems(azimuth_marks);
     ui->SelectAzimuthMarks->setCurrentIndex(1);
     range_marks<<"Не отображать"<<"10 километров"<<"50 километров";
     ui->SelectRangeMarks->addItems(range_marks);
     ui->SelectRangeMarks->setCurrentIndex(1);
-    scale<<"150 километров"<<"300 километров"<<"400 километров";
+    //scale<<"150 километров"<<"300 километров"<<"400 километров";
+    scale<<"45 километров"<<"90 километров"<<"150 километров";
     ui->SelectScale->addItems(scale);
     ui->SelectScale->setCurrentIndex(0);
-    intensity<<"Слабая"<<"Умеренная"<<"Сильная";
-    ui->SelectTrashIntensity->addItems(intensity);
-    ui->SelectTrashIntensity->setCurrentIndex(1);
+    intensity<<"Слабая"<<"Средняя"<<"Сильная";
+    //ui->SelectTrashIntensity->addItems(intensity);
+    //ui->SelectTrashIntensity->setCurrentIndex(1);
+    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
 
     ui->InputScatterTrashFrom->setValue(0.0f);
     ui->InputScatterTrashTo->setValue(150.0f);
 
+    ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
+    ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
+    ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
+    ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
     ui->RenderIndicator->show=false;
-}
+    //ui->LabelTargetsSettings->hide();
+    //ui->ButtonTargetsSettings->hide();
+    ui->LabelColorIndicator->hide();
+    ui->ButtonChangeColorDisplay->hide();
+    ui->SelectTrashIntensity->hide();
+    work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
+    ui->SelectWorkVariant->addItems(work_variants);
+    ui->SelectWorkVariant->setCurrentIndex(0);
+ }
 
 IndicatorDRL::~IndicatorDRL()
 {
@@ -35,7 +50,7 @@ IndicatorDRL::~IndicatorDRL()
 
 void IndicatorDRL::on_InputFrameFrequency_valueChanged(int frames_number)
 {
-    ui->RenderIndicator->ChangeFPS(1000/frames_number);
+    ui->RenderIndicator->ChangeFPS(frames_number>0 ? 1000/frames_number : 0);
 }
 
 void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
@@ -60,6 +75,7 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
     qreal max;
     switch(index)
     {
+        /*
         case 2:
             max=400.0f;
             break;
@@ -68,6 +84,16 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
             break;
         default:
             max=150.0f;
+        */
+        case 2:
+            max=150.0f;
+            break;
+        case 1:
+            max=90.0f;
+            break;
+        default:
+            max=45.0f;
+
     }
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
@@ -79,18 +105,19 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 
 void IndicatorDRL::on_ChangeLocatorState_clicked()
 {
-    qreal fps;
+    quint8 fps;
     if(ui->RenderIndicator->IsActive())
     {
-        fps=0.0f;
+        fps=0;
         ui->ChangeLocatorState->setText("Продолжить");
     }
     else
     {
-        fps=static_cast<qreal>(ui->InputFrameFrequency->value());
+        fps=static_cast<quint8>(ui->InputFrameFrequency->value());
         ui->ChangeLocatorState->setText("Стоп");
     }
-    ui->RenderIndicator->ChangeFPS(fps);
+    ui->InputFrameFrequency->valueChanged(fps);
+    //ui->RenderIndicator->ChangeFPS(fps);
 }
 
 void IndicatorDRL::on_ChangeViewStateAll_clicked()
@@ -172,11 +199,6 @@ void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
     ui->RenderIndicator->show_active_ntrash=arg1==2 ? true : false;
 }
 
-void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(double arg1)
-{
-    //ui->RenderIndicator->SetSettings("active_ntrash_azimuth",static_cast<quint16>(arg1));
-}
-
 void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
 {
     ui->RenderIndicator->SetSettings("active_ntrash_azimuth",static_cast<quint16>(arg1));
@@ -194,10 +216,42 @@ void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
 
 void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
 {
-
+    ui->RenderIndicator->SetSettings("active_atrash_azimuth",static_cast<quint16>(arg1));
 }
 
 void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
 {
+    ui->RenderIndicator->SetSettings("active_answer_distance",static_cast<qreal>(arg1));
+}
 
+void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
+{
+    ui->RenderIndicator->show_active_isynctrash=arg1==2 ? true : false;
+}
+
+void IndicatorDRL::on_ButtonTargetsSettings_clicked()
+{
+    //if(tsettings)
+      //  return;
+    tsettings=new TargetsSettings;
+    tsettings->show();
+}
+
+void IndicatorDRL::on_ChangeTargetsState_clicked()
+{
+    ui->RenderIndicator->ChangeTargetsState();
+    if(ui->RenderIndicator->targets_pos<0)
+        ui->ChangeTargetsState->setText(QString("Запуск целей"));
+    else
+        ui->ChangeTargetsState->setText(QString("Остановить цели"));
+}
+
+void IndicatorDRL::on_CleanLocatorDataBuffer_clicked()
+{
+    ui->RenderIndicator->CleanDataBuffer();
+}
+
+void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
+{
+    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint16>(value));
 }

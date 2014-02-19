@@ -15,11 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         menu.cpp \
     mainlocator.cpp \
-    indicatordrl.cpp
+    indicatordrl.cpp \
+    targetssettings.cpp
 
 HEADERS  += menu.h \
     mainlocator.h \
-    indicatordrl.h
+    indicatordrl.h \
+    targetssettings.h
 
 FORMS    += menu.ui \
-    indicatordrl.ui
+    indicatordrl.ui \
+    targetssettings.ui
