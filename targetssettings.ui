@@ -430,6 +430,35 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target2">
       <widget class="QCheckBox" name="TargetGoHome_2">
@@ -807,6 +836,35 @@
        </property>
        <property name="text">
         <string>Цель №2</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_2">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_2">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
        </property>
       </widget>
      </widget>
@@ -1188,6 +1246,35 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_3">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_3">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target4">
       <widget class="Line" name="line_4">
@@ -1567,6 +1654,35 @@
         </property>
        </widget>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_4">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_4">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target5">
       <widget class="Line" name="line_5">
@@ -1944,6 +2060,35 @@
        </property>
        <property name="text">
         <string>На посадку</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_5">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_5">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
        </property>
       </widget>
      </widget>
@@ -2325,6 +2470,35 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_6">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_6">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target7">
       <widget class="Line" name="line_7">
@@ -2704,6 +2878,35 @@
         </property>
        </widget>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_7">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_7">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target8">
       <widget class="QGroupBox" name="TargetExtremums_8">
@@ -3081,6 +3284,35 @@
        </property>
        <property name="text">
         <string>Цель №8</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_8">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_8">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
        </property>
       </widget>
      </widget>
@@ -3462,6 +3694,35 @@
         <string>Цель №9</string>
        </property>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_9">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_9">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="Target10">
       <widget class="QLabel" name="label_10">
@@ -3841,6 +4102,35 @@
         <string>На посадку</string>
        </property>
       </widget>
+      <widget class="QDoubleSpinBox" name="TargetSpeed_10">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>80</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="suffix">
+        <string> км/ч</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="LabelSpeedTarget_10">
+       <property name="geometry">
+        <rect>
+         <x>201</x>
+         <y>83</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Скорость:</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QPushButton" name="SwitchTargetNext">
@@ -3869,7 +4159,33 @@
       <string>&lt;-</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="ApplyTargets">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>390</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ок</string>
+     </property>
+    </widget>
     <widget class="QPushButton" name="SaveTargets">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>390</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сохранить</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SetTargetsDefault">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -3879,20 +4195,11 @@
       </rect>
      </property>
      <property name="text">
-      <string>Ок</string>
+      <string>По умолчанию</string>
      </property>
     </widget>
    </widget>
   </widget>
-  <zorder>ScrollTargets</zorder>
-  <zorder>Targets</zorder>
-  <zorder>SwitchTargetNext</zorder>
-  <zorder>SwitchTargetPrev</zorder>
-  <zorder>SaveTargets</zorder>
-  <zorder>Targets</zorder>
-  <zorder>SwitchTargetNext</zorder>
-  <zorder>SwitchTargetPrev</zorder>
-  <zorder>SaveTargets</zorder>
  </widget>
  <resources/>
  <connections/>

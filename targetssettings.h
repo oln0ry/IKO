@@ -16,11 +16,11 @@ public:
     ~TargetsSettings();
 
 private slots:
-    void on_AddTarget_clicked();
-
     void on_SwitchTargetNext_clicked();
 
     void on_SwitchTargetPrev_clicked();
+
+    void on_ApplyTargets_clicked();
 
 private:
     Ui::TargetsSettings *ui;

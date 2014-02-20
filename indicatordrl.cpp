@@ -255,3 +255,8 @@ void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
 {
     ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint16>(value));
 }
+
+void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
+{
+    ui->RenderIndicator->show_meteo=arg1==2 ? true : false;
+}

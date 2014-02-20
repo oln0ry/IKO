@@ -76,6 +76,8 @@ private slots:
 
     void on_ChangeTrashIntensity_valueChanged(int value);
 
+    void on_CheckShowMeteo_stateChanged(int arg1);
+
 private:
         QPointer<TargetsSettings>tsettings;
         Ui::IndicatorDRL *ui;

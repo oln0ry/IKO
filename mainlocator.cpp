@@ -19,6 +19,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     show_local_items=false;
     show_active_ntrash=false;
     show_active_atrash=false;
+    show_meteo=false;
     fps=1000/24;
     options["brightness"]=1.0f;
     options["interval"]=0.6f;
@@ -60,6 +61,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     GenerationActiveAnswerTrash();
     GenerationActiveInSyncTrash();
     GenerationTargetPaths();
+    GenerationMeteo();
 
     timer=new QTimer(this);
 
@@ -130,7 +132,9 @@ void MainLocator::paintGL()
     if(show_active_isynctrash && !active_insync_trash.isEmpty())
         DrawActiveInSyncTrash();
     if(targets_pos>=0)
-       DrawTargets();
+        DrawTargets();
+    if(show_meteo && !meteo.isEmpty())
+        DrawMeteo();
     glPopMatrix();
     //swapBuffers();
 }
@@ -332,7 +336,6 @@ void MainLocator::GenerationRange()
 
     while(i<=1)
     {
-        //qDebug()<<k<<"\t"<<j<<"\t"<<k%j;
         if(k%j==0)
             cache["width"]=2.5f;
         else
@@ -557,7 +560,6 @@ void MainLocator::GenerationActiveAnswerTrash()
             cache["angle"]=(*it)["angle"];
             cache["x"]=i*(*it)["x"];
             cache["y"]=i*(*it)["y"];
-            //cache["r"]=delta;
             cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
             active_answer_trash[k*250].append(cache);
         }
@@ -567,9 +569,6 @@ void MainLocator::GenerationActiveAnswerTrash()
 
 void MainLocator::GenerationActiveInSyncTrash()
 {
-    //if(options["active_insync_distance"]<=0.0f)
-        //return;
-
     QHash<QString,qreal>cache;
     qreal i=0.0f,delta,distance;
     quint8 length=0,k=0;
@@ -611,7 +610,6 @@ void MainLocator::GenerationActiveInSyncTrash()
                 cache["angle"]=(*it)["angle"];
                 cache["x"]=i*(*it)["x"];
                 cache["y"]=i*(*it)["y"];
-                //cache["r"]=delta;
                 cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
                 active_insync_trash[k*250].append(cache);
             }
@@ -710,7 +708,7 @@ void MainLocator::ContinueSearch()
     bool f=0;
     if(line_position==line_end)
     {
-        if(f=f||trash.isEmpty())
+        if(trash.isEmpty())
             GenerationTrash();
         if(f=f||local_items.isEmpty())
             GenerationLocalItems();
@@ -758,7 +756,6 @@ void MainLocator::DrawTrash()
             alpha*=options["brightness"]-(*it)["r"]+options["varu"];
             glBegin(GL_POINTS);
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-            //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
         }
@@ -783,7 +780,7 @@ void MainLocator::DrawRange()
                 alpha=1.0f;
             else
             {
-                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01f);
+                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
@@ -791,7 +788,6 @@ void MainLocator::DrawRange()
             {
                 alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
                 glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-                //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
                 glVertex2d((*ct)["x"],(*ct)["y"]);
             }
         }
@@ -812,7 +808,7 @@ void MainLocator::DrawAzimuth()
             alpha=1.0f;
         else
         {
-            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
+            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
@@ -822,7 +818,6 @@ void MainLocator::DrawAzimuth()
             alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-            //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2d(0.0f,0.0f);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
@@ -841,7 +836,7 @@ void MainLocator::DrawLocalItems()
             alpha=1.0f;
         else
         {
-            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
+            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
@@ -851,7 +846,6 @@ void MainLocator::DrawLocalItems()
             alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
             glBegin(GL_POINTS);
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-            //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
         }
@@ -867,7 +861,7 @@ void MainLocator::DrawActiveNoiseTrash()
             alpha=1.0f;
         else
         {
-            alpha=((**line_position)["angle"]-(*it)["angle"]-0.01f);
+            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
@@ -878,7 +872,6 @@ void MainLocator::DrawActiveNoiseTrash()
             alpha*=options["brightness"]-(*it)["r"]+options["varu"];
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-            //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),alpha);
             glVertex2d(0.0f,0.0f);
             glVertex2f((*it)["x"],(*it)["y"]);
             glEnd();
@@ -900,7 +893,7 @@ void MainLocator::DrawActiveAnswerTrash()
                 alpha=1.0f;
             else
             {
-                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01f);
+                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
@@ -909,7 +902,6 @@ void MainLocator::DrawActiveAnswerTrash()
                 alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
                 alpha*=options["brightness"]-(*ct)["r"]+options["varu"];
                 glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-                //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
                 glVertex2d((*ct)["x"],(*ct)["y"]);
             }
         }
@@ -931,7 +923,7 @@ void MainLocator::DrawActiveInSyncTrash()
                 alpha=1.0f;
             else
             {
-                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01f);
+                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
@@ -940,7 +932,6 @@ void MainLocator::DrawActiveInSyncTrash()
                 alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
                 alpha*=options["brightness"]-(*ct)["r"]+options["varu"];
                 glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-                //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
                 glVertex2d((*ct)["x"],(*ct)["y"]);
             }
         }
@@ -1014,7 +1005,7 @@ void MainLocator::DrawTargets()
                 alpha=1.0f;
             else
             {
-                alpha=((**line_position)["angle"]-(*ct)["angle"]-0.01f);
+                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
@@ -1024,12 +1015,21 @@ void MainLocator::DrawTargets()
                 alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
                 alpha*=options["brightness"]-(*ct)["r"]+options["varu"];
                 glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-                //glColor4f(static_cast<GLfloat>(0.6),static_cast<GLfloat>(0.8),static_cast<GLfloat>(0.6),0.4/((**line_position)["angle"]-(*ct)["angle"]-0.01));
                 glVertex2d((*ct)["x"],(*ct)["y"]);
             }
         }
         glEnd();
     //}
+}
+
+void MainLocator::GenerationMeteo()
+{
+
+}
+
+void MainLocator::DrawMeteo()
+{
+
 }
 
 void MainLocator::ChangeTargetsState()
