@@ -197,20 +197,17 @@ void MainLocator::GenerationTrash()
 {
     Cache.trash.clear();
     quint8 intensity;
-    //Очередной жопский костыль
-    if(settings["trash_intensity"]<=0)
-        intensity=1;
-    else
-        intensity=settings["trash_intensity"];
+
+    intensity=settings["trash_intensity"]>0 ? settings["trash_intensity"] : 1;
 
     RadiansEx cache;
     qreal begin=0.0f,end=45.0f,rand;
     for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;i++)
     {
         cache.angle=(*i).angle;
-        for(qint16 l=0,t=qrand()%intensity;l<t;k++)
+        for(qint16 l=0,t=25/*qrand()%intensity*/;l<t;l++)
         {
-            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
+            rand=begin+fmod((GetRandomCoord(4)+begin),(end-begin));
             cache.x=(*i).x*rand;
             cache.y=(*i).y*rand;
             cache.r=qSqrt(qPow(cache.x,2)+qPow(cache.y,2));
@@ -219,9 +216,37 @@ void MainLocator::GenerationTrash()
     }
 }
 
+/**
+ * Отрисовка пассивных помех
+ * @brief MainLocator::DrawTrash
+ */
 void MainLocator::DrawTrash()
 {
+    glPointSize(2*options["focus"]);
+    glEnable(GL_ALPHA_TEST);
+    qreal alpha;
 
+    for(QVector<RadiansEx>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
+    {
+        if(show)
+            alpha=1.0f;
+        else
+        {
+            alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*it).angle-0.01f);
+            if(not_clean && alpha<0)
+                alpha+=2*M_PI;
+        }
+
+        if(alpha>0)
+        {
+            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
+            alpha*=options["brightness"]-(*it).r+options["varu"];
+            glBegin(GL_POINTS);
+            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
+            glVertex2f((*it).x,(*it).y);
+            glEnd();
+        }
+    }
 }
 
 void MainLocator::GenerationRange()

@@ -85,7 +85,7 @@ class MainLocator : public QGLWidget
         QVector<Radians>::const_iterator ray_position;
         struct Coordinates
         {
-            QVector<Radians>trash;
+            QVector<RadiansEx>trash;
         }
             Cache,Current;
         //\[R]
