@@ -37,7 +37,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     settings["trash_intensity"]=0;
     settings["scale"]=0;
 
-    clockwise=false; //По часовой стрелке
+    clockwise=true; //По часовой стрелке
     Color=new QColorDialog(this);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
@@ -50,10 +50,11 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
         n_radians[i].y=qFastSin(n_radians[i].angle);
     }
     radians_size=ArraySize(n_radians);
-    for(quint16 i=0;i<radians_size;n_circle.append(n_radians[i+=3])); //Получаем координаты для отрисовки фона индикатора
+    for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;n_circle.append(*i),i+=3); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    /*GenerationTrash();
+    GenerationTrash();
+    /*
     GenerationRange();
     GenerationAzimuth();
     GenerationLocalItems();
@@ -152,51 +153,20 @@ bool MainLocator::IsActive()
     return timer->isActive();
 }
 
+
 void MainLocator::CleanDataBuffer()
 {
-    trash.clear();
-    local_items.clear();
-    active_answer_trash.clear();
-    active_noise_trash.clear();
+
 }
 
 void MainLocator::SetSettings(const QString option,const quint16 v)
 {
-    settings[option]=v;
-    if(option=="azimuth_marks")
-        GenerationAzimuth();
-    else if(option=="range_marks")
-        GenerationRange();
-    else if(option=="scale")
-    {
-        GenerationRange();
-        GenerationTrash();
-        GenerationLocalItems();
-    }
-    else if(option=="trash_intensity")
-        GenerationTrash();
-    else if(option=="active_ntrash_azimuth" || option=="active_noise_intensity")
-        GenerationActiveNoiseTrash();
-    else if(option=="active_atrash_azimuth")
-        GenerationActiveAnswerTrash();
-    else return;
     updateGL();
 }
 
 void MainLocator::SetSettings(const QString option,const qreal v)
 {
-    options[option]=v;
-    if(option=="brightness");
-    else if(option=="interval");
-    else if(option=="focus");
-    else if(option=="varu");
-    else if(option=="trash_begin")
-        GenerationTrash();
-    else if(option=="trash_end")
-        GenerationTrash();
-    else if(option=="active_answer_distance")
-        GenerationActiveAnswerTrash();
-    else return;
+
     updateGL();
 }
 
@@ -210,10 +180,8 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
 
 void MainLocator::GenerationRay()
 {
-    if(clockwise)
-        for(quint16 i=radians_size;i>0;ray.append(n_radians[i--])); //Получаем координаты каждой позиции, на которой может находиться луч
-    else
-        for(quint16 i=0;i<radians_size;ray.append(n_radians[i++])); //Получаем координаты каждой позиции, на которой может находиться луч
+    Radians *i=n_radians,*k=n_radians+radians_size;
+    while(i<k)ray.append(clockwise ? *k-- : *i++);
 }
 
 /**
@@ -226,7 +194,29 @@ void MainLocator::GenerationRay()
 
 void MainLocator::GenerationTrash()
 {
+    /*
+    Cache.trash->clear();
+    quint8 intensity;
+    //Очередной жопский костыль
+    if(settings["trash_intensity"]<=0)
+        intensity=1;
+    else
+        intensity=settings["trash_intensity"];
 
+    RadiansEx cache;
+    for(quint16 *it=n_radians;it<radians_size;it++)
+    {
+        cache.angle=(*it).angle;
+        for(qint16 k=0,t=qrand()%intensity;k<t;k++)
+        {
+            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
+            cache.x=(*it).x*rand;
+            cache.y=(*it).y*rand;
+            cache.r=qSqrt(qPow(cache.x,2)+qPow(cache.y,2));
+            Cache.trash->append(cache);
+        }
+    }
+    */
 }
 
 void MainLocator::GenerationRange()
@@ -348,59 +338,11 @@ void MainLocator::ContinueSearch()
     bool f=0;
     if(ray_position==ray.end())
     {
-        if(trash.isEmpty())
-            GenerationTrash();
-        if(f=f||local_items.isEmpty())
-            GenerationLocalItems();
-        if(f=f||active_answer_trash.isEmpty())
-            GenerationActiveAnswerTrash();
-        if(f=f||active_noise_trash.isEmpty())
-            GenerationActiveNoiseTrash();
-        if(f)
-            not_clean=false;
-        else if(!not_clean)
-            not_clean=true;
-        if(targets_pos>=targets.size()-1)
-                targets_pos=-1;
-        else if(targets_pos>=0)
-            targets_pos++;
         ray_position=ray.begin();
     }
     else
         //line_position++;
         ray_position++;
-}
-
-/**
- * Отрисовка пассивных помех
- * @brief MainLocator::DrawTrash
- */
-void MainLocator::DrawTrash()
-{
-    glPointSize(2*options["focus"]);
-    glEnable(GL_ALPHA_TEST);
-    qreal alpha;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=trash.begin();it<trash.end();it++)
-    {
-        if(show)
-            alpha=1.0f;
-        else
-        {
-            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
-            if(not_clean && alpha<0)
-                alpha+=2*M_PI;
-        }
-
-        if(alpha>0)
-        {
-            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-            alpha*=options["brightness"]-(*it)["r"]+options["varu"];
-            glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-            glVertex2f((*it)["x"],(*it)["y"]);
-            glEnd();
-        }
-    }
 }
 
 /**
@@ -440,6 +382,7 @@ void MainLocator::DrawRange()
  * Отрисовка меток азимута
  * @brief MainLocator::DrawAzimuth
  */
+/*
 void MainLocator::DrawAzimuth()
 {
     qreal alpha;
@@ -579,7 +522,6 @@ void MainLocator::DrawActiveInSyncTrash()
         glEnd();
     }
 }
-
 void MainLocator::GenerationTargetPaths()
 {
     QHash<QString,qreal>cache;
@@ -589,16 +531,6 @@ void MainLocator::GenerationTargetPaths()
 
     switch(settings["scale"])
     {
-        /*
-        case 2:
-            distance=1.0f/400;
-            break;
-        case 1:
-            distance=1.0f/300;
-            break;
-        default:
-            distance=1.0f/150;
-        */
         case 2:
             distance=1.0f/150;
             break;
@@ -631,6 +563,7 @@ void MainLocator::GenerationTargetPaths()
         }
     }
 }
+*/
 
 void MainLocator::DrawTargets()
 {

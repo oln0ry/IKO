@@ -71,18 +71,29 @@ class MainLocator : public QGLWidget
             qreal x,y,angle;
         }
             n_radians[ANGLE_RANGE];
+
+        struct RadiansEx:public Radians
+        {
+            qreal r;
+        };
+
         QVector<Radians>
             n_circle,
             ray;
         quint16
             radians_size;
         QVector<Radians>::const_iterator ray_position;
+        struct Coordinates
+        {
+            QVector<Radians> *trash;
+        }
+            Cache,Current;
         //\[R]
         qreal fps;
         bool not_clean;
         QTimer* timer;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
-        QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
+        //QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>circle,line;
         QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash,active_insync_trash,targets;
         QMap<QString,QColor>color;
