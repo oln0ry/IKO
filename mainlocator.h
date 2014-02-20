@@ -7,6 +7,7 @@
 
 #include<QGLWidget>
 #include<QColorDialog>
+#include<QVariant>
 
 class MainLocator : public QGLWidget
 {
@@ -17,6 +18,8 @@ class MainLocator : public QGLWidget
         //[R]
         bool clockwise;
         void GenerationRay();
+        template<typename OptionType>void SetSettings(const QString group,const QString name,OptionType option);
+        template<typename OptionType>void SetSettings(const QString name,OptionType option);
         //\[R]
         void GenerationTrash();
         void GenerationRange();
@@ -27,13 +30,13 @@ class MainLocator : public QGLWidget
         void GenerationActiveInSyncTrash();
         void GenerationTargetPaths();
         void GenerationMeteo();
-        void ChangeFPS(qreal fps);
+        void ChangeFPS(qreal fps) const;
         void CleanDataBuffer();
         void ChangeTargetsState();
-        void SetSettings(const QString,const quint16);
-        void SetSettings(const QString,const qreal);
+        //void SetSettings(const QString,const quint16);
+       // void SetSettings(const QString,const qreal);
         QColor SelectColor(const QString,const QString);
-        bool IsActive();
+        bool IsActive() const;
         bool show,
              show_trash,
              show_local_items,
@@ -51,7 +54,7 @@ class MainLocator : public QGLWidget
         void resizeGL(int nWidth, int nHeight);
         void paintGL();
         void DrawStation();
-        void LocatorArea();
+        void LocatorArea() const;
         void DrawTrash();
         void DrawRange();
         void DrawAzimuth();
@@ -66,19 +69,34 @@ class MainLocator : public QGLWidget
 
     private:
         //[R]
+        /**
+         * @brief The Radians struct
+         * Описывает формат хранения координат на основе трёх параметров:
+         *  -абсцисса точки
+         *  -ордината точки
+         *  -угол точки
+         */
         struct Radians
         {
             qreal x,y,angle;
         }
             n_radians[ANGLE_RANGE];
 
+        /**
+         * @brief The RadiansEx struct
+         * Описывает формат хранения координат на основе трёх параметров:
+         *  -абсцисса точки
+         *  -ордината точки
+         *  -угол точки
+         *  -расстояние точки от центра
+         */
         struct RadiansEx:public Radians
         {
             qreal r;
         };
 
         QVector<Radians>
-            n_circle,
+            circle,
             ray;
         quint16
             radians_size;
@@ -88,21 +106,48 @@ class MainLocator : public QGLWidget
             QVector<RadiansEx>trash;
         }
             Cache,Current;
+        QMap<QString,QMap<QString,QVariant> >settings;
         //\[R]
         qreal fps;
         bool not_clean;
         QTimer* timer;
+
+        /*
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
         //QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
         QVector<QVector<QHash<QString,qreal> >::const_iterator>circle,line;
         QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash,active_insync_trash,targets;
-        QMap<QString,QColor>color;
         QMap<QString,quint16>settings;
         QMap<QString,qreal>options;
+        */
+        QMap<QString,QColor>color;
         QColorDialog* Color;
 
     private slots:
         void ContinueSearch();
 };
 
+template<typename OptionType>
+void MainLocator::SetSettings(const QString group,const QString name,OptionType option)
+{
+    if(group=="system")
+    {
+        if(name=="show")
+            show=static_cast<bool>(option);
+    }
+    if(group=="trash")
+    {
+        if(name=="intensity" || name=="begin" || name=="end")
+            GenerationTrash();
+    }
+    settings[group][name]=QVariant::fromValue(option);
+    if(group!="common")
+        updateGL();
+}
+
+template<typename OptionType>
+void MainLocator::SetSettings(const QString name,OptionType option)
+{
+    SetSettings("common",name,option);
+}
 #endif // MAINLOCATOR_H

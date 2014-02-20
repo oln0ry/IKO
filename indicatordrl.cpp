@@ -20,18 +20,23 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     intensity<<"Слабая"<<"Средняя"<<"Сильная";
     //ui->SelectTrashIntensity->addItems(intensity);
     //ui->SelectTrashIntensity->setCurrentIndex(1);
-    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
 
     ui->InputScatterTrashFrom->setValue(0.0f);
     ui->InputScatterTrashTo->setValue(150.0f);
 
+    ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
+    ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
+    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
+
+    ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
+    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+
     ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
     ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
     ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
     ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
-    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
     ui->RenderIndicator->show=false;
     //ui->LabelTargetsSettings->hide();
     //ui->ButtonTargetsSettings->hide();
@@ -61,30 +66,26 @@ void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
 
 void IndicatorDRL::on_SelectAzimuthMarks_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("azimuth_marks",static_cast<quint16>(index));
+    if(index<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","azimuth",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_SelectRangeMarks_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("range_marks",static_cast<quint16>(index));
+    if(index<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("scale",static_cast<quint16>(index));
+    if(index<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint16>(index));
     qreal max;
     switch(index)
     {
-        /*
-        case 2:
-            max=400.0f;
-            break;
-        case 1:
-            max=300.0f;
-            break;
-        default:
-            max=150.0f;
-        */
         case 2:
             max=150.0f;
             break;
@@ -125,38 +126,46 @@ void IndicatorDRL::on_ChangeViewStateAll_clicked()
     if(ui->RenderIndicator->show)
     {
         ui->ChangeViewStateAll->setText("Отобразить все скрытые метки");
-        ui->RenderIndicator->show=false;
+        ui->RenderIndicator->SetSettings("system","show",false);
     }
     else
     {
         ui->ChangeViewStateAll->setText("Вернуть состояние скрытых меток");
-        ui->RenderIndicator->show=true;
+        ui->RenderIndicator->SetSettings("system","show",true);
     }
 }
 
 void IndicatorDRL::on_ChangeIndicatorBrightness_valueChanged(int value)
 {
-    ui->RenderIndicator->SetSettings("brightness",static_cast<qreal>(value)/100);
+    if(value<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
 }
 
 void IndicatorDRL::on_ChangeDisplayLightning_valueChanged(int value)
 {
-    ui->RenderIndicator->SetSettings("interval",static_cast<qreal>(value)/100);
+    if(value<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
 }
 
 void IndicatorDRL::on_ChangeIndicatorFocus_valueChanged(int value)
 {
-    ui->RenderIndicator->SetSettings("focus",static_cast<qreal>(value)/100);
+    if(value<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
 void IndicatorDRL::on_ChangeIndicatorVARU_valueChanged(int value)
 {
-    ui->RenderIndicator->SetSettings("varu",static_cast<qreal>(value)/100);
+    if(value<0)
+        return;
+    ui->RenderIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
 }
 
 void IndicatorDRL::on_CheckShowTrash_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_trash=arg1==2 ? true : false;
+    ui->RenderIndicator->SetSettings("trash","show",arg1==2);
 }
 
 void IndicatorDRL::on_RegenerateTrash_clicked()
@@ -171,7 +180,7 @@ void IndicatorDRL::on_InputScatterTrashFrom_valueChanged(double arg1)
     if(from>=to)
         ui->InputScatterTrashFrom->setMaximum(to);
     ui->InputScatterTrashTo->setMinimum(from);
-    ui->RenderIndicator->SetSettings("trash_begin",from);
+    ui->RenderIndicator->SetSettings("trash","begin",from);
 }
 
 void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
@@ -181,52 +190,52 @@ void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
     if(to<=from)
         ui->InputScatterTrashTo->setMinimum(from);
     ui->InputScatterTrashFrom->setMaximum(to);
-    ui->RenderIndicator->SetSettings("trash_end",to);
+    ui->RenderIndicator->SetSettings("trash","end",to);
 }
 
 void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_local_items=arg1==2 ? true : false;
+    ui->RenderIndicator->show_local_items=arg1==2;
 }
 
 void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint16>(index));
+    ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(index));
 }
 
 void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_active_ntrash=arg1==2 ? true : false;
+    ui->RenderIndicator->show_active_ntrash=arg1==2;
 }
 
 void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
 {
-    ui->RenderIndicator->SetSettings("active_ntrash_azimuth",static_cast<quint16>(arg1));
+    ui->RenderIndicator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
 }
 
 void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
 {
-    ui->RenderIndicator->SetSettings("active_noise_intensity",static_cast<quint16>(index));
+    ui->RenderIndicator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_active_atrash=arg1==2 ? true : false;
+    ui->RenderIndicator->show_active_atrash=arg1==2;
 }
 
 void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
 {
-    ui->RenderIndicator->SetSettings("active_atrash_azimuth",static_cast<quint16>(arg1));
+    ui->RenderIndicator->SetSettings("active_answer_trash","azimuth",static_cast<quint16>(arg1));
 }
 
 void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
 {
-    ui->RenderIndicator->SetSettings("active_answer_distance",static_cast<qreal>(arg1));
+    ui->RenderIndicator->SetSettings("active_answer_trash","distance",static_cast<qreal>(arg1));
 }
 
 void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_active_isynctrash=arg1==2 ? true : false;
+    ui->RenderIndicator->show_active_isynctrash=arg1==2;
 }
 
 void IndicatorDRL::on_ButtonTargetsSettings_clicked()
@@ -253,10 +262,10 @@ void IndicatorDRL::on_CleanLocatorDataBuffer_clicked()
 
 void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
 {
-    ui->RenderIndicator->SetSettings("trash_intensity",static_cast<quint16>(value));
+    ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_meteo=arg1==2 ? true : false;
+    ui->RenderIndicator->show_meteo=arg1==2;
 }
