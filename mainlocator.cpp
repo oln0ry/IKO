@@ -52,6 +52,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     radians_size=ArraySize(n_radians);
     for(quint16 i=0;i<radians_size;n_circle.append(n_radians[i+=3])); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
+    ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
     /*GenerationTrash();
     GenerationRange();
     GenerationAzimuth();
@@ -213,7 +214,6 @@ void MainLocator::GenerationRay()
         for(quint16 i=radians_size;i>0;ray.append(n_radians[i--])); //Получаем координаты каждой позиции, на которой может находиться луч
     else
         for(quint16 i=0;i<radians_size;ray.append(n_radians[i++])); //Получаем координаты каждой позиции, на которой может находиться луч
-    ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
 }
 
 /**
