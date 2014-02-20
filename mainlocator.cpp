@@ -192,7 +192,7 @@ void MainLocator::GenerationTrash()
 
     intensity=settings["trash"]["intensity"].toUInt() ?: 1;
     RadiansEx cache;
-    qreal begin=0.0f,end=1.0f,rand;
+    qreal begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),end=CalcScaleValue(settings["trash"]["end"].toDouble()),rand;
     for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;i++)
     {
         cache.angle=(*i).angle;

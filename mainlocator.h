@@ -20,6 +20,7 @@ class MainLocator : public QGLWidget
         void GenerationRay();
         template<typename OptionType>void SetSettings(const QString group,const QString name,OptionType option);
         template<typename OptionType>void SetSettings(const QString name,OptionType option);
+        template<typename T>T CalcScaleValue(const T value) const;
         //\[R]
         void GenerationTrash();
         void GenerationRange();
@@ -127,8 +128,7 @@ class MainLocator : public QGLWidget
         void ContinueSearch();
 };
 
-template<typename OptionType>
-void MainLocator::SetSettings(const QString group,const QString name,OptionType option)
+template<typename OptionType>void MainLocator::SetSettings(const QString group,const QString name,OptionType option)
 {
     if(group=="system")
     {
@@ -145,9 +145,13 @@ void MainLocator::SetSettings(const QString group,const QString name,OptionType 
         updateGL();
 }
 
-template<typename OptionType>
-void MainLocator::SetSettings(const QString name,OptionType option)
+template<typename OptionType>void MainLocator::SetSettings(const QString name,OptionType option)
 {
     SetSettings("common",name,option);
+}
+
+template<typename T>T MainLocator::CalcScaleValue(const T value) const
+{
+    return value/settings["system"]["scale"];
 }
 #endif // MAINLOCATOR_H

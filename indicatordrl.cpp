@@ -82,7 +82,6 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 {
     if(index<0)
         return;
-    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint16>(index));
     qreal max;
     switch(index)
     {
@@ -96,6 +95,7 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
             max=45.0f;
 
     }
+    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint8>(max));
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
     if(ui->InputScatterTrashTo->value()>max)
