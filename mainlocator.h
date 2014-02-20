@@ -1,6 +1,10 @@
 #ifndef MAINLOCATOR_H
 #define MAINLOCATOR_H
 
+#ifndef ANGLE_RANGE
+#define ANGLE_RANGE 360
+#endif
+
 #include<QGLWidget>
 #include<QColorDialog>
 
@@ -10,6 +14,10 @@ class MainLocator : public QGLWidget
     public:
         explicit MainLocator(QWidget *parent = 0);
         ~MainLocator();
+        //[R]
+        bool clockwise;
+        void GenerationRay();
+        //\[R]
         void GenerationTrash();
         void GenerationRange();
         void GenerationAzimuth();
@@ -57,6 +65,19 @@ class MainLocator : public QGLWidget
         qint8 GetRandomSign();
 
     private:
+        //[R]
+        struct Radians
+        {
+            qreal x,y,angle;
+        }
+            n_radians[ANGLE_RANGE];
+        QVector<Radians>
+            n_circle,
+            ray;
+        quint16
+            radians_size;
+        QVector<Radians>::const_iterator ray_position;
+        //\[R]
         qreal fps;
         bool not_clean;
         QTimer* timer;

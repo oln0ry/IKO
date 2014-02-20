@@ -2,13 +2,22 @@
 #include<qmath.h>
 #include<QTime>
 #include<QTimer>
-#include"QDebug"
+#include<QDebug>
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
 #endif
 
+#ifndef GetRadianValue
 #define GetRadianValue(radian) M_PI*radian/180
+#endif
+
+//Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
+#ifndef ArraySize
+template<typename T,size_t N>
+char(&ArraySizeHelper(T(&array)[N]))[N];
+#define ArraySize(array)(sizeof(ArraySizeHelper(array)))
+#endif
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
@@ -27,33 +36,23 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     options["active_answer_distance"]=0.0f;
     settings["trash_intensity"]=0;
     settings["scale"]=0;
-    //settings["active_ntrash_azimuth"]=25;
-    //settings["active_atrash_azimuth"]=74;
-    //show_active_ntrash,show_active_atrash
+
+    clockwise=false; //По часовой стрелке
     Color=new QColorDialog(this);
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     //Переведём все используемые градусы в радианы
     QHash<QString,qreal>radians;
-    for(quint16 i=0;i<=360;i++)
+    for(quint16 i=0;i<ANGLE_RANGE;i++)
     {
-        radians["angle"]=GetRadianValue(i);
-        radians["x"]=qFastCos(radians["angle"]);
-        radians["y"]=qFastSin(radians["angle"]);
-        //radians["r"]=qSqrt(qPow(radians["x"],2)+qPow(radians["y"],2));
-        this->radians.append(radians);
+        n_radians[i].angle=GetRadianValue(i);
+        n_radians[i].x=qFastCos(n_radians[i].angle);
+        n_radians[i].y=qFastSin(n_radians[i].angle);
     }
-
-    //Михаил Круг
-    for(QVector<QHash<QString,qreal> >::const_iterator it=this->radians.begin();it<this->radians.end();circle.append(it),it+=3);
-
-    //Белка и стрелка
-    for(QVector<QHash<QString,qreal> >::iterator it=this->radians.begin();it<this->radians.end();line.append(it++));
-
-    line_position=line.begin();
-    line_end=line.end()-1;
-
-    GenerationTrash();
+    radians_size=ArraySize(n_radians);
+    for(quint16 i=0;i<radians_size;n_circle.append(n_radians[i+=3])); //Получаем координаты для отрисовки фона индикатора
+    GenerationRay();
+    /*GenerationTrash();
     GenerationRange();
     GenerationAzimuth();
     GenerationLocalItems();
@@ -62,7 +61,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     GenerationActiveInSyncTrash();
     GenerationTargetPaths();
     GenerationMeteo();
-
+    */
     timer=new QTimer(this);
 
     connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
@@ -111,12 +110,11 @@ void MainLocator::paintGL()
     LocatorArea();
     DrawStation();
     glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),options["brightness"]);//перерисовка линии
-    //glColor3f(static_cast<GLfloat>(153/255.0),static_cast<GLfloat>(204/255.0),static_cast<GLfloat>(153/255.0));//перерисовка линии
     glBegin(GL_LINES);
         glVertex2d(static_cast<GLdouble>(0.0),static_cast<GLdouble>(0.0));
-        glVertex2d((**line_position)["x"],(**line_position)["y"]);
+        glVertex2d((*ray_position).x,(*ray_position).y);
     glEnd();
-
+    /*
     if(show_trash && !trash.isEmpty())
         DrawTrash();
     if(!range.isEmpty())
@@ -135,6 +133,7 @@ void MainLocator::paintGL()
         DrawTargets();
     if(show_meteo && !meteo.isEmpty())
         DrawMeteo();
+    */
     glPopMatrix();
     //swapBuffers();
 }
@@ -208,6 +207,15 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
     return color[option]=Color->getColor();
 }
 
+void MainLocator::GenerationRay()
+{
+    if(clockwise)
+        for(quint16 i=radians_size;i>0;ray.append(n_radians[i--])); //Получаем координаты каждой позиции, на которой может находиться луч
+    else
+        for(quint16 i=0;i<radians_size;ray.append(n_radians[i++])); //Получаем координаты каждой позиции, на которой может находиться луч
+    ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
+}
+
 /**
  *  Генератор помех
  *
@@ -215,408 +223,40 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
  *
  *  @brief MainLocator::GenerationTrash
  */
+
 void MainLocator::GenerationTrash()
 {
-    quint16 density; //Плотность (густота, кучность) помех
-    QHash<QString,qreal>cache;
-    qreal rand,begin,end;
-    trash.clear();
 
-    switch(settings["scale"])
-    {
-        /*
-        case 2:
-            begin=static_cast<qreal>(options["trash_begin"])/400;
-            end=static_cast<qreal>(options["trash_end"])/400;
-            //distance=1.0f/400;
-            break;
-        case 1:
-            begin=static_cast<qreal>(options["trash_begin"])/300;
-            end=static_cast<qreal>(options["trash_end"])/300;
-            //distance=1.0f/300;
-            break;
-        default:
-            begin=static_cast<qreal>(options["trash_begin"])/150;
-            end=static_cast<qreal>(options["trash_end"])/150;
-            //distance=1.0f/150;
-        */
-        case 2:
-            begin=static_cast<qreal>(options["trash_begin"])/150;
-            end=static_cast<qreal>(options["trash_end"])/150;
-            //distance=1.0f/400;
-            break;
-        case 1:
-            begin=static_cast<qreal>(options["trash_begin"])/90;
-            end=static_cast<qreal>(options["trash_end"])/90;
-            //distance=1.0f/300;
-            break;
-        default:
-            begin=static_cast<qreal>(options["trash_begin"])/45;
-            end=static_cast<qreal>(options["trash_end"])/45;
-        //distance=1.0f/150;
-
-    }
-
-    /*
-    switch(settings["trash_intensity"])
-    {
-        case 2:
-            density=20;
-            break;
-        case 1:
-            density=10;
-            break;
-        default:
-            density=5;
-    }
-    */
-
-    //Очередной жопский костыль
-    if(settings["trash_intensity"]<=0)
-        density=1;
-    else
-        density=settings["trash_intensity"];
-
-    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
-    {
-        cache["angle"]=(*it)["angle"];
-        for(qint16 k=0,t=qrand()%density;k<t;k++)
-        {
-            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
-            cache["x"]=(*it)["x"]*rand;
-            cache["y"]=(*it)["y"]*rand;
-            cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
-            trash.append(cache);
-        }
-    }
 }
 
 void MainLocator::GenerationRange()
 {
-    QHash<QString,qreal>cache;
-    qreal i=0.0f,delta,distance;
-    quint8 j=0,k=0;
-    range.clear();
 
-    switch(settings["scale"])
-    {
-        /*
-        case 2:
-            distance=1.0f/400;
-            break;
-        case 1:
-            distance=1.0f/300;
-            break;
-        default:
-            distance=1.0f/150;
-        */
-        case 2:
-            distance=1.0f/150;
-            break;
-        case 1:
-            distance=1.0f/90;
-            break;
-        default:
-            distance=1.0f/45;
-
-    }
-
-    switch(settings["range_marks"])
-    {
-        case 1:
-            delta=distance*10;
-            j=5;
-            break;
-        case 0:
-            return;
-        default:
-            delta=distance*50;
-            j=1;
-    }
-
-    while(i<=1)
-    {
-        if(k%j==0)
-            cache["width"]=2.5f;
-        else
-            cache["width"]=1.0f;
-        k++;
-
-        for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
-        {
-            cache["angle"]=(*it)["angle"];
-            cache["x"]=i*(*it)["x"];
-            cache["y"]=i*(*it)["y"];
-            range[i*250].append(cache);
-        }
-        i+=delta;
-    }
 }
 
 void MainLocator::GenerationAzimuth()
 {
-    QHash<QString,qreal>cache;
-    quint8 delta;
-    azimuth.clear();
-    switch(settings["azimuth_marks"])
-    {
-        case 1:
-            delta=30;
-            break;
-        case 0:
-            return;
-        default:
-            delta=10;
-    }
 
-    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it+=delta)
-    {
-        cache["angle"]=(*it)["angle"];
-        cache["x"]=(*it)["x"];
-        cache["y"]=(*it)["y"];
-        cache["width"]=(it-radians.begin())%30>0 ? 1.0f : 3.5f;
-        azimuth.append(cache);
-    }
 }
 
 void MainLocator::GenerationLocalItems()
 {
-    quint8 density=3;
-    QHash<QString,qreal>cache;
-    qreal rand,begin=0.0f,end=15.0f;//28.0f;
-    local_items.clear();
-    switch(settings["scale"])
-    {
-    /*
-        case 2:
-            begin=static_cast<qreal>(begin)/400;
-            end=static_cast<qreal>(end)/400;
-            break;
-        case 1:
-            begin=static_cast<qreal>(begin)/300;
-            end=static_cast<qreal>(end)/300;
-            break;
-        default:
-            begin=static_cast<qreal>(begin)/150;
-            end=static_cast<qreal>(end)/150;
-    */
-        case 2:
-            begin=static_cast<qreal>(begin)/150;
-            end=static_cast<qreal>(end)/150;
-            break;
-        case 1:
-            begin=static_cast<qreal>(begin)/90;
-            end=static_cast<qreal>(end)/90;
-            break;
-        default:
-            begin=static_cast<qreal>(begin)/45;
-            end=static_cast<qreal>(end)/45;
-    }
 
-    for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
-    {
-        cache["angle"]=(*it)["angle"];
-        for(qint8 k=0,t=qrand()%density;k<t;k++)
-        {
-            rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
-            cache["x"]=(*it)["x"]*rand;
-            cache["y"]=(*it)["y"]*rand;
-            local_items.append(cache);
-        }
-    }
 }
 
 void MainLocator::GenerationActiveNoiseTrash()
 {
-    quint8 density=17;
-    QHash<QString,qreal>cache;
-    active_noise_trash.clear();
 
-    /*
-    switch(settings["active_noise_intensity"])
-    {
-        case 2:
-            density=15;
-            break;
-        case 1:
-            density=8;
-            break;
-        default:
-            density=3;
-    }
-    */
-
-    quint8 ceil;
-    ceil=qrand()%10+20;
-    QVector<QHash<QString,qreal> >::const_iterator ct;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+90+settings["active_ntrash_azimuth"]),ct=it;it<(ct+ceil);it++)
-    {
-        cache["angle"]=(*it)["angle"];
-        cache["x"]=(*it)["x"];
-        cache["y"]=(*it)["y"];
-        cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
-        cache["width"]=GetRandomCoord(4)*density;
-        active_noise_trash.append(cache);
-    }
-
-    quint8 r;
-    switch(settings["active_noise_intensity"])
-    {
-        case 2:
-            for(QVector<QHash<QString,qreal> >::const_iterator rt=radians.begin();rt<radians.end();r+=40)
-            {
-                for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+r+settings["active_ntrash_azimuth"]),ct=it;it<(ct+20);it++)
-                {
-                    cache["angle"]=(*it)["angle"];
-                    cache["x"]=(*it)["x"];
-                    cache["y"]=(*it)["y"];
-                    cache["width"]=GetRandomCoord(4)*density/2-2;
-                    active_noise_trash.append(cache);
-                }
-            }
-            break;
-        case 1:
-            for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+190+settings["active_ntrash_azimuth"]),ct=it;it<(ct+20);it++)
-            {
-                cache["angle"]=(*it)["angle"];
-                cache["x"]=(*it)["x"];
-                cache["y"]=(*it)["y"];
-                cache["width"]=GetRandomCoord(4)*density/3-2;
-                active_noise_trash.append(cache);
-            }
-            for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+settings["active_ntrash_azimuth"]),ct=it;it<(ct+20);it++)
-            {
-                cache["angle"]=(*it)["angle"];
-                cache["x"]=(*it)["x"];
-                cache["y"]=(*it)["y"];
-                cache["width"]=GetRandomCoord(4)*density/3.4-2;
-                active_noise_trash.append(cache);
-            }
-            for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+280+settings["active_ntrash_azimuth"]),ct=it;it<(ct+20);it++)
-            {
-                cache["angle"]=(*it)["angle"];
-                cache["x"]=(*it)["x"];
-                cache["y"]=(*it)["y"];
-                cache["width"]=GetRandomCoord(4)*density/3.2-2;
-                active_noise_trash.append(cache);
-            }
-            break;
-    }
-
-    /*
-    for(QVector<QHash<QString,qreal> >::const_iterator it=(radians.begin()+75+qrand()%150),ct=it;it<(ct+30);it++)
-    {
-        cache["angle"]=(*it)["angle"];
-        cache["x"]=(*it)["x"];
-        cache["y"]=(*it)["y"];
-        cache["width"]=GetRandomCoord(4)*density-2;
-        active_noise_trash.append(cache);
-    }*/
 }
 
 void MainLocator::GenerationActiveAnswerTrash()
 {
-    if(options["active_answer_distance"]<=0.0f)
-        return;
 
-    QHash<QString,qreal>cache;
-    qreal i=0.0f,delta,distance;
-    quint8 azimuth=0,length=0,k=0;
-    active_answer_trash.clear();
-
-    switch(settings["scale"])
-    {
-        /*
-        case 2:
-            distance=1.0f/400;
-            break;
-        case 1:
-            distance=1.0f/300;
-            break;
-        default:
-            distance=1.0f/150;
-        */
-        case 2:
-            distance=1.0f/150;
-            break;
-        case 1:
-            distance=1.0f/90;
-            break;
-        default:
-            distance=1.0f/45;
-    }
-
-    delta=distance*options["active_answer_distance"];
-
-    azimuth=settings["active_atrash_azimuth"];
-    length=25;
-    while(i<=1)
-    {
-        k++;
-        cache["width"]=qrand()%6;
-
-        for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin()+90+azimuth;it<radians.begin()+90+azimuth+length;it++)
-        {
-            cache["angle"]=(*it)["angle"];
-            cache["x"]=i*(*it)["x"];
-            cache["y"]=i*(*it)["y"];
-            cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
-            active_answer_trash[k*250].append(cache);
-        }
-        i+=delta;
-    }
 }
 
 void MainLocator::GenerationActiveInSyncTrash()
 {
-    QHash<QString,qreal>cache;
-    qreal i=0.0f,delta,distance;
-    quint8 length=0,k=0;
-    active_insync_trash.clear();
 
-    switch(settings["scale"])
-    {
-        /*
-        case 2:
-            distance=1.0f/400;
-            break;
-        case 1:
-            distance=1.0f/300;
-            break;
-        default:
-            distance=1.0f/150;
-        */
-        case 2:
-            distance=1.0f/150;
-            break;
-        case 1:
-            distance=1.0f/90;
-            break;
-        default:
-            distance=1.0f/45;
-    }
-
-    delta=distance*6;
-    length=0;
-    for(quint8 r=0;r<3;r++,i=0.0f)
-    {
-        while(i<=1)
-        {
-            k++;
-            cache["width"]=qrand()%6;
-
-            for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin()+length;it<radians.begin()+length+25;it++)
-            {
-                cache["angle"]=(*it)["angle"];
-                cache["x"]=i*(*it)["x"];
-                cache["y"]=i*(*it)["y"];
-                cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
-                active_insync_trash[k*250].append(cache);
-            }
-            length+=4;
-            i+=delta;
-        }
-    }
 }
 
 qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign)
@@ -643,8 +283,8 @@ void MainLocator::LocatorArea()
     //glColor3f(static_cast<GLfloat>(255/255.0),static_cast<GLfloat>(153/255.0),static_cast<GLfloat>(0/255.0));// Цвет выделенной области
     color["locator"].isValid() ? qglColor(color["locator"]) : qglColor(Qt::black);
     glBegin(GL_TRIANGLE_FAN);
-        for(QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator it=circle.begin();it<circle.end();it++)
-            glVertex2d((**it)["x"],(**it)["y"]);
+        for(QVector<Radians>::const_iterator it=n_circle.begin();it<n_circle.end();it++)
+            glVertex2d((*it).x,(*it).y);
     glEnd();
 }
 
@@ -706,7 +346,7 @@ void MainLocator::ContinueSearch()
 {
     updateGL();
     bool f=0;
-    if(line_position==line_end)
+    if(ray_position==ray.end())
     {
         if(trash.isEmpty())
             GenerationTrash();
@@ -720,14 +360,15 @@ void MainLocator::ContinueSearch()
             not_clean=false;
         else if(!not_clean)
             not_clean=true;
-        line_position=line.begin();
         if(targets_pos>=targets.size()-1)
                 targets_pos=-1;
         else if(targets_pos>=0)
             targets_pos++;
+        ray_position=ray.begin();
     }
     else
-        line_position++;
+        //line_position++;
+        ray_position++;
 }
 
 /**
