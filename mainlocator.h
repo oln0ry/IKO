@@ -130,17 +130,21 @@ class MainLocator : public QGLWidget
 
 template<typename OptionType>void MainLocator::SetSettings(const QString group,const QString name,OptionType option)
 {
+    settings[group][name]=QVariant::fromValue(option);
     if(group=="system")
     {
         if(name=="show")
             show=static_cast<bool>(option);
+        if(name=="scale")
+        {
+            GenerationTrash();
+        }
     }
     if(group=="trash")
     {
         if(name=="intensity" || name=="begin" || name=="end")
             GenerationTrash();
     }
-    settings[group][name]=QVariant::fromValue(option);
     if(group!="common")
         updateGL();
 }
@@ -152,6 +156,6 @@ template<typename OptionType>void MainLocator::SetSettings(const QString name,Op
 
 template<typename T>T MainLocator::CalcScaleValue(const T value) const
 {
-    return value/settings["system"]["scale"];
+    return value/settings["system"]["scale"].toUInt();
 }
 #endif // MAINLOCATOR_H
