@@ -116,6 +116,7 @@ void MainLocator::paintGL()
         glVertex2d(static_cast<GLdouble>(0.0),static_cast<GLdouble>(0.0));
         glVertex2d((*ray_position).x,(*ray_position).y);
     glEnd();
+    DrawTrash();
     /*
     if(show_trash && !trash.isEmpty())
         DrawTrash();
@@ -194,8 +195,7 @@ void MainLocator::GenerationRay()
 
 void MainLocator::GenerationTrash()
 {
-    /*
-    Cache.trash->clear();
+    Cache.trash.clear();
     quint8 intensity;
     //Очередной жопский костыль
     if(settings["trash_intensity"]<=0)
@@ -204,19 +204,24 @@ void MainLocator::GenerationTrash()
         intensity=settings["trash_intensity"];
 
     RadiansEx cache;
-    for(quint16 *it=n_radians;it<radians_size;it++)
+    qreal begin=0.0f,end=45.0f,rand;
+    for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;i++)
     {
-        cache.angle=(*it).angle;
-        for(qint16 k=0,t=qrand()%intensity;k<t;k++)
+        cache.angle=(*i).angle;
+        for(qint16 l=0,t=qrand()%intensity;l<t;k++)
         {
             rand=begin+fmod((GetRandomCoord(6)+begin),(end-begin));
-            cache.x=(*it).x*rand;
-            cache.y=(*it).y*rand;
+            cache.x=(*i).x*rand;
+            cache.y=(*i).y*rand;
             cache.r=qSqrt(qPow(cache.x,2)+qPow(cache.y,2));
-            Cache.trash->append(cache);
+            Cache.trash.append(cache);
         }
     }
-    */
+}
+
+void MainLocator::DrawTrash()
+{
+
 }
 
 void MainLocator::GenerationRange()
