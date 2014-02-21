@@ -51,7 +51,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
         radians[i].y=qFastSin(radians[i].angle);
     }
     radians_size=ArraySize(radians);
-    for(Radians*i=radians,*k=radians+radians_size;i<k;circle.append(*i),i+=3); //Получаем координаты для отрисовки фона индикатора
+    for(Points*i=radians,*k=radians+radians_size;i<k;circle.append(*i),i+=3); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
     //GenerationTrash();
@@ -175,7 +175,7 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
 
 void MainLocator::GenerationRay()
 {
-    Radians*i=radians,*k=radians+radians_size;
+    Points*i=radians,*k=radians+radians_size;
     while(i<k)ray.append(clockwise ? *k-- : *i++);
 }
 
@@ -192,9 +192,9 @@ void MainLocator::GenerationTrash()
     quint8 intensity;
 
     intensity=settings["trash"]["intensity"].toUInt() ?: 1;
-    RadiansR cache;
+    PointsPath cache;
     qreal begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),end=CalcScaleValue(settings["trash"]["end"].toDouble()),rand;
-    for(Radians *i=radians,*k=radians+radians_size;i<k;i++)
+    for(Points *i=radians,*k=radians+radians_size;i<k;i++)
     {
         cache.angle=(*i).angle;
         for(qint16 l=0,t=qrand()%intensity;l<t;l++)
@@ -218,13 +218,13 @@ void MainLocator::DrawTrash()
     glEnable(GL_ALPHA_TEST);
     qreal alpha;
 
-    for(QVector<RadiansR>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
+    for(QVector<PointsPath>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
     {
         if(settings["system"]["show"].toBool())
             alpha=1.0f;
         else
         {
-            alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*it).angle-0.01f);
+            alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*it).angle)-0.01f;
             if(not_clean && alpha<0)
                 alpha+=2*M_PI;
         }
@@ -260,11 +260,11 @@ void MainLocator::GenerationRange()
             j=1;
     }
 
-    RadiansW cache;
+    LineEntity cache;
     while(r<=1)
     {
         cache.width=d++%j==0 ? 2.5f : 1.0f;
-        for(Radians *i=radians,*k=radians+radians_size;i<k;i++)
+        for(Points *i=radians,*k=radians+radians_size;i<k;i++)
         {
             cache.angle=(*i).angle;
             cache.x=r*(*i).x;
@@ -283,8 +283,8 @@ void MainLocator::GenerationRange()
 void MainLocator::DrawRange()
 {
     qreal alpha;
-    QVector<RadiansW>::const_iterator ct;
-    for(QHash<quint8,QVector<RadiansW> >::const_iterator it=range.begin();it!=range.end();it++)
+    QVector<LineEntity>::const_iterator ct;
+    for(QHash<quint8,QVector<LineEntity> >::const_iterator it=range.begin();it!=range.end();it++)
     {
         ct=(*it).begin();
         glLineWidth((*ct).width*settings["system"]["focus"].toDouble());
@@ -295,7 +295,7 @@ void MainLocator::DrawRange()
                 alpha=1.0f;
             else
             {
-                alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*ct).angle-0.01f);
+                alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*ct).angle)-0.01f;
                 if(not_clean && alpha<0)
                     alpha+=2*M_PI;
             }
@@ -312,7 +312,79 @@ void MainLocator::DrawRange()
 
 void MainLocator::GenerationAzimuth()
 {
+    quint8 delta;
+    azimuth.clear();
+    switch(settings["system"]["azimuth"].toUInt())
+    {
+        case 1:
+            delta=30;
+            break;
+        case 0:
+            return;
+        default:
+            delta=10;
+    }
+    LineEntity cache;
+    for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
+    {
+        cache.angle=(*i).angle;
+        cache.x=(*i).x;
+        cache.y=(*i).y;
+        cache.width=(i-radians)%30>0 ? 1.0f : 3.5f;
+        azimuth.append(cache);
+    }
+}
 
+/**
+ * Отрисовка меток азимута
+ * @brief MainLocator::DrawAzimuth
+ */
+void MainLocator::DrawAzimuth()
+{
+    qreal alpha;
+    for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
+    {
+        if(settings["system"]["show"].toBool())
+            alpha=1.0f;
+        else
+        {
+            alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*it).angle)-0.01f;
+            if(not_clean && alpha<0)
+                alpha+=2*M_PI;
+        }
+        if(alpha>0)
+        {
+            glLineWidth((*it).width*settings["system"]["focus"].toDouble());
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            glBegin(GL_LINES);
+            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*settings["system"]["brightness"].toDouble());
+            glVertex2d(0.0f,0.0f);
+            glVertex2f((*it).x,(*it).y);
+            glEnd();
+        }
+    }
+
+    quint8 delta;
+    azimuth.clear();
+    switch(settings["system"]["azimuth"].toUInt())
+    {
+        case 1:
+            delta=30;
+            break;
+        case 0:
+            return;
+        default:
+            delta=10;
+    }
+    LineEntity cache;
+    for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
+    {
+        cache.angle=(*i).angle;
+        cache.x=(*i).x;
+        cache.y=(*i).y;
+        cache.width=(i-radians)%30>0 ? 1.0f : 3.5f;
+        azimuth.append(cache);
+    }
 }
 
 void MainLocator::GenerationLocalItems()
@@ -359,7 +431,7 @@ void MainLocator::LocatorArea() const
     //glColor3f(static_cast<GLfloat>(255/255.0),static_cast<GLfloat>(153/255.0),static_cast<GLfloat>(0/255.0));// Цвет выделенной области
     color["locator"].isValid() ? qglColor(color["locator"]) : qglColor(Qt::black);
     glBegin(GL_TRIANGLE_FAN);
-        for(QVector<Radians>::const_iterator it=circle.begin();it<circle.end();it++)
+        for(QVector<Points>::const_iterator it=circle.begin();it<circle.end();it++)
             glVertex2d((*it).x,(*it).y);
     glEnd();
 }
@@ -421,37 +493,7 @@ void MainLocator::ContinueSearch()
         ray_position++;
 }
 
-/**
- * Отрисовка меток азимута
- * @brief MainLocator::DrawAzimuth
- */
 /*
-void MainLocator::DrawAzimuth()
-{
-    qreal alpha;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=azimuth.begin();it<azimuth.end();it++)
-    {
-        if(show)
-            alpha=1.0f;
-        else
-        {
-            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
-            if(not_clean && alpha<0)
-                alpha+=2*M_PI;
-        }
-        if(alpha>0)
-        {
-            glLineWidth((*it)["width"]*options["focus"]);
-            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-            glBegin(GL_LINES);
-            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-            glVertex2d(0.0f,0.0f);
-            glVertex2f((*it)["x"],(*it)["y"]);
-            glEnd();
-        }
-    }
-}
-
 void MainLocator::DrawLocalItems()
 {
     glPointSize(8*options["focus"]);

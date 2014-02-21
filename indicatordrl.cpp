@@ -1,6 +1,6 @@
 #include"indicatordrl.h"
 #include"ui_indicatordrl.h"
-#include"QDebug"
+#include<QDebug>
 IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::IndicatorDRL)
 {
     ui->setupUi(this);
