@@ -2,7 +2,7 @@
 #define MAINLOCATOR_H
 
 #ifndef ANGLE_RANGE
-#define ANGLE_RANGE 360
+#define ANGLE_RANGE 361
 #endif
 
 #include<QGLWidget>
@@ -20,7 +20,7 @@ class MainLocator : public QGLWidget
         void GenerationRay();
         template<typename OptionType>void SetSettings(const QString group,const QString name,OptionType option);
         template<typename OptionType>void SetSettings(const QString name,OptionType option);
-        template<typename T>T CalcScaleValue(const T value) const;
+        template<typename T>T CalcScaleValue(const T value)const;
         //\[R]
         void GenerationTrash();
         void GenerationRange();
@@ -69,7 +69,6 @@ class MainLocator : public QGLWidget
         qint8 GetRandomSign();
 
     private:
-        //[R]
         quint16 radians_size;
         /**
          * @brief The Points struct
@@ -81,7 +80,7 @@ class MainLocator : public QGLWidget
         struct Points
         {
             qreal x,y,angle;
-            qreal CalcAlpha();
+            qreal CalcAlpha(){}
         }
             radians[ANGLE_RANGE];
 
@@ -98,25 +97,27 @@ class MainLocator : public QGLWidget
             qreal r;
         };
 
-        struct LineEntity:public Points
+        struct LineEntity
         {
             qreal width;
+            Points *Coordinates;
         };
 
-        QVector<Points>
+        QVector<Points*>
             circle,
             ray;
 
         QVector<LineEntity>azimuth;
-        QVector<Points>::const_iterator ray_position;
-        QHash<quint8,QVector<LineEntity> >range;
+        QVector<Points*>::const_iterator ray_position;
+        QVector<LineEntity>range;
         struct Coordinates
         {
             QVector<PointsPath>trash;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
-        //\[R]
+
+        //----------------------
         qreal fps;
         bool not_clean;
         QTimer* timer;
@@ -150,8 +151,14 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
         }
         if(name=="range")
             GenerationRange();
-        if(name=="azimuth")
-            GenerationAzimuth();
+        //if(name=="azimuth")
+            //GenerationAzimuth();
+        if(name=="focus")
+        {
+            //GenerationTrash();
+            //GenerationRange();
+            //GenerationAzimuth();
+        }
     }
     if(group=="trash")
     {

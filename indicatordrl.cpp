@@ -28,6 +28,7 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
 
     ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
     ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
+    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
     ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
 
     ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
