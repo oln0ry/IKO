@@ -70,6 +70,7 @@ class MainLocator : public QGLWidget
 
     private:
         //[R]
+        quint16 radians_size;
         /**
          * @brief The Radians struct
          * Описывает формат хранения координат на основе трёх параметров:
@@ -81,7 +82,7 @@ class MainLocator : public QGLWidget
         {
             qreal x,y,angle;
         }
-            n_radians[ANGLE_RANGE];
+            radians[ANGLE_RANGE];
 
         /**
          * @brief The RadiansEx struct
@@ -91,20 +92,26 @@ class MainLocator : public QGLWidget
          *  -угол точки
          *  -расстояние точки от центра
          */
-        struct RadiansEx:public Radians
+        struct RadiansR:public Radians
         {
             qreal r;
+        };
+
+        struct RadiansW:public Radians
+        {
+            qreal width;
         };
 
         QVector<Radians>
             circle,
             ray;
-        quint16
-            radians_size;
+
+        QVector<RadiansW>azimuth;
         QVector<Radians>::const_iterator ray_position;
+        QHash<quint8,QVector<RadiansW> >range;
         struct Coordinates
         {
-            QVector<RadiansEx>trash;
+            QVector<RadiansR>trash;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
@@ -138,7 +145,10 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
         if(name=="scale")
         {
             GenerationTrash();
+            GenerationRange();
         }
+        if(name=="range")
+            GenerationRange();
     }
     if(group=="trash")
     {

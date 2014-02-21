@@ -44,20 +44,19 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
     //Переведём все используемые градусы в радианы
-    QHash<QString,qreal>radians;
     for(quint16 i=0;i<ANGLE_RANGE;i++)
     {
-        n_radians[i].angle=GetRadianValue(i);
-        n_radians[i].x=qFastCos(n_radians[i].angle);
-        n_radians[i].y=qFastSin(n_radians[i].angle);
+        radians[i].angle=GetRadianValue(i);
+        radians[i].x=qFastCos(radians[i].angle);
+        radians[i].y=qFastSin(radians[i].angle);
     }
-    radians_size=ArraySize(n_radians);
-    for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;circle.append(*i),i+=3); //Получаем координаты для отрисовки фона индикатора
+    radians_size=ArraySize(radians);
+    for(Radians*i=radians,*k=radians+radians_size;i<k;circle.append(*i),i+=3); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    GenerationTrash();
+    //GenerationTrash();
+    //GenerationRange();
     /*
-    GenerationRange();
     GenerationAzimuth();
     GenerationLocalItems();
     GenerationActiveNoiseTrash();
@@ -120,9 +119,11 @@ void MainLocator::paintGL()
     glEnd();
     if(settings["trash"]["show"].toBool() && !Cache.trash.isEmpty())
         DrawTrash();
-    /*
     if(!range.isEmpty())
         DrawRange();
+    if(!azimuth.isEmpty())
+        DrawAzimuth();
+    /*
     if(!azimuth.isEmpty())
         DrawAzimuth();
     if(show_local_items && !local_items.isEmpty())
@@ -174,7 +175,7 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
 
 void MainLocator::GenerationRay()
 {
-    Radians *i=n_radians,*k=n_radians+radians_size;
+    Radians*i=radians,*k=radians+radians_size;
     while(i<k)ray.append(clockwise ? *k-- : *i++);
 }
 
@@ -191,9 +192,9 @@ void MainLocator::GenerationTrash()
     quint8 intensity;
 
     intensity=settings["trash"]["intensity"].toUInt() ?: 1;
-    RadiansEx cache;
+    RadiansR cache;
     qreal begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),end=CalcScaleValue(settings["trash"]["end"].toDouble()),rand;
-    for(Radians *i=n_radians,*k=n_radians+radians_size;i<k;i++)
+    for(Radians *i=radians,*k=radians+radians_size;i<k;i++)
     {
         cache.angle=(*i).angle;
         for(qint16 l=0,t=qrand()%intensity;l<t;l++)
@@ -217,7 +218,7 @@ void MainLocator::DrawTrash()
     glEnable(GL_ALPHA_TEST);
     qreal alpha;
 
-    for(QVector<RadiansEx>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
+    for(QVector<RadiansR>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
     {
         if(settings["system"]["show"].toBool())
             alpha=1.0f;
@@ -241,26 +242,12 @@ void MainLocator::DrawTrash()
 
 void MainLocator::GenerationRange()
 {
-    /*
-    QHash<QString,qreal>cache;
-    qreal i=0.0f,delta,distance;
-    quint8 j=0,k=0;
+    qreal r=0.0f,delta,distance;
+    quint8 j=0,d=0;
     range.clear();
 
-    switch(settings["scale"])
-    {
-        case 2:
-            distance=1.0f/150;
-            break;
-        case 1:
-            distance=1.0f/90;
-            break;
-        default:
-            distance=1.0f/45;
-
-    }
-
-    switch(settings["range_marks"])
+    distance=CalcScaleValue(1.0f);
+    switch(settings["system"]["range"].toUInt())
     {
         case 1:
             delta=distance*10;
@@ -273,24 +260,54 @@ void MainLocator::GenerationRange()
             j=1;
     }
 
-    while(i<=1)
+    RadiansW cache;
+    while(r<=1)
     {
-        if(k%j==0)
-            cache["width"]=2.5f;
-        else
-            cache["width"]=1.0f;
-        k++;
-
-        for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin();it<radians.end();it++)
+        cache.width=d++%j==0 ? 2.5f : 1.0f;
+        for(Radians *i=radians,*k=radians+radians_size;i<k;i++)
         {
-            cache["angle"]=(*it)["angle"];
-            cache["x"]=i*(*it)["x"];
-            cache["y"]=i*(*it)["y"];
-            range[i*250].append(cache);
+            cache.angle=(*i).angle;
+            cache.x=r*(*i).x;
+            cache.y=r*(*i).y;
+            range[r].append(cache);
         }
-        i+=delta;
+        r+=delta;
     }
-    */
+}
+
+
+/**
+ * Отрисовка отметок дальности
+ * @brief MainLocator::DrawRange
+ */
+void MainLocator::DrawRange()
+{
+    qreal alpha;
+    QVector<RadiansW>::const_iterator ct;
+    for(QHash<quint8,QVector<RadiansW> >::const_iterator it=range.begin();it!=range.end();it++)
+    {
+        ct=(*it).begin();
+        glLineWidth((*ct).width*settings["system"]["focus"].toDouble());
+        glBegin(GL_LINE_STRIP);
+        for(;ct<(*it).end();ct++)
+        {
+            if(settings["system"]["show"].toBool())
+                alpha=1.0f;
+            else
+            {
+                alpha=(clockwise ? -1 : 1)*((*ray_position).angle-(*ct).angle-0.01f);
+                if(not_clean && alpha<0)
+                    alpha+=2*M_PI;
+            }
+            if(alpha>0)
+            {
+                alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+                glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*settings["system"]["brightness"].toDouble());
+                glVertex2d((*ct).x,(*ct).y);
+            }
+        }
+        glEnd();
+    }
 }
 
 void MainLocator::GenerationAzimuth()
@@ -401,41 +418,7 @@ void MainLocator::ContinueSearch()
         ray_position=ray.begin();
     }
     else
-        //line_position++;
         ray_position++;
-}
-
-/**
- * Отрисовка отметок дальности
- * @brief MainLocator::DrawRange
- */
-void MainLocator::DrawRange()
-{
-    /*qreal alpha;
-    for(QHash<quint16,QVector<QHash<QString,qreal> > >::const_iterator it=range.begin();it!=range.end();it++)
-    {
-        QVector<QHash<QString,qreal> >::const_iterator ct=(*it).begin();
-        glLineWidth((*ct)["width"]*options["focus"]);
-        glBegin(GL_LINE_STRIP);
-        for(;ct<(*it).end();ct++)
-        {
-            if(show)
-                alpha=1.0f;
-            else
-            {
-                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
-                if(not_clean && alpha<0)
-                    alpha+=2*M_PI;
-            }
-            if(alpha>0)
-            {
-                alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-                glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-                glVertex2d((*ct)["x"],(*ct)["y"]);
-            }
-        }
-        glEnd();
-    }*/
 }
 
 /**
