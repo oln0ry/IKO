@@ -123,11 +123,9 @@ void MainLocator::paintGL()
         DrawRange();
     if(!azimuth.isEmpty())
         DrawAzimuth();
-    /*
-    if(!azimuth.isEmpty())
-        DrawAzimuth();
-    if(show_local_items && !local_items.isEmpty())
+    if(settings["local_items"]["show"].toBool() && !Cache.local_items.isEmpty())
         DrawLocalItems();
+    /*
     if(show_active_ntrash && !active_noise_trash.isEmpty())
         DrawActiveNoiseTrash();
     if(show_active_atrash && !active_answer_trash.isEmpty())
@@ -191,64 +189,6 @@ qreal MainLocator::CalcAlpha(qreal angle)
             alpha+=2u*M_PI;
     }
     return alpha;
-}
-
-/**
- *  Генератор помех
- *
- *  Я, честно говоря, пропинал балду, когда мы изучали распределения Гаусса и Пуассона. Поэтому вот вам моё творчество.
- *
- *  @brief MainLocator::GenerationTrash
- */
-void MainLocator::GenerationTrash()
-{
-    Cache.trash.clear();
-    quint8 intensity;
-
-    intensity=settings["trash"]["intensity"].toUInt() ?: 1u;
-    PointsPath cache;
-    qreal
-        begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),
-        end=CalcScaleValue(settings["trash"]["end"].toDouble()),
-        rand;
-
-    for(Points*i=radians,*k=radians+radians_size;i<k;i++)
-    {
-        cache.angle=i->angle;
-        for(quint16 l=0u,t=qrand()%intensity;l<t;l++)
-        {
-            rand=begin+fmod((GetRandomCoord(4u)+begin),(end-begin));
-            cache.x=i->x*rand;
-            cache.y=i->y*rand;
-            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
-            Cache.trash.append(cache);
-        }
-    }
-}
-
-/**
- * Отрисовка пассивных помех
- * @brief MainLocator::DrawTrash
- */
-void MainLocator::DrawTrash()
-{
-    glPointSize(2u*settings["system"]["focus"].toDouble());
-    glEnable(GL_ALPHA_TEST);
-    qreal alpha;
-
-    for(QVector<PointsPath>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
-    {
-        alpha=CalcAlpha(it->angle);
-        if(alpha>0.0f)
-        {
-            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-            alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
-            glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha);
-            glVertex2f(it->x,it->y);
-            glEnd();
-        }
-    }
 }
 
 void MainLocator::GenerationRange()
@@ -367,9 +307,103 @@ void MainLocator::DrawAzimuth()
     }
 }
 
+/**
+ *  Генератор помех
+ *
+ *  Я, честно говоря, пропинал балду, когда мы изучали распределения Гаусса и Пуассона. Поэтому вот вам моё творчество.
+ *
+ *  @brief MainLocator::GenerationTrash
+ */
+void MainLocator::GenerationTrash()
+{
+    quint8 intensity=settings["trash"]["intensity"].toUInt() ?: 1u;
+    qreal
+        begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),
+        end=CalcScaleValue(settings["trash"]["end"].toDouble()),
+        rand;
+    PointsPath cache;
+
+    Cache.trash.clear();
+    for(Points*i=radians,*k=radians+radians_size;i<k;i++)
+    {
+        cache.angle=i->angle;
+        for(quint16 l=0u,t=qrand()%intensity;l<t;l++)
+        {
+            rand=begin+fmod((GetRandomCoord(4u)+begin),(end-begin));
+            cache.x=i->x*rand;
+            cache.y=i->y*rand;
+            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
+            Cache.trash.append(cache);
+        }
+    }
+}
+
+/**
+ * Отрисовка пассивных помех
+ * @brief MainLocator::DrawTrash
+ */
+void MainLocator::DrawTrash()
+{
+    glPointSize(2u*settings["system"]["focus"].toDouble());
+    glEnable(GL_ALPHA_TEST);
+    qreal alpha;
+
+    for(QVector<PointsPath>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
+    {
+        alpha=CalcAlpha(it->angle);
+        if(alpha>0.0f)
+        {
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
+            glBegin(GL_POINTS);
+            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
+            glVertex2f(it->x,it->y);
+            glEnd();
+        }
+    }
+}
+
 void MainLocator::GenerationLocalItems()
 {
+    quint8 intensity=3u;
+    qreal
+        rand,
+        begin=CalcScaleValue(0.0f),
+        end=CalcScaleValue(15.0f);
+    Cache.local_items.clear();
+    PointsPath cache;
+    for(Points*i=radians,*k=radians+radians_size;i<k;i++)
+    {
+        cache.angle=i->angle;
+        for(quint16 l=0u,t=qrand()%intensity;l<t;l++)
+        {
+            rand=begin+fmod((GetRandomCoord(4u)+begin),(end-begin));
+            cache.x=i->x*rand;
+            cache.y=i->y*rand;
+            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
+            Cache.local_items.append(cache);
+        }
+    }
+}
 
+void MainLocator::DrawLocalItems()
+{
+    glPointSize(8u*settings["system"]["focus"].toDouble());
+    glEnable(GL_ALPHA_TEST);
+    qreal alpha;
+    for(QVector<PointsPath>::const_iterator it=Cache.local_items.begin();it<Cache.local_items .end();it++)
+    {
+        alpha=CalcAlpha(it->angle);
+        if(alpha>0.0f)
+        {
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
+            glBegin(GL_POINTS);
+            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
+            glVertex2f(it->x,it->y);
+            glEnd();
+        }
+    }
 }
 
 void MainLocator::GenerationActiveNoiseTrash()
@@ -471,33 +505,6 @@ void MainLocator::ContinueSearch()
 }
 
 /*
-void MainLocator::DrawLocalItems()
-{
-    glPointSize(8*options["focus"]);
-    glEnable(GL_ALPHA_TEST);
-    qreal alpha;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=local_items.begin();it<local_items.end();it++)
-    {
-        if(show)
-            alpha=1.0f;
-        else
-        {
-            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
-            if(not_clean && alpha<0)
-                alpha+=2*M_PI;
-        }
-
-        if(alpha>0)
-        {
-            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-            glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*options["brightness"]);
-            glVertex2f((*it)["x"],(*it)["y"]);
-            glEnd();
-        }
-    }
-}
-
 void MainLocator::DrawActiveNoiseTrash()
 {
     qreal alpha;

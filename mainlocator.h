@@ -111,7 +111,9 @@ class MainLocator : public QGLWidget
         QVector<LineEntity>range;
         struct Coordinates
         {
-            QVector<PointsPath>trash;
+            QVector<PointsPath>
+                trash,
+                local_items;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
@@ -147,6 +149,7 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
         {
             GenerationTrash();
             GenerationRange();
+            GenerationLocalItems();
         }
         if(name=="range")
             GenerationRange();
@@ -163,6 +166,11 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
     {
         if(name=="intensity" || name=="begin" || name=="end")
             GenerationTrash();
+    }
+    if(group=="local_items")
+    {
+        if(name=="show")
+            GenerationLocalItems();
     }
     if(group!="common")
         updateGL();

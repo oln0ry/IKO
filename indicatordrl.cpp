@@ -33,6 +33,7 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
 
     ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
     ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+    ui->CheckShowLocalItems->stateChanged(ui->CheckShowLocalItems->checkState());
 
     ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
     ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
@@ -196,7 +197,7 @@ void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
 
 void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_local_items=arg1==2;
+    ui->RenderIndicator->SetSettings("local_items","show",arg1==2);
 }
 
 void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
