@@ -80,7 +80,6 @@ class MainLocator : public QGLWidget
         struct Points
         {
             qreal x,y,angle;
-            qreal CalcAlpha(){}
         }
             radians[ANGLE_RANGE];
 
@@ -121,7 +120,7 @@ class MainLocator : public QGLWidget
         qreal fps;
         bool not_clean;
         QTimer* timer;
-
+        qreal CalcAlpha(qreal angle);
         /*
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
         //QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
@@ -151,8 +150,8 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
         }
         if(name=="range")
             GenerationRange();
-        //if(name=="azimuth")
-            //GenerationAzimuth();
+        if(name=="azimuth")
+            GenerationAzimuth();
         if(name=="focus")
         {
             //GenerationTrash();

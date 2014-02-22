@@ -179,6 +179,20 @@ void MainLocator::GenerationRay()
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
+qreal MainLocator::CalcAlpha(qreal angle)
+{
+    qreal alpha;
+    if(settings["system"]["show"].toBool())
+        alpha=1.0f;
+    else
+    {
+        alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-angle)-0.01;
+        if(not_clean && alpha<0.0f)
+            alpha+=2u*M_PI;
+    }
+    return alpha;
+}
+
 /**
  *  Генератор помех
  *
@@ -224,14 +238,7 @@ void MainLocator::DrawTrash()
 
     for(QVector<PointsPath>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
     {
-        if(settings["system"]["show"].toBool())
-            alpha=1.0f;
-        else
-        {
-            alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-it->angle)-0.01;
-            if(not_clean && alpha<0.0f)
-                alpha+=2u*M_PI;
-        }
+        alpha=CalcAlpha(it->angle);
         if(alpha>0)
         {
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
@@ -299,14 +306,7 @@ void MainLocator::DrawRange()
         glBegin(GL_LINE_STRIP);
         for(Points *i=(*it).Coordinates,*end=(*it).Coordinates+radians_size;i<end;i++)
         {
-            if(settings["system"]["show"].toBool())
-                alpha=1.0f;
-            else
-            {
-                alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-i->angle)-0.01;
-                if(not_clean && alpha<0)
-                    alpha+=2*M_PI;
-            }
+            alpha=CalcAlpha(i->angle);
             if(alpha>0)
             {
                 alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
@@ -320,7 +320,6 @@ void MainLocator::DrawRange()
 
 void MainLocator::GenerationAzimuth()
 {
-    /*
     quint8 delta;
     azimuth.clear();
     switch(settings["system"]["azimuth"].toUInt())
@@ -336,13 +335,13 @@ void MainLocator::GenerationAzimuth()
     LineEntity cache;
     for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
     {
-        cache.angle=(*i).angle;
-        cache.x=(*i).x;
-        cache.y=(*i).y;
         cache.width=(i-radians)%30>0 ? 1.0f : 3.5f;
+        cache.Coordinates=new Points[1];
+        cache.Coordinates->angle=(*i).angle;
+        cache.Coordinates->x=(*i).x;
+        cache.Coordinates->y=(*i).y;
         azimuth.append(cache);
     }
-    */
 }
 
 /**
@@ -351,52 +350,21 @@ void MainLocator::GenerationAzimuth()
  */
 void MainLocator::DrawAzimuth()
 {
-    /*
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
-        if(settings["system"]["show"].toBool())
-            alpha=1.0f;
-        else
-        {
-            alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-(*it).angle)-0.01f;
-            if(not_clean && alpha<0)
-                alpha+=2*M_PI;
-        }
+        alpha=CalcAlpha(it->Coordinates->angle);
         if(alpha>0)
         {
-            glLineWidth((*it).width*settings["system"]["focus"].toDouble());
+            glLineWidth(it->width*settings["system"]["focus"].toDouble());
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha*settings["system"]["brightness"].toDouble());
             glVertex2d(0.0f,0.0f);
-            glVertex2f((*it).x,(*it).y);
+            glVertex2f(it->Coordinates->x,it->Coordinates->y);
             glEnd();
         }
     }
-
-    quint8 delta;
-    azimuth.clear();
-    switch(settings["system"]["azimuth"].toUInt())
-    {
-        case 1:
-            delta=30;
-            break;
-        case 0:
-            return;
-        default:
-            delta=10;
-    }
-    LineEntity cache;
-    for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
-    {
-        cache.angle=(*i).angle;
-        cache.x=(*i).x;
-        cache.y=(*i).y;
-        cache.width=(i-radians)%30>0 ? 1.0f : 3.5f;
-        azimuth.append(cache);
-    }
-    */
 }
 
 void MainLocator::GenerationLocalItems()
