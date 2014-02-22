@@ -1,6 +1,6 @@
 #include"targetssettings.h"
 #include"ui_targetssettings.h"
-#include"qdebug.h"
+#include<QDebug>
 
 TargetsSettings::TargetsSettings(QWidget *parent) : QWidget(parent),ui(new Ui::TargetsSettings)
 {

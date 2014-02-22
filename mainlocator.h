@@ -52,19 +52,19 @@ class MainLocator : public QGLWidget
     public slots:
     protected:
         void initializeGL();
-        void resizeGL(int nWidth, int nHeight);
+        void resizeGL(int width, int height);
         void paintGL();
         void DrawStation();
         void LocatorArea() const;
-        void DrawTrash();
-        void DrawRange();
-        void DrawAzimuth();
-        void DrawLocalItems();
+        void DrawTrash() const;
+        void DrawRange() const;
+        void DrawAzimuth() const;
+        void DrawLocalItems() const;
         void DrawActiveNoiseTrash();
         void DrawActiveAnswerTrash();
         void DrawActiveInSyncTrash();
         void DrawTargets();
-        void DrawMeteo();
+        void DrawMeteo() const;
         qreal GetRandomCoord(quint8,const bool rsign=false);
         qint8 GetRandomSign();
 
@@ -113,7 +113,8 @@ class MainLocator : public QGLWidget
         {
             QVector<PointsPath>
                 trash,
-                local_items;
+                local_items,
+                meteo;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
@@ -122,7 +123,9 @@ class MainLocator : public QGLWidget
         qreal fps;
         bool not_clean;
         QTimer* timer;
-        qreal CalcAlpha(qreal angle);
+        qreal CalcAlpha(qreal angle) const;
+        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse);
+        void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
         /*
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
         //QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
@@ -141,36 +144,35 @@ class MainLocator : public QGLWidget
 template<typename OptionType>void MainLocator::SetSettings(const QString group,const QString name,OptionType option)
 {
     settings[group][name]=QVariant::fromValue(option);
-    if(group=="system")
+    if(name=="show")
     {
-        if(name=="show")
+        if(group=="system")
             show=static_cast<bool>(option);
+    }
+    else if(group=="system")
+    {
         if(name=="scale")
         {
             GenerationTrash();
             GenerationRange();
             GenerationLocalItems();
+            GenerationMeteo();
         }
-        if(name=="range")
+        else if(name=="range")
             GenerationRange();
-        if(name=="azimuth")
+        else if(name=="azimuth")
             GenerationAzimuth();
-        if(name=="focus")
+        else if(name=="focus")
         {
             //GenerationTrash();
             //GenerationRange();
             //GenerationAzimuth();
         }
     }
-    if(group=="trash")
+    else if(group=="trash")
     {
         if(name=="intensity" || name=="begin" || name=="end")
             GenerationTrash();
-    }
-    if(group=="local_items")
-    {
-        if(name=="show")
-            GenerationLocalItems();
     }
     if(group!="common")
         updateGL();

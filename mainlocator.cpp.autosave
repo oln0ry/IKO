@@ -321,7 +321,7 @@ void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin
             if(ellipse)
             {
                 rand=begin+fmod((GetRandomSign()*(GetRandomCoord(4u)+begin)),end-begin);
-                cache.x=fmod((i->x*rand+CalcScaleValue(35.0f)),1.0f);
+                cache.x=fmod((i->x*rand+CalcScaleValue(35.0f)),1.0f)0;
                 cache.y=fmod((i->y*rand+CalcScaleValue(35.0f)),1.0f);
             }
             else

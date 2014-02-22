@@ -1,7 +1,7 @@
 #ifndef INDICATORDRL_H
 #define INDICATORDRL_H
 
-#include <QWidget>
+#include<QWidget>
 #include<QPointer>
 #include"targetssettings.h"
 

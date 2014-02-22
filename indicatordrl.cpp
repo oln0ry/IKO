@@ -13,7 +13,6 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     range_marks<<"Не отображать"<<"10 километров"<<"50 километров";
     ui->SelectRangeMarks->addItems(range_marks);
     ui->SelectRangeMarks->setCurrentIndex(1);
-    //scale<<"150 километров"<<"300 километров"<<"400 километров";
     scale<<"45 километров"<<"90 километров"<<"150 километров";
     ui->SelectScale->addItems(scale);
     ui->SelectScale->setCurrentIndex(0);
@@ -120,7 +119,6 @@ void IndicatorDRL::on_ChangeLocatorState_clicked()
         ui->ChangeLocatorState->setText("Стоп");
     }
     ui->InputFrameFrequency->valueChanged(fps);
-    //ui->RenderIndicator->ChangeFPS(fps);
 }
 
 void IndicatorDRL::on_ChangeViewStateAll_clicked()
@@ -202,6 +200,8 @@ void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
 
 void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
 {
+    if(index<0)
+        return;
     ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(index));
 }
 
@@ -242,8 +242,6 @@ void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
 
 void IndicatorDRL::on_ButtonTargetsSettings_clicked()
 {
-    //if(tsettings)
-      //  return;
     tsettings=new TargetsSettings;
     tsettings->show();
 }
@@ -264,10 +262,12 @@ void IndicatorDRL::on_CleanLocatorDataBuffer_clicked()
 
 void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
 {
+    if(value<0)
+        return;
     ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_meteo=arg1==2;
+    ui->RenderIndicator->SetSettings("meteo","show",arg1==2);
 }
