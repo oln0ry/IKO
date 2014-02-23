@@ -63,7 +63,6 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     GenerationActiveAnswerTrash();
     GenerationActiveInSyncTrash();
     GenerationTargetPaths();
-    GenerationMeteo();
     */
     timer=new QTimer(this);
 
@@ -112,9 +111,9 @@ void MainLocator::paintGL()
     glEnable(GL_BLEND);
     LocatorArea();
     DrawStation();
-    glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),settings["system"]["brightness"].toFloat());//перерисовка линии
+    glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),settings["system"]["brightness"].toFloat());//перерисовка линии
     glBegin(GL_LINES);
-        glVertex2d(static_cast<GLdouble>(0.0f),static_cast<GLdouble>(0.0f));
+        glVertex2d(static_cast<GLdouble>(.0f),static_cast<GLdouble>(.0f));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
     if(settings["trash"]["show"].toBool() && !Cache.trash.isEmpty())
@@ -143,9 +142,9 @@ void MainLocator::paintGL()
 
 void MainLocator::ChangeFPS(qreal fps) const
 {
-    if(fps<=0.0f && IsActive())
+    if(fps<=.0f && IsActive())
         timer->stop();
-    if(fps>0.0f)
+    if(fps>.0f)
     {
         if(IsActive())
             timer->stop();
@@ -184,8 +183,8 @@ qreal MainLocator::CalcAlpha(qreal angle) const
         alpha=1.0f;
     else
     {
-        alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-angle)-0.01;
-        if(not_clean && alpha<0.0f)
+        alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-angle)-.01;
+        if(not_clean && alpha<.0f)
             alpha+=2u*M_PI;
     }
     return alpha;
@@ -193,7 +192,7 @@ qreal MainLocator::CalcAlpha(qreal angle) const
 
 void MainLocator::GenerationRange()
 {
-    qreal r=0.0f,delta,distance;
+    qreal r=.0f,delta,distance;
     quint8 j=0u,d=0u;
     range.clear();
 
@@ -245,10 +244,10 @@ void MainLocator::DrawRange() const
         for(Points *i=it->Coordinates,*end=it->Coordinates+radians_size;i<end;i++)
         {
             alpha=CalcAlpha(i->angle);
-            if(alpha>0.0f)
+            if(alpha>.0f)
             {
                 alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-                glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
+                glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
                 glVertex2d(i->x,i->y);
             }
         }
@@ -292,47 +291,59 @@ void MainLocator::DrawAzimuth() const
     for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
         alpha=CalcAlpha(it->Coordinates->angle);
-        if(alpha>0.0f)
+        if(alpha>.0f)
         {
             glLineWidth(it->width*settings["system"]["focus"].toDouble());
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
             glBegin(GL_LINES);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
-            glVertex2d(0.0f,0.0f);
+            glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
+            glVertex2d(.0f,.0f);
             glVertex2f(it->Coordinates->x,it->Coordinates->y);
             glEnd();
         }
     }
 }
 
-void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity=3.0f,bool ellipse=false)
+void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear=true)
+{
+    return CreateEllipseTrashArea(storage,.0f,GetRandomCoord(4u)*30u,offset_x,offset_y,intensity,ellipse,clear);
+}
+
+void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity=3.0f,bool ellipse=false,bool clear=true)
 {
     qreal rand;
     begin=CalcScaleValue(begin),
     end=CalcScaleValue(end);
-    storage.clear();
+    if(clear)
+        storage.clear();
     PointsPath cache;
     for(Points*i=radians,*k=radians+radians_size;i<k;i++)
     {
-        if(offset_x==0.0f || offset_y==0.0f)
-            cache.angle=i->angle;
         for(quint16 l=0u,t=fmod(qrand(),intensity);l<t;l++)
         {
             if(ellipse)
             {
-                rand=begin+fmod((GetRandomSign()*(GetRandomCoord(4u)+begin)),end-begin);
-                cache.x=fmod((i->x*rand+CalcScaleValue(35.0f)),1.0f);
-                cache.y=fmod((i->y*rand+CalcScaleValue(35.0f)),1.0f);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x)+GetRandomSign();//*CalcScaleValue(offset_x*rand);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.y=i->y*rand+CalcScaleValue(offset_y)+GetRandomSign();//*CalcScaleValue(offset_y*rand);
             }
             else
             {
-                rand=begin+fmod(GetRandomCoord(4u)+begin,end-begin);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
                 cache.x=i->x*rand+CalcScaleValue(offset_x);
                 cache.y=i->y*rand+CalcScaleValue(offset_y);
             }
             cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
-            if(offset_x>0.0f || offset_y>0.0f)
-                cache.angle=qAtan2(cache.y,cache.x);
+            if(offset_x>.0f || offset_y>.0f)
+                if(cache.x>0)
+                    cache.angle=qAtan2(cache.y,cache.x);
+                else if(cache.x==0)
+                    cache.angle=M_PI/2;
+                else
+                    cache.angle=qAtan2(cache.y,cache.x);
+            else
+                cache.angle=i->angle;
             storage.append(cache);
         }
     }
@@ -345,48 +356,25 @@ void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u
     qreal alpha;
     for(QVector<PointsPath>::const_iterator it=storage.begin();it<storage.end();it++)
     {
-        alpha=CalcAlpha(it->angle);
-        if(alpha>0.0f)
+        if(qPow(it->x,2)+qPow(it->y,2)>=qPow(CalcScaleValue(settings["system"]["scale"].toDouble()),2))
+            alpha=0;
+        else
+            alpha=CalcAlpha(it->angle);
+        if(alpha>.0f)
         {
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
             alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
             glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
+            glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
             glVertex2f(it->x,it->y);
             glEnd();
         }
     }
 }
 
-/**
- *  Генератор помех
- *
- *  Я, честно говоря, пропинал балду, когда мы изучали распределения Гаусса и Пуассона. Поэтому вот вам моё творчество.
- *
- *  @brief MainLocator::GenerationTrash
- */
 void MainLocator::GenerationTrash()
 {
-    quint8 intensity=settings["trash"]["intensity"].toUInt() ?: 1u;
-    qreal
-        begin=CalcScaleValue(settings["trash"]["begin"].toDouble()),
-        end=CalcScaleValue(settings["trash"]["end"].toDouble()),
-        rand;
-    PointsPath cache;
-
-    Cache.trash.clear();
-    for(Points*i=radians,*k=radians+radians_size;i<k;i++)
-    {
-        cache.angle=i->angle;
-        for(quint16 l=0u,t=qrand()%intensity;l<t;l++)
-        {
-            rand=begin+fmod(GetRandomCoord(4u)+begin,end-begin);
-            cache.x=i->x*rand;
-            cache.y=i->y*rand;
-            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
-            Cache.trash.append(cache);
-        }
-    }
+    CreateEllipseTrashArea(Cache.trash,settings["trash"]["begin"].toDouble(),settings["trash"]["end"].toDouble(),.0f,.0f,settings["trash"]["intensity"].toUInt() ?: 1u);
 }
 
 /**
@@ -395,28 +383,12 @@ void MainLocator::GenerationTrash()
  */
 void MainLocator::DrawTrash() const
 {
-    glPointSize(2u*settings["system"]["focus"].toDouble());
-    glEnable(GL_ALPHA_TEST);
-    qreal alpha;
-
-    for(QVector<PointsPath>::const_iterator it=Cache.trash.begin();it<Cache.trash.end();it++)
-    {
-        alpha=CalcAlpha(it->angle);
-        if(alpha>0.0f)
-        {
-            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-            alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
-            glBegin(GL_POINTS);
-            glColor4f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262),alpha*settings["system"]["brightness"].toDouble());
-            glVertex2f(it->x,it->y);
-            glEnd();
-        }
-    }
+    DrawEllipseTrashArea(Cache.trash,2u);
 }
 
 void MainLocator::GenerationLocalItems()
 {
-    CreateEllipseTrashArea(Cache.local_items,0.0f,15.0f,0.0f,0.0f);
+    CreateEllipseTrashArea(Cache.local_items,.0f,15.0f,.0f,.0f);
 }
 
 void MainLocator::DrawLocalItems() const
@@ -426,9 +398,12 @@ void MainLocator::DrawLocalItems() const
 
 void MainLocator::GenerationMeteo()
 {
-    CreateEllipseTrashArea(Cache.meteo,0.0f,21.54f,60.0f,140.0f,4u,true);
-    //CreateEllipseTrashArea(Cache.meteo,0.0f,55.0f,40.0f,98.0f,1.3f);
-    //CreateEllipseTrashArea(Cache.meteo,0.0f,32.0f,12.0f,10.0f,1.3f);
+    /*
+    CreateEllipseTrashArea(Cache.meteo,20.0f,20.0f,3u,true);
+    CreateEllipseTrashArea(Cache.meteo,-20.0f,20.0f,3u,true,false);
+    CreateEllipseTrashArea(Cache.meteo,-30.0f,-30.0f,3u,true,false);
+    CreateEllipseTrashArea(Cache.meteo,-50.0f,-10.0f,3u,true,false);
+    */
 }
 
 void MainLocator::DrawMeteo() const
@@ -487,12 +462,12 @@ void MainLocator::LocatorArea() const
 void MainLocator::DrawStation()
 {
     glLineWidth(2.0f);
-    glColor3f(static_cast<GLfloat>(0.925),static_cast<GLfloat>(0.714),static_cast<GLfloat>(0.262));
+    glColor3f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262));
     qreal
         distance=CalcScaleValue(1.0f),
         rx=5u*distance,
         ry=10u*distance;
-    glTranslatef(rx,0.0f,0.0f);
+    glTranslatef(rx,.0f,.0f);
     glBegin(GL_LINES);
         glVertex2d(-rx,-ry);
         glVertex2d(-rx,ry);
@@ -506,7 +481,7 @@ void MainLocator::DrawStation()
         glVertex2d(rx,-ry);
         glVertex2d(rx,ry);
     glEnd();
-    glTranslatef(-rx,0.0f,0.0f);
+    glTranslatef(-rx,.0f,.0f);
 }
 
 void MainLocator::ContinueSearch()

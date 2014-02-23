@@ -171,6 +171,7 @@ void IndicatorDRL::on_CheckShowTrash_stateChanged(int arg1)
 void IndicatorDRL::on_RegenerateTrash_clicked()
 {
     ui->RenderIndicator->GenerationTrash();
+    ui->RenderIndicator->GenerationMeteo();
 }
 
 void IndicatorDRL::on_InputScatterTrashFrom_valueChanged(double arg1)

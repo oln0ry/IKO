@@ -5,6 +5,10 @@
 #define ANGLE_RANGE 361
 #endif
 
+#ifndef METEO
+#define METEO 5
+#endif
+
 #include<QGLWidget>
 #include<QColorDialog>
 #include<QVariant>
@@ -113,8 +117,8 @@ class MainLocator : public QGLWidget
         {
             QVector<PointsPath>
                 trash,
-                local_items,
-                meteo;
+                local_items;
+            QVector<PointsPath>meteo;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
@@ -124,7 +128,8 @@ class MainLocator : public QGLWidget
         bool not_clean;
         QTimer* timer;
         qreal CalcAlpha(qreal angle) const;
-        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse);
+        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
+        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
         /*
         QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
@@ -156,7 +161,8 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
             GenerationTrash();
             GenerationRange();
             GenerationLocalItems();
-            GenerationMeteo();
+            if(Cache.meteo.isEmpty())
+                GenerationMeteo();
         }
         else if(name=="range")
             GenerationRange();
