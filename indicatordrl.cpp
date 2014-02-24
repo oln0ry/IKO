@@ -213,7 +213,7 @@ void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
 
 void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
 {
-    ui->RenderIndicator->SetSettings("active_noise_trash","azimuth",360-static_cast<quint16>(arg1));
+    ui->RenderIndicator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
 }
 
 void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)

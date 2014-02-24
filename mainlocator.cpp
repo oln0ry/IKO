@@ -413,19 +413,105 @@ void MainLocator::DrawMeteo() const
 void MainLocator::GenerationActiveNoiseTrash()
 {
     quint8 density=17;
+    qint16 angle;
     Cache.active_noise_trash.clear();
 
     LineEntity cache;
-
-    for(Points*i=radians+settings["active_noise_trash"]["azimuth"].toUInt(),*k=radians+settings["active_noise_trash"]["azimuth"].toUInt()+20;i<k;i++)
+    switch(settings["active_noise_trash"]["intensity"].toUInt())
     {
-        cache.Coordinates=new Points[1];
-        cache.Coordinates->angle=i->angle;
-        cache.Coordinates->x=i->x;
-        cache.Coordinates->y=i->y;
-        cache.width=GetRandomCoord(4)*density;
-        //cache["width"]=GetRandomCoord(4)*density;
-        Cache.active_noise_trash.append(cache);
+        case 0:
+            angle=settings["active_noise_trash"]["azimuth"].toUInt();
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            if(angle<20)
+                for(Points*i=radians,*k=radians+20-angle;i<k;i++)
+                {
+                    cache.Coordinates=new Points[1];
+                    cache.Coordinates->angle=i->angle;
+                    cache.Coordinates->x=i->x;
+                    cache.Coordinates->y=i->y;
+                    cache.width=GetRandomCoord(4)*density;
+                    //cache["width"]=GetRandomCoord(4)*density;
+                    Cache.active_noise_trash.append(cache);
+                }
+            break;
+        case 1:
+            angle=settings["active_noise_trash"]["azimuth"].toUInt();
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            if(angle<20)
+                for(Points*i=radians,*k=radians+20-angle;i<k;i++)
+                {
+                    cache.Coordinates=new Points[1];
+                    cache.Coordinates->angle=i->angle;
+                    cache.Coordinates->x=i->x;
+                    cache.Coordinates->y=i->y;
+                    cache.width=GetRandomCoord(4)*density;
+                    //cache["width"]=GetRandomCoord(4)*density;
+                    Cache.active_noise_trash.append(cache);
+                }
+            angle=settings["active_noise_trash"]["azimuth"].toUInt()+100;
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            angle=settings["active_noise_trash"]["azimuth"].toUInt()+200;
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            angle=settings["active_noise_trash"]["azimuth"].toUInt()+300;
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            break;
+        case 2:
+            for(Points*i=radians+settings["active_noise_trash"]["azimuth"].toUInt()+260,*k=radians+settings["active_noise_trash"]["azimuth"].toUInt()+280;i<k;i++)
+            {
+                cache.Coordinates=new Points[1];
+                cache.Coordinates->angle=i->angle;
+                cache.Coordinates->x=i->x;
+                cache.Coordinates->y=i->y;
+                cache.width=GetRandomCoord(4)*density;
+                //cache["width"]=GetRandomCoord(4)*density;
+                Cache.active_noise_trash.append(cache);
+            }
+            break;
     }
 }
 
