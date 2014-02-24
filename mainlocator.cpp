@@ -103,7 +103,6 @@ void MainLocator::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // чистим буфер изображения и буфер глубины
     glLoadIdentity(); // загружаем матрицу
     glPushMatrix();
-    //glRotatef(37.0f, 0.0, 0.0, 1.0);
     glLineWidth(2.0f*1u*settings["system"]["focus"].toDouble());
     //glOrtho(0,wax,way,0,1,0); // подготавливаем плоскости для матрицы
     //glOrtho(0,wax,way,0,1,0);
@@ -112,6 +111,7 @@ void MainLocator::paintGL()
     LocatorArea();
     DrawStation();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),settings["system"]["brightness"].toFloat());//перерисовка линии
+    glRotatef(90.0f, 0.0, 0.0, 1.0);
     glBegin(GL_LINES);
         glVertex2d(static_cast<GLdouble>(.0f),static_cast<GLdouble>(.0f));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
@@ -126,9 +126,9 @@ void MainLocator::paintGL()
         DrawLocalItems();
     if(settings["meteo"]["show"].toBool() && !Cache.meteo.isEmpty())
         DrawMeteo();
-    /*
-    if(show_active_ntrash && !active_noise_trash.isEmpty())
+    if(settings["active_noise_trash"]["show"].toBool() && !Cache.active_noise_trash.isEmpty())
         DrawActiveNoiseTrash();
+    /*
     if(show_active_atrash && !active_answer_trash.isEmpty())
         DrawActiveAnswerTrash();
     if(show_active_isynctrash && !active_insync_trash.isEmpty())
@@ -306,7 +306,7 @@ void MainLocator::DrawAzimuth() const
 
 void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear=true)
 {
-    return CreateEllipseTrashArea(storage,.0f,GetRandomCoord(4u)*30u,offset_x,offset_y,intensity,ellipse,clear);
+    return CreateEllipseTrashArea(storage,.0f,GetRandomCoord(4u)*10u,offset_x,offset_y,intensity,ellipse,clear);
 }
 
 void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity=3.0f,bool ellipse=false,bool clear=true)
@@ -398,12 +398,10 @@ void MainLocator::DrawLocalItems() const
 
 void MainLocator::GenerationMeteo()
 {
-    /*
     CreateEllipseTrashArea(Cache.meteo,20.0f,20.0f,3u,true);
     CreateEllipseTrashArea(Cache.meteo,-20.0f,20.0f,3u,true,false);
     CreateEllipseTrashArea(Cache.meteo,-30.0f,-30.0f,3u,true,false);
     CreateEllipseTrashArea(Cache.meteo,-50.0f,-10.0f,3u,true,false);
-    */
 }
 
 void MainLocator::DrawMeteo() const
@@ -414,7 +412,41 @@ void MainLocator::DrawMeteo() const
 
 void MainLocator::GenerationActiveNoiseTrash()
 {
+    quint8 density=17;
+    Cache.active_noise_trash.clear();
 
+    LineEntity cache;
+
+    for(Points*i=radians+settings["active_noise_trash"]["azimuth"].toUInt(),*k=radians+settings["active_noise_trash"]["azimuth"].toUInt()+20;i<k;i++)
+    {
+        cache.Coordinates=new Points[1];
+        cache.Coordinates->angle=i->angle;
+        cache.Coordinates->x=i->x;
+        cache.Coordinates->y=i->y;
+        cache.width=GetRandomCoord(4)*density;
+        //cache["width"]=GetRandomCoord(4)*density;
+        Cache.active_noise_trash.append(cache);
+    }
+}
+
+void MainLocator::DrawActiveNoiseTrash()
+{
+    qreal alpha;
+    for(QVector<LineEntity>::const_iterator it=Cache.active_noise_trash.begin();it<Cache.active_noise_trash.end();it++)
+    {
+        alpha=CalcAlpha(it->Coordinates->angle);
+        if(alpha>0)
+        {
+            glLineWidth(it->width*settings["system"]["focus"].toDouble());
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            //alpha*=options["brightness"]-(*it)["r"]+options["varu"];
+            glBegin(GL_LINES);
+            glColor4f(static_cast<GLfloat>(.925f),static_cast<GLfloat>(.714f),static_cast<GLfloat>(.262f),alpha);
+            glVertex2d(.0f,.0f);
+            glVertex2f(it->Coordinates->x,it->Coordinates->y);
+            glEnd();
+        }
+    }
 }
 
 void MainLocator::GenerationActiveAnswerTrash()
@@ -495,33 +527,6 @@ void MainLocator::ContinueSearch()
 }
 
 /*
-void MainLocator::DrawActiveNoiseTrash()
-{
-    qreal alpha;
-    for(QVector<QHash<QString,qreal> >::const_iterator it=active_noise_trash.begin();it<active_noise_trash.end();it++)
-    {
-        if(show)
-            alpha=1.0f;
-        else
-        {
-            alpha=(**line_position)["angle"]-(*it)["angle"]-0.01f;
-            if(not_clean && alpha<0)
-                alpha+=2*M_PI;
-        }
-        if(alpha>0)
-        {
-            glLineWidth((*it)["width"]*options["focus"]);
-            alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-            alpha*=options["brightness"]-(*it)["r"]+options["varu"];
-            glBegin(GL_LINES);
-            glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-            glVertex2d(0.0f,0.0f);
-            glVertex2f((*it)["x"],(*it)["y"]);
-            glEnd();
-        }
-    }
-}
-
 void MainLocator::DrawActiveAnswerTrash()
 {
     qreal alpha;

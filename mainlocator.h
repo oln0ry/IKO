@@ -117,8 +117,9 @@ class MainLocator : public QGLWidget
         {
             QVector<PointsPath>
                 trash,
-                local_items;
-            QVector<PointsPath>meteo;
+                local_items,
+                meteo;
+            QVector<LineEntity>active_noise_trash;
         }
             Cache,Current;
         QMap<QString,QMap<QString,QVariant> >settings;
@@ -163,6 +164,8 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
             GenerationLocalItems();
             if(Cache.meteo.isEmpty())
                 GenerationMeteo();
+            if(Cache.active_noise_trash.isEmpty())
+                GenerationActiveNoiseTrash();
         }
         else if(name=="range")
             GenerationRange();
@@ -179,6 +182,11 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
     {
         if(name=="intensity" || name=="begin" || name=="end")
             GenerationTrash();
+    }
+    else if (group=="active_noise_trash")
+    {
+        if(name=="azimuth" || name=="intensity")
+            GenerationActiveNoiseTrash();
     }
     if(group!="common")
         updateGL();
