@@ -21,24 +21,6 @@ char(&ArraySizeHelper(T(&array)[N]))[N];
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
-    /*
-    targets_pos=-1;
-    not_clean=false;
-    show=false;
-    show_trash=true;
-    show_local_items=false;
-    show_active_ntrash=false;
-    show_active_atrash=false;
-    show_meteo=false;
-    fps=1000/24;
-
-    options["brightness"]=1.0f;
-    options["interval"]=0.6f;
-    options["focus"]=1.0f;
-    options["active_answer_distance"]=0.0f;
-    settings["trash_intensity"]=0;
-    settings["scale"]=0;
-*/
     clockwise=true; //По часовой стрелке
     Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
@@ -54,18 +36,7 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    //GenerationTrash();
-    //GenerationRange();
-    /*
-    GenerationAzimuth();
-    GenerationLocalItems();
-    GenerationActiveNoiseTrash();
-    GenerationActiveAnswerTrash();
-    GenerationActiveInSyncTrash();
-    GenerationTargetPaths();
-    */
     timer=new QTimer(this);
-
     connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
     ChangeFPS(fps);
 }
@@ -104,8 +75,6 @@ void MainLocator::paintGL()
     glLoadIdentity(); // загружаем матрицу
     glPushMatrix();
     glLineWidth(2.0f*1u*settings["system"]["focus"].toDouble());
-    //glOrtho(0,wax,way,0,1,0); // подготавливаем плоскости для матрицы
-    //glOrtho(0,wax,way,0,1,0);
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     LocatorArea();
@@ -428,7 +397,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
             if(angle<20)
@@ -463,7 +431,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                     cache.Coordinates->x=i->x;
                     cache.Coordinates->y=i->y;
                     cache.width=GetRandomCoord(4)*density;
-                    //cache["width"]=GetRandomCoord(4)*density;
                     Cache.active_noise_trash.append(cache);
                 }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+100;
@@ -474,7 +441,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+200;
@@ -485,7 +451,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+300;
@@ -496,7 +461,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
             break;
@@ -508,7 +472,6 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
             break;
@@ -525,7 +488,6 @@ void MainLocator::DrawActiveNoiseTrash()
         {
             glLineWidth(it->width*settings["system"]["focus"].toDouble());
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-            //alpha*=options["brightness"]-(*it)["r"]+options["varu"];
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(.925f),static_cast<GLfloat>(.714f),static_cast<GLfloat>(.262f),alpha);
             glVertex2d(.0f,.0f);
