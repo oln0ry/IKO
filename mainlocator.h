@@ -45,7 +45,7 @@ class MainLocator : public QGLWidget
         void GenerationRay();
         void GenerationRay(qint16 angle);
         void GenerationTrash();
-        void GenerationRange();
+        virtual void GenerationRange();
         void GenerationAzimuth();
         void GenerationLocalItems();
         void GenerationActiveNoiseTrash();

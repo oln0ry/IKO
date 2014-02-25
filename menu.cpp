@@ -5,7 +5,6 @@ Menu::Menu(QWidget *parent) : QMainWindow(parent),ui(new Ui::Menu)
 {
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->verticalLayout);
-    ui->ButtonRSP->hide();
 }
 
 Menu::~Menu()
@@ -25,4 +24,10 @@ void Menu::on_ButtonIndicatorPRL_clicked()
 {
     PRL=new IndicatorPRL;
     PRL->show();
+}
+
+void Menu::on_ButtonRSP_clicked()
+{
+    RSP=new RSPIndicators;
+    RSP->show();
 }

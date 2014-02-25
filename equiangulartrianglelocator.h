@@ -1,5 +1,9 @@
 #include"mainlocator.h"
 
+#ifndef TRIANGLE_ANGLE
+#define TRIANGLE_ANGLE  46
+#endif
+
 #ifndef EQUIANGULARTRIANGLELOCATOR_H
 #define EQUIANGULARTRIANGLELOCATOR_H
 

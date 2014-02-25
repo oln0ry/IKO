@@ -15,6 +15,19 @@ public:
     explicit IndicatorPRL(QWidget *parent = 0);
     ~IndicatorPRL();
 
+private slots:
+    void on_SelectScaleEquiangular_currentIndexChanged(int index);
+
+    void on_SelectRangeMarksEquiangular_currentIndexChanged(int index);
+
+    void on_ChangeTrashIntensityEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorBrightnessEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorFocusEquiangular_valueChanged(int value);
+
+    void on_ChangeLocatorStateEquiangular_clicked();
+
 private:
     Ui::IndicatorPRL *ui;
 };

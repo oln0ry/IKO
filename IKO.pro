@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     targetssettings.cpp \
     indicatorprl.cpp \
     equiangulartrianglelocator.cpp \
-    righttrianglelocator.cpp
+    righttrianglelocator.cpp \
+    rspindicators.cpp
 
 HEADERS  += menu.h \
     mainlocator.h \
@@ -27,9 +28,11 @@ HEADERS  += menu.h \
     targetssettings.h \
     indicatorprl.h \
     equiangulartrianglelocator.h \
-    righttrianglelocator.h
+    righttrianglelocator.h \
+    rspindicators.h
 
 FORMS    += menu.ui \
     indicatordrl.ui \
     targetssettings.ui \
-    indicatorprl.ui
+    indicatorprl.ui \
+    rspindicators.ui
