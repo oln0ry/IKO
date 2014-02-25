@@ -4,6 +4,7 @@
 #include<QMainWindow>
 #include<QPointer>
 #include"indicatordrl.h"
+#include"indicatorprl.h"
 
 namespace Ui {
 class Menu;
@@ -20,9 +21,12 @@ public:
 private slots:
     void on_ButtonIndicatorDRL_clicked();
 
-    private:
+    void on_ButtonIndicatorPRL_clicked();
+
+private:
         Ui::Menu *ui;
         QPointer<IndicatorDRL>DRL;
+        QPointer<IndicatorPRL>PRL;
 };
 
 #endif // MENU_H

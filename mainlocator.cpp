@@ -1,23 +1,4 @@
 #include"mainlocator.h"
-#include<qmath.h>
-#include<QTime>
-#include<QTimer>
-#include<QDebug>
-
-#ifndef GL_MULTISAMPLE
-#define GL_MULTISAMPLE  0x809D
-#endif
-
-#ifndef GetRadianValue
-#define GetRadianValue(radian) M_PI*radian/180
-#endif
-
-//Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
-#ifndef ArraySize
-template<typename T,size_t N>
-char(&ArraySizeHelper(T(&array)[N]))[N];
-#define ArraySize(array)(sizeof(ArraySizeHelper(array)))
-#endif
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
@@ -109,7 +90,7 @@ void MainLocator::paintGL()
     //swapBuffers();
 }
 
-void MainLocator::ChangeFPS(qreal fps) const
+void MainLocator::ChangeFPS(qreal fps)
 {
     if(fps<=.0f && IsActive())
         timer->stop();
@@ -141,7 +122,13 @@ QColor MainLocator::SelectColor(const QString option,const QString title="")
 
 void MainLocator::GenerationRay()
 {
-    Points*i=radians,*end=radians+radians_size;
+    GenerationRay(radians_size);
+}
+
+void MainLocator::GenerationRay(qint16 angle)
+{
+    //for(Points*i=radians,*k=radians+20-angle;i<k;i++)
+    Points*i=radians,*end=radians+angle;
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
@@ -478,7 +465,7 @@ void MainLocator::GenerationActiveNoiseTrash()
     }
 }
 
-void MainLocator::DrawActiveNoiseTrash()
+void MainLocator::DrawActiveNoiseTrash() const
 {
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=Cache.active_noise_trash.begin();it<Cache.active_noise_trash.end();it++)
@@ -507,7 +494,7 @@ void MainLocator::GenerationActiveInSyncTrash()
 
 }
 
-qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign)
+qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign) const
 {
     //Фикс странного бага, наблюдающегося под виндой
     if(accuracy>4u)
@@ -519,7 +506,7 @@ qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign)
     return a;
 }
 
-qint8 MainLocator::GetRandomSign()
+qint8 MainLocator::GetRandomSign() const
 {
     if(rand()%2u)
         return 1u;
@@ -539,7 +526,7 @@ void MainLocator::LocatorArea() const
  * @brief MainLocator::DrawStation
  * Отрисуем прямоугольник
  */
-void MainLocator::DrawStation()
+void MainLocator::DrawStation() const
 {
     glLineWidth(2.0f);
     glColor3f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262));

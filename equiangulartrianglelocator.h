@@ -1,18 +1,26 @@
+#include"mainlocator.h"
+
 #ifndef EQUIANGULARTRIANGLELOCATOR_H
 #define EQUIANGULARTRIANGLELOCATOR_H
 
-#include <QGLWidget>
-
-class EquiangularTriangleLocator : public QGLWidget
+class EquiangularTriangleLocator : public MainLocator
 {
     Q_OBJECT
-public:
-    explicit EquiangularTriangleLocator(QObject *parent = 0);
+    public:
+        explicit EquiangularTriangleLocator(QWidget *parent = 0);
+        //void GenerationRange();
 
-signals:
+    protected:
+        void initializeGL();
+        void resizeGL(int width, int height);
+        void paintGL();
+        void LocatorArea() const;
+        void DrawStation() const;
+        void GenerationRay();
+    signals:
 
-public slots:
-
+    protected slots:
+        void ContinueSearch();
 };
 
 #endif // EQUIANGULARTRIANGLELOCATOR_H

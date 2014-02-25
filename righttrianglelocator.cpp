@@ -1,6 +1,6 @@
-#include"equiangulartrianglelocator.h"
+#include"righttrianglelocator.h"
 
-EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLocator(parent)
+RightTriangleLocator::RightTriangleLocator(QWidget *parent):EquiangularTriangleLocator(parent)
 {
     clockwise=true; //По часовой стрелке
     //Color=new QColorDialog(this);
@@ -18,9 +18,10 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
+    ChangeFPS(1000/24);
 }
 
-void EquiangularTriangleLocator::initializeGL()
+void RightTriangleLocator::initializeGL()
 {
     qglClearColor(palette().background().color()); //Фон OpenGl-виджета
     glMatrixMode(GL_PROJECTION); //Устанавливаем матрицу
@@ -32,14 +33,14 @@ void EquiangularTriangleLocator::initializeGL()
     //glEnable(GL_DEPTH_TEST);
 }
 
-void EquiangularTriangleLocator::resizeGL(int width, int height)
+void RightTriangleLocator::resizeGL(int width, int height)
 {
     glEnable(GL_MULTISAMPLE);
     glLoadIdentity();
     glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(height));
 }
 
-void EquiangularTriangleLocator::paintGL()
+void RightTriangleLocator::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // чистим буфер изображения и буфер глубины
     glLoadIdentity(); // загружаем матрицу
@@ -48,17 +49,16 @@ void EquiangularTriangleLocator::paintGL()
     glEnable(GL_BLEND);
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
-    glRotatef(270.0f, 0.0, 0.0, 1.0);
+    glRotatef(0.0f, 0.0, 0.0, 1.0);
     DrawStation();
     glBegin(GL_LINES);
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
+        glVertex2d(qFastCos(GetRadianValue(226)),qFastSin(GetRadianValue(226)));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
     glPopMatrix();
-    DrawRange();
 }
 
-void EquiangularTriangleLocator::LocatorArea() const
+void RightTriangleLocator::LocatorArea() const
 {
     qglColor(Qt::black);
     glBegin(GL_TRIANGLE_FAN);
@@ -67,43 +67,31 @@ void EquiangularTriangleLocator::LocatorArea() const
     glEnd();
 }
 
-void EquiangularTriangleLocator::GenerationRay()
+void RightTriangleLocator::GenerationRay()
 {
-    //QVector<Points*>circle,ray;
     ray.clear();
-    Points*i,*end,*current;
+    Points*i,*end;
     i=radians,end=radians+46;
     while(i<end)ray.append(clockwise ? end-- : i++);
     i=radians+radians_size-46,end=radians+radians_size;
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
-void EquiangularTriangleLocator::DrawStation() const
+void RightTriangleLocator::DrawStation() const
 {
     glLineWidth(2.0f);
     glBegin(GL_LINES);
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
+        glVertex2d(qFastCos(GetRadianValue(226)),qFastSin(GetRadianValue(226)));
         glVertex2d(qFastCos(GetRadianValue(-46)),qFastSin(GetRadianValue(-46)));
 
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
+        glVertex2d(qFastCos(GetRadianValue(226)),qFastSin(GetRadianValue(226)));
         glVertex2d(qFastCos(GetRadianValue(46)),qFastSin(GetRadianValue(46)));
 
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
-        glVertex2d(qFastCos(GetRadianValue(46)),qFastSin(GetRadianValue(20)));
+        glVertex2d(qFastCos(GetRadianValue(236)),qFastSin(GetRadianValue(226)));
+        glVertex2d(qFastCos(GetRadianValue(46)),qFastSin(GetRadianValue(345)));
 
         glVertex2d(qFastCos(GetRadianValue(-46)),qFastSin(GetRadianValue(-46)));
         glVertex2d(qFastCos(GetRadianValue(46)),qFastSin(GetRadianValue(46)));
     glEnd();
 }
 
-void EquiangularTriangleLocator::ContinueSearch()
-{
-    updateGL();
-    if(ray_position==ray.end()-1u)
-    {
-        clockwise=!clockwise; //Для обращения в другую сторону!
-        GenerationRay();
-        ray_position=ray.begin();
-    }
-    ray_position++;
-}

@@ -1,5 +1,25 @@
-#ifndef MAINLOCATOR_H
-#define MAINLOCATOR_H
+#include<QGLWidget>
+#include<QColorDialog>
+#include<QVariant>
+#include<qmath.h>
+#include<QTime>
+#include<QTimer>
+#include<QDebug>
+
+#ifndef GL_MULTISAMPLE
+#define GL_MULTISAMPLE  0x809D
+#endif
+
+#ifndef GetRadianValue
+#define GetRadianValue(radian) M_PI*radian/180
+#endif
+
+//Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
+#ifndef ArraySize
+template<typename T,size_t N>
+char(&ArraySizeHelper(T(&array)[N]))[N];
+#define ArraySize(array)(sizeof(ArraySizeHelper(array)))
+#endif
 
 #ifndef ANGLE_RANGE
 #define ANGLE_RANGE 361
@@ -9,9 +29,8 @@
 #define METEO 5
 #endif
 
-#include<QGLWidget>
-#include<QColorDialog>
-#include<QVariant>
+#ifndef MAINLOCATOR_H
+#define MAINLOCATOR_H
 
 class MainLocator : public QGLWidget
 {
@@ -19,13 +38,12 @@ class MainLocator : public QGLWidget
     public:
         explicit MainLocator(QWidget *parent = 0);
         ~MainLocator();
-        //[R]
-        bool clockwise;
-        void GenerationRay();
         template<typename OptionType>void SetSettings(const QString group,const QString name,OptionType option);
         template<typename OptionType>void SetSettings(const QString name,OptionType option);
         template<typename T>T CalcScaleValue(const T value)const;
-        //\[R]
+
+        void GenerationRay();
+        void GenerationRay(qint16 angle);
         void GenerationTrash();
         void GenerationRange();
         void GenerationAzimuth();
@@ -35,20 +53,13 @@ class MainLocator : public QGLWidget
         void GenerationActiveInSyncTrash();
         void GenerationTargetPaths();
         void GenerationMeteo();
-        void ChangeFPS(qreal fps) const;
+        void ChangeFPS(qreal fps);
         void CleanDataBuffer();
         void ChangeTargetsState();
-        //void SetSettings(const QString,const quint16);
-       // void SetSettings(const QString,const qreal);
         QColor SelectColor(const QString,const QString);
         bool IsActive() const;
-        bool show,
-             show_trash,
-             show_local_items,
-             show_active_ntrash,
-             show_active_atrash,
-             show_active_isynctrash,
-             show_meteo;
+        bool clockwise,
+             show;
         qint8 targets_pos;
 
     signals:
@@ -58,92 +69,56 @@ class MainLocator : public QGLWidget
         void initializeGL();
         void resizeGL(int width, int height);
         void paintGL();
-        void DrawStation();
+        void DrawStation() const;
         void LocatorArea() const;
         void DrawTrash() const;
         void DrawRange() const;
         void DrawAzimuth() const;
         void DrawLocalItems() const;
-        void DrawActiveNoiseTrash();
+        void DrawActiveNoiseTrash() const;
         void DrawActiveAnswerTrash();
         void DrawActiveInSyncTrash();
         void DrawTargets();
         void DrawMeteo() const;
-        qreal GetRandomCoord(quint8,const bool rsign=false);
-        qint8 GetRandomSign();
-
-    private:
+        qreal GetRandomCoord(quint8,const bool rsign=false) const;
+        qint8 GetRandomSign() const;
         quint16 radians_size;
-        /**
-         * @brief The Points struct
-         * Описывает формат хранения координат на основе трёх параметров:
-         *  -абсцисса точки
-         *  -ордината точки
-         *  -угол точки
-         */
+        qreal CalcAlpha(qreal angle) const;
+        qreal fps;
         struct Points
         {
             qreal x,y,angle;
-        }
-            radians[ANGLE_RANGE];
-
-        /**
-         * @brief The PointsPath struct
-         * Описывает формат хранения координат на основе трёх параметров:
-         *  -абсцисса точки
-         *  -ордината точки
-         *  -угол точки
-         *  -расстояние точки от центра
-         */
+        }radians[ANGLE_RANGE];
         struct PointsPath:public Points
         {
             qreal r;
         };
-
         struct LineEntity
         {
             qreal width;
             Points *Coordinates;
         };
-
-        QVector<Points*>
-            circle,
-            ray;
-
-        QVector<LineEntity>azimuth;
-        QVector<Points*>::const_iterator ray_position;
-        QVector<LineEntity>range;
         struct Coordinates
         {
-            QVector<PointsPath>
-                trash,
-                local_items,
-                meteo;
+            QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
-        }
-            Cache,Current;
-        QMap<QString,QMap<QString,QVariant> >settings;
-
-        //----------------------
-        qreal fps;
-        bool not_clean;
+        }Cache,Current;
+        QVector<Points*>::const_iterator ray_position;
+        QVector<Points*>circle,ray;
         QTimer* timer;
-        qreal CalcAlpha(qreal angle) const;
+
+    private:
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
-        /*
-        QVector<QVector<QHash<QString,qreal> >::const_iterator>::const_iterator line_position,line_end;
-        //QVector<QHash<QString,qreal> >radians,trash,azimuth,local_items,active_noise_trash,meteo;
-        QVector<QVector<QHash<QString,qreal> >::const_iterator>circle,line;
-        QHash<quint16,QVector<QHash<QString,qreal> > >range,active_answer_trash,active_insync_trash,targets;
-        QMap<QString,quint16>settings;
-        QMap<QString,qreal>options;
-        */
-        QMap<QString,QColor>color;
+        bool not_clean;
         QColorDialog* Color;
+        QVector<LineEntity>azimuth;
+        QVector<LineEntity>range;
+        QMap<QString,QMap<QString,QVariant> >settings;
+        QMap<QString,QColor>color;
 
-    private slots:
+     protected slots:
         void ContinueSearch();
 };
 

@@ -223,7 +223,7 @@ void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
 
 void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_active_atrash=arg1==2;
+    //ui->RenderIndicator->show_active_atrash=arg1==2;
 }
 
 void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
@@ -238,7 +238,7 @@ void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
 
 void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
 {
-    ui->RenderIndicator->show_active_isynctrash=arg1==2;
+    //ui->RenderIndicator->show_active_isynctrash=arg1==2;
 }
 
 void IndicatorDRL::on_ButtonTargetsSettings_clicked()

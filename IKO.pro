@@ -16,13 +16,20 @@ SOURCES += main.cpp\
         menu.cpp \
     mainlocator.cpp \
     indicatordrl.cpp \
-    targetssettings.cpp
+    targetssettings.cpp \
+    indicatorprl.cpp \
+    equiangulartrianglelocator.cpp \
+    righttrianglelocator.cpp
 
 HEADERS  += menu.h \
     mainlocator.h \
     indicatordrl.h \
-    targetssettings.h
+    targetssettings.h \
+    indicatorprl.h \
+    equiangulartrianglelocator.h \
+    righttrianglelocator.h
 
 FORMS    += menu.ui \
     indicatordrl.ui \
-    targetssettings.ui
+    targetssettings.ui \
+    indicatorprl.ui
