@@ -6,11 +6,15 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     //Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
     //Переведём все используемые градусы в радианы
+    qreal angle=qFastCos(GetRadianValue(46));
     for(quint16 i=0u;i<ANGLE_RANGE;i++)
     {
         radians[i].angle=GetRadianValue(i);
         radians[i].x=qFastCos(radians[i].angle);
         radians[i].y=qFastSin(radians[i].angle);
+        radians_triangle_ray[i].angle=radians[i].angle;
+        radians_triangle_ray[i].x=angle;
+        radians_triangle_ray[i].y=radians[i].y;
     }
     radians_size=ArraySize(radians);
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
@@ -54,8 +58,9 @@ void EquiangularTriangleLocator::paintGL()
         glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
+    if(!range.isEmpty())
+        DrawRange();
     glPopMatrix();
-    DrawRange();
 }
 
 void EquiangularTriangleLocator::LocatorArea() const
@@ -69,12 +74,11 @@ void EquiangularTriangleLocator::LocatorArea() const
 
 void EquiangularTriangleLocator::GenerationRay()
 {
-    //QVector<Points*>circle,ray;
     ray.clear();
-    Points*i,*end,*current;
-    i=radians,end=radians+46;
+    Points*i,*end;
+    i=radians_triangle_ray,end=radians_triangle_ray+46;
     while(i<end)ray.append(clockwise ? end-- : i++);
-    i=radians+radians_size-46,end=radians+radians_size;
+    i=radians_triangle_ray+radians_size-46,end=radians_triangle_ray+radians_size;
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
@@ -106,4 +110,64 @@ void EquiangularTriangleLocator::ContinueSearch()
         ray_position=ray.begin();
     }
     ray_position++;
+}
+
+void EquiangularTriangleLocator::GenerationRange()
+{
+    qreal r=.0f,delta,distance;
+    quint8 j=0u,d=0u;
+    range.clear();
+
+    distance=CalcScaleValue(1.0f);
+    switch(settings["system"]["range"].toUInt())
+    {
+        case 1:
+            delta=distance*10u;
+            j=5u;
+            break;
+        case 0:
+            return;
+        default:
+            delta=distance*50u;
+            j=1u;
+    }
+
+    LineEntity cache;
+    quint16 c;
+    while(r<=1u)
+    {
+        cache.width=d%j==0u ? 3.5f : 1.0f;
+        cache.Coordinates=new Points[radians_size];
+        c=0u;
+        for(Points *i=radians,*end=radians+radians_size;i<end;i++,c++)
+        {
+            cache.Coordinates[c].angle=i->angle;
+            cache.Coordinates[c].x=r*i->x;
+            cache.Coordinates[c].y=r*i->y;
+        }
+        range.append(cache);
+        r+=delta;
+        d++;
+    }
+}
+
+void EquiangularTriangleLocator::DrawRange() const
+{
+    qreal alpha;
+    for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
+    {
+        glLineWidth(it->width);
+        glBegin(GL_LINE_STRIP);
+        for(Points *i=it->Coordinates,*end=it->Coordinates+radians_size;i<end;i++)
+        {
+            alpha=CalcAlpha(i->angle);
+            if(alpha>.0f)
+            {
+                alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+                glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
+                glVertex2d(i->x,i->y);
+            }
+        }
+        glEnd();
+    }
 }

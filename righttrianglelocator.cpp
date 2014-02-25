@@ -6,11 +6,15 @@ RightTriangleLocator::RightTriangleLocator(QWidget *parent):EquiangularTriangleL
     //Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
     //Переведём все используемые градусы в радианы
+    qreal angle=qFastCos(GetRadianValue(46));
     for(quint16 i=0u;i<ANGLE_RANGE;i++)
     {
         radians[i].angle=GetRadianValue(i);
         radians[i].x=qFastCos(radians[i].angle);
         radians[i].y=qFastSin(radians[i].angle);
+        radians_triangle_ray[i].angle=radians[i].angle;
+        radians_triangle_ray[i].x=angle;
+        radians_triangle_ray[i].y=radians[i].y;
     }
     radians_size=ArraySize(radians);
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора

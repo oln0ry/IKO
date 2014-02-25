@@ -8,7 +8,7 @@ class EquiangularTriangleLocator : public MainLocator
     Q_OBJECT
     public:
         explicit EquiangularTriangleLocator(QWidget *parent = 0);
-        //void GenerationRange();
+        void GenerationRange();
 
     protected:
         void initializeGL();
@@ -16,7 +16,9 @@ class EquiangularTriangleLocator : public MainLocator
         void paintGL();
         void LocatorArea() const;
         void DrawStation() const;
+        void DrawRange() const;
         void GenerationRay();
+        Points radians_triangle_ray[ANGLE_RANGE];
     signals:
 
     protected slots:

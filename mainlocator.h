@@ -103,9 +103,11 @@ class MainLocator : public QGLWidget
             QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
         }Cache,Current;
+        QVector<LineEntity>range;
         QVector<Points*>::const_iterator ray_position;
         QVector<Points*>circle,ray;
         QTimer* timer;
+        QMap<QString,QMap<QString,QVariant> >settings;
 
     private:
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
@@ -114,8 +116,6 @@ class MainLocator : public QGLWidget
         bool not_clean;
         QColorDialog* Color;
         QVector<LineEntity>azimuth;
-        QVector<LineEntity>range;
-        QMap<QString,QMap<QString,QVariant> >settings;
         QMap<QString,QColor>color;
 
      protected slots:
