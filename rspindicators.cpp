@@ -19,14 +19,14 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
     ui->SelectWorkVariant->setCurrentIndex(0);
 
     range_marks_triangles<<"Не отображать"<<"5 километров"<<"10 километров";
-    ui->SelectRangeMarksEquiangular->addItems(range_marks);
+    ui->SelectRangeMarksEquiangular->addItems(range_marks_triangles);
     ui->SelectRangeMarksEquiangular->setCurrentIndex(1);
-    ui->SelectRangeMarksRightTriangle->addItems(range_marks);
+    ui->SelectRangeMarksRightTriangle->addItems(range_marks_triangles);
     ui->SelectRangeMarksRightTriangle->setCurrentIndex(1);
     scale_triangles<<"20 километров"<<"30 километров"<<"60 километров";
-    ui->SelectScaleEquiangular->addItems(scale);
+    ui->SelectScaleEquiangular->addItems(scale_triangles);
     ui->SelectScaleEquiangular->setCurrentIndex(1);
-    ui->SelectScaleRightTriangle->addItems(scale);
+    ui->SelectScaleRightTriangle->addItems(scale_triangles);
     ui->SelectScaleRightTriangle->setCurrentIndex(1);
 
     //Настроим индикатор кругового обзора
@@ -110,4 +110,174 @@ void RSPIndicators::on_ChangeLocatorStateRightTriangle_clicked()
         ui->ThirdIndicator->ChangeFPS(fps);
         ui->ChangeLocatorStateRightTriangle->setText("Стоп");
     }
+}
+
+void RSPIndicators::on_ChangeViewStateAll_clicked()
+{
+    if(ui->FirstIndicator->show)
+    {
+        ui->ChangeViewStateAll->setText("Все отметки");
+        ui->FirstIndicator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeViewStateAll->setText("Скрыть");
+        ui->FirstIndicator->SetSettings("system","show",true);
+    }
+}
+
+void RSPIndicators::on_ChangeViewStateAllEquiangular_clicked()
+{
+    if(ui->SecondIndicator->show)
+    {
+        ui->ChangeViewStateAllEquiangular->setText("Отобразить все скрытые метки");
+        ui->SecondIndicator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeViewStateAllEquiangular->setText("Скрыть");
+        ui->SecondIndicator->SetSettings("system","show",true);
+    }
+}
+
+void RSPIndicators::on_ChangeViewStateAllRightTriangle_clicked()
+{
+    if(ui->ThirdIndicator->show)
+    {
+        ui->ChangeViewStateAllRightTriangle->setText("Отобразить все скрытые метки");
+        ui->ThirdIndicator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeViewStateAllRightTriangle->setText("Скрыть");
+        ui->ThirdIndicator->SetSettings("system","show",true);
+    }
+}
+
+void RSPIndicators::on_ButtonTargetsSettings_clicked()
+{
+    tsettings=new TargetsSettings;
+    tsettings->show();
+}
+
+void RSPIndicators::on_SelectRangeMarksEquiangular_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    ui->SecondIndicator->SetSettings("system","range",static_cast<quint16>(index));
+}
+
+void RSPIndicators::on_SelectRangeMarksRightTriangle_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    ui->ThirdIndicator->SetSettings("system","range",static_cast<quint16>(index));
+}
+
+void RSPIndicators::on_SelectScaleEquiangular_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    qreal max;
+    switch(index)
+    {
+        case 2:
+            max=60.0f;
+            break;
+        case 1:
+            max=30.0f;
+            break;
+        default:
+            max=20.0f;
+
+    }
+    ui->SecondIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->SecondIndicator->SetSettings("trash","end",max);
+    ui->SecondIndicator->SetSettings("trash","begin",0);
+}
+
+void RSPIndicators::on_SelectScaleRightTriangle_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    qreal max;
+    switch(index)
+    {
+        case 2:
+            max=60.0f;
+            break;
+        case 1:
+            max=30.0f;
+            break;
+        default:
+            max=20.0f;
+
+    }
+    ui->ThirdIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->ThirdIndicator->SetSettings("trash","end",max);
+    ui->ThirdIndicator->SetSettings("trash","begin",0);
+}
+
+void RSPIndicators::on_SelectRangeMarks_currentIndexChanged(int index)
+{
+
+}
+
+void RSPIndicators::on_SelectScale_currentIndexChanged(int index)
+{
+
+}
+
+void RSPIndicators::on_SelectWorkVariant_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    switch(index)
+    {
+        case 0:
+            if(ui->ChangeTrashIntensity->isEnabled())
+                ui->ChangeTrashIntensity->setEnabled(false);
+            if(ui->ChangeTrashIntensityEquiangular->isEnabled())
+                ui->ChangeTrashIntensityEquiangular->setEnabled(false);
+            if(ui->ChangeTrashIntensityRightTriangle->isEnabled())
+                ui->ChangeTrashIntensityRightTriangle->setEnabled(false);
+            if(ui->CheckActiveNoiseShow->isEnabled())
+                ui->CheckActiveNoiseShow->setEnabled(false);
+            if(ui->CheckActiveAnswerShow->isEnabled())
+                ui->CheckActiveAnswerShow->setEnabled(false);
+            if(ui->CheckActiveInSyncShow->isEnabled())
+                ui->CheckActiveInSyncShow->setEnabled(false);
+            break;
+        case 1:
+            if(!ui->ChangeTrashIntensity->isEnabled())
+                ui->ChangeTrashIntensity->setEnabled(true);
+            if(!ui->ChangeTrashIntensityEquiangular->isEnabled())
+                ui->ChangeTrashIntensityEquiangular->setEnabled(true);
+            if(!ui->ChangeTrashIntensityRightTriangle->isEnabled())
+                ui->ChangeTrashIntensityRightTriangle->setEnabled(true);
+            if(!ui->CheckActiveNoiseShow->isEnabled())
+                ui->CheckActiveNoiseShow->setEnabled(true);
+            if(!ui->CheckActiveAnswerShow->isEnabled())
+                ui->CheckActiveAnswerShow->setEnabled(true);
+            if(!ui->CheckActiveInSyncShow->isEnabled())
+                ui->CheckActiveInSyncShow->setEnabled(true);
+            break;
+        case 2:
+            if(ui->ChangeTrashIntensity->isEnabled())
+                ui->ChangeTrashIntensity->setEnabled(false);
+            if(ui->ChangeTrashIntensityEquiangular->isEnabled())
+                ui->ChangeTrashIntensityEquiangular->setEnabled(false);
+            if(ui->ChangeTrashIntensityRightTriangle->isEnabled())
+                ui->ChangeTrashIntensityRightTriangle->setEnabled(false);
+            if(ui->CheckActiveNoiseShow->isEnabled())
+                ui->CheckActiveNoiseShow->setEnabled(false);
+            if(!ui->CheckActiveAnswerShow->isEnabled())
+                ui->CheckActiveAnswerShow->setEnabled(true);
+            if(!ui->CheckActiveInSyncShow->isEnabled())
+                ui->CheckActiveInSyncShow->setEnabled(true);
+
+    }
+    ui->FirstIndicator->SetSettings("system","mode",static_cast<quint8>(index));
+    ui->SecondIndicator->SetSettings("system","mode",static_cast<quint8>(index));
+    ui->ThirdIndicator->SetSettings("system","mode",static_cast<quint8>(index));
 }

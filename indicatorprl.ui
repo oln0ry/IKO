@@ -276,7 +276,7 @@
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="text">
-    <string>Отобразить все</string>
+    <string>Отобразить всё</string>
    </property>
   </widget>
   <widget class="QPushButton" name="ChangeViewStateAllRightTriangle">
@@ -292,7 +292,7 @@
     <cursorShape>ArrowCursor</cursorShape>
    </property>
    <property name="text">
-    <string>Отобразить все</string>
+    <string>Отобразить всё</string>
    </property>
   </widget>
   <widget class="QLabel" name="LabelRangeMarksRightTriangle">
