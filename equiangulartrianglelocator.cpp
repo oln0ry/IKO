@@ -125,11 +125,11 @@ void EquiangularTriangleLocator::ContinueSearch()
 
 void EquiangularTriangleLocator::GenerationRange()
 {
-    qreal r=.0f,delta,distance;
+    qreal r=-1.0f,delta,distance;
     quint8 j=0u,d=0u;
     range.clear();
 
-    distance=CalcScaleValue(1.0f);
+    distance=CalcScaleValue(3.5f);
     switch(settings["system"]["range"].toUInt())
     {
         case 1:
@@ -140,26 +140,27 @@ void EquiangularTriangleLocator::GenerationRange()
             return;
         default:
             delta=distance*10u;
-            j=5u;
+            j=2u;
     }
 
     LineEntity cache;
     quint16 c;
-    while(r<=1u)
+    while(r<=2.4f)
     {
         cache.width=d%j==0u ? 3.5f : 1.0f;
-        cache.Coordinates=new Points[radians_size];
+        cache.Coordinates=new Points[36];
         c=0u;
-        for(Points *i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,*end=radians_triangle_ray+radians_size;i<end;i++,c++)
+
+        for(Points *i=radians_triangle_ray+radians_size-18,*end=radians_triangle_ray+radians_size;i<end;i++,c++)
         {
             cache.Coordinates[c].angle=i->angle;
-            cache.Coordinates[c].x=r*i->x;
+            cache.Coordinates[c].x=r*i->x-1;
             cache.Coordinates[c].y=r*i->y;
         }
-        for(Points *i=radians_triangle_ray,*end=radians_triangle_ray+TRIANGLE_ANGLE;i<end;i++,c++)
+        for(Points *i=radians_triangle_ray,*end=radians_triangle_ray+18;i<end;i++,c++)
         {
             cache.Coordinates[c].angle=i->angle;
-            cache.Coordinates[c].x=r*i->x;
+            cache.Coordinates[c].x=r*i->x-1;
             cache.Coordinates[c].y=r*i->y;
         }
         range.append(cache);
@@ -175,7 +176,7 @@ void EquiangularTriangleLocator::DrawRange() const
     {
         glLineWidth(it->width);
         glBegin(GL_LINE_STRIP);
-        for(Points *i=it->Coordinates,*end=it->Coordinates+radians_size;i<end;i++)
+        for(Points *i=it->Coordinates,*end=it->Coordinates+36;i<end;i++)
         {
             alpha=CalcAlpha(i->angle);
             if(alpha>.0f)

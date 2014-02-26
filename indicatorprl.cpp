@@ -92,3 +92,17 @@ void IndicatorPRL::on_ChangeLocatorStateEquiangular_clicked()
     }
     //ui->InputFrameFrequency->valueChanged(24);
 }
+
+void IndicatorPRL::on_ChangeViewStateAllEquiangular_clicked()
+{
+    if(ui->RenderEquiangularIndicator->show)
+    {
+        ui->ChangeViewStateAllEquiangular->setText("Отобразить все скрытые метки");
+        ui->RenderEquiangularIndicator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeViewStateAllEquiangular->setText("Вернуть состояние скрытых меток");
+        ui->RenderEquiangularIndicator->SetSettings("system","show",true);
+    }
+}

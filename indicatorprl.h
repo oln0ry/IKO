@@ -28,6 +28,8 @@ private slots:
 
     void on_ChangeLocatorStateEquiangular_clicked();
 
+    void on_ChangeViewStateAllEquiangular_clicked();
+
 private:
     Ui::IndicatorPRL *ui;
 };
