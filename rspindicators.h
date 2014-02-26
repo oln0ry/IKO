@@ -15,6 +15,13 @@ public:
     explicit RSPIndicators(QWidget *parent = 0);
     ~RSPIndicators();
 
+private slots:
+    void on_ChangeLocatorState_clicked();
+
+    void on_ChangeLocatorStateEquiangular_clicked();
+
+    void on_ChangeLocatorStateRightTriangle_clicked();
+
 private:
     Ui::RSPIndicators *ui;
 };

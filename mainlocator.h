@@ -155,6 +155,25 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
             //GenerationRange();
             //GenerationAzimuth();
         }
+        else if(name=="mode")
+        {
+            if(option==0)
+            {
+                SetSettings("trash","show",false);
+                SetSettings("local_items","show",false);
+                SetSettings("meteo","show",false);
+                SetSettings("active_noise_trash","show",false);
+                SetSettings("active_answer_trash","show",false);
+                SetSettings("active_insync_trash","show",false);
+            }
+            else if(option==2)
+            {
+                SetSettings("trash","show",false);
+                SetSettings("local_items","show",false);
+                SetSettings("meteo","show",false);
+                SetSettings("active_noise_trash","show",false);
+            }
+        }
     }
     else if(group=="trash")
     {

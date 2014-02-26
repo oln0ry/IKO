@@ -22,7 +22,7 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     GenerationRay();
     GenerationRange();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    ChangeFPS(fps);
+    ChangeFPS(0);
 }
 
 void EquiangularTriangleLocator::initializeGL()

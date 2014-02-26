@@ -14,10 +14,11 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
         radians[i].y=qFastSin(radians[i].angle);
     }
     radians_size=ArraySize(radians);
+    circle.clear();
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    ChangeFPS(fps);
+    ChangeFPS(0);
 }
 
 void MainLocator::timerEvent(QTimerEvent *event)
@@ -29,9 +30,8 @@ void MainLocator::timerEvent(QTimerEvent *event)
 
 MainLocator::~MainLocator()
 {
-    //if(timer->isActive());
-    //    killTimer(timer->timerId());
-    //delete timer;
+    if(IsActive())
+        killTimer(timer.timerId());
 }
 
 void MainLocator::initializeGL()
@@ -133,7 +133,6 @@ void MainLocator::GenerationRay()
 
 void MainLocator::GenerationRay(qint16 angle)
 {
-    //for(Points*i=radians,*k=radians+20-angle;i<k;i++)
     Points*i=radians,*end=radians+angle;
     while(i<end)ray.append(clockwise ? end-- : i++);
 }

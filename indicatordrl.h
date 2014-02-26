@@ -78,6 +78,8 @@ private slots:
 
     void on_CheckShowMeteo_stateChanged(int arg1);
 
+    void on_SelectWorkVariant_currentIndexChanged(int index);
+
 private:
         QPointer<TargetsSettings>tsettings;
         Ui::IndicatorDRL *ui;

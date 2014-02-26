@@ -21,7 +21,7 @@ RightTriangleLocator::RightTriangleLocator(QWidget *parent):EquiangularTriangleL
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    ChangeFPS(fps);
+    ChangeFPS(0);
 }
 
 void RightTriangleLocator::initializeGL()
@@ -81,8 +81,6 @@ void RightTriangleLocator::GenerationRay()
     Points*i,*end;
     i=radians_triangle_ray,end=radians_triangle_ray+TRIANGLE_ANGLE;
     while(i<end)ray.append(clockwise ? end-- : i++);
-    //i=radians_triangle_ray+radians_size-46,end=radians_triangle_ray+radians_size;
-    //while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
 

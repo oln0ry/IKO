@@ -91,7 +91,7 @@ void IndicatorPRL::on_ChangeIndicatorFocusEquiangular_valueChanged(int value)
 
 void IndicatorPRL::on_ChangeLocatorStateEquiangular_clicked()
 {
-    quint8 fps;
+    quint16 fps;
     if(ui->RenderEquiangularIndicator->IsActive())
     {
         ui->RenderEquiangularIndicator->ChangeFPS(0);
@@ -136,7 +136,7 @@ void IndicatorPRL::on_ChangeIndicatorVARUEquiangular_valueChanged(int value)
 
 void IndicatorPRL::on_ChangeLocatorStateRightTriangle_clicked()
 {
-    quint8 fps;
+    quint16 fps;
     if(ui->RenderRightTriangleIndicator->IsActive())
     {
         ui->RenderRightTriangleIndicator->ChangeFPS(0);

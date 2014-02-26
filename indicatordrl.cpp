@@ -38,9 +38,6 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
     ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
     ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
-    ui->RenderIndicator->show=false;
-    //ui->LabelTargetsSettings->hide();
-    //ui->ButtonTargetsSettings->hide();
     ui->LabelColorIndicator->hide();
     ui->ButtonChangeColorDisplay->hide();
     ui->SelectTrashIntensity->hide();
@@ -107,7 +104,7 @@ void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
 
 void IndicatorDRL::on_ChangeLocatorState_clicked()
 {
-    quint8 fps;
+    quint16 fps;
     if(ui->RenderIndicator->IsActive())
     {
         fps=0;
@@ -271,4 +268,46 @@ void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
 void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
 {
     ui->RenderIndicator->SetSettings("meteo","show",arg1==2);
+}
+
+void IndicatorDRL::on_SelectWorkVariant_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    switch(index)
+    {
+        case 0:
+            if(ui->BoxTrashSettings->isEnabled())
+                ui->BoxTrashSettings->setEnabled(false);
+            if(ui->BoxActiveTrashSettings->isEnabled())
+                ui->BoxActiveTrashSettings->setEnabled(false);
+            break;
+        case 1:
+            if(!ui->BoxTrashSettings->isEnabled())
+                ui->BoxTrashSettings->setEnabled(true);
+            if(!ui->BoxActiveTrashSettings->isEnabled())
+                ui->BoxActiveTrashSettings->setEnabled(true);
+            if(!ui->BoxActiveNoiseTrash->isEnabled())
+                ui->BoxActiveNoiseTrash->setEnabled(true);
+            ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
+            ui->CheckShowMeteo->stateChanged(ui->CheckShowMeteo->checkState());
+            ui->CheckShowLocalItems->stateChanged(ui->CheckShowLocalItems->checkState());
+            ui->CheckActiveNoiseShow->stateChanged(ui->CheckActiveNoiseShow->checkState());
+            ui->CheckActiveAnswerShow->stateChanged(ui->CheckActiveAnswerShow->checkState());
+            ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+            break;
+        case 2:
+            if(!ui->BoxActiveTrashSettings->isEnabled())
+                ui->BoxActiveTrashSettings->setEnabled(true);
+            if(!ui->BoxActiveTrashSettings->isEnabled())
+                ui->BoxActiveTrashSettings->setEnabled(true);
+            if(ui->BoxActiveNoiseTrash->isEnabled())
+                ui->BoxActiveNoiseTrash->setEnabled(false);
+            if(ui->BoxTrashSettings->isEnabled())
+                ui->BoxTrashSettings->setEnabled(false);
+            ui->CheckActiveAnswerShow->stateChanged(ui->CheckActiveAnswerShow->checkState());
+            ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+            break;
+    }
+    ui->RenderIndicator->SetSettings("system","mode",static_cast<quint8>(index));
 }
