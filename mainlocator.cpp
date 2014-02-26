@@ -312,10 +312,7 @@ void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u
     qreal alpha;
     for(QVector<PointsPath>::const_iterator it=storage.begin();it<storage.end();it++)
     {
-        if(qPow(it->x,2)+qPow(it->y,2)>=qPow(CalcScaleValue(settings["system"]["scale"].toDouble()),2))
-            alpha=0;
-        else
-            alpha=CalcAlpha(it->angle);
+        alpha=CalcAlpha(it->angle);
         if(alpha>.0f)
         {
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;

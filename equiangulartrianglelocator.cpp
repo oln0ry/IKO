@@ -6,7 +6,7 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     //Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
     //Переведём все используемые градусы в радианы
-    qreal angle=qFastCos(GetRadianValue(TRIANGLE_ANGLE));
+    qreal angle=GRID_OFFSET+qFastCos(GetRadianValue(TRIANGLE_ANGLE));
     for(quint16 i=0u;i<ANGLE_RANGE;i++)
     {
         radians[i].angle=GetRadianValue(i);
@@ -17,12 +17,13 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
         radians_triangle_ray[i].y=radians[i].y;
     }
     radians_size=ArraySize(radians);
+    circle.clear();
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
+    GenerationRange();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
     timer=new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
-    GenerationRange();
 }
 
 void EquiangularTriangleLocator::initializeGL()
@@ -53,14 +54,17 @@ void EquiangularTriangleLocator::paintGL()
     glEnable(GL_BLEND);
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
-    glRotatef(270.0f, 0.0, 0.0, 1.0);
+    glRotatef(270.0f,.0f,.0f,1.0f);
+    glTranslatef(-GRID_OFFSET,.0f,.0f);
     DrawStation();
     glBegin(GL_LINES);
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
+        glVertex2d(.0f,.0f);
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
     if(!range.isEmpty())
         DrawRange();
+    if(!Cache.trash.isEmpty())
+        DrawTrash();
     glPopMatrix();
 }
 
@@ -79,16 +83,16 @@ void EquiangularTriangleLocator::GenerationRay()
     Points*i,*end;
     if(clockwise)
     {
-        i=radians_triangle_ray+radians_size-46,end=radians_triangle_ray+radians_size;
+        i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,end=radians_triangle_ray+radians_size;
         while(i<end)ray.append(clockwise ? i++ : end--);
-        i=radians_triangle_ray,end=radians_triangle_ray+46;
+        i=radians_triangle_ray,end=radians_triangle_ray+TRIANGLE_ANGLE;
         while(i<end)ray.append(clockwise ? i++ : end--);
     }
     else
     {
-        i=radians_triangle_ray,end=radians_triangle_ray+46;
+        i=radians_triangle_ray,end=radians_triangle_ray+TRIANGLE_ANGLE;
         while(i<end)ray.append(clockwise ? i++ : end--);
-        i=radians_triangle_ray+radians_size-46,end=radians_triangle_ray+radians_size;
+        i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,end=radians_triangle_ray+radians_size;
         while(i<end)ray.append(clockwise ? i++ : end--);
     }
 }
@@ -96,18 +100,19 @@ void EquiangularTriangleLocator::GenerationRay()
 void EquiangularTriangleLocator::DrawStation() const
 {
     glLineWidth(2.0f);
+
     glBegin(GL_LINES);
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
-        glVertex2d(qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
+        glVertex2f(.0f,.0f);
+        glVertex2f(GRID_OFFSET+qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
 
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
-        glVertex2d(qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(TRIANGLE_ANGLE)));
+        glVertex2f(.0f,.0f);
+        glVertex2d(GRID_OFFSET+qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(TRIANGLE_ANGLE)));
 
-        glVertex2d(qFastCos(GetRadianValue(180)),qFastSin(GetRadianValue(180)));
-        glVertex2d(qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(20)));
+        glVertex2f(.0f,.0f);
+        glVertex2d(GRID_OFFSET+qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(10)));
 
-        glVertex2d(qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
-        glVertex2d(qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(TRIANGLE_ANGLE)));
+        glVertex2d(GRID_OFFSET+qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
+        glVertex2d(GRID_OFFSET+qFastCos(GetRadianValue(TRIANGLE_ANGLE)),qFastSin(GetRadianValue(TRIANGLE_ANGLE)));
     glEnd();
 }
 
@@ -123,44 +128,58 @@ void EquiangularTriangleLocator::ContinueSearch()
     ray_position++;
 }
 
+qreal EquiangularTriangleLocator::CalcAlpha(qreal angle) const
+{
+    qreal alpha;
+    if(settings["system"]["show"].toBool())
+        alpha=1.0f;
+    else
+    {
+        alpha=(clockwise ? 1 : -1)*((*ray_position)->angle-angle)-.01;
+        if(not_clean && alpha<.0f)
+            alpha+=2u*M_PI;
+    }
+    return alpha;
+}
+
 void EquiangularTriangleLocator::GenerationRange()
 {
-    qreal r=-1.0f,delta,distance;
+    qreal r=.0f,delta,distance;
     quint8 j=0u,d=0u;
     range.clear();
 
-    distance=CalcScaleValue(3.5f);
+    distance=CalcScaleValue(1.0f);
     switch(settings["system"]["range"].toUInt())
     {
         case 1:
             delta=distance*5u;
-            j=10u;
+            j=2u;
             break;
         case 0:
             return;
         default:
             delta=distance*10u;
-            j=2u;
+            j=1u;
     }
 
     LineEntity cache;
     quint16 c;
-    while(r<=2.4f)
+    while(r<=1.0f)
     {
         cache.width=d%j==0u ? 3.5f : 1.0f;
-        cache.Coordinates=new Points[36];
+        cache.Coordinates=new Points[2*TRIANGLE_ANGLE];
         c=0u;
 
-        for(Points *i=radians_triangle_ray+radians_size-18,*end=radians_triangle_ray+radians_size;i<end;i++,c++)
+        for(Points *i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,*end=radians_triangle_ray+radians_size;i<end;i++,c++)
         {
             cache.Coordinates[c].angle=i->angle;
-            cache.Coordinates[c].x=r*i->x-1;
+            cache.Coordinates[c].x=r*i->x;
             cache.Coordinates[c].y=r*i->y;
         }
-        for(Points *i=radians_triangle_ray,*end=radians_triangle_ray+18;i<end;i++,c++)
+        for(Points *i=radians_triangle_ray,*end=radians_triangle_ray+TRIANGLE_ANGLE;i<end;i++,c++)
         {
             cache.Coordinates[c].angle=i->angle;
-            cache.Coordinates[c].x=r*i->x-1;
+            cache.Coordinates[c].x=r*i->x;
             cache.Coordinates[c].y=r*i->y;
         }
         range.append(cache);
@@ -174,14 +193,14 @@ void EquiangularTriangleLocator::DrawRange() const
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
     {
-        glLineWidth(it->width);
+        glLineWidth(it->width*settings["system"]["focus"].toDouble());
         glBegin(GL_LINE_STRIP);
-        for(Points *i=it->Coordinates,*end=it->Coordinates+36;i<end;i++)
+        for(Points *i=it->Coordinates,*end=it->Coordinates+2*TRIANGLE_ANGLE;i<end;i++)
         {
             alpha=CalcAlpha(i->angle);
             if(alpha>.0f)
             {
-                //alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+                alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
                 glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
                 glVertex2d(i->x,i->y);
             }
@@ -189,3 +208,75 @@ void EquiangularTriangleLocator::DrawRange() const
         glEnd();
     }
 }
+
+void EquiangularTriangleLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity=3.0f,bool ellipse=false,bool clear=true)
+{
+    qreal rand;
+    begin=CalcScaleValue(begin),
+    end=CalcScaleValue(end);
+    if(clear)
+        storage.clear();
+    PointsPath cache;
+    for(Points *i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,*k=radians_triangle_ray+radians_size;i<k;i++)
+    {
+        for(quint16 l=0u,t=fmod(qrand(),intensity);l<t;l++)
+        {
+            if(ellipse)
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x)+GetRandomSign();//*CalcScaleValue(offset_x*rand);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.y=i->y*rand+CalcScaleValue(offset_y)+GetRandomSign();//*CalcScaleValue(offset_y*rand);
+            }
+            else
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x);
+                cache.y=i->y*rand+CalcScaleValue(offset_y);
+            }
+            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
+            if(offset_x>.0f || offset_y>.0f)
+                if(cache.x>0)
+                    cache.angle=qAtan2(cache.y,cache.x);
+                else if(cache.x==0)
+                    cache.angle=M_PI/2;
+                else
+                    cache.angle=qAtan2(cache.y,cache.x);
+            else
+                cache.angle=i->angle;
+            storage.append(cache);
+        }
+    }
+
+    for(Points*i=radians_triangle_ray,*k=radians_triangle_ray+TRIANGLE_ANGLE;i<k;i++)
+    {
+        for(quint16 l=0u,t=fmod(qrand(),intensity);l<t;l++)
+        {
+            if(ellipse)
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x)+GetRandomSign();//*CalcScaleValue(offset_x*rand);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.y=i->y*rand+CalcScaleValue(offset_y)+GetRandomSign();//*CalcScaleValue(offset_y*rand);
+            }
+            else
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x);
+                cache.y=i->y*rand+CalcScaleValue(offset_y);
+            }
+            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
+            if(offset_x>.0f || offset_y>.0f)
+                if(cache.x>0)
+                    cache.angle=qAtan2(cache.y,cache.x);
+                else if(cache.x==0)
+                    cache.angle=M_PI/2;
+                else
+                    cache.angle=qAtan2(cache.y,cache.x);
+            else
+                cache.angle=i->angle;
+            storage.append(cache);
+        }
+    }
+}
+

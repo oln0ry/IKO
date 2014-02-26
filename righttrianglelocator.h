@@ -15,7 +15,7 @@ class RightTriangleLocator : public EquiangularTriangleLocator
         void paintGL();
         void LocatorArea() const;
         void DrawStation() const;
-        void GenerationRay();
+        virtual void GenerationRay();
     signals:
 };
 

@@ -4,7 +4,7 @@
 IndicatorPRL::IndicatorPRL(QWidget *parent):QWidget(parent),ui(new Ui::IndicatorPRL)
 {
     ui->setupUi(this);
-    ui->RenderRightTriangleIndicator->hide();
+    //ui->RenderRightTriangleIndicator->hide();
     QStringList range_marks,
                 scale;
     range_marks<<"Не отображать"<<"5 километров"<<"10 километров";
@@ -20,9 +20,13 @@ IndicatorPRL::IndicatorPRL(QWidget *parent):QWidget(parent),ui(new Ui::Indicator
 
     ui->ChangeIndicatorBrightnessEquiangular->valueChanged(ui->ChangeIndicatorBrightnessEquiangular->value());
     ui->ChangeIndicatorFocusEquiangular->valueChanged(ui->ChangeIndicatorFocusEquiangular->value());
+    ui->ChangeDisplayLightningEquiangular->valueChanged(ui->ChangeDisplayLightningEquiangular->value());
+    ui->ChangeIndicatorVARUEquiangular->valueChanged(ui->ChangeIndicatorVARUEquiangular->value());
 
-    ui->RenderRightTriangleIndicator->ChangeFPS(1000/24);
-    ui->RenderEquiangularIndicator->ChangeFPS(1000/24);
+    ui->ChangeTrashIntensityEquiangular->valueChanged(ui->ChangeTrashIntensityEquiangular->value());
+
+    ui->RenderRightTriangleIndicator->ChangeFPS(24);
+    ui->RenderEquiangularIndicator->ChangeFPS(24);
 }
 
 IndicatorPRL::~IndicatorPRL()
@@ -48,6 +52,8 @@ void IndicatorPRL::on_SelectScaleEquiangular_currentIndexChanged(int index)
 
     }
     ui->RenderEquiangularIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->RenderEquiangularIndicator->SetSettings("trash","end",max);
+    ui->RenderEquiangularIndicator->SetSettings("trash","begin",0);
 }
 
 void IndicatorPRL::on_SelectRangeMarksEquiangular_currentIndexChanged(int index)
@@ -59,7 +65,10 @@ void IndicatorPRL::on_SelectRangeMarksEquiangular_currentIndexChanged(int index)
 
 void IndicatorPRL::on_ChangeTrashIntensityEquiangular_valueChanged(int value)
 {
-
+    if(value<0)
+        return;
+    ui->RenderEquiangularIndicator->SetSettings("trash","show",value>0);
+    ui->RenderEquiangularIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void IndicatorPRL::on_ChangeIndicatorBrightnessEquiangular_valueChanged(int value)
@@ -104,5 +113,33 @@ void IndicatorPRL::on_ChangeViewStateAllEquiangular_clicked()
     {
         ui->ChangeViewStateAllEquiangular->setText("Вернуть состояние скрытых меток");
         ui->RenderEquiangularIndicator->SetSettings("system","show",true);
+    }
+}
+
+void IndicatorPRL::on_ChangeDisplayLightningEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquiangularIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+}
+
+void IndicatorPRL::on_ChangeIndicatorVARUEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquiangularIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+}
+
+void IndicatorPRL::on_ChangeLocatorStateRightTriangle_clicked()
+{
+    if(ui->RenderRightTriangleIndicator->IsActive())
+    {
+        ui->RenderRightTriangleIndicator->ChangeFPS(0);
+        ui->ChangeLocatorStateRightTriangle->setText("Продолжить");
+    }
+    else
+    {
+        ui->RenderRightTriangleIndicator->ChangeFPS(20);
+        ui->ChangeLocatorStateRightTriangle->setText("Стоп");
     }
 }

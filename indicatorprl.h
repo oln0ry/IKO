@@ -30,6 +30,12 @@ private slots:
 
     void on_ChangeViewStateAllEquiangular_clicked();
 
+    void on_ChangeDisplayLightningEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorVARUEquiangular_valueChanged(int value);
+
+    void on_ChangeLocatorStateRightTriangle_clicked();
+
 private:
     Ui::IndicatorPRL *ui;
 };

@@ -4,6 +4,10 @@
 #define TRIANGLE_ANGLE  46
 #endif
 
+#ifndef GRID_OFFSET
+#define GRID_OFFSET  1.0f
+#endif
+
 #ifndef EQUIANGULARTRIANGLELOCATOR_H
 #define EQUIANGULARTRIANGLELOCATOR_H
 
@@ -12,7 +16,7 @@ class EquiangularTriangleLocator : public MainLocator
     Q_OBJECT
     public:
         explicit EquiangularTriangleLocator(QWidget *parent = 0);
-        void GenerationRange();
+        virtual void GenerationRange();
 
     protected:
         void initializeGL();
@@ -21,11 +25,14 @@ class EquiangularTriangleLocator : public MainLocator
         void LocatorArea() const;
         void DrawStation() const;
         void DrawRange() const;
-        void GenerationRay();
+        virtual void GenerationRay();
+        qreal CalcAlpha(qreal angle) const;
         Points radians_triangle_ray[ANGLE_RANGE];
+        virtual void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
+
     signals:
 
-    protected slots:
+    private slots:
         void ContinueSearch();
 };
 

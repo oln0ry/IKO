@@ -57,7 +57,7 @@ class MainLocator : public QGLWidget
         void CleanDataBuffer();
         void ChangeTargetsState();
         QColor SelectColor(const QString,const QString);
-        bool IsActive() const;
+        virtual bool IsActive() const;
         bool clockwise,
              show;
         qint8 targets_pos;
@@ -83,7 +83,7 @@ class MainLocator : public QGLWidget
         qreal GetRandomCoord(quint8,const bool rsign=false) const;
         qint8 GetRandomSign() const;
         quint16 radians_size;
-        qreal CalcAlpha(qreal angle) const;
+        virtual qreal CalcAlpha(qreal angle) const;
         qreal fps;
         struct Points
         {
@@ -108,12 +108,12 @@ class MainLocator : public QGLWidget
         QVector<Points*>circle,ray;
         QTimer* timer;
         QMap<QString,QMap<QString,QVariant> >settings;
+        bool not_clean;
+        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
+        virtual void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
 
     private:
-        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
-        void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
-        bool not_clean;
         QColorDialog* Color;
         QVector<LineEntity>azimuth;
         QMap<QString,QColor>color;
