@@ -17,15 +17,21 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    timer=new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
     ChangeFPS(fps);
+}
+
+void MainLocator::timerEvent(QTimerEvent *event)
+{
+    if(timer.timerId()==event->timerId())
+        ContinueSearch();
+    QWidget::timerEvent(event);
 }
 
 MainLocator::~MainLocator()
 {
-    //if(timer->isActive());//dtimer->stop;
-    delete timer;
+    //if(timer->isActive());
+    //    killTimer(timer->timerId());
+    //delete timer;
 }
 
 void MainLocator::initializeGL()
@@ -93,18 +99,18 @@ void MainLocator::paintGL()
 void MainLocator::ChangeFPS(qreal fps)
 {
     if(fps<=.0f && IsActive())
-        timer->stop();
+        timer.stop();
     if(fps>.0f)
     {
         if(IsActive())
-            timer->stop();
-        timer->start(fps);
+            timer.stop();
+        timer.start(fps,this);
     }
 }
 
 bool MainLocator::IsActive() const
 {
-    return timer->isActive();
+    return timer.isActive();
 }
 
 
@@ -552,9 +558,7 @@ void MainLocator::ContinueSearch()
 {
     updateGL();
     if(ray_position==ray.end()-1u)
-    {
         ray_position=ray.begin();
-    }
     ray_position++;
 }
 

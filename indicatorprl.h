@@ -36,6 +36,22 @@ private slots:
 
     void on_ChangeLocatorStateRightTriangle_clicked();
 
+    void on_SelectRangeMarksRightTriangle_currentIndexChanged(int index);
+
+    void on_SelectScaleRightTriangle_currentIndexChanged(int index);
+
+    void on_ChangeTrashIntensityRightTriangle_valueChanged(int value);
+
+    void on_ChangeDisplayLightningRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorBrightnessRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorFocusRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorVARURightTriangle_valueChanged(int value);
+
+    void on_ChangeViewStateAllRightTriangle_clicked();
+
 private:
     Ui::IndicatorPRL *ui;
 };

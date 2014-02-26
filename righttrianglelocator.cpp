@@ -21,8 +21,7 @@ RightTriangleLocator::RightTriangleLocator(QWidget *parent):EquiangularTriangleL
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    timer=new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
+    ChangeFPS(fps);
 }
 
 void RightTriangleLocator::initializeGL()
@@ -60,8 +59,10 @@ void RightTriangleLocator::paintGL()
         glVertex2d(.0f,.0f);
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
-    //if(!range.isEmpty())
-        //DrawRange();
+    if(!range.isEmpty())
+        DrawRange();
+    if(!Cache.trash.isEmpty())
+        DrawTrash();
     glPopMatrix();
 }
 
@@ -101,4 +102,119 @@ void RightTriangleLocator::DrawStation() const
         glVertex2d(2*qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(0)));
         glVertex2d(2*qFastCos(GetRadianValue(TRIANGLE_ANGLE)),2*qFastSin(GetRadianValue(TRIANGLE_ANGLE)));
     glEnd();
+}
+
+qreal RightTriangleLocator::CalcAlpha(qreal angle) const
+{
+    qreal alpha;
+    if(settings["system"]["show"].toBool())
+        alpha=1.0f;
+    else
+    {
+        alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-angle)-.01;
+        if(not_clean && alpha<.0f)
+            alpha+=2u*M_PI;
+    }
+    return alpha;
+}
+
+void RightTriangleLocator::GenerationRange()
+{
+    qreal r=.0f,delta,distance;
+    quint8 j=0u,d=0u;
+    range.clear();
+
+    distance=CalcScaleValue(1.0f);
+    switch(settings["system"]["range"].toUInt())
+    {
+        case 1:
+            delta=distance*5u;
+            j=2u;
+            break;
+        case 0:
+            return;
+        default:
+            delta=distance*10u;
+            j=1u;
+    }
+    LineEntity cache;
+    quint16 c;
+    while(r<=1.0f)
+    {
+        cache.width=d%j==0u ? 3.5f : 1.0f;
+        cache.Coordinates=new Points[TRIANGLE_ANGLE];
+        c=0u;
+
+        for(Points *i=radians_triangle_ray,*end=radians_triangle_ray+TRIANGLE_ANGLE;i<end;i++,c++)
+        {
+            cache.Coordinates[c].angle=i->angle;
+            cache.Coordinates[c].x=r*i->x;
+            cache.Coordinates[c].y=r*i->y;
+        }
+        range.append(cache);
+        r+=delta;
+        d++;
+    }
+}
+
+void RightTriangleLocator::DrawRange() const
+{
+    qreal alpha;
+    for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
+    {
+        glLineWidth(it->width*settings["system"]["focus"].toDouble());
+        glBegin(GL_LINE_STRIP);
+        for(Points *i=it->Coordinates,*end=it->Coordinates+TRIANGLE_ANGLE;i<end;i++)
+        {
+            alpha=CalcAlpha(i->angle);
+            if(alpha>.0f)
+            {
+                alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+                glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
+                glVertex2d(i->x,i->y);
+            }
+        }
+        glEnd();
+    }
+}
+
+void RightTriangleLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity=3.0f,bool ellipse=false,bool clear=true)
+{
+    qreal rand;
+    begin=CalcScaleValue(begin),
+    end=CalcScaleValue(end);
+    if(clear)
+        storage.clear();
+    PointsPath cache;
+
+    for(Points*i=radians_triangle_ray,*k=radians_triangle_ray+TRIANGLE_ANGLE;i<k;i++)
+    {
+        for(quint16 l=0u,t=fmod(qrand(),intensity);l<t;l++)
+        {
+            if(ellipse)
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x)+GetRandomSign();//*CalcScaleValue(offset_x*rand);
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.y=i->y*rand+CalcScaleValue(offset_y)+GetRandomSign();//*CalcScaleValue(offset_y*rand);
+            }
+            else
+            {
+                rand=begin+fmod(GetRandomCoord(4u),end-begin);
+                cache.x=i->x*rand+CalcScaleValue(offset_x);
+                cache.y=i->y*rand+CalcScaleValue(offset_y);
+            }
+            cache.r=qSqrt(qPow(cache.x,2u)+qPow(cache.y,2u));
+            if(offset_x>.0f || offset_y>.0f)
+                if(cache.x>0)
+                    cache.angle=qAtan2(cache.y,cache.x);
+                else if(cache.x==0)
+                    cache.angle=M_PI/2;
+                else
+                    cache.angle=qAtan2(cache.y,cache.x);
+            else
+                cache.angle=i->angle;
+            storage.append(cache);
+        }
+    }
 }

@@ -3,7 +3,8 @@
 #include<QVariant>
 #include<qmath.h>
 #include<QTime>
-#include<QTimer>
+#include <QBasicTimer>
+#include <QTimerEvent>
 #include<QDebug>
 
 #ifndef GL_MULTISAMPLE
@@ -66,9 +67,11 @@ class MainLocator : public QGLWidget
 
     public slots:
     protected:
+        void timerEvent(QTimerEvent *event);
         void initializeGL();
         void resizeGL(int width, int height);
         void paintGL();
+        virtual void ContinueSearch();
         void DrawStation() const;
         void LocatorArea() const;
         void DrawTrash() const;
@@ -106,7 +109,7 @@ class MainLocator : public QGLWidget
         QVector<LineEntity>range;
         QVector<Points*>::const_iterator ray_position;
         QVector<Points*>circle,ray;
-        QTimer* timer;
+        QBasicTimer timer;
         QMap<QString,QMap<QString,QVariant> >settings;
         bool not_clean;
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
@@ -119,7 +122,7 @@ class MainLocator : public QGLWidget
         QMap<QString,QColor>color;
 
      protected slots:
-        void ContinueSearch();
+
 };
 
 template<typename OptionType>void MainLocator::SetSettings(const QString group,const QString name,OptionType option)

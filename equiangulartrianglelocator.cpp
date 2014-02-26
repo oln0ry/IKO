@@ -22,8 +22,7 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     GenerationRay();
     GenerationRange();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    timer=new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(ContinueSearch()));
+    ChangeFPS(fps);
 }
 
 void EquiangularTriangleLocator::initializeGL()
@@ -279,4 +278,3 @@ void EquiangularTriangleLocator::CreateEllipseTrashArea(QVector<PointsPath>&stor
         }
     }
 }
-
