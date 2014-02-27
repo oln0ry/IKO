@@ -29,8 +29,8 @@ IndicatorPRL::IndicatorPRL(QWidget *parent):QWidget(parent),ui(new Ui::Indicator
     ui->ChangeIndicatorVARURightTriangle->valueChanged(ui->ChangeIndicatorVARURightTriangle->value());
     ui->ChangeTrashIntensityRightTriangle->valueChanged(ui->ChangeTrashIntensityRightTriangle->value());
 
-    ui->RenderEquiangularIndicator->ChangeFPS(24);
-    ui->RenderRightTriangleIndicator->ChangeFPS(24);
+    ui->RenderEquiangularIndicator->ChangeFPS(1000/24);
+    ui->RenderRightTriangleIndicator->ChangeFPS(1000/24);
 }
 
 IndicatorPRL::~IndicatorPRL()
@@ -100,7 +100,7 @@ void IndicatorPRL::on_ChangeLocatorStateEquiangular_clicked()
     else
     {
         fps=static_cast<quint8>(24);
-        ui->RenderEquiangularIndicator->ChangeFPS(fps);
+        ui->RenderEquiangularIndicator->ChangeFPS(1000/fps);
         ui->ChangeLocatorStateEquiangular->setText("Стоп");
     }
     //ui->InputFrameFrequency->valueChanged(24);
@@ -145,7 +145,7 @@ void IndicatorPRL::on_ChangeLocatorStateRightTriangle_clicked()
     else
     {
         fps=static_cast<quint8>(24);
-        ui->RenderRightTriangleIndicator->ChangeFPS(fps);
+        ui->RenderRightTriangleIndicator->ChangeFPS(1000/fps);
         ui->ChangeLocatorStateRightTriangle->setText("Стоп");
     }
 }

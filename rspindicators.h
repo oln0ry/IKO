@@ -46,6 +46,30 @@ class RSPIndicators:public QWidget
 
     void on_SelectWorkVariant_currentIndexChanged(int index);
 
+    void on_SelectAzimuthMarks_currentIndexChanged(int index);
+
+    void on_ChangeIndicatorVARU_valueChanged(int value);
+
+    void on_ChangeIndicatorFocusEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorFocusRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorFocus_valueChanged(int value);
+
+    void on_ChangeIndicatorBrightnessEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorBrightnessRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorBrightness_valueChanged(int value);
+
+    void on_ChangeDisplayLightning_valueChanged(int value);
+
+    void on_ChangeTrashIntensityEquiangular_valueChanged(int value);
+
+    void on_ChangeTrashIntensityRightTriangle_valueChanged(int value);
+
+    void on_ChangeTrashIntensity_valueChanged(int value);
+
 private:
     QPointer<TargetsSettings>tsettings;
     Ui::RSPIndicators *ui;

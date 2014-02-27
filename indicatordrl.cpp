@@ -43,7 +43,7 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->SelectTrashIntensity->hide();
     work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
     ui->SelectWorkVariant->addItems(work_variants);
-    ui->SelectWorkVariant->setCurrentIndex(0);
+    ui->SelectWorkVariant->setCurrentIndex(1);
  }
 
 IndicatorDRL::~IndicatorDRL()

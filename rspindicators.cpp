@@ -16,7 +16,7 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
     ui->SelectScale->setCurrentIndex(0);
     work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
     ui->SelectWorkVariant->addItems(work_variants);
-    ui->SelectWorkVariant->setCurrentIndex(0);
+    ui->SelectWorkVariant->setCurrentIndex(1);
 
     range_marks_triangles<<"Не отображать"<<"5 километров"<<"10 километров";
     ui->SelectRangeMarksEquiangular->addItems(range_marks_triangles);
@@ -54,9 +54,9 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
     ui->ChangeIndicatorFocusRightTriangle->valueChanged(ui->ChangeIndicatorFocusRightTriangle->value());
 
     //Запуск индикаторов
-    ui->FirstIndicator->ChangeFPS(24);
-    ui->SecondIndicator->ChangeFPS(24);
-    ui->ThirdIndicator->ChangeFPS(24);
+    ui->FirstIndicator->ChangeFPS(1000/24);
+    ui->SecondIndicator->ChangeFPS(1000/24);
+    ui->ThirdIndicator->ChangeFPS(1000/24);
 }
 
 RSPIndicators::~RSPIndicators()
@@ -75,7 +75,7 @@ void RSPIndicators::on_ChangeLocatorState_clicked()
     else
     {
         fps=static_cast<quint8>(24);
-        ui->FirstIndicator->ChangeFPS(fps);
+        ui->FirstIndicator->ChangeFPS(1000/fps);
         ui->ChangeLocatorState->setText("Стоп");
     }
 }
@@ -91,7 +91,7 @@ void RSPIndicators::on_ChangeLocatorStateEquiangular_clicked()
     else
     {
         fps=static_cast<quint8>(24);
-        ui->SecondIndicator->ChangeFPS(fps);
+        ui->SecondIndicator->ChangeFPS(1000/fps);
         ui->ChangeLocatorStateEquiangular->setText("Стоп");
     }
 }
@@ -107,7 +107,7 @@ void RSPIndicators::on_ChangeLocatorStateRightTriangle_clicked()
     else
     {
         fps=static_cast<quint8>(24);
-        ui->ThirdIndicator->ChangeFPS(fps);
+        ui->ThirdIndicator->ChangeFPS(1000/fps);
         ui->ChangeLocatorStateRightTriangle->setText("Стоп");
     }
 }
@@ -220,12 +220,31 @@ void RSPIndicators::on_SelectScaleRightTriangle_currentIndexChanged(int index)
 
 void RSPIndicators::on_SelectRangeMarks_currentIndexChanged(int index)
 {
-
+    if(index<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","range",static_cast<quint16>(index));
 }
 
 void RSPIndicators::on_SelectScale_currentIndexChanged(int index)
 {
+    if(index<0)
+        return;
+    qreal max;
+    switch(index)
+    {
+        case 2:
+            max=150.0f;
+            break;
+        case 1:
+            max=90.0f;
+            break;
+        default:
+            max=45.0f;
 
+    }
+    ui->FirstIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->FirstIndicator->SetSettings("trash","end",max);
+    ui->FirstIndicator->SetSettings("trash","begin",0);
 }
 
 void RSPIndicators::on_SelectWorkVariant_currentIndexChanged(int index)
@@ -280,4 +299,98 @@ void RSPIndicators::on_SelectWorkVariant_currentIndexChanged(int index)
     ui->FirstIndicator->SetSettings("system","mode",static_cast<quint8>(index));
     ui->SecondIndicator->SetSettings("system","mode",static_cast<quint8>(index));
     ui->ThirdIndicator->SetSettings("system","mode",static_cast<quint8>(index));
+}
+
+void RSPIndicators::on_SelectAzimuthMarks_currentIndexChanged(int index)
+{
+    if(index<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","azimuth",static_cast<quint16>(index));
+}
+
+void RSPIndicators::on_ChangeIndicatorVARU_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->SecondIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ThirdIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeIndicatorFocusEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->SecondIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+
+}
+
+void RSPIndicators::on_ChangeIndicatorFocusRightTriangle_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->ThirdIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+
+}
+
+void RSPIndicators::on_ChangeIndicatorFocus_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeIndicatorBrightnessEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->SecondIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+
+}
+
+void RSPIndicators::on_ChangeIndicatorBrightnessRightTriangle_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->ThirdIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeIndicatorBrightness_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeDisplayLightning_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->FirstIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->SecondIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->ThirdIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeTrashIntensityEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->FirstIndicator->SetSettings("trash","show",value>0);
+    ui->FirstIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+}
+
+void RSPIndicators::on_ChangeTrashIntensityRightTriangle_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->SecondIndicator->SetSettings("trash","show",value>0);
+    ui->SecondIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+}
+
+void RSPIndicators::on_ChangeTrashIntensity_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->ThirdIndicator->SetSettings("trash","show",value>0);
+    ui->ThirdIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
