@@ -53,7 +53,7 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="Target1">
-      <widget class="QGroupBox" name="TargetExtremums">
+      <widget class="QGroupBox" name="TargetExtremums_1">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -65,7 +65,7 @@
        <property name="title">
         <string>Точки перегиба</string>
        </property>
-       <widget class="QGroupBox" name="TargetExtremumFirst">
+       <widget class="QGroupBox" name="TargetExtremumFirst_1">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -77,7 +77,7 @@
         <property name="title">
          <string>Первая точка</string>
         </property>
-        <widget class="QLabel" name="LabelTargetAzimuthFinish">
+        <widget class="QLabel" name="LabelTargetAzimuthFinish_1">
          <property name="geometry">
           <rect>
            <x>33</x>
@@ -90,7 +90,7 @@
           <string>Азимут:</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst">
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -103,7 +103,7 @@
           <string>°</string>
          </property>
         </widget>
-        <widget class="QLabel" name="LabelTargetRangeFinish">
+        <widget class="QLabel" name="LabelTargetRangeFinish_1">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -116,7 +116,7 @@
           <string>Дальность:</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst">
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -130,7 +130,7 @@
          </property>
         </widget>
        </widget>
-       <widget class="QGroupBox" name="TargetExtremumSecond">
+       <widget class="QGroupBox" name="TargetExtremumSecond_1">
         <property name="geometry">
          <rect>
           <x>200</x>
@@ -155,7 +155,7 @@
           <string>Азимут:</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond">
+        <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -181,7 +181,7 @@
           <string>Дальность:</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond">
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -220,7 +220,7 @@
           <string>Азимут:</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="TargetAzimuthExtremumThird">
+        <widget class="QSpinBox" name="TargetAzimuthExtremumThird_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -246,7 +246,7 @@
           <string>Дальность:</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird">
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -285,7 +285,7 @@
           <string>Азимут:</string>
          </property>
         </widget>
-        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth">
+        <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -311,7 +311,7 @@
           <string>Дальность:</string>
          </property>
         </widget>
-        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth">
+        <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -326,7 +326,7 @@
         </widget>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="TargetStart">
+      <widget class="QGroupBox" name="TargetStart_1">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -338,7 +338,7 @@
        <property name="title">
         <string>Начало траектории</string>
        </property>
-       <widget class="QLabel" name="LabelTargetAzimuthStart">
+       <widget class="QLabel" name="LabelTargetAzimuthStart_1">
         <property name="geometry">
          <rect>
           <x>33</x>
@@ -351,7 +351,7 @@
          <string>Азимут:</string>
         </property>
        </widget>
-       <widget class="QSpinBox" name="TargetAzimuthStart">
+       <widget class="QSpinBox" name="TargetAzimuthStart_1">
         <property name="geometry">
          <rect>
           <x>90</x>
@@ -364,7 +364,7 @@
          <string>°</string>
         </property>
        </widget>
-       <widget class="QLabel" name="LabelTargetRangeStart">
+       <widget class="QLabel" name="LabelTargetRangeStart_1">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -377,7 +377,7 @@
          <string>Дальность:</string>
         </property>
        </widget>
-       <widget class="QDoubleSpinBox" name="TargetRangeStart">
+       <widget class="QDoubleSpinBox" name="TargetRangeStart_1">
         <property name="geometry">
          <rect>
           <x>90</x>
@@ -391,7 +391,7 @@
         </property>
        </widget>
       </widget>
-      <widget class="QCheckBox" name="TargetGoHome">
+      <widget class="QCheckBox" name="TargetGoHome_1">
        <property name="geometry">
         <rect>
          <x>200</x>
@@ -430,7 +430,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="TargetSpeed">
+      <widget class="QDoubleSpinBox" name="TargetSpeed_1">
        <property name="geometry">
         <rect>
          <x>270</x>
@@ -446,7 +446,7 @@
         <string> км/ч</string>
        </property>
       </widget>
-      <widget class="QLabel" name="LabelSpeedTarget">
+      <widget class="QLabel" name="LabelSpeedTarget_1">
        <property name="geometry">
         <rect>
          <x>201</x>

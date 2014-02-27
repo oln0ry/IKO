@@ -133,6 +133,7 @@ void MainLocator::GenerationRay()
 
 void MainLocator::GenerationRay(qint16 angle)
 {
+    ray.clear();
     Points*i=radians,*end=radians+angle;
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
