@@ -375,22 +375,22 @@ void RSPIndicators::on_ChangeTrashIntensityEquiangular_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->FirstIndicator->SetSettings("trash","show",value>0);
-    ui->FirstIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->SecondIndicator->SetSettings("trash","show",value>0);
+    ui->SecondIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void RSPIndicators::on_ChangeTrashIntensityRightTriangle_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->SecondIndicator->SetSettings("trash","show",value>0);
-    ui->SecondIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->ThirdIndicator->SetSettings("trash","show",value>0);
+    ui->ThirdIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void RSPIndicators::on_ChangeTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->ThirdIndicator->SetSettings("trash","show",value>0);
-    ui->ThirdIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->FirstIndicator->SetSettings("trash","show",value>0);
+    ui->FirstIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
