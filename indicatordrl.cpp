@@ -38,9 +38,6 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
     ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
     ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
-    ui->LabelColorIndicator->hide();
-    ui->ButtonChangeColorDisplay->hide();
-    ui->SelectTrashIntensity->hide();
     work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
     ui->SelectWorkVariant->addItems(work_variants);
     ui->SelectWorkVariant->setCurrentIndex(1);
@@ -58,8 +55,8 @@ void IndicatorDRL::on_InputFrameFrequency_valueChanged(int frames_number)
 
 void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
 {
-    QColor c=ui->RenderIndicator->SelectColor("locator","Выберите цвет фона индикатора");
-    ui->ButtonChangeColorDisplay->setPalette(c);
+    //QColor c=ui->RenderIndicator->SelectColor("locator","Выберите цвет фона индикатора");
+    //ui->ButtonChangeColorDisplay->setPalette(c);
 }
 
 void IndicatorDRL::on_SelectAzimuthMarks_currentIndexChanged(int index)

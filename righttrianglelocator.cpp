@@ -39,8 +39,13 @@ void RightTriangleLocator::initializeGL()
 void RightTriangleLocator::resizeGL(int width, int height)
 {
     glEnable(GL_MULTISAMPLE);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(height));
+    glOrtho(0.0, 0.0, 0.0, 1.0, 1.0, -1.0f);
+    if(width>height)
+        glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(height),static_cast<GLint>(height));
+    else
+        glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(width));
 }
 
 void RightTriangleLocator::paintGL()

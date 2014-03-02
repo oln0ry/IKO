@@ -29,7 +29,8 @@ HEADERS  += menu.h \
     indicatorprl.h \
     equiangulartrianglelocator.h \
     righttrianglelocator.h \
-    rspindicators.h
+    rspindicators.h \
+    helper.h
 
 FORMS    += menu.ui \
     indicatordrl.ui \

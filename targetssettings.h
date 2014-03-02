@@ -1,7 +1,8 @@
 #ifndef TARGETSSETTINGS_H
 #define TARGETSSETTINGS_H
 
-#include <QWidget>
+#include<QWidget>
+#include"helper.h"
 
 namespace Ui {
 class TargetsSettings;
@@ -23,9 +24,12 @@ public:
 
         void on_ApplyTargets_clicked();
 
+        void on_TargetsGoHome_stateChanged(int arg);
+
     private:
         Ui::TargetsSettings *ui;
         quint8 targets_count;
+        Targets *Targs;
 };
 
 #endif // TARGETSSETTINGS_H

@@ -7,925 +7,805 @@
     <x>0</x>
     <y>0</y>
     <width>862</width>
-    <height>803</height>
+    <height>746</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Индикатор ДРЛ</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>503</width>
-     <height>503</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="RenderLayout">
-    <item row="0" column="0">
-     <widget class="MainLocator" name="RenderIndicator" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>501</width>
-        <height>501</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>800</width>
-        <height>800</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="BoxIndicatorSettings">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>16</y>
-     <width>301</width>
-     <height>519</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Настройки индикатора</string>
-   </property>
-   <widget class="QLabel" name="LabelFrameFrequency">
-    <property name="geometry">
-     <rect>
-      <x>42</x>
-      <y>30</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Частота кадров:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="InputFrameFrequency">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>29</y>
-      <width>51</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>120</number>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelColorIndicator">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>303</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Цвет дисплея:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ButtonChangeColorDisplay">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>300</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelAzimuthMarks">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>65</y>
-      <width>121</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Отметки азимута:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="SelectAzimuthMarks">
-    <property name="geometry">
-     <rect>
-      <x>159</x>
-      <y>63</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="SelectRangeMarks">
-    <property name="geometry">
-     <rect>
-      <x>159</x>
-      <y>100</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelRangeMarks">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>102</y>
-      <width>131</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Отметки дальности:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelScale">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>138</y>
-      <width>61</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Масштаб:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="SelectScale">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>138</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelBrightness">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>180</y>
-      <width>111</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Яркость дисплея:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSlider" name="ChangeIndicatorBrightness">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>182</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QSlider" name="ChangeIndicatorFocus">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>242</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelFocus">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>240</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Фокус:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ChangeLocatorState">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>470</y>
-      <width>281</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Стоп</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ChangeViewStateAll">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>420</y>
-      <width>281</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Отобразить все скрытые метки</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="ChangeDisplayLightning">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>212</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>60</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelDisplayLightning">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>210</y>
-      <width>71</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Подсветка:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelVARU">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>270</y>
-      <width>41</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ВАРУ:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QSlider" name="ChangeIndicatorVARU">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>271</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="maximum">
-     <number>100</number>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>100</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelTargetsSettings">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>340</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Настройки целей:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ButtonTargetsSettings">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>339</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ChangeTargetsState">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>370</y>
-      <width>281</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Запуск целей</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelWorkVariant">
-    <property name="geometry">
-     <rect>
-      <x>47</x>
-      <y>303</y>
-      <width>104</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Режим работы:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="SelectWorkVariant">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>300</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-   </widget>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>20</y>
-     <width>20</width>
-     <height>513</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="BoxTrashSettings">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>540</y>
-     <width>241</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Настройки пассивных помех</string>
-   </property>
-   <widget class="QCheckBox" name="CheckShowTrash">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>231</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Усиление приёмника</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="CheckShowLocalItems">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>160</y>
-      <width>151</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Местные предметы</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="RegenerateTrash">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>210</y>
-      <width>221</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Перегенерировать помехи</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="SelectTrashIntensity">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>50</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelTrashIntensity">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>56</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Интенсивность:</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="ChangeTrashIntensity">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>221</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="minimum">
-     <number>1</number>
-    </property>
-    <property name="maximum">
-     <number>30</number>
-    </property>
-    <property name="pageStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>5</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="InputScatterTrashTo">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>130</y>
-      <width>85</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="suffix">
-     <string> км.</string>
-    </property>
-    <property name="maximum">
-     <double>150.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelScatterTrashFrom">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>134</y>
-      <width>21</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>от:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelScatterTrash">
-    <property name="geometry">
-     <rect>
-      <x>12</x>
-      <y>103</y>
-      <width>181</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Разброс помех по радиусу:</string>
-    </property>
-   </widget>
-   <widget class="QDoubleSpinBox" name="InputScatterTrashFrom">
-    <property name="geometry">
-     <rect>
-      <x>34</x>
-      <y>130</y>
-      <width>81</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="suffix">
-     <string> км.</string>
-    </property>
-    <property name="maximum">
-     <double>400.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="LabelScatterTrashTo">
-    <property name="geometry">
-     <rect>
-      <x>127</x>
-      <y>134</y>
-      <width>21</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>до:</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="CheckShowMeteo">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>184</y>
-      <width>151</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Метеообразования</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>524</y>
-     <width>520</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="BoxActiveTrashSettings">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>540</y>
-     <width>571</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Настройки активных помех</string>
-   </property>
-   <widget class="QGroupBox" name="BoxActiveNoiseTrash">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>261</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Шумовая помеха</string>
-    </property>
-    <widget class="QLabel" name="LabelActiveNoiseAzimuth">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>57</width>
-       <height>15</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Азимут:</string>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="InputActiveNoiseAzimuth">
-     <property name="geometry">
-      <rect>
-       <x>68</x>
-       <y>26</y>
-       <width>71</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="suffix">
-      <string>°</string>
-     </property>
-     <property name="maximum">
-      <number>360</number>
-     </property>
-     <property name="value">
-      <number>25</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LabelActiveNoiseIntensity">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>101</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Интенсивность:</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="SelectActiveNoiseIntensity">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>58</y>
-       <width>121</width>
-       <height>23</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="CheckActiveNoiseShow">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>28</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Отображать</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="BoxActiveAnswerTrash">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>130</y>
-      <width>261</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Ответно-импульсная помеха</string>
-    </property>
-    <widget class="QSpinBox" name="InputActiveAnswerAzimuth">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>30</y>
-       <width>71</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="suffix">
-      <string>°</string>
-     </property>
-     <property name="maximum">
-      <number>360</number>
-     </property>
-     <property name="value">
-      <number>74</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LabelActiveAnswerAzimuth">
-     <property name="geometry">
-      <rect>
-       <x>12</x>
-       <y>34</y>
-       <width>57</width>
-       <height>15</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Азимут:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="LabelActiveAnswerDistance">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Дистанция:</string>
-     </property>
-    </widget>
-    <widget class="QDoubleSpinBox" name="InputActiveAnswerDistance">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>67</y>
-       <width>81</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="suffix">
-      <string> км.</string>
-     </property>
-     <property name="value">
-      <double>3.000000000000000</double>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="CheckActiveAnswerShow">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>32</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Отображать</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="BoxActiveInSyncTrash">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>29</y>
-      <width>251</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Несинхронно-импульсная помеха</string>
-    </property>
-    <widget class="QCheckBox" name="CheckActiveInSyncShow">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Отображать</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="CleanLocatorDataBuffer">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>200</y>
-      <width>251</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Очистить индикатор</string>
-    </property>
-   </widget>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout_7">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <layout class="QGridLayout" name="RenderLayout">
+       <item row="0" column="0">
+        <widget class="MainLocator" name="RenderIndicator" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>400</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>37</width>
+         <height>17</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="BoxIndicatorSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Настройки индикатора</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="LayoutSettingsAndButtons">
+            <item>
+             <layout class="QFormLayout" name="LayoutInternalSettings">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <property name="labelAlignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="verticalSpacing">
+               <number>14</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="LabelFrameFrequency">
+                <property name="text">
+                 <string>Частота кадров:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="LabelAzimuthMarks">
+                <property name="text">
+                 <string>Отметки азимута:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="SelectAzimuthMarks">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="LabelRangeMarks">
+                <property name="text">
+                 <string>Отметки дальности:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QComboBox" name="SelectRangeMarks">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="LabelScale">
+                <property name="text">
+                 <string>Масштаб:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="SelectScale">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="LabelBrightness">
+                <property name="text">
+                 <string>Яркость дисплея:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QSlider" name="ChangeIndicatorBrightness">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="LabelDisplayLightning">
+                <property name="text">
+                 <string>Подсветка:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QSlider" name="ChangeDisplayLightning">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>60</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="LabelFocus">
+                <property name="text">
+                 <string>Фокус:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QSlider" name="ChangeIndicatorFocus">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="LabelVARU">
+                <property name="text">
+                 <string>ВАРУ:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QSlider" name="ChangeIndicatorVARU">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="LabelWorkVariant">
+                <property name="text">
+                 <string>Режим работы:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QComboBox" name="SelectWorkVariant">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="LabelTargetsSettings">
+                <property name="text">
+                 <string>Настройки целей:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QPushButton" name="ButtonTargetsSettings">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="InputFrameFrequency">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>120</number>
+                </property>
+                <property name="value">
+                 <number>24</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="LayoutButtons">
+              <item>
+               <widget class="QPushButton" name="ChangeTargetsState">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>Запуск целей</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ChangeViewStateAll">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>Отобразить все скрытые метки</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ChangeLocatorState">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>Стоп</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>245</width>
+           <height>45</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetFixedSize</enum>
+       </property>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>243</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="BoxTrashSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Настройки пассивных помех</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="LayoutTrashIntensitySettings">
+            <item>
+             <widget class="QCheckBox" name="CheckShowTrash">
+              <property name="text">
+               <string>Усиление приёмника</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="LayoutTrashIntensity">
+              <item>
+               <widget class="QLabel" name="LabelTrashIntensity">
+                <property name="text">
+                 <string>Интенсивность:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSlider" name="ChangeTrashIntensity">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>30</number>
+                </property>
+                <property name="pageStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>5</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="LabelScatterTrash">
+              <property name="text">
+               <string>Разброс помех по радиусу:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="LayoutTrashIntensityScatter">
+              <item>
+               <layout class="QHBoxLayout" name="LayoutTrashIntensityScatterFrom">
+                <item>
+                 <widget class="QLabel" name="LabelScatterTrashFrom">
+                  <property name="text">
+                   <string>от:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="InputScatterTrashFrom">
+                  <property name="suffix">
+                   <string> км.</string>
+                  </property>
+                  <property name="maximum">
+                   <double>400.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="LayoutTrashIntensityScatterTo">
+                <item>
+                 <widget class="QLabel" name="LabelScatterTrashTo">
+                  <property name="text">
+                   <string>до:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="InputScatterTrashTo">
+                  <property name="suffix">
+                   <string> км.</string>
+                  </property>
+                  <property name="maximum">
+                   <double>150.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="CheckShowLocalItems">
+              <property name="text">
+               <string>Местные предметы</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="CheckShowMeteo">
+              <property name="text">
+               <string>Метеообразования</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="RegenerateTrash">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>ArrowCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string>Перегенерировать помехи</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="BoxActiveTrashSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Настройки активных помех</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>26</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="BoxActiveAnswerTrash">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Ответно-импульсная помеха</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <item>
+                  <layout class="QHBoxLayout" name="LayoutActiveAnswerTrashShow">
+                   <item>
+                    <layout class="QFormLayout" name="LayoutActiveAnswerTrashAzimuth">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="LabelActiveAnswerAzimuth">
+                       <property name="text">
+                        <string>Азимут:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QSpinBox" name="InputActiveAnswerAzimuth">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="maximum">
+                        <number>360</number>
+                       </property>
+                       <property name="value">
+                        <number>74</number>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="CheckActiveAnswerShow">
+                     <property name="text">
+                      <string>Отображать</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="LayoutActiveNoiseTrashDistance">
+                   <item>
+                    <widget class="QLabel" name="LabelActiveAnswerDistance">
+                     <property name="text">
+                      <string>Дистанция:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="InputActiveAnswerDistance">
+                     <property name="suffix">
+                      <string> км.</string>
+                     </property>
+                     <property name="value">
+                      <double>3.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>232</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="CleanLocatorDataBuffer">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>Очистить индикатор</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>21</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="BoxActiveNoiseTrash">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Шумовая помеха</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="LayoutActiveNoiseTrashSettings">
+                 <item>
+                  <widget class="QSplitter" name="splitter">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <widget class="QWidget" name="layoutWidget">
+                    <layout class="QFormLayout" name="LayoutActiveNoiseTrashAzimuth">
+                     <property name="fieldGrowthPolicy">
+                      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                     </property>
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="LabelActiveNoiseAzimuth">
+                       <property name="text">
+                        <string>Азимут:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QSpinBox" name="InputActiveNoiseAzimuth">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="maximum">
+                        <number>360</number>
+                       </property>
+                       <property name="value">
+                        <number>25</number>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QCheckBox" name="CheckActiveNoiseShow">
+                    <property name="text">
+                     <string>Отображать</string>
+                    </property>
+                   </widget>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QFormLayout" name="LayoutActiveNoiseTrashIntensity">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <property name="labelAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="formAlignment">
+                    <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                   </property>
+                   <property name="horizontalSpacing">
+                    <number>27</number>
+                   </property>
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="LabelActiveNoiseIntensity">
+                     <property name="text">
+                      <string>Интенсивность:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="SelectActiveNoiseIntensity"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="BoxActiveInSyncTrash">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Несинхронно-импульсная помеха</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="CheckActiveInSyncShow">
+                 <property name="text">
+                  <string>Отображать</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+  <zorder></zorder>
+  <zorder></zorder>
  </widget>
  <customwidgets>
   <customwidget>

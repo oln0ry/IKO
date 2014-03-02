@@ -49,11 +49,14 @@ void MainLocator::initializeGL()
 void MainLocator::resizeGL(int width, int height)
 {
     glEnable(GL_MULTISAMPLE);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-    //qreal ratio=static_cast<GLfloat>(height)/static_cast<GLfloat>(width);
-    //glOrtho(-1.0f/ratio,1.0f/ratio,-1.0f,1.0f,0.0f,0.0f);
-    glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(height));
+    glOrtho(0.0, 0.0, 0.0, 1.0, 1.0, -1.0f);
+    if(width>height)
+        glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(height),static_cast<GLint>(height));
+    else
+        glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(width));
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void MainLocator::paintGL()
@@ -397,32 +400,20 @@ void MainLocator::GenerationActiveNoiseTrash()
                     cache.Coordinates->x=i->x;
                     cache.Coordinates->y=i->y;
                     cache.width=GetRandomCoord(4)*density;
-                    //cache["width"]=GetRandomCoord(4)*density;
                     Cache.active_noise_trash.append(cache);
                 }
             break;
         case 1:
             angle=settings["active_noise_trash"]["azimuth"].toUInt();
-            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
+            for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+30;i<k;i++)
             {
                 cache.Coordinates=new Points[1];
                 cache.Coordinates->angle=i->angle;
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
-                //cache["width"]=GetRandomCoord(4)*density;
                 Cache.active_noise_trash.append(cache);
             }
-            if(angle<20)
-                for(Points*i=radians,*k=radians+20-angle;i<k;i++)
-                {
-                    cache.Coordinates=new Points[1];
-                    cache.Coordinates->angle=i->angle;
-                    cache.Coordinates->x=i->x;
-                    cache.Coordinates->y=i->y;
-                    cache.width=GetRandomCoord(4)*density;
-                    Cache.active_noise_trash.append(cache);
-                }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+100;
             for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+20;i<k;i++)
             {
@@ -431,6 +422,7 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
+                cache.width-=4*density/5;
                 Cache.active_noise_trash.append(cache);
             }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+200;
@@ -441,6 +433,7 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
+                cache.width-=4*density/5;
                 Cache.active_noise_trash.append(cache);
             }
             angle=settings["active_noise_trash"]["azimuth"].toUInt()+300;
@@ -451,6 +444,7 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.Coordinates->x=i->x;
                 cache.Coordinates->y=i->y;
                 cache.width=GetRandomCoord(4)*density;
+                cache.width-=4*density/5;
                 Cache.active_noise_trash.append(cache);
             }
             break;
@@ -531,6 +525,7 @@ void MainLocator::LocatorArea() const
  */
 void MainLocator::DrawStation() const
 {
+    glRotatef(30.0f, 0.0, 0.0, 1.0);
     glLineWidth(2.0f);
     glColor3f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262));
     qreal
@@ -552,6 +547,7 @@ void MainLocator::DrawStation() const
         glVertex2d(rx,ry);
     glEnd();
     glTranslatef(-rx,.0f,.0f);
+    glRotatef(-30.0f, 0.0, 0.0, 1.0);
 }
 
 void MainLocator::ContinueSearch()

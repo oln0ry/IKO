@@ -1,11 +1,5 @@
-#include<QGLWidget>
-#include<QColorDialog>
-#include<QVariant>
-#include<qmath.h>
-#include<QTime>
-#include <QBasicTimer>
-#include <QTimerEvent>
-#include<QDebug>
+#ifndef MAINLOCATOR_H
+#define MAINLOCATOR_H
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
@@ -13,13 +7,6 @@
 
 #ifndef GetRadianValue
 #define GetRadianValue(radian) M_PI*radian/180
-#endif
-
-//Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
-#ifndef ArraySize
-template<typename T,size_t N>
-char(&ArraySizeHelper(T(&array)[N]))[N];
-#define ArraySize(array)(sizeof(ArraySizeHelper(array)))
 #endif
 
 #ifndef ANGLE_RANGE
@@ -30,8 +17,22 @@ char(&ArraySizeHelper(T(&array)[N]))[N];
 #define METEO 5
 #endif
 
-#ifndef MAINLOCATOR_H
-#define MAINLOCATOR_H
+#include<QGLWidget>
+#include<QColorDialog>
+#include<QVariant>
+#include<qmath.h>
+#include<QTime>
+#include<QBasicTimer>
+#include<QTimerEvent>
+#include<QDebug>
+#include"helper.h"
+
+//Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
+#ifndef ArraySize
+template<typename T,size_t N>
+char(&ArraySizeHelper(T(&array)[N]))[N];
+#define ArraySize(array)(sizeof(ArraySizeHelper(array)))
+#endif
 
 class MainLocator : public QGLWidget
 {
@@ -88,19 +89,7 @@ class MainLocator : public QGLWidget
         quint16 radians_size;
         virtual qreal CalcAlpha(qreal angle) const;
         qreal fps;
-        struct Points
-        {
-            qreal x,y,angle;
-        }radians[ANGLE_RANGE];
-        struct PointsPath:public Points
-        {
-            qreal r;
-        };
-        struct LineEntity
-        {
-            qreal width;
-            Points *Coordinates;
-        };
+        Points radians[ANGLE_RANGE];
         struct Coordinates
         {
             QVector<PointsPath>trash,local_items,meteo;

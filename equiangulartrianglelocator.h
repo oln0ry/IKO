@@ -1,4 +1,5 @@
-#include"mainlocator.h"
+#ifndef EQUIANGULARTRIANGLELOCATOR_H
+#define EQUIANGULARTRIANGLELOCATOR_H
 
 #ifndef TRIANGLE_ANGLE
 #define TRIANGLE_ANGLE  46
@@ -8,8 +9,7 @@
 #define GRID_OFFSET  1.0f
 #endif
 
-#ifndef EQUIANGULARTRIANGLELOCATOR_H
-#define EQUIANGULARTRIANGLELOCATOR_H
+#include"mainlocator.h"
 
 class EquiangularTriangleLocator : public MainLocator
 {

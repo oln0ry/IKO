@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1359</width>
-    <height>731</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>411</width>
-     <height>431</height>
+     <width>410</width>
+     <height>410</height>
     </rect>
    </property>
   </widget>
@@ -28,8 +28,8 @@
     <rect>
      <x>470</x>
      <y>10</y>
-     <width>411</width>
-     <height>431</height>
+     <width>410</width>
+     <height>410</height>
     </rect>
    </property>
   </widget>
@@ -38,8 +38,8 @@
     <rect>
      <x>930</x>
      <y>10</y>
-     <width>411</width>
-     <height>431</height>
+     <width>410</width>
+     <height>410</height>
     </rect>
    </property>
   </widget>
@@ -88,7 +88,7 @@
      <x>442</x>
      <y>450</y>
      <width>16</width>
-     <height>271</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="orientation">
@@ -101,7 +101,7 @@
      <x>20</x>
      <y>460</y>
      <width>411</width>
-     <height>261</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="title">
@@ -516,8 +516,8 @@
     <rect>
      <x>470</x>
      <y>460</y>
-     <width>601</width>
-     <height>261</height>
+     <width>631</width>
+     <height>271</height>
     </rect>
    </property>
    <property name="title">
@@ -526,7 +526,7 @@
    <widget class="QSlider" name="ChangeTrashIntensityEquiangular">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>170</x>
       <y>91</y>
       <width>131</width>
       <height>20</height>
@@ -551,7 +551,7 @@
    <widget class="QSlider" name="ChangeIndicatorFocusEquiangular">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>170</x>
       <y>150</y>
       <width>131</width>
       <height>20</height>
@@ -576,7 +576,7 @@
    <widget class="QLabel" name="LabelBrightnessEquiangular">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>118</y>
       <width>111</width>
       <height>20</height>
@@ -592,9 +592,9 @@
    <widget class="QComboBox" name="SelectScaleEquiangular">
     <property name="geometry">
      <rect>
-      <x>147</x>
+      <x>167</x>
       <y>60</y>
-      <width>131</width>
+      <width>134</width>
       <height>23</height>
      </rect>
     </property>
@@ -605,7 +605,7 @@
    <widget class="QLabel" name="LabelFocusEquiangular">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>110</x>
       <y>148</y>
       <width>51</width>
       <height>20</height>
@@ -621,7 +621,7 @@
    <widget class="QPushButton" name="ChangeViewStateAllEquiangular">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>180</y>
       <width>221</width>
       <height>31</height>
@@ -637,7 +637,7 @@
    <widget class="QSlider" name="ChangeIndicatorBrightnessEquiangular">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>170</x>
       <y>120</y>
       <width>131</width>
       <height>20</height>
@@ -662,9 +662,9 @@
    <widget class="QComboBox" name="SelectRangeMarksEquiangular">
     <property name="geometry">
      <rect>
-      <x>146</x>
+      <x>166</x>
       <y>30</y>
-      <width>131</width>
+      <width>134</width>
       <height>23</height>
      </rect>
     </property>
@@ -675,7 +675,7 @@
    <widget class="QLabel" name="LabelRangeMarksEquiangular">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>32</y>
       <width>131</width>
       <height>16</height>
@@ -688,7 +688,7 @@
    <widget class="QPushButton" name="ChangeLocatorStateEquiangular">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>220</y>
       <width>221</width>
       <height>31</height>
@@ -704,7 +704,7 @@
    <widget class="QLabel" name="LabelScaleEquiangular">
     <property name="geometry">
      <rect>
-      <x>79</x>
+      <x>99</x>
       <y>60</y>
       <width>61</width>
       <height>20</height>
@@ -720,7 +720,7 @@
    <widget class="QLabel" name="LabelTrashIntensityEquiangular">
     <property name="geometry">
      <rect>
-      <x>3</x>
+      <x>23</x>
       <y>89</y>
       <width>141</width>
       <height>20</height>
@@ -733,7 +733,7 @@
    <widget class="Line" name="line_6">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>310</x>
       <y>30</y>
       <width>21</width>
       <height>221</height>
@@ -746,7 +746,7 @@
    <widget class="QPushButton" name="ChangeLocatorStateRightTriangle">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>350</x>
       <y>220</y>
       <width>211</width>
       <height>31</height>
@@ -762,7 +762,7 @@
    <widget class="QSlider" name="ChangeIndicatorFocusRightTriangle">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>490</x>
       <y>150</y>
       <width>131</width>
       <height>20</height>
@@ -787,7 +787,7 @@
    <widget class="QLabel" name="LabelRangeMarksRightTriangle">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>350</x>
       <y>32</y>
       <width>131</width>
       <height>16</height>
@@ -800,7 +800,7 @@
    <widget class="QSlider" name="ChangeTrashIntensityRightTriangle">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>490</x>
       <y>91</y>
       <width>131</width>
       <height>20</height>
@@ -825,9 +825,9 @@
    <widget class="QComboBox" name="SelectScaleRightTriangle">
     <property name="geometry">
      <rect>
-      <x>447</x>
+      <x>487</x>
       <y>60</y>
-      <width>131</width>
+      <width>134</width>
       <height>23</height>
      </rect>
     </property>
@@ -838,7 +838,7 @@
    <widget class="QLabel" name="LabelBrightnessRightTriangle">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>370</x>
       <y>118</y>
       <width>111</width>
       <height>20</height>
@@ -854,7 +854,7 @@
    <widget class="QPushButton" name="ChangeViewStateAllRightTriangle">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>350</x>
       <y>180</y>
       <width>211</width>
       <height>31</height>
@@ -870,7 +870,7 @@
    <widget class="QSlider" name="ChangeIndicatorBrightnessRightTriangle">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>490</x>
       <y>120</y>
       <width>131</width>
       <height>20</height>
@@ -895,7 +895,7 @@
    <widget class="QLabel" name="LabelScaleRightTriangle">
     <property name="geometry">
      <rect>
-      <x>379</x>
+      <x>419</x>
       <y>60</y>
       <width>61</width>
       <height>20</height>
@@ -911,9 +911,9 @@
    <widget class="QComboBox" name="SelectRangeMarksRightTriangle">
     <property name="geometry">
      <rect>
-      <x>446</x>
+      <x>486</x>
       <y>30</y>
-      <width>131</width>
+      <width>134</width>
       <height>23</height>
      </rect>
     </property>
@@ -924,7 +924,7 @@
    <widget class="QLabel" name="LabelTrashIntensityRightTriangle">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>89</y>
       <width>141</width>
       <height>20</height>
@@ -937,7 +937,7 @@
    <widget class="QLabel" name="LabelFocusRightTriangle">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>430</x>
       <y>148</y>
       <width>51</width>
       <height>20</height>
@@ -954,9 +954,9 @@
   <widget class="QPushButton" name="ButtonTargetsSettings">
    <property name="geometry">
     <rect>
-     <x>1210</x>
+     <x>1250</x>
      <y>489</y>
-     <width>131</width>
+     <width>91</width>
      <height>23</height>
     </rect>
    </property>
@@ -970,7 +970,7 @@
   <widget class="QLabel" name="LabelTargetsSettings">
    <property name="geometry">
     <rect>
-     <x>1083</x>
+     <x>1120</x>
      <y>490</y>
      <width>121</width>
      <height>20</height>
@@ -986,9 +986,9 @@
   <widget class="QPushButton" name="ChangeTargetsState">
    <property name="geometry">
     <rect>
-     <x>1090</x>
-     <y>530</y>
-     <width>251</width>
+     <x>1130</x>
+     <y>526</y>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>

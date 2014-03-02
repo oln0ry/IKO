@@ -34,7 +34,7 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
     //Ползунки
     ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
     ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
-    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeDisplayLightning->value());
+    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
     ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
     ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
 

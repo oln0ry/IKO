@@ -1,7 +1,6 @@
-#include"equiangulartrianglelocator.h"
-
 #ifndef RIGHTTRIANGLELOCATOR_H
 #define RIGHTTRIANGLELOCATOR_H
+#include"equiangulartrianglelocator.h"
 
 class RightTriangleLocator : public EquiangularTriangleLocator
 {
