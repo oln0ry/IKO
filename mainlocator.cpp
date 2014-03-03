@@ -325,7 +325,7 @@ void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u
         if(alpha>.0f)
         {
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-            alpha*=settings["system"]["brightness"].toDouble()-it->r+settings["system"]["varu"].toDouble();
+            alpha*=settings["system"]["brightness"].toDouble()+it->r-(1-settings["system"]["varu"].toDouble());
             glBegin(GL_POINTS);
             glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
             glVertex2f(it->x,it->y);

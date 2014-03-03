@@ -325,11 +325,6 @@
          </property>
         </widget>
        </widget>
-       <zorder>TargetExtremumFirst_1</zorder>
-       <zorder>TargetExtremumSecond_1</zorder>
-       <zorder>TargetExtremumThird</zorder>
-       <zorder>TargetExtremumFourth</zorder>
-       <zorder>TargetGoHome150_1</zorder>
       </widget>
       <widget class="QGroupBox" name="TargetStart_1">
        <property name="geometry">

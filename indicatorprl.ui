@@ -255,11 +255,8 @@
        <enum>Qt::Vertical</enum>
       </property>
       <widget class="QWidget" name="">
-       <layout class="QFormLayout" name="formLayout_3">
-        <property name="labelAlignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
          <widget class="QLabel" name="LabelScaleEquiangular">
           <property name="text">
            <string>Масштаб:</string>
@@ -269,7 +266,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item>
          <widget class="QComboBox" name="SelectScaleEquiangular">
           <property name="cursor">
            <cursorShape>ArrowCursor</cursorShape>
