@@ -16,6 +16,8 @@ public:
     explicit TargetsSettings(QWidget *parent = 0);
     ~TargetsSettings();
     quint8 Count();
+    Targets *Targs;
+    static Targets* T;
 
     private slots:
         void on_SwitchTargetNext_clicked();
@@ -28,8 +30,8 @@ public:
 
     private:
         Ui::TargetsSettings *ui;
-        quint8 targets_count;
-        Targets *Targs;
+        static quint8 targets_count;
+        void ApplyTargets(Targets*);
 };
 
 #endif // TARGETSSETTINGS_H

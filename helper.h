@@ -28,5 +28,4 @@ struct Targets
     qreal speed;
     quint8 landing;
 };
-
 #endif // HELPER_H

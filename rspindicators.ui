@@ -57,8 +57,6 @@
          <height>300</height>
         </size>
        </property>
-       <zorder>line_3</zorder>
-       <zorder>line_3</zorder>
       </widget>
      </item>
     </layout>
@@ -291,7 +289,7 @@
            <number>1</number>
           </property>
           <property name="value">
-           <number>100</number>
+           <number>0</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -451,36 +449,8 @@
        </layout>
       </item>
      </layout>
-     <zorder>LabelRangeMarks</zorder>
-     <zorder>SelectRangeMarks</zorder>
-     <zorder>SelectAzimuthMarks</zorder>
-     <zorder>LabelAzimuthMarks</zorder>
-     <zorder>SelectScale</zorder>
-     <zorder>LabelScale</zorder>
-     <zorder>LabelBrightness</zorder>
-     <zorder>LabelDisplayLightning</zorder>
-     <zorder>ChangeDisplayLightning</zorder>
-     <zorder>ChangeIndicatorVARU</zorder>
-     <zorder>LabelFocus</zorder>
-     <zorder>LabelVARU</zorder>
-     <zorder>ChangeIndicatorFocus</zorder>
-     <zorder>ChangeIndicatorBrightness</zorder>
-     <zorder>ChangeLocatorState</zorder>
-     <zorder>ChangeViewStateAll</zorder>
-     <zorder>CheckActiveNoiseShow</zorder>
-     <zorder>CheckActiveAnswerShow</zorder>
      <zorder>line_5</zorder>
-     <zorder>CheckActiveInSyncShow</zorder>
-     <zorder>FirstIndicator</zorder>
-     <zorder>SecondIndicator</zorder>
      <zorder></zorder>
-     <zorder>LabelActiveNoiseTrashAzimuth</zorder>
-     <zorder>InputActiveNoiseTrashAzimuth</zorder>
-     <zorder>SelectActiveNoiseTrashIntensity</zorder>
-     <zorder>InputActiveAnswerTrashAzimuth</zorder>
-     <zorder>LabelActiveAnswerTrashAzimuth</zorder>
-     <zorder>LabelActiveAnswerTrashRange</zorder>
-     <zorder>InputActiveAnswerTrashAzimuth_2</zorder>
      <zorder>horizontalSpacer</zorder>
      <zorder></zorder>
     </widget>
@@ -894,35 +864,6 @@
        </layout>
       </item>
      </layout>
-     <zorder>ChangeTrashIntensityEquiangular</zorder>
-     <zorder>ChangeIndicatorFocusEquiangular</zorder>
-     <zorder>LabelBrightnessEquiangular</zorder>
-     <zorder>SelectScaleEquiangular</zorder>
-     <zorder>LabelFocusEquiangular</zorder>
-     <zorder>ChangeViewStateAllEquiangular</zorder>
-     <zorder>ChangeIndicatorBrightnessEquiangular</zorder>
-     <zorder>SelectRangeMarksEquiangular</zorder>
-     <zorder>LabelRangeMarksEquiangular</zorder>
-     <zorder>ChangeLocatorStateEquiangular</zorder>
-     <zorder>LabelScaleEquiangular</zorder>
-     <zorder>LabelTrashIntensityEquiangular</zorder>
-     <zorder>line_6</zorder>
-     <zorder>ChangeLocatorStateRightTriangle</zorder>
-     <zorder>ChangeIndicatorFocusRightTriangle</zorder>
-     <zorder>LabelRangeMarksRightTriangle</zorder>
-     <zorder>ChangeTrashIntensityRightTriangle</zorder>
-     <zorder>SelectScaleRightTriangle</zorder>
-     <zorder>LabelBrightnessRightTriangle</zorder>
-     <zorder>ChangeViewStateAllRightTriangle</zorder>
-     <zorder>ChangeIndicatorBrightnessRightTriangle</zorder>
-     <zorder>LabelScaleRightTriangle</zorder>
-     <zorder>SelectRangeMarksRightTriangle</zorder>
-     <zorder>LabelTrashIntensityRightTriangle</zorder>
-     <zorder>LabelFocusRightTriangle</zorder>
-     <zorder>FirstIndicator</zorder>
-     <zorder>ChangeLocatorStateEquiangular</zorder>
-     <zorder>horizontalSpacer_2</zorder>
-     <zorder>horizontalSpacer_3</zorder>
     </widget>
    </item>
    <item row="4" column="6">

@@ -3,6 +3,7 @@
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
     clockwise=true; //По часовой стрелке
+    not_clean=false;
     Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
 
@@ -70,7 +71,7 @@ void MainLocator::paintGL()
     LocatorArea();
     DrawStation();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),settings["system"]["brightness"].toFloat());//перерисовка линии
-    glRotatef(90.0f, 0.0, 0.0, 1.0);
+    glRotatef(90.0f,.0f,.0f,1.0);
     glBegin(GL_LINES);
         glVertex2d(static_cast<GLdouble>(.0f),static_cast<GLdouble>(.0f));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
@@ -325,7 +326,7 @@ void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u
         if(alpha>.0f)
         {
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-            alpha*=settings["system"]["brightness"].toDouble()+it->r-(1-settings["system"]["varu"].toDouble());
+            alpha*=settings["system"]["brightness"].toDouble()+it->r-settings["system"]["varu"].toDouble();
             glBegin(GL_POINTS);
             glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
             glVertex2f(it->x,it->y);
@@ -525,7 +526,7 @@ void MainLocator::LocatorArea() const
  */
 void MainLocator::DrawStation() const
 {
-    glRotatef(30.0f, 0.0, 0.0, 1.0);
+    glRotatef(30.0f,.0f,.0f,1.0f);
     glLineWidth(2.0f);
     glColor3f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262));
     qreal
@@ -547,15 +548,24 @@ void MainLocator::DrawStation() const
         glVertex2d(rx,ry);
     glEnd();
     glTranslatef(-rx,.0f,.0f);
-    glRotatef(-30.0f, 0.0, 0.0, 1.0);
+    glRotatef(-30.0f,.0f,.0f,1.0);
 }
 
 void MainLocator::ContinueSearch()
 {
     updateGL();
     if(ray_position==ray.end()-1u)
+    {
+        if(!not_clean)
+            not_clean=true;
         ray_position=ray.begin();
+    }
     ray_position++;
+}
+
+void MainLocator::GenerationTargetPaths()
+{
+    
 }
 
 /*

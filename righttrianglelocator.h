@@ -21,6 +21,8 @@ class RightTriangleLocator : public EquiangularTriangleLocator
         virtual void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
 
     signals:
+    private slots:
+        virtual void ContinueSearch();
 };
 
 #endif // RIGHTTRIANGLELOCATOR_H

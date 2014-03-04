@@ -3,6 +3,7 @@
 RightTriangleLocator::RightTriangleLocator(QWidget *parent):EquiangularTriangleLocator(parent)
 {
     clockwise=true; //По часовой стрелке
+    not_clean=false;
     //Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
     //Переведём все используемые градусы в радианы
@@ -107,6 +108,20 @@ void RightTriangleLocator::DrawStation() const
     glEnd();
 }
 
+void RightTriangleLocator::ContinueSearch()
+{
+    updateGL();
+    if(ray_position==ray.end()-1u)
+    {
+        if(!not_clean)
+            not_clean=true;
+        clockwise=!clockwise; //Для обращения в другую сторону!
+        GenerationRay();
+        ray_position=ray.begin();
+    }
+    ray_position++;
+}
+
 qreal RightTriangleLocator::CalcAlpha(qreal angle) const
 {
     qreal alpha;
@@ -115,8 +130,19 @@ qreal RightTriangleLocator::CalcAlpha(qreal angle) const
     else
     {
         alpha=(clockwise ? -1 : 1)*((*ray_position)->angle-angle)-.01;
-        if(not_clean && alpha<.0f)
-            alpha+=2u*M_PI;
+        if(!not_clean)
+            return alpha;
+        if(clockwise && (*ray_position)->angle-angle>0)
+        {
+            alpha+=GetRadianValue(TRIANGLE_ANGLE);
+            alpha=1-alpha;
+        }
+        if(!clockwise && angle-(*ray_position)->angle>0)
+        {
+            alpha+=GetRadianValue(TRIANGLE_ANGLE);
+            alpha=1-alpha;
+        }
+        //qDebug()<<(*ray_position)->angle<<"\t"<<angle;
     }
     return alpha;
 }

@@ -33,7 +33,7 @@ class EquiangularTriangleLocator : public MainLocator
     signals:
 
     private slots:
-        void ContinueSearch();
+        virtual void ContinueSearch();
 };
 
 #endif // EQUIANGULARTRIANGLELOCATOR_H

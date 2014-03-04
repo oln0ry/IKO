@@ -3,6 +3,7 @@
 EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLocator(parent)
 {
     clockwise=true; //По часовой стрелке
+    not_clean=true;
     //Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
     //Переведём все используемые градусы в радианы
@@ -20,7 +21,6 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     circle.clear();
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
-    GenerationRange();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
     ChangeFPS(0);
 }
@@ -141,7 +141,7 @@ qreal EquiangularTriangleLocator::CalcAlpha(qreal angle) const
     {
         alpha=(clockwise ? 1 : -1)*((*ray_position)->angle-angle)-.01;
         if(not_clean && alpha<.0f)
-            alpha+=2u*M_PI;
+            alpha+=2*M_PI;
     }
     return alpha;
 }
