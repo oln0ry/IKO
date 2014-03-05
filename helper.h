@@ -20,12 +20,21 @@ struct LineEntity
     Points *Coordinates;
 };
 
-
 struct Targets
 {
     Daddy Coordinates[5];
-    //Points Coordinates[5];
     qreal speed;
     quint8 landing;
 };
+
+class Helper
+{
+    public:
+        template<typename T>static T CalcScaleValue(const T value,const unsigned int scale);
+};
+
+template<typename T>T Helper::CalcScaleValue(const T value,const unsigned int scale)
+{
+    return value/scale;
+}
 #endif // HELPER_H

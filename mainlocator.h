@@ -43,7 +43,7 @@ class MainLocator : public QGLWidget
         template<typename OptionType>void SetSettings(const QString group,const QString name,OptionType option);
         template<typename OptionType>void SetSettings(const QString name,OptionType option);
         template<typename T>T CalcScaleValue(const T value)const;
-
+        template<typename T>T CalcScaleValue(const T value,const unsigned int scale) const;
         void GenerationRay();
         void GenerationRay(qint16 angle);
         void GenerationTrash();
@@ -82,8 +82,8 @@ class MainLocator : public QGLWidget
         void DrawActiveNoiseTrash() const;
         void DrawActiveAnswerTrash();
         void DrawActiveInSyncTrash();
-        void DrawTargets();
         void DrawMeteo() const;
+        void DrawTargets() const;
         qreal GetRandomCoord(quint8,const bool rsign=false) const;
         qint8 GetRandomSign() const;
         quint16 radians_size;
@@ -185,6 +185,6 @@ template<typename OptionType>void MainLocator::SetSettings(const QString name,Op
 
 template<typename T>T MainLocator::CalcScaleValue(const T value) const
 {
-    return value/settings["system"]["scale"].toUInt();
+    return Helper::CalcScaleValue(value,settings["system"]["scale"].toUInt());
 }
 #endif // MAINLOCATOR_H

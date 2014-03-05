@@ -4,7 +4,7 @@
 RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndicators)
 {
     ui->setupUi(this);
-    QStringList azimuth_marks,range_marks,scale,range_marks_triangles,scale_triangles,work_variants;
+    QStringList azimuth_marks,range_marks,scale,range_marks_triangles,scale_triangles,work_variants,intensity;
     azimuth_marks<<"Не отображать"<<"30°"<<"10°";
     ui->SelectAzimuthMarks->addItems(azimuth_marks);
     ui->SelectAzimuthMarks->setCurrentIndex(1);
@@ -31,6 +31,10 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
 
     //Настроим индикатор кругового обзора
 
+    intensity<<"Слабая"<<"Средняя"<<"Сильная";
+    ui->SelectActiveNoiseTrashIntensity->addItems(intensity);
+    ui->SelectActiveNoiseTrashIntensity->setCurrentIndex(1);
+
     //Ползунки
     ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
     ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
@@ -46,12 +50,16 @@ RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndi
     //Настройки глиссадного индикатора
     ui->ChangeTrashIntensityEquiangular->valueChanged(ui->ChangeTrashIntensityEquiangular->value());
     ui->ChangeIndicatorBrightnessEquiangular->valueChanged(ui->ChangeIndicatorBrightnessEquiangular->value());
+    ui->ChangeLightningEquiangular->valueChanged(ui->ChangeLightningEquiangular->value());
     ui->ChangeIndicatorFocusEquiangular->valueChanged(ui->ChangeIndicatorFocusEquiangular->value());
+    ui->ChangeIndicatorVARUEquiangular->valueChanged(ui->ChangeIndicatorVARUEquiangular->value());
 
     //Настройки курсового индикатора
     ui->ChangeTrashIntensityRightTriangle->valueChanged(ui->ChangeTrashIntensityRightTriangle->value());
     ui->ChangeIndicatorBrightnessRightTriangle->valueChanged(ui->ChangeIndicatorBrightnessRightTriangle->value());
+    ui->ChangeLightningRightTriangle->valueChanged(ui->ChangeLightningRightTriangle->value());
     ui->ChangeIndicatorFocusRightTriangle->valueChanged(ui->ChangeIndicatorFocusRightTriangle->value());
+    ui->ChangeIndicatorVARURightTriangle->valueChanged(ui->ChangeIndicatorVARURightTriangle->value());
 
     //Запуск индикаторов
     ui->FirstIndicator->ChangeFPS(1000/24);
@@ -313,8 +321,6 @@ void RSPIndicators::on_ChangeIndicatorVARU_valueChanged(int value)
     if(value<0)
         return;
     ui->FirstIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
-    ui->SecondIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
-    ui->ThirdIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
 }
 
 void RSPIndicators::on_ChangeIndicatorFocusEquiangular_valueChanged(int value)
@@ -367,8 +373,6 @@ void RSPIndicators::on_ChangeDisplayLightning_valueChanged(int value)
     if(value<0)
         return;
     ui->FirstIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
-    ui->SecondIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
-    ui->ThirdIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
 }
 
 void RSPIndicators::on_ChangeTrashIntensityEquiangular_valueChanged(int value)
@@ -393,4 +397,37 @@ void RSPIndicators::on_ChangeTrashIntensity_valueChanged(int value)
         return;
     ui->FirstIndicator->SetSettings("trash","show",value>0);
     ui->FirstIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+}
+
+void RSPIndicators::on_ChangeLightningEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->SecondIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeLightningRightTriangle_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->ThirdIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeIndicatorVARUEquiangular_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->SecondIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeIndicatorVARURightTriangle_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->ThirdIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_SelectActiveNoiseTrashIntensity_currentIndexChanged(int index)
+{
+
 }

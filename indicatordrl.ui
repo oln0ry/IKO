@@ -95,6 +95,19 @@
                 </property>
                </widget>
               </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="InputFrameFrequency">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>120</number>
+                </property>
+                <property name="value">
+                 <number>24</number>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="LabelAzimuthMarks">
                 <property name="text">
@@ -296,19 +309,6 @@
                 </property>
                 <property name="text">
                  <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QSpinBox" name="InputFrameFrequency">
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>120</number>
-                </property>
-                <property name="value">
-                 <number>24</number>
                 </property>
                </widget>
               </item>

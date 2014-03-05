@@ -2,7 +2,9 @@
 #include"ui_targetssettings.h"
 #include<QDebug>
 Targets* TargetsSettings::T=0;
+QVector<QVector<Points> > * TargetsSettings::targets=0;
 quint8 TargetsSettings::targets_count=0;
+quint16 TargetsSettings::time=12;
 TargetsSettings::TargetsSettings(QWidget *parent) : QWidget(parent),ui(new Ui::TargetsSettings)
 {
     ui->setupUi(this);
@@ -55,7 +57,11 @@ void TargetsSettings::on_SwitchTargetPrev_clicked()
 
 void TargetsSettings::on_ApplyTargets_clicked()
 {
+    qreal t=time/3600;
     Targs=new Targets[Count()];
+    targets=new QVector<QVector<Points> >[Count()];
+    Points path;
+    targets->clear();
     quint8 old=ui->Targets->currentIndex();
     int landing;
     QGroupBox* Gb,*Gbi;
@@ -94,6 +100,19 @@ void TargetsSettings::on_ApplyTargets_clicked()
         Gbi=Gb->findChild<QGroupBox*>(QString("%1%2").arg("TargetExtremumFourth_").arg(widget+1u));
         Targs[widget].Coordinates[4].angle=Gbi->findChild<QSpinBox*>(QString("%1%2").arg("TargetAzimuthExtremumFourth_").arg(widget+1u))->value();
         Targs[widget].Coordinates[4].x=Gbi->findChild<QDoubleSpinBox*>(QString("%1%2").arg("TargetRangeExtremumFourth_").arg(widget+1u))->value();
+
+        t*=Targs[widget].speed;
+        quint16 angle=Targs[widget].Coordinates[0].angle;
+
+        for(qreal x=Targs[widget].Coordinates[0].x;x<Targs[widget].Coordinates[1].x;x+=t)
+        {
+            path.angle=angle;
+            //path.x=x;
+            //path.y=x/Helper::CalcScaleValue();
+            targets[widget][45].append(path);
+            if(angle<Targs[widget].Coordinates[1].angle)
+                angle++;
+        }
     }
     ui->Targets->setCurrentIndex(old);
     TargetsSettings::T=Targs;

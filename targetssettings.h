@@ -18,6 +18,8 @@ public:
     quint8 Count();
     Targets *Targs;
     static Targets* T;
+    static quint16 time;
+    static QVector<QVector<Points> >* targets;
 
     private slots:
         void on_SwitchTargetNext_clicked();

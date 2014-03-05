@@ -70,6 +70,16 @@ class RSPIndicators:public QWidget
 
     void on_ChangeTrashIntensity_valueChanged(int value);
 
+    void on_ChangeLightningEquiangular_valueChanged(int value);
+
+    void on_ChangeLightningRightTriangle_valueChanged(int value);
+
+    void on_ChangeIndicatorVARUEquiangular_valueChanged(int value);
+
+    void on_ChangeIndicatorVARURightTriangle_valueChanged(int value);
+
+    void on_SelectActiveNoiseTrashIntensity_currentIndexChanged(int index);
+
 private:
     QPointer<TargetsSettings>tsettings;
     Ui::RSPIndicators *ui;

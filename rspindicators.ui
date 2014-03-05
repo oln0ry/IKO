@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1144</width>
-    <height>754</height>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -557,7 +557,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="LabelFocusEquiangular">
             <property name="text">
              <string>Фокус:</string>
@@ -567,7 +567,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QSlider" name="ChangeIndicatorFocusEquiangular">
             <property name="cursor">
              <cursorShape>ArrowCursor</cursorShape>
@@ -586,7 +586,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="LabelVARUEquiangular">
             <property name="text">
              <string>ВАРУ:</string>
@@ -596,7 +596,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QSlider" name="ChangeIndicatorVARUEquiangular">
             <property name="cursor">
              <cursorShape>ArrowCursor</cursorShape>
@@ -608,10 +608,39 @@
              <number>1</number>
             </property>
             <property name="value">
-             <number>100</number>
+             <number>0</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSlider" name="ChangeLightningEquiangular">
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="value">
+             <number>40</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="LabelLightningEquiangular">
+            <property name="text">
+             <string>Подсветка:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -636,6 +665,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QPushButton" name="ChangeViewStateAllEquiangular">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="cursor">
                <cursorShape>ArrowCursor</cursorShape>
               </property>
@@ -646,6 +681,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="ChangeLocatorStateEquiangular">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="cursor">
                <cursorShape>ArrowCursor</cursorShape>
               </property>
@@ -760,7 +801,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="LabelFocusRightTriangle">
             <property name="text">
              <string>Фокус:</string>
@@ -770,7 +811,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QSlider" name="ChangeIndicatorFocusRightTriangle">
             <property name="cursor">
              <cursorShape>ArrowCursor</cursorShape>
@@ -789,7 +830,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="LabelVARURightTriangle">
             <property name="text">
              <string>ВАРУ:</string>
@@ -799,7 +840,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QSlider" name="ChangeIndicatorVARURightTriangle">
             <property name="cursor">
              <cursorShape>ArrowCursor</cursorShape>
@@ -811,7 +852,36 @@
              <number>1</number>
             </property>
             <property name="value">
+             <number>0</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="LabelLightningRightTriangle">
+            <property name="text">
+             <string>Подсветка:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSlider" name="ChangeLightningRightTriangle">
+            <property name="cursor">
+             <cursorShape>ArrowCursor</cursorShape>
+            </property>
+            <property name="maximum">
              <number>100</number>
+            </property>
+            <property name="singleStep">
+             <number>1</number>
+            </property>
+            <property name="value">
+             <number>25</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -839,6 +909,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
              <widget class="QPushButton" name="ChangeViewStateAllRightTriangle">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="cursor">
                <cursorShape>ArrowCursor</cursorShape>
               </property>
@@ -849,6 +925,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="ChangeLocatorStateRightTriangle">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="cursor">
                <cursorShape>ArrowCursor</cursorShape>
               </property>

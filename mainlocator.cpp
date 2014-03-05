@@ -1,4 +1,5 @@
 #include"mainlocator.h"
+#include"targetssettings.h"
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
@@ -88,6 +89,9 @@ void MainLocator::paintGL()
         DrawMeteo();
     if(settings["active_noise_trash"]["show"].toBool() && !Cache.active_noise_trash.isEmpty())
         DrawActiveNoiseTrash();
+    //if(!TargetsSettings::T[0].Path.isEmpty())
+    //    DrawTargets();
+
     /*
     if(show_active_atrash && !active_answer_trash.isEmpty())
         DrawActiveAnswerTrash();
@@ -671,37 +675,9 @@ void MainLocator::GenerationTargetPaths()
 }
 */
 
-void MainLocator::DrawTargets()
+void MainLocator::DrawTargets() const
 {
-    /*
-    qreal alpha;
-    //for(QHash<quint16,QVector<QHash<QString,qreal> > >::const_iterator it=targets.begin();it!=targets.end();it++)
-    //{
-        QVector<QHash<QString,qreal> >::const_iterator ct=targets[targets_pos].begin();//Фикс для возможности установки ширины
-        glLineWidth((*ct)["width"]);
-        glBegin(GL_LINE_STRIP);
-        for(;ct<targets[targets_pos].end();ct++)
-        {
-            if(show)
-                alpha=1.0f;
-            else
-            {
-                alpha=(**line_position)["angle"]-(*ct)["angle"]-0.01f;
-                if(not_clean && alpha<0)
-                    alpha+=2*M_PI;
-            }
-
-            if(alpha>0)
-            {
-                alpha=alpha<options["interval"] ? 1.0f : options["interval"]/alpha;
-                alpha*=options["brightness"]-(*ct)["r"]+options["varu"];
-                glColor4f(static_cast<GLfloat>(0.925f),static_cast<GLfloat>(0.714f),static_cast<GLfloat>(0.262f),alpha);
-                glVertex2d((*ct)["x"],(*ct)["y"]);
-            }
-        }
-        glEnd();
-    //}
-    */
+    qDebug()<<"targets are init";
 }
 
 void MainLocator::ChangeTargetsState()
