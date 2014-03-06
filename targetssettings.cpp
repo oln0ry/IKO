@@ -2,7 +2,7 @@
 #include"ui_targetssettings.h"
 #include<QDebug>
 Targets* TargetsSettings::T=0;
-QVector<QVector<Points> > * TargetsSettings::targets=0;
+QHash<quint16,QHash<quint16,QVector<Points> > >TargetsSettings::targets;
 quint8 TargetsSettings::targets_count=0;
 quint16 TargetsSettings::time=12;
 TargetsSettings::TargetsSettings(QWidget *parent) : QWidget(parent),ui(new Ui::TargetsSettings)
@@ -57,11 +57,10 @@ void TargetsSettings::on_SwitchTargetPrev_clicked()
 
 void TargetsSettings::on_ApplyTargets_clicked()
 {
-    qreal t=time/3600;
+    qreal t=static_cast<qreal>(time)/3600;
     Targs=new Targets[Count()];
-    targets=new QVector<QVector<Points> >[Count()];
     Points path;
-    targets->clear();
+    targets.clear();
     quint8 old=ui->Targets->currentIndex();
     int landing;
     QGroupBox* Gb,*Gbi;
@@ -102,21 +101,51 @@ void TargetsSettings::on_ApplyTargets_clicked()
         Targs[widget].Coordinates[4].x=Gbi->findChild<QDoubleSpinBox*>(QString("%1%2").arg("TargetRangeExtremumFourth_").arg(widget+1u))->value();
 
         t*=Targs[widget].speed;
+        if(t<=0)
+            continue;
         quint16 angle=Targs[widget].Coordinates[0].angle;
+        if(Targs[widget].Coordinates[0].x<Targs[widget].Coordinates[1].x)
+            for(qreal x=Targs[widget].Coordinates[0].x;x<Targs[widget].Coordinates[1].x;x+=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,45);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][150].append(path);
 
-        for(qreal x=Targs[widget].Coordinates[0].x;x<Targs[widget].Coordinates[1].x;x+=t)
-        {
-            path.angle=angle;
-            //path.x=x;
-            //path.y=x/Helper::CalcScaleValue();
-            targets[widget][45].append(path);
-            if(angle<Targs[widget].Coordinates[1].angle)
-                angle++;
-        }
+                if(Targs[widget].Coordinates[0].angle<Targs[widget].Coordinates[1].angle && angle<Targs[widget].Coordinates[1].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[0].angle>Targs[widget].Coordinates[1].angle && angle>Targs[widget].Coordinates[1].angle)
+                    angle--;
+            }
+        else
+            for(qreal x=Targs[widget].Coordinates[0].x;x>=Targs[widget].Coordinates[1].x;x-=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,45);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[0].angle<Targs[widget].Coordinates[1].angle && angle<Targs[widget].Coordinates[1].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[0].angle>Targs[widget].Coordinates[1].angle && angle>Targs[widget].Coordinates[1].angle)
+                    angle--;
+             }
     }
     ui->Targets->setCurrentIndex(old);
     TargetsSettings::T=Targs;
-//close();
+    close();
 }
 
 void TargetsSettings::on_TargetsGoHome_stateChanged(int arg)

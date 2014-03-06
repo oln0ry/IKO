@@ -19,7 +19,7 @@ public:
     Targets *Targs;
     static Targets* T;
     static quint16 time;
-    static QVector<QVector<Points> >* targets;
+    static QHash<quint16,QHash<quint16,QVector<Points> > >targets;
 
     private slots:
         void on_SwitchTargetNext_clicked();

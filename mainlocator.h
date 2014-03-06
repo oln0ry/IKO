@@ -5,10 +5,6 @@
 #define GL_MULTISAMPLE  0x809D
 #endif
 
-#ifndef GetRadianValue
-#define GetRadianValue(radian) M_PI*radian/180
-#endif
-
 #ifndef ANGLE_RANGE
 #define ANGLE_RANGE 361
 #endif
@@ -20,7 +16,6 @@
 #include<QGLWidget>
 #include<QColorDialog>
 #include<QVariant>
-#include<qmath.h>
 #include<QTime>
 #include<QBasicTimer>
 #include<QTimerEvent>

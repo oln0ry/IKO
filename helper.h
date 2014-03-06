@@ -1,6 +1,12 @@
 #ifndef HELPER_H
 #define HELPER_H
 #include<QWidget>
+#include<qmath.h>
+
+#ifndef GetRadianValue
+#define GetRadianValue(radian) M_PI*radian/180
+#endif
+
 struct Daddy
 {
     qreal x,angle;

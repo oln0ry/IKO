@@ -89,8 +89,8 @@ void MainLocator::paintGL()
         DrawMeteo();
     if(settings["active_noise_trash"]["show"].toBool() && !Cache.active_noise_trash.isEmpty())
         DrawActiveNoiseTrash();
-    //if(!TargetsSettings::T[0].Path.isEmpty())
-    //    DrawTargets();
+    if(!TargetsSettings::targets.isEmpty())
+        DrawTargets();
 
     /*
     if(show_active_atrash && !active_answer_trash.isEmpty())
@@ -677,7 +677,11 @@ void MainLocator::GenerationTargetPaths()
 
 void MainLocator::DrawTargets() const
 {
-    qDebug()<<"targets are init";
+    //static QHash<quint16,QHash<quint16,QVector<Points> > >targets;
+    for(QHash<quint16,QHash<quint16,QVector<Points> > >::const_iterator it=TargetsSettings::targets.begin();it<TargetsSettings::targets.end();it++)
+    {
+
+    }
 }
 
 void MainLocator::ChangeTargetsState()
