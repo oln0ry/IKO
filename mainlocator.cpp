@@ -677,10 +677,31 @@ void MainLocator::GenerationTargetPaths()
 
 void MainLocator::DrawTargets() const
 {
-    //static QHash<quint16,QHash<quint16,QVector<Points> > >targets;
-    for(QHash<quint16,QHash<quint16,QVector<Points> > >::const_iterator it=TargetsSettings::targets.begin();it<TargetsSettings::targets.end();it++)
+    /*
+    struct Targets
     {
-
+        Daddy Coordinates[5];
+        qreal speed;
+        quint8 landing;
+    };
+    */
+    qreal alpha;
+    Points p;
+    for(QHash<quint16,QHash<quint16,QVector<Points> > >::iterator it=TargetsSettings::targets.begin();it!=TargetsSettings::targets.end();it++)
+    {
+        p=(*it)[settings["system"]["scale"].toUInt()].front();
+        (*it)[settings["system"]["scale"].toUInt()].pop_front();
+        alpha=CalcAlpha(p.angle);
+        if(alpha>0)
+        {
+            glLineWidth(5*settings["system"]["focus"].toDouble());
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            glBegin(GL_LINES);
+            glColor4f(static_cast<GLfloat>(.925f),static_cast<GLfloat>(.714f),static_cast<GLfloat>(.262f),alpha);
+            glVertex2f(p.x-0.03,p.y-0.01);
+            glVertex2f(p.x+0.03,p.y+0.01);
+            glEnd();
+        }
     }
 }
 

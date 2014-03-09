@@ -4,7 +4,7 @@
 Targets* TargetsSettings::T=0;
 QHash<quint16,QHash<quint16,QVector<Points> > >TargetsSettings::targets;
 quint8 TargetsSettings::targets_count=0;
-quint16 TargetsSettings::time=12;
+quint16 TargetsSettings::time=3600;
 TargetsSettings::TargetsSettings(QWidget *parent) : QWidget(parent),ui(new Ui::TargetsSettings)
 {
     ui->setupUi(this);
@@ -108,9 +108,18 @@ void TargetsSettings::on_ApplyTargets_clicked()
             for(qreal x=Targs[widget].Coordinates[0].x;x<Targs[widget].Coordinates[1].x;x+=t)
             {
                 path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][30].append(path);
                 path.x=Helper::CalcScaleValue(x,45);
                 path.y=path.x/qFastCos(path.angle);
                 targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][60].append(path);
                 path.x=Helper::CalcScaleValue(x,90);
                 path.y=path.x/qFastCos(path.angle);
                 targets[widget][90].append(path);
@@ -127,9 +136,18 @@ void TargetsSettings::on_ApplyTargets_clicked()
             for(qreal x=Targs[widget].Coordinates[0].x;x>=Targs[widget].Coordinates[1].x;x-=t)
             {
                 path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][30].append(path);
                 path.x=Helper::CalcScaleValue(x,45);
                 path.y=path.x/qFastCos(path.angle);
                 targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                path.y=path.x/qFastCos(path.angle);
+                targets[widget][60].append(path);
                 path.x=Helper::CalcScaleValue(x,90);
                 path.y=path.x/qFastCos(path.angle);
                 targets[widget][90].append(path);

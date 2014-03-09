@@ -22,7 +22,7 @@ EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLoca
     for(Points*i=radians,*end=radians+radians_size;i<end;circle.append(i),i+=3u); //Получаем координаты для отрисовки фона индикатора
     GenerationRay();
     ray_position=ray.begin(); //Устанавливаем стартовую позицию луча
-    ChangeFPS(0);
+    ChangeFPS(0u);
 }
 
 void EquiangularTriangleLocator::initializeGL()

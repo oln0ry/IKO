@@ -78,6 +78,9 @@
                <property name="suffix">
                 <string>°</string>
                </property>
+               <property name="maximum">
+                <number>360</number>
+               </property>
               </widget>
              </item>
              <item row="1" column="0">
@@ -91,6 +94,9 @@
               <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_1">
                <property name="suffix">
                 <string> км.</string>
+               </property>
+               <property name="maximum">
+                <double>150.000000000000000</double>
                </property>
               </widget>
              </item>
@@ -127,6 +133,9 @@
              <property name="suffix">
               <string>°</string>
              </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
             </widget>
             <widget class="QLabel" name="LabelTargetRangeFinish_2">
              <property name="geometry">
@@ -152,6 +161,9 @@
              </property>
              <property name="suffix">
               <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
              </property>
             </widget>
            </widget>
@@ -186,6 +198,9 @@
              <property name="suffix">
               <string>°</string>
              </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
             </widget>
             <widget class="QLabel" name="LabelTargetRangeFinish_3">
              <property name="geometry">
@@ -211,6 +226,9 @@
              </property>
              <property name="suffix">
               <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
              </property>
             </widget>
            </widget>
@@ -245,6 +263,9 @@
              <property name="suffix">
               <string>°</string>
              </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
             </widget>
             <widget class="QLabel" name="LabelTargetRangeFinish_4">
              <property name="geometry">
@@ -270,6 +291,9 @@
              </property>
              <property name="suffix">
               <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
              </property>
             </widget>
            </widget>
@@ -313,6 +337,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_1">
           <property name="geometry">
@@ -338,6 +365,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -394,6 +424,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_1">
@@ -506,6 +539,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_2">
           <property name="geometry">
@@ -531,6 +567,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -583,6 +622,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_5">
            <property name="geometry">
@@ -608,6 +650,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -648,6 +693,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_6">
            <property name="geometry">
@@ -673,6 +721,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -713,6 +764,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_7">
            <property name="geometry">
@@ -738,6 +792,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -778,6 +835,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_8">
            <property name="geometry">
@@ -803,6 +863,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -834,6 +897,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_2">
@@ -945,6 +1011,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_9">
            <property name="geometry">
@@ -970,6 +1039,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1010,6 +1082,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_10">
            <property name="geometry">
@@ -1035,6 +1110,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1075,6 +1153,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_11">
            <property name="geometry">
@@ -1100,6 +1181,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1140,6 +1224,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_12">
            <property name="geometry">
@@ -1165,6 +1252,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1219,6 +1309,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_3">
           <property name="geometry">
@@ -1244,6 +1337,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -1274,6 +1370,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_3">
@@ -1411,6 +1510,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_13">
            <property name="geometry">
@@ -1436,6 +1538,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1476,6 +1581,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_14">
            <property name="geometry">
@@ -1501,6 +1609,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1541,6 +1652,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_15">
            <property name="geometry">
@@ -1566,6 +1680,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1606,6 +1723,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_16">
            <property name="geometry">
@@ -1631,6 +1751,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1672,6 +1795,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_4">
           <property name="geometry">
@@ -1698,6 +1824,9 @@
           <property name="suffix">
            <string> км.</string>
           </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
+          </property>
          </widget>
         </widget>
         <widget class="QDoubleSpinBox" name="TargetSpeed_4">
@@ -1714,6 +1843,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_4">
@@ -1813,6 +1945,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_5">
           <property name="geometry">
@@ -1838,6 +1973,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -1903,6 +2041,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_17">
            <property name="geometry">
@@ -1928,6 +2069,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -1968,6 +2112,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_18">
            <property name="geometry">
@@ -1993,6 +2140,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2033,6 +2183,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_19">
            <property name="geometry">
@@ -2058,6 +2211,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2098,6 +2254,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_20">
            <property name="geometry">
@@ -2123,6 +2282,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2154,6 +2316,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_5">
@@ -2240,6 +2405,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_6">
           <property name="geometry">
@@ -2265,6 +2433,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -2343,6 +2514,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_21">
            <property name="geometry">
@@ -2368,6 +2542,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2408,6 +2585,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_22">
            <property name="geometry">
@@ -2433,6 +2613,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2473,6 +2656,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_23">
            <property name="geometry">
@@ -2498,6 +2684,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2538,6 +2727,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_24">
            <property name="geometry">
@@ -2563,6 +2755,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2594,6 +2789,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_6">
@@ -2718,6 +2916,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_25">
            <property name="geometry">
@@ -2743,6 +2944,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2783,6 +2987,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_26">
            <property name="geometry">
@@ -2808,6 +3015,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2848,6 +3058,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_27">
            <property name="geometry">
@@ -2873,6 +3086,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2913,6 +3129,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_28">
            <property name="geometry">
@@ -2938,6 +3157,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -2992,6 +3214,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_7">
           <property name="geometry">
@@ -3018,6 +3243,9 @@
           <property name="suffix">
            <string> км.</string>
           </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
+          </property>
          </widget>
         </widget>
         <widget class="QDoubleSpinBox" name="TargetSpeed_7">
@@ -3034,6 +3262,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_7">
@@ -3132,6 +3363,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_33">
            <property name="geometry">
@@ -3157,6 +3391,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3197,6 +3434,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_34">
            <property name="geometry">
@@ -3222,6 +3462,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3262,6 +3505,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_35">
            <property name="geometry">
@@ -3287,6 +3533,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3327,6 +3576,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_36">
            <property name="geometry">
@@ -3352,6 +3604,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3393,6 +3648,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_8">
           <property name="geometry">
@@ -3418,6 +3676,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -3474,6 +3735,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_8">
@@ -3572,6 +3836,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_37">
            <property name="geometry">
@@ -3597,6 +3864,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3640,6 +3910,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_38">
            <property name="geometry">
@@ -3665,6 +3938,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3705,6 +3981,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_39">
            <property name="geometry">
@@ -3730,6 +4009,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3770,6 +4052,9 @@
            <property name="suffix">
             <string>°</string>
            </property>
+           <property name="maximum">
+            <number>360</number>
+           </property>
           </widget>
           <widget class="QLabel" name="LabelTargetRangeFinish_40">
            <property name="geometry">
@@ -3795,6 +4080,9 @@
            </property>
            <property name="suffix">
             <string> км.</string>
+           </property>
+           <property name="maximum">
+            <double>150.000000000000000</double>
            </property>
           </widget>
          </widget>
@@ -3836,6 +4124,9 @@
           <property name="suffix">
            <string>°</string>
           </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
          </widget>
          <widget class="QLabel" name="LabelTargetRangeStart_9">
           <property name="geometry">
@@ -3861,6 +4152,9 @@
           </property>
           <property name="suffix">
            <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
           </property>
          </widget>
         </widget>
@@ -3917,6 +4211,9 @@
          </property>
          <property name="suffix">
           <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
          </property>
         </widget>
         <widget class="QLabel" name="LabelSpeedTarget_9">
@@ -3998,7 +4295,7 @@
            <x>10</x>
            <y>140</y>
            <width>418</width>
-           <height>241</height>
+           <height>244</height>
           </rect>
          </property>
          <property name="title">
@@ -4010,40 +4307,64 @@
             <property name="title">
              <string>Первая точка</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_3">
-               <item row="0" column="0">
-                <widget class="QLabel" name="LabelTargetAzimuthFinish_45">
-                 <property name="text">
-                  <string>Азимут:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_10">
-                 <property name="suffix">
-                  <string>°</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="LabelTargetRangeFinish_45">
-                 <property name="text">
-                  <string>Дальность:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_10">
-                 <property name="suffix">
-                  <string> км.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
+            <widget class="QLabel" name="LabelTargetAzimuthFinish_45">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>31</y>
+               <width>50</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Азимут:</string>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="TargetAzimuthExtremumFirst_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>31</y>
+               <width>53</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string>°</string>
+             </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="LabelTargetRangeFinish_45">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>61</y>
+               <width>72</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Дальность:</string>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="TargetRangeExtremumFirst_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>61</y>
+               <width>90</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
+             </property>
+            </widget>
            </widget>
           </item>
           <item row="0" column="1">
@@ -4051,40 +4372,64 @@
             <property name="title">
              <string>Вторая точка</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_3">
-             <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_4">
-               <item row="0" column="0">
-                <widget class="QLabel" name="LabelTargetAzimuthFinish_46">
-                 <property name="text">
-                  <string>Азимут:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_10">
-                 <property name="suffix">
-                  <string>°</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="LabelTargetRangeFinish_46">
-                 <property name="text">
-                  <string>Дальность:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_10">
-                 <property name="suffix">
-                  <string> км.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
+            <widget class="QLabel" name="LabelTargetAzimuthFinish_46">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>31</y>
+               <width>50</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Азимут:</string>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="TargetAzimuthExtremumSecond_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>31</y>
+               <width>53</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string>°</string>
+             </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="LabelTargetRangeFinish_46">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>61</y>
+               <width>72</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Дальность:</string>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="TargetRangeExtremumSecond_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>61</y>
+               <width>90</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
+             </property>
+            </widget>
            </widget>
           </item>
           <item row="1" column="0">
@@ -4092,40 +4437,64 @@
             <property name="title">
              <string>Третья точка</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_5">
-               <item row="0" column="0">
-                <widget class="QLabel" name="LabelTargetAzimuthFinish_47">
-                 <property name="text">
-                  <string>Азимут:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="TargetAzimuthExtremumThird_10">
-                 <property name="suffix">
-                  <string>°</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="LabelTargetRangeFinish_47">
-                 <property name="text">
-                  <string>Дальность:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_10">
-                 <property name="suffix">
-                  <string> км.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
+            <widget class="QLabel" name="LabelTargetAzimuthFinish_47">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>31</y>
+               <width>50</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Азимут:</string>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="TargetAzimuthExtremumThird_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>31</y>
+               <width>53</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string>°</string>
+             </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="LabelTargetRangeFinish_47">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>61</y>
+               <width>72</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Дальность:</string>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="TargetRangeExtremumThird_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>61</y>
+               <width>90</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
+             </property>
+            </widget>
            </widget>
           </item>
           <item row="1" column="1">
@@ -4133,40 +4502,64 @@
             <property name="title">
              <string>Четвёртая точка</string>
             </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <layout class="QFormLayout" name="formLayout_6">
-               <item row="0" column="0">
-                <widget class="QLabel" name="LabelTargetAzimuthFinish_48">
-                 <property name="text">
-                  <string>Азимут:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_10">
-                 <property name="suffix">
-                  <string>°</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="LabelTargetRangeFinish_48">
-                 <property name="text">
-                  <string>Дальность:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_10">
-                 <property name="suffix">
-                  <string> км.</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
+            <widget class="QLabel" name="LabelTargetAzimuthFinish_48">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>31</y>
+               <width>50</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Азимут:</string>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="TargetAzimuthExtremumFourth_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>31</y>
+               <width>53</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string>°</string>
+             </property>
+             <property name="maximum">
+              <number>360</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="LabelTargetRangeFinish_48">
+             <property name="geometry">
+              <rect>
+               <x>13</x>
+               <y>61</y>
+               <width>72</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Дальность:</string>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="TargetRangeExtremumFourth_10">
+             <property name="geometry">
+              <rect>
+               <x>91</x>
+               <y>61</y>
+               <width>90</width>
+               <height>24</height>
+              </rect>
+             </property>
+             <property name="suffix">
+              <string> км.</string>
+             </property>
+             <property name="maximum">
+              <double>150.000000000000000</double>
+             </property>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -4183,104 +4576,141 @@
          <property name="title">
           <string>Начало траектории</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <layout class="QFormLayout" name="formLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="LabelTargetAzimuthStart_10">
-              <property name="text">
-               <string>Азимут:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QSpinBox" name="TargetAzimuthStart_10">
-              <property name="suffix">
-               <string>°</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="LabelTargetRangeStart_10">
-              <property name="text">
-               <string>Дальность:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QDoubleSpinBox" name="TargetRangeStart_10">
-              <property name="suffix">
-               <string> км.</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <widget class="QLabel" name="LabelTargetAzimuthStart_10">
+          <property name="geometry">
+           <rect>
+            <x>13</x>
+            <y>31</y>
+            <width>50</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Азимут:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="TargetAzimuthStart_10">
+          <property name="geometry">
+           <rect>
+            <x>91</x>
+            <y>31</y>
+            <width>97</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="suffix">
+           <string>°</string>
+          </property>
+          <property name="maximum">
+           <number>360</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="LabelTargetRangeStart_10">
+          <property name="geometry">
+           <rect>
+            <x>13</x>
+            <y>57</y>
+            <width>72</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Дальность:</string>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="TargetRangeStart_10">
+          <property name="geometry">
+           <rect>
+            <x>91</x>
+            <y>57</y>
+            <width>97</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="suffix">
+           <string> км.</string>
+          </property>
+          <property name="maximum">
+           <double>150.000000000000000</double>
+          </property>
+         </widget>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QCheckBox" name="TargetGoHome_10">
          <property name="geometry">
           <rect>
-           <x>220</x>
-           <y>50</y>
-           <width>181</width>
-           <height>91</height>
+           <x>221</x>
+           <y>51</y>
+           <width>97</width>
+           <height>21</height>
           </rect>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QCheckBox" name="TargetGoHome_10">
-            <property name="text">
-             <string>На посадку</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QRadioButton" name="TargetGoHome150_10">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>150°</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="TargetGoHome330_10">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>330°</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QFormLayout" name="formLayout_2">
-            <item row="0" column="0">
-             <widget class="QLabel" name="LabelSpeedTarget_10">
-              <property name="text">
-               <string>Скорость:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QDoubleSpinBox" name="TargetSpeed_10">
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-              <property name="suffix">
-               <string> км/ч</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <property name="text">
+          <string>На посадку</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="TargetGoHome150_10">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>222</x>
+           <y>79</y>
+           <width>54</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>150°</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="TargetGoHome330_10">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>282</x>
+           <y>79</y>
+           <width>54</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>330°</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="LabelSpeedTarget_10">
+         <property name="geometry">
+          <rect>
+           <x>222</x>
+           <y>113</y>
+           <width>63</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Скорость:</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="TargetSpeed_10">
+         <property name="geometry">
+          <rect>
+           <x>291</x>
+           <y>113</y>
+           <width>97</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="suffix">
+          <string> км/ч</string>
+         </property>
+         <property name="maximum">
+          <double>1200.000000000000000</double>
+         </property>
         </widget>
        </widget>
       </widget>
