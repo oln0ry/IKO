@@ -1,0 +1,11 @@
+<RCC>
+    <qresource lang="ru" prefix="/buttons">
+        <file alias="knob">knob.png</file>
+        <file>knob1.png</file>
+        <file>knob2.png</file>
+        <file>reo_knob.png</file>
+    </qresource>
+    <qresource lang="ru" prefix="/patterns">
+        <file>background.png</file>
+    </qresource>
+</RCC>

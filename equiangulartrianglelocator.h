@@ -10,6 +10,7 @@
 #endif
 
 #include"mainlocator.h"
+#include"helper.h"
 
 class EquiangularTriangleLocator : public MainLocator
 {

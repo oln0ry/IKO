@@ -27,8 +27,6 @@ private slots:
 
     void on_SelectRangeMarks_currentIndexChanged(int index);
 
-    void on_SelectScale_currentIndexChanged(int index);
-
     void on_ChangeLocatorState_clicked();
 
     void on_ChangeViewStateAll_clicked();
@@ -78,7 +76,25 @@ private slots:
 
     void on_CheckShowMeteo_stateChanged(int arg1);
 
-    void on_SelectWorkVariant_currentIndexChanged(int index);
+    void on_SelectScale_clicked();
+
+    void on_ChangeIndicatorBrightnessButton_clicked();
+
+    void on_ChangeIndicatorBrightness_sliderReleased();
+
+    void on_ChangeDisplayLightningButton_clicked();
+
+    void on_ChangeDisplayLightning_sliderReleased();
+
+    void on_ChangeIndicatorFocusButton_clicked();
+
+    void on_ChangeIndicatorFocus_sliderReleased();
+
+    void on_ChangeIndicatorVARUButton_clicked();
+
+    void on_ChangeIndicatorVARU_sliderReleased();
+
+    void on_SelectWorkVariant_clicked();
 
 private:
         QPointer<TargetsSettings>tsettings;

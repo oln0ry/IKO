@@ -1,4 +1,5 @@
 #include"equiangulartrianglelocator.h"
+#include"targetssettings.h"
 
 EquiangularTriangleLocator::EquiangularTriangleLocator(QWidget *parent):MainLocator(parent)
 {
@@ -69,6 +70,10 @@ void EquiangularTriangleLocator::paintGL()
         DrawRange();
     if(!Cache.trash.isEmpty())
         DrawTrash();
+
+    if(!TargetsSettings::targets.isEmpty())
+        DrawTargets();
+
     glPopMatrix();
 }
 

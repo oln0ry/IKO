@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>862</width>
-    <height>746</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -82,6 +82,9 @@
               <property name="labelAlignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
+              <property name="formAlignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
               <property name="verticalSpacing">
                <number>14</number>
               </property>
@@ -153,11 +156,39 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QComboBox" name="SelectScale">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QToolButton" name="SelectScale">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelScaleValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="LabelBrightness">
@@ -166,25 +197,6 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QSlider" name="ChangeIndicatorBrightness">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
                 </property>
                </widget>
               </item>
@@ -198,25 +210,6 @@
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
-               <widget class="QSlider" name="ChangeDisplayLightning">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>60</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
               <item row="6" column="0">
                <widget class="QLabel" name="LabelFocus">
                 <property name="text">
@@ -224,25 +217,6 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QSlider" name="ChangeIndicatorFocus">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
                 </property>
                </widget>
               </item>
@@ -256,25 +230,6 @@
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
-               <widget class="QSlider" name="ChangeIndicatorVARU">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="maximum">
-                 <number>200</number>
-                </property>
-                <property name="singleStep">
-                 <number>1</number>
-                </property>
-                <property name="value">
-                 <number>0</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
               <item row="8" column="0">
                <widget class="QLabel" name="LabelWorkVariant">
                 <property name="text">
@@ -282,13 +237,6 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
-               <widget class="QComboBox" name="SelectWorkVariant">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
                 </property>
                </widget>
               </item>
@@ -311,6 +259,217 @@
                  <string/>
                 </property>
                </widget>
+              </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QToolButton" name="ChangeIndicatorBrightnessButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="ChangeIndicatorBrightness">
+                  <property name="cursor">
+                   <cursorShape>ArrowCursor</cursorShape>
+                  </property>
+                  <property name="maximum">
+                   <number>100</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>100</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="5" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="QToolButton" name="ChangeDisplayLightningButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="ChangeDisplayLightning">
+                  <property name="cursor">
+                   <cursorShape>ArrowCursor</cursorShape>
+                  </property>
+                  <property name="maximum">
+                   <number>100</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>60</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="6" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QToolButton" name="ChangeIndicatorFocusButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="ChangeIndicatorFocus">
+                  <property name="cursor">
+                   <cursorShape>ArrowCursor</cursorShape>
+                  </property>
+                  <property name="maximum">
+                   <number>100</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>100</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="7" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QToolButton" name="ChangeIndicatorVARUButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="ChangeIndicatorVARU">
+                  <property name="cursor">
+                   <cursorShape>ArrowCursor</cursorShape>
+                  </property>
+                  <property name="maximum">
+                   <number>200</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
+                   <number>0</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="8" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item>
+                 <widget class="QToolButton" name="SelectWorkVariant">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelSelectWorkVariantValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -815,6 +974,31 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>SelectRangeMarks</tabstop>
+  <tabstop>InputActiveNoiseAzimuth</tabstop>
+  <tabstop>ButtonTargetsSettings</tabstop>
+  <tabstop>ChangeTargetsState</tabstop>
+  <tabstop>ChangeViewStateAll</tabstop>
+  <tabstop>ChangeLocatorState</tabstop>
+  <tabstop>CheckShowTrash</tabstop>
+  <tabstop>ChangeTrashIntensity</tabstop>
+  <tabstop>InputScatterTrashFrom</tabstop>
+  <tabstop>InputScatterTrashTo</tabstop>
+  <tabstop>CheckShowLocalItems</tabstop>
+  <tabstop>CheckShowMeteo</tabstop>
+  <tabstop>RegenerateTrash</tabstop>
+  <tabstop>InputActiveAnswerAzimuth</tabstop>
+  <tabstop>CheckActiveAnswerShow</tabstop>
+  <tabstop>InputActiveAnswerDistance</tabstop>
+  <tabstop>CleanLocatorDataBuffer</tabstop>
+  <tabstop>InputFrameFrequency</tabstop>
+  <tabstop>CheckActiveNoiseShow</tabstop>
+  <tabstop>SelectActiveNoiseIntensity</tabstop>
+  <tabstop>CheckActiveInSyncShow</tabstop>
+  <tabstop>SelectScale</tabstop>
+  <tabstop>SelectAzimuthMarks</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

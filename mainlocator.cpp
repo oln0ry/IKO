@@ -5,6 +5,8 @@ MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffe
 {
     clockwise=true; //По часовой стрелке
     not_clean=false;
+    show=false;
+    targets_df=true;
     Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
 
@@ -92,16 +94,7 @@ void MainLocator::paintGL()
     if(!TargetsSettings::targets.isEmpty())
         DrawTargets();
 
-    /*
-    if(show_active_atrash && !active_answer_trash.isEmpty())
-        DrawActiveAnswerTrash();
-    if(show_active_isynctrash && !active_insync_trash.isEmpty())
-        DrawActiveInSyncTrash();
-    if(targets_pos>=0)
-        DrawTargets();
-    */
     glPopMatrix();
-    //swapBuffers();
 }
 
 void MainLocator::ChangeFPS(qreal fps)
@@ -563,6 +556,7 @@ void MainLocator::ContinueSearch()
         if(!not_clean)
             not_clean=true;
         ray_position=ray.begin();
+        targets_df=true;
     }
     ray_position++;
 }
@@ -632,65 +626,25 @@ void MainLocator::DrawActiveInSyncTrash()
         glEnd();
     }
 }
-void MainLocator::GenerationTargetPaths()
-{
-    QHash<QString,qreal>cache;
-    qreal i=1.0f,delta,distance;
-    quint8 length=0,k=0;
-    targets.clear();
-
-    switch(settings["scale"])
-    {
-        case 2:
-            distance=1.0f/150;
-            break;
-        case 1:
-            distance=1.0f/90;
-            break;
-        default:
-            distance=1.0f/45;
-    }
-
-    delta=distance*8;
-    length=0;
-    for(quint8 r=0;r<5;r++,i=0.0f)
-    {
-        while(i>=0)
-        {
-            cache["width"]=6;
-
-            for(QVector<QHash<QString,qreal> >::const_iterator it=radians.begin()+length;it<radians.begin()+length+10;it++)
-            {
-                cache["angle"]=(*it)["angle"];
-                cache["x"]=i*(*it)["x"];
-                cache["y"]=i*(*it)["y"];
-                cache["r"]=qSqrt(qPow(cache["x"],2)+qPow(cache["y"],2));
-                targets[k].append(cache);
-            }
-            k++;
-            length+=4*GetRandomSign();
-            i-=delta;
-        }
-    }
-}
 */
 
-void MainLocator::DrawTargets() const
+void MainLocator::DrawTargets()
 {
-    /*
-    struct Targets
-    {
-        Daddy Coordinates[5];
-        qreal speed;
-        quint8 landing;
-    };
-    */
     qreal alpha;
     Points p;
     for(QHash<quint16,QHash<quint16,QVector<Points> > >::iterator it=TargetsSettings::targets.begin();it!=TargetsSettings::targets.end();it++)
     {
         p=(*it)[settings["system"]["scale"].toUInt()].front();
-        (*it)[settings["system"]["scale"].toUInt()].pop_front();
+        //if(targets_df)
+        {
+            (*it)[20].pop_front();
+            (*it)[30].pop_front();
+            (*it)[45].pop_front();
+            (*it)[60].pop_front();
+            (*it)[90].pop_front();
+            (*it)[150].pop_front();
+        }
+
         alpha=CalcAlpha(p.angle);
         if(alpha>0)
         {
@@ -698,11 +652,31 @@ void MainLocator::DrawTargets() const
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(.925f),static_cast<GLfloat>(.714f),static_cast<GLfloat>(.262f),alpha);
-            glVertex2f(p.x-0.03,p.y-0.01);
-            glVertex2f(p.x+0.03,p.y+0.01);
+            //qDebug()<<p.x<<"\t"<<p.y;
+            if(p.y>0 && p.x>0 || p.x<0 && p.y<0)
+            {
+                glVertex2f(p.x-0.03,p.y+0.03);
+                glVertex2f(p.x+0.03,p.y-0.03);
+            }
+            else if(p.y==0)
+            {
+                glVertex2f(p.x,p.y-0.03);
+                glVertex2f(p.x,p.y+0.03);
+            }
+            else if(p.x==0)
+            {
+                glVertex2f(p.x-0.03,p.y);
+                glVertex2f(p.x+0.03,p.y);
+            }
+            else
+            {
+                glVertex2f(p.x-0.03,p.y-0.03);
+                glVertex2f(p.x+0.03,p.y+0.03);
+            }
             glEnd();
         }
     }
+    targets_df=false;
 }
 
 void MainLocator::ChangeTargetsState()

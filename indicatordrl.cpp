@@ -6,16 +6,14 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->setupUi(this);
     ui->InputFrameFrequency->valueChanged(ui->InputFrameFrequency->value());
     //setLayout(ui->RenderLayout);
-    QStringList azimuth_marks,range_marks,scale,intensity,work_variants;
+    QStringList azimuth_marks,range_marks,intensity;
     azimuth_marks<<"Не отображать"<<"30°"<<"10°";
     ui->SelectAzimuthMarks->addItems(azimuth_marks);
     ui->SelectAzimuthMarks->setCurrentIndex(1);
     range_marks<<"Не отображать"<<"10 километров"<<"50 километров";
     ui->SelectRangeMarks->addItems(range_marks);
     ui->SelectRangeMarks->setCurrentIndex(1);
-    scale<<"45 километров"<<"90 километров"<<"150 километров";
-    ui->SelectScale->addItems(scale);
-    ui->SelectScale->setCurrentIndex(0);
+    ui->SelectScale->click();
     intensity<<"Слабая"<<"Средняя"<<"Сильная";
     //ui->SelectTrashIntensity->addItems(intensity);
     //ui->SelectTrashIntensity->setCurrentIndex(1);
@@ -25,9 +23,13 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->InputScatterTrashFrom->setValue(0.0f);
     ui->InputScatterTrashTo->setValue(150.0f);
 
+    ui->ChangeIndicatorBrightness->hide();
     ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
+    ui->ChangeDisplayLightning->hide();
     ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
+    ui->ChangeIndicatorFocus->hide();
     ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
+    ui->ChangeIndicatorVARU->hide();
     ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
 
     ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
@@ -38,9 +40,8 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
     ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
     ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
-    work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
-    ui->SelectWorkVariant->addItems(work_variants);
-    ui->SelectWorkVariant->setCurrentIndex(1);
+
+    ui->SelectWorkVariant->click();
  }
 
 IndicatorDRL::~IndicatorDRL()
@@ -71,32 +72,6 @@ void IndicatorDRL::on_SelectRangeMarks_currentIndexChanged(int index)
     if(index<0)
         return;
     ui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(index));
-}
-
-void IndicatorDRL::on_SelectScale_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    qreal max;
-    switch(index)
-    {
-        case 2:
-            max=150.0f;
-            break;
-        case 1:
-            max=90.0f;
-            break;
-        default:
-            max=45.0f;
-
-    }
-    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint8>(max));
-    if(ui->InputScatterTrashFrom->value()>max)
-        ui->InputScatterTrashFrom->setValue(max);
-    if(ui->InputScatterTrashTo->value()>max)
-        ui->InputScatterTrashTo->setValue(max);
-    ui->InputScatterTrashFrom->setMaximum(max);
-    ui->InputScatterTrashTo->setMaximum(max);
 }
 
 void IndicatorDRL::on_ChangeLocatorState_clicked()
@@ -267,19 +242,108 @@ void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
     ui->RenderIndicator->SetSettings("meteo","show",arg1==2);
 }
 
-void IndicatorDRL::on_SelectWorkVariant_currentIndexChanged(int index)
+
+void IndicatorDRL::on_SelectScale_clicked()
 {
-    if(index<0)
-        return;
-    switch(index)
+    static qint8 status=0;
+    if(status<0 || status>1)
+        status=0;
+    else
+        status++;
+
+    qreal max;
+    switch(status)
     {
         case 0:
+            ui->LabelScaleValue->setText("45 км.");
+            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+            max=45.0f;
+            break;
+        case 1:
+            ui->LabelScaleValue->setText("90 км.");
+            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+            max=90.0f;
+            break;
+        case 2:
+            ui->LabelScaleValue->setText("150 км.");
+            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+            max=150.0f;
+            break;
+    }
+
+    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    if(ui->InputScatterTrashFrom->value()>max)
+        ui->InputScatterTrashFrom->setValue(max);
+    if(ui->InputScatterTrashTo->value()>max)
+        ui->InputScatterTrashTo->setValue(max);
+    ui->InputScatterTrashFrom->setMaximum(max);
+    ui->InputScatterTrashTo->setMaximum(max);
+}
+
+void IndicatorDRL::on_ChangeIndicatorBrightnessButton_clicked()
+{
+    if(ui->ChangeIndicatorBrightness->isHidden())
+        ui->ChangeIndicatorBrightness->show();
+}
+
+void IndicatorDRL::on_ChangeIndicatorBrightness_sliderReleased()
+{
+    ui->ChangeIndicatorBrightness->hide();
+}
+
+void IndicatorDRL::on_ChangeDisplayLightningButton_clicked()
+{
+    if(ui->ChangeDisplayLightning->isHidden())
+        ui->ChangeDisplayLightning->show();
+}
+
+void IndicatorDRL::on_ChangeDisplayLightning_sliderReleased()
+{
+    ui->ChangeDisplayLightning->hide();
+}
+
+void IndicatorDRL::on_ChangeIndicatorFocusButton_clicked()
+{
+    if(ui->ChangeIndicatorFocus->isHidden())
+        ui->ChangeIndicatorFocus->show();
+}
+
+void IndicatorDRL::on_ChangeIndicatorFocus_sliderReleased()
+{
+    ui->ChangeIndicatorFocus->hide();
+}
+
+void IndicatorDRL::on_ChangeIndicatorVARUButton_clicked()
+{
+    if(ui->ChangeIndicatorVARU->isHidden())
+        ui->ChangeIndicatorVARU->show();
+}
+
+void IndicatorDRL::on_ChangeIndicatorVARU_sliderReleased()
+{
+    ui->ChangeIndicatorVARU->hide();
+}
+
+void IndicatorDRL::on_SelectWorkVariant_clicked()
+{
+    static qint8 status=0;
+    if(status<0 || status>1)
+        status=0;
+    else
+        status++;
+    switch(status)
+    {
+        case 0:
+            ui->LabelSelectWorkVariantValue->setText("АКТ");
+            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
             if(ui->BoxTrashSettings->isEnabled())
                 ui->BoxTrashSettings->setEnabled(false);
             if(ui->BoxActiveTrashSettings->isEnabled())
                 ui->BoxActiveTrashSettings->setEnabled(false);
             break;
         case 1:
+            ui->LabelSelectWorkVariantValue->setText("ПАСС");
+            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
             if(!ui->BoxTrashSettings->isEnabled())
                 ui->BoxTrashSettings->setEnabled(true);
             if(!ui->BoxActiveTrashSettings->isEnabled())
@@ -294,6 +358,8 @@ void IndicatorDRL::on_SelectWorkVariant_currentIndexChanged(int index)
             ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
             break;
         case 2:
+            ui->LabelSelectWorkVariantValue->setText("СДЦ");
+            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
             if(!ui->BoxActiveTrashSettings->isEnabled())
                 ui->BoxActiveTrashSettings->setEnabled(true);
             if(!ui->BoxActiveTrashSettings->isEnabled())
@@ -306,5 +372,5 @@ void IndicatorDRL::on_SelectWorkVariant_currentIndexChanged(int index)
             ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
             break;
     }
-    ui->RenderIndicator->SetSettings("system","mode",static_cast<quint8>(index));
+    ui->RenderIndicator->SetSettings("system","mode",static_cast<quint8>(status));
 }

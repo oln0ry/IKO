@@ -37,3 +37,6 @@ FORMS    += menu.ui \
     targetssettings.ui \
     indicatorprl.ui \
     rspindicators.ui
+
+RESOURCES += \
+    Common.qrc

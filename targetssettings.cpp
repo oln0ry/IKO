@@ -4,7 +4,7 @@
 Targets* TargetsSettings::T=0;
 QHash<quint16,QHash<quint16,QVector<Points> > >TargetsSettings::targets;
 quint8 TargetsSettings::targets_count=0;
-quint16 TargetsSettings::time=3600;
+quint16 TargetsSettings::time=12;
 TargetsSettings::TargetsSettings(QWidget *parent) : QWidget(parent),ui(new Ui::TargetsSettings)
 {
     ui->setupUi(this);
@@ -103,28 +103,40 @@ void TargetsSettings::on_ApplyTargets_clicked()
         t*=Targs[widget].speed;
         if(t<=0)
             continue;
-        quint16 angle=Targs[widget].Coordinates[0].angle;
+        quint16 angle=360-Targs[widget].Coordinates[0].angle;
         if(Targs[widget].Coordinates[0].x<Targs[widget].Coordinates[1].x)
             for(qreal x=Targs[widget].Coordinates[0].x;x<Targs[widget].Coordinates[1].x;x+=t)
             {
                 path.angle=GetRadianValue(angle);
                 path.x=Helper::CalcScaleValue(x,20);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][20].append(path);
                 path.x=Helper::CalcScaleValue(x,30);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][30].append(path);
                 path.x=Helper::CalcScaleValue(x,45);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][45].append(path);
                 path.x=Helper::CalcScaleValue(x,60);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][60].append(path);
                 path.x=Helper::CalcScaleValue(x,90);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][90].append(path);
                 path.x=Helper::CalcScaleValue(x,150);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][150].append(path);
 
                 if(Targs[widget].Coordinates[0].angle<Targs[widget].Coordinates[1].angle && angle<Targs[widget].Coordinates[1].angle)
@@ -137,27 +149,282 @@ void TargetsSettings::on_ApplyTargets_clicked()
             {
                 path.angle=GetRadianValue(angle);
                 path.x=Helper::CalcScaleValue(x,20);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][20].append(path);
                 path.x=Helper::CalcScaleValue(x,30);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][30].append(path);
                 path.x=Helper::CalcScaleValue(x,45);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][45].append(path);
                 path.x=Helper::CalcScaleValue(x,60);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][60].append(path);
                 path.x=Helper::CalcScaleValue(x,90);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][90].append(path);
                 path.x=Helper::CalcScaleValue(x,150);
-                path.y=path.x/qFastCos(path.angle);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
                 targets[widget][150].append(path);
 
                 if(Targs[widget].Coordinates[0].angle<Targs[widget].Coordinates[1].angle && angle<Targs[widget].Coordinates[1].angle)
                     angle++;
                 else if(Targs[widget].Coordinates[0].angle>Targs[widget].Coordinates[1].angle && angle>Targs[widget].Coordinates[1].angle)
+                    angle--;
+             }
+        angle=360-Targs[widget].Coordinates[1].angle;
+        if(Targs[widget].Coordinates[1].x<Targs[widget].Coordinates[2].x)
+            for(qreal x=Targs[widget].Coordinates[1].x;x<Targs[widget].Coordinates[2].x;x+=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[1].angle<Targs[widget].Coordinates[2].angle && angle<Targs[widget].Coordinates[2].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[1].angle>Targs[widget].Coordinates[2].angle && angle>Targs[widget].Coordinates[2].angle)
+                    angle--;
+            }
+        else
+            for(qreal x=Targs[widget].Coordinates[1].x;x>=Targs[widget].Coordinates[2].x;x-=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[1].angle<Targs[widget].Coordinates[2].angle && angle<Targs[widget].Coordinates[2].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[1].angle>Targs[widget].Coordinates[2].angle && angle>Targs[widget].Coordinates[2].angle)
+                    angle--;
+             }
+        angle=360-Targs[widget].Coordinates[2].angle;
+        if(Targs[widget].Coordinates[2].x<Targs[widget].Coordinates[3].x)
+            for(qreal x=Targs[widget].Coordinates[2].x;x<Targs[widget].Coordinates[3].x;x+=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[2].angle<Targs[widget].Coordinates[3].angle && angle<Targs[widget].Coordinates[3].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[2].angle>Targs[widget].Coordinates[3].angle && angle>Targs[widget].Coordinates[3].angle)
+                    angle--;
+            }
+        else
+            for(qreal x=Targs[widget].Coordinates[2].x;x>=Targs[widget].Coordinates[3].x;x-=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[2].angle<Targs[widget].Coordinates[3].angle && angle<Targs[widget].Coordinates[3].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[2].angle>Targs[widget].Coordinates[3].angle && angle>Targs[widget].Coordinates[3].angle)
+                    angle--;
+             }
+        angle=360-Targs[widget].Coordinates[3].angle;
+        if(Targs[widget].Coordinates[3].x<Targs[widget].Coordinates[4].x)
+            for(qreal x=Targs[widget].Coordinates[3].x;x<Targs[widget].Coordinates[4].x;x+=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[3].angle<Targs[widget].Coordinates[4].angle && angle<Targs[widget].Coordinates[4].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[3].angle>Targs[widget].Coordinates[4].angle && angle>Targs[widget].Coordinates[4].angle)
+                    angle--;
+            }
+        else
+            for(qreal x=Targs[widget].Coordinates[3].x;x>=Targs[widget].Coordinates[4].x;x-=t)
+            {
+                path.angle=GetRadianValue(angle);
+                path.x=Helper::CalcScaleValue(x,20);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][20].append(path);
+                path.x=Helper::CalcScaleValue(x,30);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][30].append(path);
+                path.x=Helper::CalcScaleValue(x,45);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][45].append(path);
+                path.x=Helper::CalcScaleValue(x,60);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][60].append(path);
+                path.x=Helper::CalcScaleValue(x,90);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][90].append(path);
+                path.x=Helper::CalcScaleValue(x,150);
+                if(angle<360 && angle>180)
+                    path.x=-path.x;
+                path.y=path.x*qFastSin(path.angle);
+                targets[widget][150].append(path);
+
+                if(Targs[widget].Coordinates[3].angle<Targs[widget].Coordinates[4].angle && angle<Targs[widget].Coordinates[4].angle)
+                    angle++;
+                else if(Targs[widget].Coordinates[3].angle>Targs[widget].Coordinates[4].angle && angle>Targs[widget].Coordinates[4].angle)
                     angle--;
              }
     }

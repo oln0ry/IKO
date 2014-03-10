@@ -78,7 +78,7 @@ class MainLocator : public QGLWidget
         void DrawActiveAnswerTrash();
         void DrawActiveInSyncTrash();
         void DrawMeteo() const;
-        void DrawTargets() const;
+        void DrawTargets();
         qreal GetRandomCoord(quint8,const bool rsign=false) const;
         qint8 GetRandomSign() const;
         quint16 radians_size;
@@ -89,13 +89,13 @@ class MainLocator : public QGLWidget
         {
             QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
-        }Cache,Current;
+        }Cache;
         QVector<LineEntity>range;
         QVector<Points*>::const_iterator ray_position;
         QVector<Points*>circle,ray;
         QBasicTimer timer;
         QMap<QString,QMap<QString,QVariant> >settings;
-        bool not_clean;
+        bool not_clean,targets_df;
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         virtual void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
 
