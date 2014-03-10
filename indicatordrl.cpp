@@ -6,13 +6,11 @@ IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::Indicat
     ui->setupUi(this);
     ui->InputFrameFrequency->valueChanged(ui->InputFrameFrequency->value());
     //setLayout(ui->RenderLayout);
-    QStringList azimuth_marks,range_marks,intensity;
-    azimuth_marks<<"Не отображать"<<"30°"<<"10°";
-    ui->SelectAzimuthMarks->addItems(azimuth_marks);
-    ui->SelectAzimuthMarks->setCurrentIndex(1);
-    range_marks<<"Не отображать"<<"10 километров"<<"50 километров";
-    ui->SelectRangeMarks->addItems(range_marks);
-    ui->SelectRangeMarks->setCurrentIndex(1);
+    QStringList intensity;
+    ui->SelectAzimuthMarks->click();
+    ui->SelectRangeMarks->click();
+    //ui->SelectRangeMarks->addItems(range_marks);
+    //ui->SelectRangeMarks->setCurrentIndex(1);
     ui->SelectScale->click();
     intensity<<"Слабая"<<"Средняя"<<"Сильная";
     //ui->SelectTrashIntensity->addItems(intensity);
@@ -58,20 +56,6 @@ void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
 {
     //QColor c=ui->RenderIndicator->SelectColor("locator","Выберите цвет фона индикатора");
     //ui->ButtonChangeColorDisplay->setPalette(c);
-}
-
-void IndicatorDRL::on_SelectAzimuthMarks_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    ui->RenderIndicator->SetSettings("system","azimuth",static_cast<quint16>(index));
-}
-
-void IndicatorDRL::on_SelectRangeMarks_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    ui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(index));
 }
 
 void IndicatorDRL::on_ChangeLocatorState_clicked()
@@ -373,4 +357,56 @@ void IndicatorDRL::on_SelectWorkVariant_clicked()
             break;
     }
     ui->RenderIndicator->SetSettings("system","mode",static_cast<quint8>(status));
+}
+
+void IndicatorDRL::on_SelectRangeMarks_clicked()
+{
+    static qint8 status=0;
+    if(status<0 || status>1)
+        status=0;
+    else
+        status++;
+
+    switch(status)
+    {
+        case 0:
+            ui->LabelSelectRangeMarksValue->setText("НЕТ");
+            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+            break;
+        case 1:
+            ui->LabelSelectRangeMarksValue->setText("10 км.");
+            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+            break;
+        case 2:
+            ui->LabelSelectRangeMarksValue->setText("50 км.");
+            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+            break;
+    }
+    ui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(status));
+}
+
+void IndicatorDRL::on_SelectAzimuthMarks_clicked()
+{
+    static qint8 status=0;
+    if(status<0 || status>1)
+        status=0;
+    else
+        status++;
+
+    switch(status)
+    {
+        case 0:
+            ui->LabelSelectAzimuthMarksValue->setText("НЕТ");
+            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+            break;
+        case 1:
+            ui->LabelSelectAzimuthMarksValue->setText("30°");
+            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+            break;
+        case 2:
+            ui->LabelSelectAzimuthMarksValue->setText("10°");
+            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+            break;
+    }
+    ui->RenderIndicator->SetSettings("system","azimuth",static_cast<quint16>(status));
 }

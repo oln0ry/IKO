@@ -23,10 +23,6 @@ private slots:
 
     void on_ButtonChangeColorDisplay_clicked();
 
-    void on_SelectAzimuthMarks_currentIndexChanged(int index);
-
-    void on_SelectRangeMarks_currentIndexChanged(int index);
-
     void on_ChangeLocatorState_clicked();
 
     void on_ChangeViewStateAll_clicked();
@@ -95,6 +91,10 @@ private slots:
     void on_ChangeIndicatorVARU_sliderReleased();
 
     void on_SelectWorkVariant_clicked();
+
+    void on_SelectRangeMarks_clicked();
+
+    void on_SelectAzimuthMarks_clicked();
 
 private:
         QPointer<TargetsSettings>tsettings;

@@ -121,13 +121,6 @@
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="SelectAzimuthMarks">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="0">
                <widget class="QLabel" name="LabelRangeMarks">
                 <property name="text">
@@ -135,13 +128,6 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QComboBox" name="SelectRangeMarks">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
                 </property>
                </widget>
               </item>
@@ -461,6 +447,73 @@ background-position: center;</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="LabelSelectWorkVariantValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QToolButton" name="SelectRangeMarks">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelSelectRangeMarksValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QToolButton" name="SelectAzimuthMarks">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelSelectAzimuthMarksValue">
                   <property name="styleSheet">
                    <string notr="true">color: #ae0000;</string>
                   </property>
@@ -975,7 +1028,6 @@ background-position: center;</string>
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>SelectRangeMarks</tabstop>
   <tabstop>InputActiveNoiseAzimuth</tabstop>
   <tabstop>ButtonTargetsSettings</tabstop>
   <tabstop>ChangeTargetsState</tabstop>
@@ -997,7 +1049,6 @@ background-position: center;</string>
   <tabstop>SelectActiveNoiseIntensity</tabstop>
   <tabstop>CheckActiveInSyncShow</tabstop>
   <tabstop>SelectScale</tabstop>
-  <tabstop>SelectAzimuthMarks</tabstop>
  </tabstops>
  <resources/>
  <connections/>
