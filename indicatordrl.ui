@@ -88,29 +88,6 @@
               <property name="verticalSpacing">
                <number>14</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QLabel" name="LabelFrameFrequency">
-                <property name="text">
-                 <string>Частота кадров:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QSpinBox" name="InputFrameFrequency">
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>120</number>
-                </property>
-                <property name="value">
-                 <number>24</number>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="LabelAzimuthMarks">
                 <property name="text">
@@ -121,6 +98,41 @@
                 </property>
                </widget>
               </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QToolButton" name="SelectAzimuthMarks">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelSelectAzimuthMarksValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item row="2" column="0">
                <widget class="QLabel" name="LabelRangeMarks">
                 <property name="text">
@@ -130,6 +142,41 @@
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                </widget>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QToolButton" name="SelectRangeMarks">
+                  <property name="minimumSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>OpenHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-image: url(:/buttons/knob);
+background-repeat: no-repeat;
+background-position: center;</string>
+                  </property>
+                  <property name="text">
+                   <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="LabelSelectRangeMarksValue">
+                  <property name="styleSheet">
+                   <string notr="true">color: #ae0000;</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="LabelScale">
@@ -186,66 +233,6 @@ background-position: center;</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="LabelDisplayLightning">
-                <property name="text">
-                 <string>Подсветка:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="LabelFocus">
-                <property name="text">
-                 <string>Фокус:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="LabelVARU">
-                <property name="text">
-                 <string>ВАРУ:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="LabelWorkVariant">
-                <property name="text">
-                 <string>Режим работы:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0">
-               <widget class="QLabel" name="LabelTargetsSettings">
-                <property name="text">
-                 <string>Настройки целей:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="1">
-               <widget class="QPushButton" name="ButtonTargetsSettings">
-                <property name="cursor">
-                 <cursorShape>ArrowCursor</cursorShape>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
               <item row="4" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
@@ -289,6 +276,16 @@ background-position: center;</string>
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="LabelDisplayLightning">
+                <property name="text">
+                 <string>Подсветка:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
               </item>
               <item row="5" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -334,6 +331,16 @@ background-position: center;</string>
                 </item>
                </layout>
               </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="LabelFocus">
+                <property name="text">
+                 <string>Фокус:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
               <item row="6" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_9">
                 <item>
@@ -377,6 +384,16 @@ background-position: center;</string>
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="LabelVARU">
+                <property name="text">
+                 <string>ВАРУ:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
               </item>
               <item row="7" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -422,6 +439,16 @@ background-position: center;</string>
                 </item>
                </layout>
               </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="LabelWorkVariant">
+                <property name="text">
+                 <string>Режим работы:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
               <item row="8" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_11">
                 <item>
@@ -457,72 +484,48 @@ background-position: center;</string>
                 </item>
                </layout>
               </item>
-              <item row="2" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_12">
-                <item>
-                 <widget class="QToolButton" name="SelectRangeMarks">
-                  <property name="minimumSize">
-                   <size>
-                    <width>32</width>
-                    <height>32</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>OpenHandCursor</cursorShape>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">border-image: url(:/buttons/knob);
-background-repeat: no-repeat;
-background-position: center;</string>
-                  </property>
-                  <property name="text">
-                   <string>...</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="LabelSelectRangeMarksValue">
-                  <property name="styleSheet">
-                   <string notr="true">color: #ae0000;</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <item row="9" column="0">
+               <widget class="QLabel" name="LabelTargetsSettings">
+                <property name="text">
+                 <string>Настройки целей:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
               </item>
-              <item row="1" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_13">
-                <item>
-                 <widget class="QToolButton" name="SelectAzimuthMarks">
-                  <property name="minimumSize">
-                   <size>
-                    <width>32</width>
-                    <height>32</height>
-                   </size>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">border-image: url(:/buttons/knob);
-background-repeat: no-repeat;
-background-position: center;</string>
-                  </property>
-                  <property name="text">
-                   <string>...</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="LabelSelectAzimuthMarksValue">
-                  <property name="styleSheet">
-                   <string notr="true">color: #ae0000;</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <item row="9" column="1">
+               <widget class="QPushButton" name="ButtonTargetsSettings">
+                <property name="cursor">
+                 <cursorShape>ArrowCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="InputFrameFrequency">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>120</number>
+                </property>
+                <property name="value">
+                 <number>24</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="LabelFrameFrequency">
+                <property name="text">
+                 <string>Частота кадров:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>

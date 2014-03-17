@@ -5,7 +5,8 @@
 #include<QPointer>
 #include"indicatordrl.h"
 #include"indicatorprl.h"
-#include"rspindicators.h"
+//#include"rspindicators.h"
+#include"commonview.h"
 
 namespace Ui {
 class Menu;
@@ -30,7 +31,7 @@ private:
         Ui::Menu *ui;
         QPointer<IndicatorDRL>DRL;
         QPointer<IndicatorPRL>PRL;
-        QPointer<RSPIndicators>RSP;
+        QPointer<commonview>RSP;
 };
 
 #endif // MENU_H

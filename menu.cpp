@@ -28,6 +28,6 @@ void Menu::on_ButtonIndicatorPRL_clicked()
 
 void Menu::on_ButtonRSP_clicked()
 {
-    RSP=new RSPIndicators;
+    RSP=new commonview;
     RSP->show();
 }
