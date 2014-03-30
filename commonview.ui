@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>851</height>
+    <height>872</height>
    </rect>
   </property>
   <property name="palette">
@@ -107,7 +107,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeMainLocatorFocus">
+  <widget class="QToolButton" name="ChangeRightTriangleFocus">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -115,6 +115,98 @@
      <width>32</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LabelChangeRightTriangleFocus">
+   <property name="geometry">
+    <rect>
+     <x>413</x>
+     <y>10</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ФОКУС</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="ChangeRightTriangleBrightness">
+   <property name="geometry">
+    <rect>
+     <x>657</x>
+     <y>30</y>
+     <width>32</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LabelChangeRightTriangleBrightness">
+   <property name="geometry">
+    <rect>
+     <x>644</x>
+     <y>10</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ЯРКОСТЬ</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="ChangeMainLocatorBrightness">
+   <property name="geometry">
+    <rect>
+     <x>243</x>
+     <y>710</y>
+     <width>32</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/buttons/reo_knob.png);
+background-repeat: no-repeat;
+background-position: center;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="ChangeMainLocatorFocus">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>710</y>
+     <width>32</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
@@ -128,86 +220,6 @@ background-position: center;</string>
   <widget class="QLabel" name="LabelChangeMainLocatorFocus">
    <property name="geometry">
     <rect>
-     <x>413</x>
-     <y>10</y>
-     <width>51</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>ФОКУС</string>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="ChangeMainLocatorBrightness">
-   <property name="geometry">
-    <rect>
-     <x>657</x>
-     <y>30</y>
-     <width>32</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-image: url(:/buttons/reo_knob.png);
-background-repeat: no-repeat;
-background-position: center;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelChangeMainLocatorBrightness">
-   <property name="geometry">
-    <rect>
-     <x>644</x>
-     <y>10</y>
-     <width>61</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>ЯРКОСТЬ</string>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorBrightness">
-   <property name="geometry">
-    <rect>
-     <x>243</x>
-     <y>710</y>
-     <width>32</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-image: url(:/buttons/reo_knob.png);
-background-repeat: no-repeat;
-background-position: center;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorFocus">
-   <property name="geometry">
-    <rect>
-     <x>17</x>
-     <y>710</y>
-     <width>32</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-image: url(:/buttons/reo_knob.png);
-background-repeat: no-repeat;
-background-position: center;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus">
-   <property name="geometry">
-    <rect>
      <x>10</x>
      <y>690</y>
      <width>51</width>
@@ -218,7 +230,7 @@ background-position: center;</string>
     <string>ФОКУС</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorBrightness">
+  <widget class="QLabel" name="LabelChangeMainLocatorBrightness">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -231,7 +243,7 @@ background-position: center;</string>
     <string>ЯРКОСТЬ</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorFocus_2">
+  <widget class="QToolButton" name="ChangeEquingularLocatorMagnificationSDC">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -240,6 +252,9 @@ background-position: center;</string>
      <height>32</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
 background-repeat: no-repeat;
@@ -249,7 +264,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorFocus_3">
+  <widget class="QToolButton" name="ChangeEquingularLocatorMagnificationPASS">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -258,6 +273,9 @@ background-position: center;</string>
      <height>32</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
 background-repeat: no-repeat;
@@ -267,7 +285,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorFocus_4">
+  <widget class="QToolButton" name="ChangeEquingularLocatorMagnificationAKT">
    <property name="geometry">
     <rect>
      <x>550</x>
@@ -276,6 +294,9 @@ background-position: center;</string>
      <height>32</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
 background-repeat: no-repeat;
@@ -285,7 +306,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_2">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorMagnification">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -298,7 +319,7 @@ background-position: center;</string>
     <string>УСИЛЕНИЕ ПРИЁМНИКА</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_3">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorMagnificationSDC">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -311,7 +332,7 @@ background-position: center;</string>
     <string>СДЦ</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_4">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorMagnificationPASS">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -324,7 +345,7 @@ background-position: center;</string>
     <string>ПАСС</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_5">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorMagnificationAKT">
    <property name="geometry">
     <rect>
      <x>555</x>
@@ -337,7 +358,7 @@ background-position: center;</string>
     <string>АКТ</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorFocus_5">
+  <widget class="QToolButton" name="ChangeEquingularLocatorScale">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -345,6 +366,9 @@ background-position: center;</string>
      <width>32</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/switch_base.png);
@@ -355,7 +379,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_6">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorScale">
    <property name="geometry">
     <rect>
      <x>595</x>
@@ -368,7 +392,7 @@ background-position: center;</string>
     <string>МАСШТАБ</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_7">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorScale60">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -381,7 +405,7 @@ background-position: center;</string>
     <string>60км</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_8">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorScale20">
    <property name="geometry">
     <rect>
      <x>645</x>
@@ -394,7 +418,7 @@ background-position: center;</string>
     <string>20км</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_9">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorScale30">
    <property name="geometry">
     <rect>
      <x>610</x>
@@ -407,7 +431,7 @@ background-position: center;</string>
     <string>30км</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorBrightness_2">
+  <widget class="QToolButton" name="ChangeEquingularLocatorMode">
    <property name="geometry">
     <rect>
      <x>724</x>
@@ -415,6 +439,9 @@ background-position: center;</string>
      <width>32</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/knob);
@@ -425,7 +452,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_10">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorModePASS">
    <property name="geometry">
     <rect>
      <x>680</x>
@@ -438,7 +465,7 @@ background-position: center;</string>
     <string>ПАСС</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_11">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorModeSMESH">
    <property name="geometry">
     <rect>
      <x>720</x>
@@ -451,7 +478,7 @@ background-position: center;</string>
     <string>СМЕШ</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_12">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorModeAKT">
    <property name="geometry">
     <rect>
      <x>770</x>
@@ -464,7 +491,7 @@ background-position: center;</string>
     <string>АКТ</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_13">
+  <widget class="QLabel" name="LabelChangeEquingularLocatorMode">
    <property name="geometry">
     <rect>
      <x>695</x>
@@ -477,7 +504,7 @@ background-position: center;</string>
     <string>ВЫБОР ВИДЕО</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_14">
+  <widget class="QLabel" name="LabelChangeMainLocatorScale">
    <property name="geometry">
     <rect>
      <x>275</x>
@@ -490,7 +517,7 @@ background-position: center;</string>
     <string>МАСШТАБ</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_15">
+  <widget class="QLabel" name="LabelChangeMainLocatorScale90">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -503,7 +530,7 @@ background-position: center;</string>
     <string>90км</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_16">
+  <widget class="QLabel" name="LabelChangeMainLocatorScale150">
    <property name="geometry">
     <rect>
      <x>335</x>
@@ -513,10 +540,10 @@ background-position: center;</string>
     </rect>
    </property>
    <property name="text">
-    <string>100км</string>
+    <string>150км</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_17">
+  <widget class="QLabel" name="LabelChangeMainLocatorScale45">
    <property name="geometry">
     <rect>
      <x>245</x>
@@ -526,10 +553,10 @@ background-position: center;</string>
     </rect>
    </property>
    <property name="text">
-    <string>40км</string>
+    <string>45км</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="ChangeEquingularLocatorBrightness_3">
+  <widget class="QToolButton" name="ChangeMainLocatorScale">
    <property name="geometry">
     <rect>
      <x>289</x>
@@ -537,6 +564,9 @@ background-position: center;</string>
      <width>32</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/knob);
@@ -547,7 +577,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_18">
+  <widget class="QLabel" name="LabelChangeMainLocatorMagnificationPASS">
    <property name="geometry">
     <rect>
      <x>171</x>
@@ -560,7 +590,7 @@ background-position: center;</string>
     <string>ПАССИВ.</string>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_19">
+  <widget class="QLabel" name="LabelChangeMainLocatorMagnificationAKT">
    <property name="geometry">
     <rect>
      <x>114</x>
@@ -582,6 +612,9 @@ background-position: center;</string>
      <height>32</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
 background-repeat: no-repeat;
@@ -591,7 +624,7 @@ background-position: center;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="LabelChangeEquingularLocatorFocus_20">
+  <widget class="QLabel" name="LabelChangeMainLocatorMagnification">
    <property name="geometry">
     <rect>
      <x>111</x>
@@ -613,6 +646,9 @@ background-position: center;</string>
      <height>32</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>OpenHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">border-image: url(:/buttons/reo_knob.png);
 background-repeat: no-repeat;
@@ -625,15 +661,15 @@ background-position: center;</string>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>600</x>
      <y>320</y>
-     <width>177</width>
+     <width>289</width>
      <height>87</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <widget class="QLabel" name="LabelChangeMainLocatorBrightnessMarks">
+     <widget class="QLabel" name="LabelChangeRightTriangleBrightnessMarks">
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ЯРКОСТЬ МЕТОК&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
@@ -643,13 +679,16 @@ background-position: center;</string>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QToolButton" name="ChangeMainLocatorBrightnessMarksRange">
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QToolButton" name="ChangeRightTriangleBrightnessMarksRange">
           <property name="minimumSize">
            <size>
             <width>32</width>
             <height>32</height>
            </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>OpenHandCursor</cursorShape>
           </property>
           <property name="layoutDirection">
            <enum>Qt::LeftToRight</enum>
@@ -664,8 +703,8 @@ background-position: center;</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="LabelChangeMainLocatorBrightnessMarksRange">
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="LabelChangeRightTriangleBrightnessMarksRange">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ДАЛЬНОСТИ&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -675,13 +714,16 @@ background-position: center;</string>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QToolButton" name="ChangeMainLocatorBrightnessMarksAzimuth">
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QToolButton" name="ChangeRightTriangleBrightnessMarksAzimuth">
           <property name="minimumSize">
            <size>
             <width>32</width>
             <height>32</height>
            </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>OpenHandCursor</cursorShape>
           </property>
           <property name="layoutDirection">
            <enum>Qt::LeftToRight</enum>
@@ -696,8 +738,8 @@ background-position: center;</string>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="LabelChangeMainLocatorBrightnessMarksAzimuth">
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QLabel" name="LabelChangeRightTriangleBrightnessMarksAzimuth">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;УГЛОВОЙ&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -709,6 +751,46 @@ background-position: center;</string>
     </item>
    </layout>
   </widget>
+  <zorder>RenderRightTrinagleLocator</zorder>
+  <zorder>RenderEquingularTriangleLocator</zorder>
+  <zorder>RenderMainLocator</zorder>
+  <zorder>ChangeRightTriangleFocus</zorder>
+  <zorder>LabelChangeRightTriangleFocus</zorder>
+  <zorder>ChangeRightTriangleBrightness</zorder>
+  <zorder>LabelChangeRightTriangleBrightness</zorder>
+  <zorder>ChangeMainLocatorBrightness</zorder>
+  <zorder>ChangeMainLocatorFocus</zorder>
+  <zorder>LabelChangeMainLocatorFocus</zorder>
+  <zorder>LabelChangeMainLocatorBrightness</zorder>
+  <zorder>ChangeEquingularLocatorMagnificationSDC</zorder>
+  <zorder>ChangeEquingularLocatorMagnificationPASS</zorder>
+  <zorder>ChangeEquingularLocatorMagnificationAKT</zorder>
+  <zorder>LabelChangeEquingularLocatorMagnification</zorder>
+  <zorder>LabelChangeEquingularLocatorMagnificationSDC</zorder>
+  <zorder>LabelChangeEquingularLocatorMagnificationPASS</zorder>
+  <zorder>LabelChangeEquingularLocatorMagnificationAKT</zorder>
+  <zorder>ChangeEquingularLocatorScale</zorder>
+  <zorder>LabelChangeEquingularLocatorScale</zorder>
+  <zorder>LabelChangeEquingularLocatorScale60</zorder>
+  <zorder>LabelChangeEquingularLocatorScale20</zorder>
+  <zorder>LabelChangeEquingularLocatorScale30</zorder>
+  <zorder>ChangeEquingularLocatorMode</zorder>
+  <zorder>LabelChangeEquingularLocatorModePASS</zorder>
+  <zorder>LabelChangeEquingularLocatorModeSMESH</zorder>
+  <zorder>LabelChangeEquingularLocatorModeAKT</zorder>
+  <zorder>LabelChangeEquingularLocatorMode</zorder>
+  <zorder>LabelChangeMainLocatorScale</zorder>
+  <zorder>LabelChangeMainLocatorScale90</zorder>
+  <zorder>LabelChangeMainLocatorScale150</zorder>
+  <zorder>LabelChangeMainLocatorScale45</zorder>
+  <zorder>ChangeMainLocatorScale</zorder>
+  <zorder>LabelChangeMainLocatorMagnificationPASS</zorder>
+  <zorder>LabelChangeMainLocatorMagnificationAKT</zorder>
+  <zorder>ChangeEquingularLocatorFocus_6</zorder>
+  <zorder>LabelChangeMainLocatorMagnification</zorder>
+  <zorder>ChangeEquingularLocatorFocus_7</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>LabelChangeRightTriangleBrightnessMarks</zorder>
  </widget>
  <customwidgets>
   <customwidget>
