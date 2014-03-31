@@ -14,6 +14,9 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
     ui->ChangeEquingularLocatorMagnificationAKTSlider->hide();
     ui->ChangeEquingularLocatorScale->clicked();
     ui->ChangeEquingularLocatorMode->clicked();
+
+    ui->ChangeMainLocatorFocusSlider->valueChanged(ui->ChangeMainLocatorFocusSlider->value());
+    ui->ChangeMainLocatorBrightnessSlider->valueChanged(ui->ChangeMainLocatorBrightnessSlider->value());
 }
 
 commonview::~commonview()
@@ -30,7 +33,9 @@ void commonview::on_ChangeMainLocatorFocus_pressed()
 
 void commonview::on_ChangeMainLocatorFocusSlider_valueChanged(int value)
 {
-
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
 void commonview::on_ChangeMainLocatorFocusSlider_sliderReleased()
@@ -53,7 +58,12 @@ void commonview::on_ChangeMainLocatorBrightness_pressed()
 
 void commonview::on_ChangeMainLocatorBrightnessSlider_valueChanged(int value)
 {
-
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    //[З]ui->RenderMainLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->RenderMainLocator->SetSettings("system","lightning",1.0f);
+    ui->RenderMainLocator->SetSettings("system","varu",.0f);
 }
 
 void commonview::on_ChangeMainLocatorBrightnessSlider_sliderReleased()
