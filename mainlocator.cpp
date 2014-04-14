@@ -55,7 +55,7 @@ void MainLocator::resizeGL(int width, int height)
     glEnable(GL_MULTISAMPLE);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, 0.0, 0.0, 1.0, 1.0, -1.0f);
+    glOrtho(.0f, .0f, .0f, 1.0, 1.0, -1.0f);
     if(width>height)
         glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(height),static_cast<GLint>(height));
     else

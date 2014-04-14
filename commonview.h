@@ -74,6 +74,38 @@ private slots:
 
     void on_ChangeEquingularLocatorMode_released();
 
+    void on_ChangeRightTriangleBrightnessMarksRange_pressed();
+
+    void on_ChangeRightTriangleBrightnessMarksRangeSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderPressed();
+
+    void on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderReleased();
+
+    void on_ChangeRightTriangleBrightnessMarksAzimuth_pressed();
+
+    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderPressed();
+
+    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderReleased();
+
+    void on_ChangeRightTriangleFocus_pressed();
+
+    void on_ChangeRightTriangleFocusSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleFocusSlider_sliderPressed();
+
+    void on_ChangeRightTriangleFocusSlider_sliderReleased();
+
+    void on_ChangeRightTriangleBrightness_pressed();
+
+    void on_ChangeRightTriangleBrightnessSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleBrightnessSlider_sliderPressed();
+
+    void on_ChangeRightTriangleBrightnessSlider_sliderReleased();
+
 private:
     Ui::commonview *ui;
 };

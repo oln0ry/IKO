@@ -15,8 +15,24 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
     ui->ChangeEquingularLocatorScale->clicked();
     ui->ChangeEquingularLocatorMode->clicked();
 
+    ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->hide();
+    ui->ChangeRightTriangleBrightnessMarksRangeSlider->hide();
+
+    ui->ChangeRightTriangleFocusSlider->hide();
+    ui->ChangeRightTriangleBrightnessSlider->hide();
+
     ui->ChangeMainLocatorFocusSlider->valueChanged(ui->ChangeMainLocatorFocusSlider->value());
     ui->ChangeMainLocatorBrightnessSlider->valueChanged(ui->ChangeMainLocatorBrightnessSlider->value());
+
+    ui->ChangeRightTriangleBrightnessSlider->valueChanged(ui->ChangeRightTriangleBrightnessSlider->value());
+    ui->ChangeRightTriangleFocusSlider->valueChanged(ui->ChangeRightTriangleFocusSlider->value());
+
+    ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->valueChanged(ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->value());
+    ui->ChangeRightTriangleBrightnessMarksRangeSlider->valueChanged(ui->ChangeRightTriangleBrightnessMarksRangeSlider->value());
+
+    ui->RenderMainLocator->ChangeFPS(1000/24);
+    ui->RenderEquingularTriangleLocator->ChangeFPS(1000/24);
+    ui->RenderRightTrinagleLocator->ChangeFPS(1000/24);
 }
 
 commonview::~commonview()
@@ -86,7 +102,7 @@ void commonview::on_ChangeMainLocatorMagnificationAKT_pressed()
 
 void commonview::on_ChangeMainLocatorMagnificationAKTSlider_valueChanged(int value)
 {
-
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationAKTSlider_sliderReleased()
@@ -109,7 +125,7 @@ void commonview::on_ChangeMainLocatorMagnificationPASS_pressed()
 
 void commonview::on_ChangeMainLocatorMagnificationPASSSlider_valueChanged(int value)
 {
-
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationPASSSlider_sliderReleased()
@@ -150,13 +166,19 @@ void commonview::on_ChangeMainLocatorScale_clicked()
 
     ui->RenderMainLocator->SetSettings("system","scale",static_cast<quint8>(max));
     /*
-    if(ui->InputScatterTrashFrom->value()>max)
+    if(ui->Iui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(status));nputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
     if(ui->InputScatterTrashTo->value()>max)
         ui->InputScatterTrashTo->setValue(max);
     ui->InputScatterTrashFrom->setMaximum(max);
     ui->InputScatterTrashTo->setMaximum(max);
     */
+    ui->RenderMainLocator->SetSettings("trash","show",true);
+    ui->RenderMainLocator->SetSettings("trash","begin",0);
+    ui->RenderMainLocator->SetSettings("trash","end",static_cast<quint8>(max));
+
+    ui->RenderMainLocator->SetSettings("system","azimuth",2);
+    ui->RenderMainLocator->SetSettings("system","range",2);
 }
 
 void commonview::on_ChangeMainLocatorScale_pressed()
@@ -218,6 +240,9 @@ void commonview::on_ChangeEquingularLocatorScale_clicked()
     }
     ui->RenderEquingularTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
     ui->RenderRightTrinagleLocator->SetSettings("system","scale",static_cast<quint8>(max));
+
+    ui->RenderEquingularTriangleLocator->SetSettings("system","range",2);
+    ui->RenderRightTrinagleLocator->SetSettings("system","range",2);
 }
 
 void commonview::on_ChangeEquingularLocatorScale_pressed()
@@ -261,4 +286,100 @@ void commonview::on_ChangeEquingularLocatorMode_pressed()
 void commonview::on_ChangeEquingularLocatorMode_released()
 {
     ui->ChangeEquingularLocatorMode->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksRange_pressed()
+{
+    ui->ChangeRightTriangleBrightnessMarksRange->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleBrightnessMarksRangeSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleBrightnessMarksRangeSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_valueChanged(int value)
+{
+
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleBrightnessMarksRange->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleBrightnessMarksRangeSlider->hide();
+    ui->ChangeRightTriangleBrightnessMarksRange->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksAzimuth_pressed()
+{
+    ui->ChangeRightTriangleBrightnessMarksAzimuth->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksAzimuthSlider_valueChanged(int value)
+{
+    ui->RenderEquingularTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",0.2f);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","varu",.0f);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleBrightnessMarksAzimuth->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->hide();
+    ui->ChangeRightTriangleBrightnessMarksAzimuth->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleFocus_pressed()
+{
+    ui->ChangeRightTriangleFocus->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleFocusSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleFocusSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleFocusSlider_valueChanged(int value)
+{
+    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void commonview::on_ChangeRightTriangleFocusSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleFocusSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleFocusSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleFocusSlider->hide();
+    ui->ChangeRightTriangleFocus->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightness_pressed()
+{
+    ui->ChangeRightTriangleBrightness->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleBrightnessSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleBrightnessSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleBrightnessSlider_valueChanged(int value)
+{
+    ui->RenderRightTrinagleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->RenderRightTrinagleLocator->SetSettings("system","lightning",0.2f);
+    ui->RenderRightTrinagleLocator->SetSettings("system","varu",.0f);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleBrightnessSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleBrightnessSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleBrightnessSlider->hide();
+    ui->ChangeRightTriangleBrightness->setCursor(Qt::OpenHandCursor);
 }
