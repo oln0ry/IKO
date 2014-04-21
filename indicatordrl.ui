@@ -370,10 +370,10 @@ background-position: center;</string>
                    <cursorShape>ArrowCursor</cursorShape>
                   </property>
                   <property name="minimum">
-                   <number>1</number>
+                   <number>100</number>
                   </property>
                   <property name="maximum">
-                   <number>300</number>
+                   <number>400</number>
                   </property>
                   <property name="singleStep">
                    <number>1</number>

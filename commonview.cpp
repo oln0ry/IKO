@@ -1,6 +1,10 @@
 #include "commonview.h"
 #include "ui_commonview.h"
 
+#ifndef FPS
+#define FPS 1000/24
+#endif
+
 commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
 {
     ui->setupUi(this);
@@ -28,6 +32,8 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
 
     ui->ChangeMainLocatorFocusSlider->valueChanged(ui->ChangeMainLocatorFocusSlider->value());
     ui->ChangeMainLocatorBrightnessSlider->valueChanged(ui->ChangeMainLocatorBrightnessSlider->value());
+    ui->ChangeMainLocatorBrightnessSlider->sliderReleased();
+    ui->ChangeRightTriangleBrightnessSlider->sliderReleased();
 
     ui->ChangeRightTriangleBrightnessSlider->valueChanged(ui->ChangeRightTriangleBrightnessSlider->value());
     ui->ChangeRightTriangleFocusSlider->valueChanged(ui->ChangeRightTriangleFocusSlider->value());
@@ -35,9 +41,9 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
     ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->valueChanged(ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->value());
     ui->ChangeRightTriangleBrightnessMarksRangeSlider->valueChanged(ui->ChangeRightTriangleBrightnessMarksRangeSlider->value());
 
-    ui->RenderMainLocator->ChangeFPS(1000/24);
-    ui->RenderEquingularTriangleLocator->ChangeFPS(1000/24);
-    ui->RenderRightTrinagleLocator->ChangeFPS(1000/24);
+    ui->RenderMainLocator->ChangeFPS(FPS);
+    ui->RenderEquingularTriangleLocator->ChangeFPS(FPS);
+    ui->RenderRightTrinagleLocator->ChangeFPS(FPS);
 }
 
 commonview::~commonview()
@@ -63,11 +69,15 @@ void commonview::on_ChangeMainLocatorFocusSlider_sliderReleased()
 {
     ui->ChangeMainLocatorFocusSlider->hide();
     ui->ChangeMainLocatorFocus->setCursor(Qt::OpenHandCursor);
+    if(!ui->RenderMainLocator->IsActive())
+        ui->RenderMainLocator->ChangeFPS(FPS);
 }
 
 void commonview::on_ChangeMainLocatorFocusSlider_sliderPressed()
 {
     ui->ChangeMainLocatorFocusSlider->setCursor(Qt::ClosedHandCursor);
+    if(ui->RenderMainLocator->IsActive())
+        ui->RenderMainLocator->ChangeFPS(0);
 }
 
 void commonview::on_ChangeMainLocatorBrightness_pressed()
@@ -81,21 +91,33 @@ void commonview::on_ChangeMainLocatorBrightnessSlider_valueChanged(int value)
 {
     if(value<0)
         return;
+    /*
+    //ТОРМОЗА
     ui->RenderMainLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
     //[З]ui->RenderMainLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
     ui->RenderMainLocator->SetSettings("system","lightning",1.0f);
     ui->RenderMainLocator->SetSettings("system","varu",.0f);
+    */
 }
 
 void commonview::on_ChangeMainLocatorBrightnessSlider_sliderReleased()
 {
     ui->ChangeMainLocatorBrightnessSlider->hide();
     ui->ChangeMainLocatorBrightness->setCursor(Qt::OpenHandCursor);
+    if(!ui->RenderMainLocator->IsActive())
+        ui->RenderMainLocator->ChangeFPS(FPS);
+
+    ui->RenderMainLocator->SetSettings("system","brightness",static_cast<qreal>(ui->ChangeMainLocatorBrightnessSlider->value())/100);
+    //[З]ui->RenderMainLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->RenderMainLocator->SetSettings("system","lightning",1.0f);
+    ui->RenderMainLocator->SetSettings("system","varu",.0f);
 }
 
 void commonview::on_ChangeMainLocatorBrightnessSlider_sliderPressed()
 {
     ui->ChangeMainLocatorBrightnessSlider->setCursor(Qt::ClosedHandCursor);
+    if(ui->RenderMainLocator->IsActive())
+        ui->RenderMainLocator->ChangeFPS(0);
 }
 
 void commonview::on_ChangeMainLocatorMagnificationAKT_pressed()
@@ -107,13 +129,14 @@ void commonview::on_ChangeMainLocatorMagnificationAKT_pressed()
 
 void commonview::on_ChangeMainLocatorMagnificationAKTSlider_valueChanged(int value)
 {
-    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    //ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationAKTSlider_sliderReleased()
 {
     ui->ChangeMainLocatorMagnificationAKTSlider->hide();
     ui->ChangeMainLocatorMagnificationAKT->setCursor(Qt::OpenHandCursor);
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(ui->ChangeMainLocatorMagnificationAKTSlider->value()));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationAKTSlider_sliderPressed()
@@ -130,13 +153,15 @@ void commonview::on_ChangeMainLocatorMagnificationPASS_pressed()
 
 void commonview::on_ChangeMainLocatorMagnificationPASSSlider_valueChanged(int value)
 {
-    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    //ТОРМОЗА
+    //ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationPASSSlider_sliderReleased()
 {
     ui->ChangeMainLocatorMagnificationPASSSlider->hide();
     ui->ChangeMainLocatorMagnificationPASS->setCursor(Qt::OpenHandCursor);
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(ui->ChangeMainLocatorMagnificationPASSSlider->value()));
 }
 
 void commonview::on_ChangeMainLocatorMagnificationPASSSlider_sliderPressed()
@@ -323,12 +348,21 @@ void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_valueChanged(i
 void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderPressed()
 {
     ui->ChangeRightTriangleBrightnessMarksRange->setCursor(Qt::ClosedHandCursor);
+    if(ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(0);
+    if(ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(0);
 }
 
 void commonview::on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderReleased()
 {
     ui->ChangeRightTriangleBrightnessMarksRangeSlider->hide();
     ui->ChangeRightTriangleBrightnessMarksRange->setCursor(Qt::OpenHandCursor);
+
+    if(!ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(FPS);
+    if(!ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(FPS);
 }
 
 void commonview::on_ChangeRightTriangleBrightnessMarksAzimuth_pressed()
@@ -365,19 +399,30 @@ void commonview::on_ChangeRightTriangleFocus_pressed()
 
 void commonview::on_ChangeRightTriangleFocusSlider_valueChanged(int value)
 {
-    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+    //ТОРМОЗА
+    //ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+    //ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
 void commonview::on_ChangeRightTriangleFocusSlider_sliderPressed()
 {
     ui->ChangeRightTriangleFocusSlider->setCursor(Qt::ClosedHandCursor);
+    if(ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(0);
+    if(ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(0);
 }
 
 void commonview::on_ChangeRightTriangleFocusSlider_sliderReleased()
 {
     ui->ChangeRightTriangleFocusSlider->hide();
     ui->ChangeRightTriangleFocus->setCursor(Qt::OpenHandCursor);
+    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(ui->ChangeRightTriangleFocusSlider->value())/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(ui->ChangeRightTriangleFocusSlider->value())/100);
+    if(!ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(FPS);
+    if(!ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(FPS);
 }
 
 void commonview::on_ChangeRightTriangleBrightness_pressed()
@@ -389,23 +434,43 @@ void commonview::on_ChangeRightTriangleBrightness_pressed()
 
 void commonview::on_ChangeRightTriangleBrightnessSlider_valueChanged(int value)
 {
+    /*
+    //ТОРМОЗА
     ui->RenderRightTrinagleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
     ui->RenderRightTrinagleLocator->SetSettings("system","lightning",0.2f);
     ui->RenderRightTrinagleLocator->SetSettings("system","varu",.0f);
     ui->RenderEquingularTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
     ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",0.2f);
     ui->RenderEquingularTriangleLocator->SetSettings("system","varu",.0f);
+    */
 }
 
 void commonview::on_ChangeRightTriangleBrightnessSlider_sliderPressed()
 {
     ui->ChangeRightTriangleBrightnessSlider->setCursor(Qt::ClosedHandCursor);
+    if(ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(0);
+    if(ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(0);
 }
 
 void commonview::on_ChangeRightTriangleBrightnessSlider_sliderReleased()
 {
     ui->ChangeRightTriangleBrightnessSlider->hide();
     ui->ChangeRightTriangleBrightness->setCursor(Qt::OpenHandCursor);
+
+    ui->RenderRightTrinagleLocator->SetSettings("system","brightness",static_cast<qreal>(ui->ChangeRightTriangleBrightnessSlider->value())/100);
+    ui->RenderRightTrinagleLocator->SetSettings("system","lightning",0.2f);
+    ui->RenderRightTrinagleLocator->SetSettings("system","varu",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(ui->ChangeRightTriangleBrightnessSlider->value())/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",0.2f);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","varu",.0f);
+
+
+    if(!ui->RenderRightTrinagleLocator->IsActive())
+        ui->RenderRightTrinagleLocator->ChangeFPS(FPS);
+    if(!ui->RenderEquingularTriangleLocator->IsActive())
+        ui->RenderEquingularTriangleLocator->ChangeFPS(FPS);
 }
 
 void commonview::on_SetTargetsSettings_clicked()
@@ -470,7 +535,6 @@ void commonview::on_CheckActiveNoiseShow_stateChanged(int arg1)
 void commonview::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
 {
     ui->RenderMainLocator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
-
 }
 
 void commonview::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)

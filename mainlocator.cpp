@@ -545,7 +545,7 @@ void MainLocator::LocatorArea() const
 void MainLocator::DrawStation() const
 {
     glRotatef(30.0f,.0f,.0f,1.0f);
-    glLineWidth(2.0f);
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glColor3f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262));
     qreal
         distance=CalcScaleValue(1.0f),
