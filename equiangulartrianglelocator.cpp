@@ -236,13 +236,24 @@ void EquiangularTriangleLocator::GenerationAzimuth()
             delta=10u;
     }
     LineEntity cache;
-    for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
+
+    for(Points *i=radians_triangle_ray+radians_size-TRIANGLE_ANGLE,*k=radians_triangle_ray+radians_size;i<k;i+=delta)
     {
         cache.width=(i-radians)%30u>0u ? 1.0f : 3.5f;
         cache.Coordinates=new Points[1];
         cache.Coordinates->angle=i->angle;
-        cache.Coordinates->x=i->x;
-        cache.Coordinates->y=i->y;
+        cache.Coordinates->x=i->x+124;
+        cache.Coordinates->y=i->y+124;
+        azimuth.append(cache);
+    }
+
+    for(Points *i=radians_triangle_ray,*k=radians_triangle_ray+TRIANGLE_ANGLE;i<k;i+=delta)
+    {
+        cache.width=(i-radians)%30u>0u ? 1.0f : 3.5f;
+        cache.Coordinates=new Points[1];
+        cache.Coordinates->angle=i->angle;
+        cache.Coordinates->x=i->x+124;
+        cache.Coordinates->y=i->y+124;
         azimuth.append(cache);
     }
 }

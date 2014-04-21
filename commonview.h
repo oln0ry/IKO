@@ -126,6 +126,12 @@ private slots:
 
     void on_ChangeEquingularLocatorMagnificationAKTSlider_sliderReleased();
 
+    void on_CheckActiveNoiseShow_stateChanged(int arg1);
+
+    void on_InputActiveNoiseAzimuth_valueChanged(int arg1);
+
+    void on_SelectActiveNoiseIntensity_currentIndexChanged(int index);
+
 private:
     QPointer<TargetsSettings>tsettings;
     Ui::commonview *ui;

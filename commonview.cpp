@@ -15,6 +15,11 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
     ui->ChangeEquingularLocatorScale->clicked();
     ui->ChangeEquingularLocatorMode->clicked();
 
+    QStringList intensity;
+    intensity<<"Слабая"<<"Средняя"<<"Сильная";
+    ui->SelectActiveNoiseIntensity->addItems(intensity);
+    ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
+
     ui->ChangeRightTriangleBrightnessMarksAzimuthSlider->hide();
     ui->ChangeRightTriangleBrightnessMarksRangeSlider->hide();
 
@@ -455,4 +460,20 @@ void commonview::on_ChangeEquingularLocatorMagnificationAKTSlider_sliderPressed(
 void commonview::on_ChangeEquingularLocatorMagnificationAKTSlider_sliderReleased()
 {
     ui->ChangeEquingularLocatorMagnificationAKTSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_CheckActiveNoiseShow_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","show",static_cast<quint16>(arg1));
+}
+
+void commonview::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
+
+}
+
+void commonview::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
 }
