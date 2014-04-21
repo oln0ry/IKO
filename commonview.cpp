@@ -60,8 +60,7 @@ void commonview::on_ChangeMainLocatorFocus_pressed()
 
 void commonview::on_ChangeMainLocatorFocusSlider_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderMainLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
@@ -417,8 +416,10 @@ void commonview::on_ChangeRightTriangleFocusSlider_sliderReleased()
 {
     ui->ChangeRightTriangleFocusSlider->hide();
     ui->ChangeRightTriangleFocus->setCursor(Qt::OpenHandCursor);
-    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(ui->ChangeRightTriangleFocusSlider->value())/100);
-    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(ui->ChangeRightTriangleFocusSlider->value())/100);
+    int focus=ui->ChangeRightTriangleFocusSlider->value();
+    focus=focus>=0 ? focus+100 : 100-focus;
+    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(focus)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(focus)/100);
     if(!ui->RenderRightTrinagleLocator->IsActive())
         ui->RenderRightTrinagleLocator->ChangeFPS(FPS);
     if(!ui->RenderEquingularTriangleLocator->IsActive())

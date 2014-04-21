@@ -104,8 +104,7 @@ void IndicatorDRL::on_ChangeDisplayLightning_valueChanged(int value)
 
 void IndicatorDRL::on_ChangeIndicatorFocus_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 

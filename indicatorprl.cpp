@@ -84,8 +84,7 @@ void IndicatorPRL::on_ChangeIndicatorBrightnessEquiangular_valueChanged(int valu
 
 void IndicatorPRL::on_ChangeIndicatorFocusEquiangular_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderEquiangularIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
@@ -204,8 +203,7 @@ void IndicatorPRL::on_ChangeIndicatorBrightnessRightTriangle_valueChanged(int va
 
 void IndicatorPRL::on_ChangeIndicatorFocusRightTriangle_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderRightTriangleIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 

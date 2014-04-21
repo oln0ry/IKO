@@ -790,13 +790,13 @@ background-position: center;</string>
     <cursorShape>OpenHandCursor</cursorShape>
    </property>
    <property name="minimum">
-    <number>100</number>
+    <number>-300</number>
    </property>
    <property name="maximum">
-    <number>400</number>
+    <number>300</number>
    </property>
    <property name="value">
-    <number>100</number>
+    <number>0</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -914,13 +914,13 @@ background-position: center;</string>
     </rect>
    </property>
    <property name="minimum">
-    <number>100</number>
+    <number>-300</number>
    </property>
    <property name="maximum">
-    <number>400</number>
+    <number>300</number>
    </property>
    <property name="value">
-    <number>100</number>
+    <number>0</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
