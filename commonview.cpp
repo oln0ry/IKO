@@ -16,6 +16,17 @@ commonview::commonview(QWidget *parent) : QWidget(parent),ui(new Ui::commonview)
     ui->ChangeEquingularLocatorMagnificationSDCSlider->hide();
     ui->ChangeEquingularLocatorMagnificationPASSSlider->hide();
     ui->ChangeEquingularLocatorMagnificationAKTSlider->hide();
+
+    ui->ChangeRightTriangleAmplHorizontalSlider->hide();
+    ui->ChangeRightTriangleAmplVerticalSlider->hide();
+    ui->ChangeRightTriangleOffsetlHorizontalSlider->hide();
+    ui->ChangeRightTriangleOffsetlVerticalSlider->hide();
+
+    ui->ChangeEquingularTriangleAmplHorizontalSlider->hide();
+    ui->ChangeEquingularTriangleAmplVerticalSlider->hide();
+    ui->ChangeEquingularTriangleOffsetHorizontalSlider->hide();
+    ui->ChangeEquingularTriangleOffsetVerticalSlider->hide();
+
     ui->ChangeEquingularLocatorScale->clicked();
     ui->ChangeEquingularLocatorMode->clicked();
 

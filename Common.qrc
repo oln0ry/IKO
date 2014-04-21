@@ -7,6 +7,7 @@
         <file>switch_up.png</file>
         <file>switch_down.png</file>
         <file>switch_base.png</file>
+        <file>knob_sixty.png</file>
     </qresource>
     <qresource prefix="/patterns" lang="ru">
         <file>background.png</file>
