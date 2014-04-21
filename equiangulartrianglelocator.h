@@ -18,6 +18,7 @@ class EquiangularTriangleLocator : public MainLocator
     public:
         explicit EquiangularTriangleLocator(QWidget *parent = 0);
         virtual void GenerationRange();
+        virtual void GenerationAzimuth();
 
     protected:
         void initializeGL();
@@ -26,6 +27,7 @@ class EquiangularTriangleLocator : public MainLocator
         void LocatorArea() const;
         void DrawStation() const;
         void DrawRange() const;
+        void DrawAzimuth() const;
         virtual void GenerationRay();
         qreal CalcAlpha(qreal angle) const;
         Points radians_triangle_ray[ANGLE_RANGE];

@@ -1,3 +1,4 @@
+#include<QHBoxLayout>
 #include"mainlocator.h"
 #include"targetssettings.h"
 
@@ -61,6 +62,8 @@ void MainLocator::resizeGL(int width, int height)
     else
         glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(width),static_cast<GLint>(width));
     glMatrixMode(GL_MODELVIEW);
+    this->width=width;
+    this->height=height;
 }
 
 void MainLocator::paintGL()
@@ -68,13 +71,14 @@ void MainLocator::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // чистим буфер изображения и буфер глубины
     glLoadIdentity(); // загружаем матрицу
     glPushMatrix();
-    glLineWidth(2.0f*1u*settings["system"]["focus"].toDouble());
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     LocatorArea();
     DrawStation();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),settings["system"]["brightness"].toFloat());//перерисовка линии
     glRotatef(90.0f,.0f,.0f,1.0);
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
         glVertex2d(static_cast<GLdouble>(.0f),static_cast<GLdouble>(.0f));
         glVertex2d((*ray_position)->x,(*ray_position)->y);
@@ -95,6 +99,23 @@ void MainLocator::paintGL()
         DrawTargets();
 
     glPopMatrix();
+}
+
+/**
+ * Увеличение индикатора
+ */
+void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
+{
+
+    if(parentWidget()->isMaximized())
+    {
+        resize(300,300);
+    }
+    else
+    {
+        resize(height,height);
+    }
+    //updateGL();
 }
 
 void MainLocator::ChangeFPS(qreal fps)
@@ -202,7 +223,7 @@ void MainLocator::DrawRange() const
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
     {
-        glLineWidth(it->width);
+        glLineWidth(it->width*settings["system"]["focus"].toDouble());
         glBegin(GL_LINE_STRIP);
         for(Points *i=it->Coordinates,*end=it->Coordinates+radians_size;i<end;i++)
         {

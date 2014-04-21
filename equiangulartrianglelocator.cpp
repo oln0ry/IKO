@@ -62,12 +62,15 @@ void EquiangularTriangleLocator::paintGL()
     glRotatef(270.0f,.0f,.0f,1.0f);
     glTranslatef(-GRID_OFFSET,.0f,.0f);
     DrawStation();
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
         glVertex2d(.0f,.0f);
         glVertex2d((*ray_position)->x,(*ray_position)->y);
     glEnd();
     if(!range.isEmpty())
         DrawRange();
+    //if(!azimuth.isEmpty())
+        //DrawAzimuth();
     if(!Cache.trash.isEmpty())
         DrawTrash();
 
@@ -215,6 +218,55 @@ void EquiangularTriangleLocator::DrawRange() const
             }
         }
         glEnd();
+    }
+}
+
+void EquiangularTriangleLocator::GenerationAzimuth()
+{
+    quint8 delta;
+    azimuth.clear();
+    switch(settings["system"]["azimuth"].toUInt())
+    {
+        case 1:
+            delta=30u;
+            break;
+        case 0:
+            return;
+        default:
+            delta=10u;
+    }
+    LineEntity cache;
+    for(Points *i=radians,*k=radians+radians_size;i<k;i+=delta)
+    {
+        cache.width=(i-radians)%30u>0u ? 1.0f : 3.5f;
+        cache.Coordinates=new Points[1];
+        cache.Coordinates->angle=i->angle;
+        cache.Coordinates->x=i->x;
+        cache.Coordinates->y=i->y;
+        azimuth.append(cache);
+    }
+}
+
+/**
+ * Отрисовка меток азимута
+ * @brief MainLocator::DrawAzimuth
+ */
+void EquiangularTriangleLocator::DrawAzimuth() const
+{
+    qreal alpha;
+    for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
+    {
+        alpha=CalcAlpha(it->Coordinates->angle);
+        if(alpha>.0f)
+        {
+            glLineWidth(it->width*settings["system"]["focus"].toDouble());
+            alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
+            glBegin(GL_LINES);
+            glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());
+            glVertex2d(.0f,.0f);
+            glVertex2f(it->Coordinates->x,it->Coordinates->y);
+            glEnd();
+        }
     }
 }
 

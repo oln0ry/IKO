@@ -205,7 +205,7 @@
           <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>300</number>
          </property>
          <property name="singleStep">
           <number>1</number>
@@ -437,7 +437,7 @@
           <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <number>300</number>
          </property>
          <property name="singleStep">
           <number>1</number>

@@ -20,6 +20,7 @@
 #include<QBasicTimer>
 #include<QTimerEvent>
 #include<QDebug>
+#include<QMouseEvent>
 #include"helper.h"
 
 //Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
@@ -67,6 +68,7 @@ class MainLocator : public QGLWidget
         void initializeGL();
         void resizeGL(int width, int height);
         void paintGL();
+        void mouseDoubleClickEvent(QMouseEvent  *event);
         virtual void ContinueSearch();
         void DrawStation() const;
         void LocatorArea() const;
@@ -90,7 +92,7 @@ class MainLocator : public QGLWidget
             QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
         }Cache;
-        QVector<LineEntity>range;
+        QVector<LineEntity>range,azimuth;
         QVector<Points*>::const_iterator ray_position;
         QVector<Points*>circle,ray;
         QBasicTimer timer;
@@ -102,8 +104,8 @@ class MainLocator : public QGLWidget
     private:
         void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
         QColorDialog* Color;
-        QVector<LineEntity>azimuth;
         QMap<QString,QColor>color;
+        int width,height;
 
      protected slots:
 

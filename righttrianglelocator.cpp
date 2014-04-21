@@ -42,7 +42,7 @@ void RightTriangleLocator::resizeGL(int width, int height)
     glEnable(GL_MULTISAMPLE);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, 0.0, 0.0, 1.0, 1.0, -1.0f);
+    glOrtho(.0f, .0f, .0f, 1.0, 1.0, -1.0f);
     if(width>height)
         glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(height),static_cast<GLint>(height));
     else
@@ -58,9 +58,10 @@ void RightTriangleLocator::paintGL()
     glEnable(GL_BLEND);
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
-    glRotatef(0.0f,.0f,.0f,1.0f);
+    glRotatef(.0f,.0f,.0f,1.0f);
     glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)),.0f);
     DrawStation();
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
         glVertex2d(.0f,.0f);
         glVertex2d((*ray_position)->x,(*ray_position)->y);

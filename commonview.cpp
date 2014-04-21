@@ -177,8 +177,8 @@ void commonview::on_ChangeMainLocatorScale_clicked()
     ui->RenderMainLocator->SetSettings("trash","begin",0);
     ui->RenderMainLocator->SetSettings("trash","end",static_cast<quint8>(max));
 
-    ui->RenderMainLocator->SetSettings("system","azimuth",2);
-    ui->RenderMainLocator->SetSettings("system","range",2);
+    ui->RenderMainLocator->SetSettings("system","azimuth",2u);
+    ui->RenderMainLocator->SetSettings("system","range",1u);
 }
 
 void commonview::on_ChangeMainLocatorScale_pressed()
@@ -200,7 +200,8 @@ void commonview::on_ChangeEquingularLocatorMagnificationSDC_pressed()
 
 void commonview::on_ChangeEquingularLocatorMagnificationSDCSlider_valueChanged(int value)
 {
-
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTrinagleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
 }
 
 void commonview::on_ChangeEquingularLocatorMagnificationSDCSlider_sliderReleased()
@@ -227,22 +228,36 @@ void commonview::on_ChangeEquingularLocatorScale_clicked()
     {
         case 0:
             ui->ChangeEquingularLocatorScale->setStyleSheet("border-image: url(:/buttons/switch_up);background-repeat: no-repeat;background-position: center;");
-            max=45.0f;
+            max=60.0f;
             break;
         case 1:
             ui->ChangeEquingularLocatorScale->setStyleSheet("border-image: url(:/buttons/switch_base);background-repeat: no-repeat;background-position: center;");
-            max=90.0f;
+            max=20.0f;
             break;
         case 2:
             ui->ChangeEquingularLocatorScale->setStyleSheet("border-image: url(:/buttons/switch_down);background-repeat: no-repeat;background-position: center;");
-            max=150.0f;
+            max=30.0f;
             break;
     }
     ui->RenderEquingularTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
     ui->RenderRightTrinagleLocator->SetSettings("system","scale",static_cast<quint8>(max));
 
-    ui->RenderEquingularTriangleLocator->SetSettings("system","range",2);
-    ui->RenderRightTrinagleLocator->SetSettings("system","range",2);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","range",1u);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","azimuth",1u);
+
+    ui->RenderRightTrinagleLocator->SetSettings("system","range",1u);
+    ui->RenderRightTrinagleLocator->SetSettings("system","azimuth",1u);
+
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","show",true);
+    //ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","begin",0);
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","end",static_cast<quint8>(max));
+
+    ui->RenderRightTrinagleLocator->SetSettings("trash","show",true);
+    //ui->RenderRightTrinagleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTrinagleLocator->SetSettings("trash","begin",0);
+    ui->RenderRightTrinagleLocator->SetSettings("trash","end",static_cast<quint8>(max));
+
 }
 
 void commonview::on_ChangeEquingularLocatorScale_pressed()
@@ -346,6 +361,7 @@ void commonview::on_ChangeRightTriangleFocus_pressed()
 void commonview::on_ChangeRightTriangleFocusSlider_valueChanged(int value)
 {
     ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
 void commonview::on_ChangeRightTriangleFocusSlider_sliderPressed()
@@ -371,6 +387,9 @@ void commonview::on_ChangeRightTriangleBrightnessSlider_valueChanged(int value)
     ui->RenderRightTrinagleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
     ui->RenderRightTrinagleLocator->SetSettings("system","lightning",0.2f);
     ui->RenderRightTrinagleLocator->SetSettings("system","varu",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",0.2f);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","varu",.0f);
 }
 
 void commonview::on_ChangeRightTriangleBrightnessSlider_sliderPressed()
@@ -382,4 +401,58 @@ void commonview::on_ChangeRightTriangleBrightnessSlider_sliderReleased()
 {
     ui->ChangeRightTriangleBrightnessSlider->hide();
     ui->ChangeRightTriangleBrightness->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_SetTargetsSettings_clicked()
+{
+    tsettings=new TargetsSettings;
+    tsettings->show();
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationPASS_pressed()
+{
+    ui->ChangeEquingularLocatorMagnificationPASS->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularLocatorMagnificationPASSSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularLocatorMagnificationPASSSlider->show();
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationPASSSlider_valueChanged(int value)
+{
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTrinagleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationPASSSlider_sliderPressed()
+{
+    ui->ChangeEquingularLocatorMagnificationPASSSlider->hide();
+    ui->ChangeEquingularLocatorMagnificationPASS->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationPASSSlider_sliderReleased()
+{
+    ui->ChangeEquingularLocatorMagnificationPASSSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationAKT_pressed()
+{
+    ui->ChangeEquingularLocatorMagnificationAKT->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularLocatorMagnificationAKTSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularLocatorMagnificationAKTSlider->show();
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationAKTSlider_valueChanged(int value)
+{
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTrinagleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationAKTSlider_sliderPressed()
+{
+    ui->ChangeEquingularLocatorMagnificationAKTSlider->hide();
+    ui->ChangeEquingularLocatorMagnificationAKT->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularLocatorMagnificationAKTSlider_sliderReleased()
+{
+    ui->ChangeEquingularLocatorMagnificationAKTSlider->setCursor(Qt::ClosedHandCursor);
 }

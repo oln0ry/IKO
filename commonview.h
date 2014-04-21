@@ -1,7 +1,9 @@
 #ifndef COMMONVIEW_H
 #define COMMONVIEW_H
 
-#include <QWidget>
+#include<QWidget>
+#include<QPointer>
+#include"targetssettings.h"
 
 namespace Ui {
 class commonview;
@@ -106,7 +108,26 @@ private slots:
 
     void on_ChangeRightTriangleBrightnessSlider_sliderReleased();
 
+    void on_SetTargetsSettings_clicked();
+
+    void on_ChangeEquingularLocatorMagnificationPASS_pressed();
+
+    void on_ChangeEquingularLocatorMagnificationPASSSlider_valueChanged(int value);
+
+    void on_ChangeEquingularLocatorMagnificationPASSSlider_sliderPressed();
+
+    void on_ChangeEquingularLocatorMagnificationPASSSlider_sliderReleased();
+
+    void on_ChangeEquingularLocatorMagnificationAKT_pressed();
+
+    void on_ChangeEquingularLocatorMagnificationAKTSlider_valueChanged(int value);
+
+    void on_ChangeEquingularLocatorMagnificationAKTSlider_sliderPressed();
+
+    void on_ChangeEquingularLocatorMagnificationAKTSlider_sliderReleased();
+
 private:
+    QPointer<TargetsSettings>tsettings;
     Ui::commonview *ui;
 };
 
