@@ -1,11 +1,10 @@
 #include<QHBoxLayout>
 #include"mainlocator.h"
 #include"targetssettings.h"
-#include<QApplication>
-#include<QDesktopWidget>
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
+    FS=nullptr;
     clockwise=true; //По часовой стрелке
     not_clean=false;
     show=false;
@@ -111,8 +110,24 @@ void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
     //MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
     //QGLWidget w(0L,Qt::SplashScreen);
     //w.showFullScreen();
-    this->resize(QApplication::desktop()->size());
-    this->parentWidget()->showFullScreen();
+    //this->resize(QApplication::desktop()->size());
+    //this->parentWidget()->showFullScreen();
+    if(FS==nullptr)
+    {
+        FS=new QMainWindow;
+        Old=parentWidget();
+        parentWidget()->hide();
+        FS->setCentralWidget(this);
+        FS->showFullScreen();
+    }
+    else
+    {
+        Old->show();
+        delete FS;
+        FS=nullptr;
+    }
+
+
     /*if(parentWidget()->isMaximized())
     {
         resize(300,300);

@@ -21,6 +21,7 @@
 #include<QTimerEvent>
 #include<QDebug>
 #include<QMouseEvent>
+#include<QMainWindow>
 #include"helper.h"
 
 //Макрос стырен из Chromium, т.к. это пока лучшее, что можно придумать для подсчёта элементов массива
@@ -100,6 +101,8 @@ class MainLocator : public QGLWidget
         bool not_clean,targets_df;
         void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
         virtual void CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin,qreal end,qreal offset_x,qreal offset_y,qreal intensity,bool ellipse,bool clear);
+        QMainWindow *FS;
+        QWidget *Old;
 
     private:
         void DrawEllipseTrashArea(QVector<PointsPath>storage, quint8 size) const;
