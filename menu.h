@@ -5,7 +5,7 @@
 #include<QPointer>
 #include"indicatordrl.h"
 #include"indicatorprl.h"
-//#include"rspindicators.h"
+#include"rspindicators.h"
 #include"commonview.h"
 
 namespace Ui {
@@ -27,10 +27,13 @@ private slots:
 
     void on_ButtonRSP_clicked();
 
+    void on_ButtonDRLPRL_clicked();
+
 private:
         Ui::Menu *ui;
         QPointer<IndicatorDRL>DRL;
         QPointer<IndicatorPRL>PRL;
+        QPointer<RSPIndicators>DRLPRL;
         QPointer<commonview>RSP;
 };
 

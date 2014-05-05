@@ -132,6 +132,70 @@ private slots:
 
     void on_SelectActiveNoiseIntensity_currentIndexChanged(int index);
 
+    void on_ChangeRightTriangleAmplVertical_pressed();
+
+    void on_ChangeRightTriangleAmplVerticalSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleAmplVerticalSlider_sliderPressed();
+
+    void on_ChangeRightTriangleAmplVerticalSlider_sliderReleased();
+
+    void on_ChangeRightTriangleAmplHorizontal_pressed();
+    
+    void on_ChangeRightTriangleAmplHorizontalSlider_sliderPressed();
+
+    void on_ChangeRightTriangleAmplHorizontalSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleAmplHorizontalSlider_sliderReleased();
+
+    void on_ChangeRightTriangleOffsetlVertical_pressed();
+
+    void on_ChangeRightTriangleOffsetlVerticalSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleOffsetlVerticalSlider_sliderPressed();
+
+    void on_ChangeRightTriangleOffsetlVerticalSlider_sliderReleased();
+
+    void on_ChangeRightTriangleOffsetlHorizontal_pressed();
+
+    void on_ChangeRightTriangleOffsetlHorizontalSlider_valueChanged(int value);
+
+    void on_ChangeRightTriangleOffsetlHorizontalSlider_sliderPressed();
+
+    void on_ChangeRightTriangleOffsetlHorizontalSlider_sliderReleased();
+
+    void on_ChangeEquingularTriangleAmplVertical_pressed();
+
+    void on_ChangeEquingularTriangleAmplVerticalSlider_valueChanged(int value);
+
+    void on_ChangeEquingularTriangleAmplVerticalSlider_sliderPressed();
+
+    void on_ChangeEquingularTriangleAmplVerticalSlider_sliderReleased();
+
+    void on_ChangeEquingularTriangleAmplHorizontal_pressed();
+
+    void on_ChangeEquingularTriangleAmplHorizontalSlider_valueChanged(int value);
+
+    void on_ChangeEquingularTriangleAmplHorizontalSlider_sliderPressed();
+
+    void on_ChangeEquingularTriangleAmplHorizontalSlider_sliderReleased();
+
+    void on_ChangeEquingularTriangleOffsetVertical_pressed();
+
+    void on_ChangeEquingularTriangleOffsetVerticalSlider_valueChanged(int value);
+
+    void on_ChangeEquingularTriangleOffsetVerticalSlider_sliderPressed();
+
+    void on_ChangeEquingularTriangleOffsetVerticalSlider_sliderReleased();
+
+    void on_ChangeEquingularTriangleOffsetHorizontal_pressed();
+
+    void on_ChangeEquingularTriangleOffsetHorizontalSlider_valueChanged(int value);
+
+    void on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderPressed();
+
+    void on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderReleased();
+
 private:
     QPointer<TargetsSettings>tsettings;
     Ui::commonview *ui;

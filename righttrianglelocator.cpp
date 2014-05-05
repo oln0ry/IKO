@@ -59,7 +59,8 @@ void RightTriangleLocator::paintGL()
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
     glRotatef(.0f,.0f,.0f,1.0f);
-    glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)),.0f);
+    //qDebug()<<settings["disposition"]["vertical"].toDouble()/100;
+    glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE))+settings["disposition"]["horizontal"].toDouble()/100,qFastSin(GetRadianValue(-TRIANGLE_ANGLE))+settings["disposition"]["vertical"].toDouble()/100,.0f);
     DrawStation();
     glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
@@ -93,6 +94,7 @@ void RightTriangleLocator::GenerationRay()
 
 void RightTriangleLocator::DrawStation() const
 {
+    //glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)),.0f);
     glLineWidth(2.0f);
     glBegin(GL_LINES);
         glVertex2d(.0f,.0f);

@@ -31,3 +31,9 @@ void Menu::on_ButtonRSP_clicked()
     RSP=new commonview;
     RSP->show();
 }
+
+void Menu::on_ButtonDRLPRL_clicked()
+{
+    DRLPRL=new RSPIndicators;
+    DRLPRL->show();
+}

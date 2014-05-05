@@ -410,8 +410,9 @@ void commonview::on_ChangeRightTriangleFocus_pressed()
 void commonview::on_ChangeRightTriangleFocusSlider_valueChanged(int value)
 {
     //ТОРМОЗА
-    //ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-    //ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderRightTrinagleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
 }
 
 void commonview::on_ChangeRightTriangleFocusSlider_sliderPressed()
@@ -552,4 +553,189 @@ void commonview::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
 void commonview::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
 {
     ui->RenderMainLocator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
+}
+
+void commonview::on_ChangeRightTriangleAmplVertical_pressed()
+{
+    ui->ChangeRightTriangleAmplVertical->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleAmplVerticalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleAmplVerticalSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleAmplVerticalSlider_valueChanged(int value)
+{
+
+}
+
+void commonview::on_ChangeRightTriangleAmplVerticalSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleAmplVerticalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleAmplVerticalSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleAmplVerticalSlider->hide();
+    ui->ChangeRightTriangleAmplVertical->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleAmplHorizontal_pressed()
+{
+    ui->ChangeRightTriangleAmplHorizontal->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleAmplHorizontalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleAmplHorizontalSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleAmplHorizontalSlider_valueChanged(int value)
+{
+
+}
+
+void commonview::on_ChangeRightTriangleAmplHorizontalSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleAmplHorizontalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+
+void commonview::on_ChangeRightTriangleAmplHorizontalSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleAmplHorizontalSlider->hide();
+    ui->ChangeRightTriangleAmplHorizontal->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleOffsetlVertical_pressed()
+{
+    ui->ChangeRightTriangleOffsetlVertical->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleOffsetlVerticalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleOffsetlVerticalSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleOffsetlVerticalSlider_valueChanged(int value)
+{
+    ui->RenderRightTrinagleLocator->SetSettings("disposition","vertical",static_cast<qint16>(value));
+}
+
+void commonview::on_ChangeRightTriangleOffsetlVerticalSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleOffsetlVerticalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleOffsetlVerticalSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleOffsetlVerticalSlider->hide();
+    ui->ChangeRightTriangleOffsetlVertical->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleOffsetlHorizontal_pressed()
+{
+    ui->ChangeRightTriangleOffsetlHorizontal->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeRightTriangleOffsetlHorizontalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTriangleOffsetlHorizontalSlider->show();
+}
+
+void commonview::on_ChangeRightTriangleOffsetlHorizontalSlider_valueChanged(int value)
+{
+    ui->RenderRightTrinagleLocator->SetSettings("disposition","horizontal",static_cast<qint16>(value));
+}
+
+void commonview::on_ChangeRightTriangleOffsetlHorizontalSlider_sliderPressed()
+{
+    ui->ChangeRightTriangleOffsetlHorizontalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeRightTriangleOffsetlHorizontalSlider_sliderReleased()
+{
+    ui->ChangeRightTriangleOffsetlHorizontalSlider->hide();
+    ui->ChangeRightTriangleOffsetlHorizontal->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleAmplVertical_pressed()
+{
+    ui->ChangeEquingularTriangleAmplVertical->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularTriangleAmplVerticalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularTriangleAmplVerticalSlider->show();
+}
+
+void commonview::on_ChangeEquingularTriangleAmplVerticalSlider_valueChanged(int value)
+{
+
+}
+
+void commonview::on_ChangeEquingularTriangleAmplVerticalSlider_sliderPressed()
+{
+    ui->ChangeEquingularTriangleAmplVerticalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleAmplVerticalSlider_sliderReleased()
+{
+    ui->ChangeEquingularTriangleAmplVerticalSlider->hide();
+    ui->ChangeEquingularTriangleAmplVertical->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleAmplHorizontal_pressed()
+{
+    ui->ChangeEquingularTriangleAmplHorizontal->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularTriangleAmplHorizontalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularTriangleAmplHorizontalSlider->show();
+}
+
+void commonview::on_ChangeEquingularTriangleAmplHorizontalSlider_valueChanged(int value)
+{
+
+}
+
+void commonview::on_ChangeEquingularTriangleAmplHorizontalSlider_sliderPressed()
+{
+    ui->ChangeEquingularTriangleAmplHorizontalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleAmplHorizontalSlider_sliderReleased()
+{
+    ui->ChangeEquingularTriangleAmplHorizontalSlider->hide();
+    ui->ChangeEquingularTriangleAmplHorizontal->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetVertical_pressed()
+{
+    ui->ChangeEquingularTriangleOffsetVertical->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularTriangleOffsetVerticalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularTriangleOffsetVerticalSlider->show();
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetVerticalSlider_valueChanged(int value)
+{
+    ui->RenderEquingularTriangleLocator->SetSettings("disposition","vertical",static_cast<qint16>(value));
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetVerticalSlider_sliderPressed()
+{
+    ui->ChangeEquingularTriangleOffsetVerticalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetVerticalSlider_sliderReleased()
+{
+    ui->ChangeEquingularTriangleOffsetVerticalSlider->hide();
+    ui->ChangeEquingularTriangleOffsetVertical->setCursor(Qt::OpenHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetHorizontal_pressed()
+{
+    ui->ChangeEquingularTriangleOffsetHorizontal->setCursor(Qt::ClosedHandCursor);
+    ui->ChangeEquingularTriangleOffsetHorizontalSlider->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularTriangleOffsetHorizontalSlider->show();
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetHorizontalSlider_valueChanged(int value)
+{
+    ui->RenderEquingularTriangleLocator->SetSettings("disposition","horizontal",static_cast<qint16>(value));
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderPressed()
+{
+    ui->ChangeEquingularTriangleOffsetHorizontalSlider->setCursor(Qt::ClosedHandCursor);
+}
+
+void commonview::on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderReleased()
+{
+    ui->ChangeEquingularTriangleOffsetHorizontalSlider->hide();
+    ui->ChangeEquingularTriangleOffsetHorizontal->setCursor(Qt::OpenHandCursor);
 }
