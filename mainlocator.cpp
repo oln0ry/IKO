@@ -1,6 +1,8 @@
 #include<QHBoxLayout>
 #include"mainlocator.h"
 #include"targetssettings.h"
+#include<QApplication>
+#include<QDesktopWidget>
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
@@ -106,15 +108,19 @@ void MainLocator::paintGL()
  */
 void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
 {
-
-    if(parentWidget()->isMaximized())
+    //MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
+    //QGLWidget w(0L,Qt::SplashScreen);
+    //w.showFullScreen();
+    this->resize(QApplication::desktop()->size());
+    this->parentWidget()->showFullScreen();
+    /*if(parentWidget()->isMaximized())
     {
         resize(300,300);
     }
     else
     {
         resize(height,height);
-    }
+    }*/
     //updateGL();
 }
 

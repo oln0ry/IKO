@@ -111,10 +111,13 @@ void EquiangularTriangleLocator::GenerationRay()
 
 void EquiangularTriangleLocator::DrawStation() const
 {
+    //settings["disposition"]["vertical"].toDouble()/100
     glLineWidth(2.0f);
 
     glBegin(GL_LINES);
         glVertex2f(.0f,.0f);
+        //glVertex2f(GRID_OFFSET+qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
+
         glVertex2f(GRID_OFFSET+qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)));
 
         glVertex2f(.0f,.0f);
