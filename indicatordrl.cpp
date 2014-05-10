@@ -1,260 +1,228 @@
 #include"indicatordrl.h"
 #include"ui_indicatordrl.h"
-#include<QDebug>
-IndicatorDRL::IndicatorDRL(QWidget *parent) : QWidget(parent),ui(new Ui::IndicatorDRL)
+#include<QtGui>
+
+IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::IndicatorDRL)
 {
     ui->setupUi(this);
-    ui->InputFrameFrequency->valueChanged(ui->InputFrameFrequency->value());
-    //setLayout(ui->RenderLayout);
+    //###Инициализация
+    change_view_bottom=0;
+
+    ui->SelectAzimuthMarks->clicked(); //Отметки азимута
+    ui->SelectRangeMarks->clicked(); //Отметки дальности
+
+    //Масштаб
+    ui->SelectScale->clicked();
+    ui->SelectScale->clicked();
+    ui->SelectScale->clicked();
+
+    //Яркость индикатора
+    ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
+    ui->ChangeIndicatorBrightness->hide();
+    ui->ChangeIndicatorBrightness->setDisabled(true);
+
+    //Подсветка луча индикатора (остаточное изображение)
+    ui->ChangeIndicatorLightning->valueChanged(ui->ChangeIndicatorLightning->value());
+    ui->ChangeIndicatorLightning->hide();
+    ui->ChangeIndicatorLightning->setDisabled(true);
+
+    //Фокус изображения, отображаемого на индикаторе
+    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
+    ui->ChangeIndicatorFocus->hide();
+    ui->ChangeIndicatorFocus->setDisabled(true);
+
+    //Автоматическая регулировка усиления индикатора
+    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
+    ui->ChangeIndicatorVARU->hide();
+    ui->ChangeIndicatorVARU->setDisabled(true);
+
+    //Интенсивность усиления приёмника
+    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+    ui->ChangeTrashIntensity->hide();
+    ui->ChangeTrashIntensity->setDisabled(true);
+
+    //Радиус генерации пассивных помех
+    ui->InputScatterTrashFrom->valueChanged(ui->InputScatterTrashFrom->value());
+    ui->InputScatterTrashTo->valueChanged(ui->InputScatterTrashTo->value());
+
+    ui->CheckShowLocalItems->stateChanged(ui->CheckShowLocalItems->checkState()); //Засветка индикатора от местных предметов
+    ui->CheckShowMeteo->stateChanged(ui->CheckShowMeteo->checkState()); //Метеообразования
+
+    //Активные шумовые помехи
     QStringList intensity;
-    ui->SelectAzimuthMarks->click();
-    ui->SelectRangeMarks->click();
-    //ui->SelectRangeMarks->addItems(range_marks);
-    //ui->SelectRangeMarks->setCurrentIndex(1);
-    ui->SelectScale->click();
     intensity<<"Слабая"<<"Средняя"<<"Сильная";
-    //ui->SelectTrashIntensity->addItems(intensity);
-    //ui->SelectTrashIntensity->setCurrentIndex(1);
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
 
-    ui->InputScatterTrashFrom->setValue(0.0f);
-    ui->InputScatterTrashTo->setValue(150.0f);
+    ui->SelectWorkVariant->clicked(); //Режим индикатора кругового обзора
+    //###\Инициализация
 
-    ui->ChangeIndicatorBrightness->hide();
-    ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
-    ui->ChangeDisplayLightning->hide();
-    ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
-    ui->ChangeIndicatorFocus->hide();
-    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
-    ui->ChangeIndicatorVARU->hide();
-    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
-
-    ui->CheckShowTrash->stateChanged(ui->CheckShowTrash->checkState());
-    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
-    ui->CheckShowLocalItems->stateChanged(ui->CheckShowLocalItems->checkState());
-
-    ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
-    ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
-    ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
-    ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
-
-    ui->SelectWorkVariant->click();
- }
+    ui->ChangeLocatorState->clicked(); //Запуск индикатора
+}
 
 IndicatorDRL::~IndicatorDRL()
 {
     delete ui;
 }
 
-void IndicatorDRL::on_InputFrameFrequency_valueChanged(int frames_number)
+void IndicatorDRL::resizeEvent(QResizeEvent *E)
 {
-    ui->RenderIndicator->ChangeFPS(frames_number>0 ? 1000/frames_number : 0);
-}
-
-void IndicatorDRL::on_ButtonChangeColorDisplay_clicked()
-{
-    //QColor c=ui->RenderIndicator->SelectColor("locator","Выберите цвет фона индикатора");
-    //ui->ButtonChangeColorDisplay->setPalette(c);
-}
-
-void IndicatorDRL::on_ChangeLocatorState_clicked()
-{
-    quint16 fps;
-    if(ui->RenderIndicator->IsActive())
+    QMainWindow::resizeEvent(E);
+    if(isFullScreen())
+        return;
+    if(ui->BoxIndicatorSettings->geometry().y()+ui->BoxIndicatorSettings->geometry().height()<ui->BoxActiveTrashSettings->geometry().y())
     {
-        fps=0;
-        ui->ChangeLocatorState->setText("Продолжить");
+        if(change_view_bottom==0)
+            change_view_bottom=ui->BoxActiveTrashSettings->geometry().y();
+        ui->gridLayout_3->addWidget(ui->BoxTrashSettings,3,0,1,1,Qt::AlignRight|Qt::AlignBottom);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->LabelActiveAnswerAzimuth,0,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->InputActiveAnswerAzimuth,0,1,1,1);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->LabelActiveAnswerDistance,1,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->InputActiveAnswerDistance,1,1,1,1);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->CheckActiveAnswerShow,2,0,1,2,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_6->addWidget(ui->BoxActiveAnswerTrash,0,1,1,1);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->LabelActiveNoiseIntensity,1,0,1,1,Qt::AlignLeft|Qt::AlignBottom);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->SelectActiveNoiseIntensity,2,0,1,1,Qt::AlignTop);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->CheckActiveNoiseShow,3,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_6->addWidget(ui->BoxActiveNoiseTrash,0,0,2,1);
+        ui->gridLayout_6->addWidget(ui->CheckActiveInSyncShow,1,1,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_3->addWidget(ui->BoxActiveTrashSettings,3,2,1,1);
     }
+
+    if(change_view_bottom>0 && change_view_bottom>static_cast<unsigned int>(ui->BoxActiveTrashSettings->geometry().y()))
+    {
+        ui->gridLayout_3->addWidget(ui->BoxTrashSettings,1,0,1,1,Qt::AlignLeft|Qt::AlignBottom);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->LabelActiveAnswerAzimuth,0,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->InputActiveAnswerAzimuth,0,1,1,1);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->LabelActiveAnswerDistance,1,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->InputActiveAnswerDistance,1,1,1,1);
+        ui->LayoutActiveAnswerTrashSettings->addWidget(ui->CheckActiveAnswerShow,2,0,1,2,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_6->addWidget(ui->BoxActiveAnswerTrash,0,1,1,1);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->LabelActiveNoiseIntensity,1,0,1,1,Qt::AlignLeft|Qt::AlignBottom);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->SelectActiveNoiseIntensity,2,0,1,1,Qt::AlignTop);
+        ui->LayoutActiveNoiseTrashSettings->addWidget(ui->CheckActiveNoiseShow,3,0,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_6->addWidget(ui->BoxActiveNoiseTrash,0,0,2,1);
+        ui->gridLayout_6->addWidget(ui->CheckActiveInSyncShow,1,1,1,1,Qt::AlignLeft|Qt::AlignVCenter);
+        ui->gridLayout_3->addWidget(ui->BoxActiveTrashSettings,2,0,1,1);
+    }
+}
+
+/**
+ * Этот метод является чистой воды диким шаманством
+ */
+bool IndicatorDRL::eventFilter(QObject *O, QEvent *E)
+{
+    if((O->objectName()=="MainLocator" || O->inherits("MainLocator")) && E->type()==QEvent::MouseButtonDblClick)
+    {
+        if(isFullScreen())
+        {
+            ui->gridLayout_3->addWidget(ui->RenderMainLocator,0,0,1,1);
+            ui->centralwidget->raise();
+            showNormal();
+        }
+        else
+        {
+            ui->gridLayout_3->addWidget(ui->RenderMainLocator,0,0,0,0);
+            ui->RenderMainLocator->raise();
+            showFullScreen();
+        }
+        activateWindow();
+    }
+    return QMainWindow::eventFilter(O,E);
+}
+
+void IndicatorDRL::on_SelectAzimuthMarks_clicked()
+{
+    static quint8 status=0u;
+
+    if(status>1u)
+        status=0u;
     else
+        status++;
+
+    qint16 degree=0;
+
+    switch(status)
     {
-        fps=static_cast<quint8>(ui->InputFrameFrequency->value());
-        ui->ChangeLocatorState->setText("Стоп");
+        case 0u:
+            //ui->LabelSelectAzimuthMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectAzimuthMarksValue->setText("10°");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectAzimuthMarksValue->setText("30°");
+            degree=60u;
+            break;
     }
-    ui->InputFrameFrequency->valueChanged(fps);
+    ui->SelectAzimuthMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderMainLocator->SetSettings("system","azimuth",static_cast<quint16>(status));
 }
 
-void IndicatorDRL::on_ChangeViewStateAll_clicked()
+void IndicatorDRL::on_SelectRangeMarks_clicked()
 {
-    if(ui->RenderIndicator->show)
-    {
-        ui->ChangeViewStateAll->setText("Отобразить все скрытые метки");
-        ui->RenderIndicator->SetSettings("system","show",false);
-    }
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
     else
+        status++;
+
+    qint16 degree=0u;
+
+    switch(status)
     {
-        ui->ChangeViewStateAll->setText("Вернуть состояние скрытых меток");
-        ui->RenderIndicator->SetSettings("system","show",true);
+        case 0u:
+            //ui->LabelSelectRangeMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectRangeMarksValue->setText("10 км.");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectRangeMarksValue->setText("50 км.");
+            degree=60u;
+            break;
     }
+    ui->SelectRangeMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderMainLocator->SetSettings("system","range",static_cast<quint16>(status));
 }
-
-void IndicatorDRL::on_ChangeIndicatorBrightness_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->RenderIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
-}
-
-void IndicatorDRL::on_ChangeDisplayLightning_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->RenderIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
-}
-
-void IndicatorDRL::on_ChangeIndicatorFocus_valueChanged(int value)
-{
-    value=value>=0 ? value+100 : 100-value;
-    ui->RenderIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-}
-
-void IndicatorDRL::on_ChangeIndicatorVARU_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->RenderIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
-}
-
-void IndicatorDRL::on_CheckShowTrash_stateChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("trash","show",arg1==2);
-}
-
-void IndicatorDRL::on_RegenerateTrash_clicked()
-{
-    ui->RenderIndicator->GenerationTrash();
-    ui->RenderIndicator->GenerationMeteo();
-}
-
-void IndicatorDRL::on_InputScatterTrashFrom_valueChanged(double arg1)
-{
-    qreal from=static_cast<qreal>(arg1),
-          to=static_cast<qreal>(ui->InputScatterTrashTo->value());
-    if(from>=to)
-        ui->InputScatterTrashFrom->setMaximum(to);
-    ui->InputScatterTrashTo->setMinimum(from);
-    ui->RenderIndicator->SetSettings("trash","begin",from);
-}
-
-void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
-{
-    qreal from=static_cast<qreal>(ui->InputScatterTrashFrom->value()),
-          to=static_cast<qreal>(arg1);
-    if(to<=from)
-        ui->InputScatterTrashTo->setMinimum(from);
-    ui->InputScatterTrashFrom->setMaximum(to);
-    ui->RenderIndicator->SetSettings("trash","end",to);
-}
-
-void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("local_items","show",arg1==2);
-}
-
-void IndicatorDRL::on_SelectTrashIntensity_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(index));
-}
-
-void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("active_noise_trash","show",static_cast<quint16>(arg1));
-}
-
-void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
-}
-
-void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
-{
-    ui->RenderIndicator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
-}
-
-void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
-{
-    //ui->RenderIndicator->show_active_atrash=arg1==2;
-}
-
-void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("active_answer_trash","azimuth",static_cast<quint16>(arg1));
-}
-
-void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
-{
-    ui->RenderIndicator->SetSettings("active_answer_trash","distance",static_cast<qreal>(arg1));
-}
-
-void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
-{
-    //ui->RenderIndicator->show_active_isynctrash=arg1==2;
-}
-
-void IndicatorDRL::on_ButtonTargetsSettings_clicked()
-{
-    tsettings=new TargetsSettings;
-    tsettings->show();
-}
-
-void IndicatorDRL::on_ChangeTargetsState_clicked()
-{
-    ui->RenderIndicator->ChangeTargetsState();
-    if(ui->RenderIndicator->targets_pos<0)
-        ui->ChangeTargetsState->setText(QString("Запуск целей"));
-    else
-        ui->ChangeTargetsState->setText(QString("Остановить цели"));
-}
-
-void IndicatorDRL::on_CleanLocatorDataBuffer_clicked()
-{
-    ui->RenderIndicator->CleanDataBuffer();
-}
-
-void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->RenderIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
-}
-
-void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
-{
-    ui->RenderIndicator->SetSettings("meteo","show",arg1==2);
-}
-
 
 void IndicatorDRL::on_SelectScale_clicked()
 {
-    static qint8 status=0;
-    if(status<0 || status>1)
-        status=0;
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
     else
         status++;
 
     qreal max;
+    qint16 degree=0u;
+
     switch(status)
     {
-        case 0:
-            ui->LabelScaleValue->setText("45 км.");
-            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+        case 0u:
+            //ui->LabelScaleValue->setText("45 км.");
+            degree=0u;
             max=45.0f;
             break;
-        case 1:
-            ui->LabelScaleValue->setText("90 км.");
-            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+        case 1u:
+            //ui->LabelScaleValue->setText("90 км.");
+            degree=45u;
             max=90.0f;
             break;
-        case 2:
-            ui->LabelScaleValue->setText("150 км.");
-            ui->SelectScale->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+        case 2u:
+            //ui->LabelScaleValue->setText("150 км.");
+            degree=180u;
             max=150.0f;
             break;
     }
 
-    ui->RenderIndicator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->SelectScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
+    ui->RenderMainLocator->SetSettings("system","scale",static_cast<quint8>(max));
+
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
     if(ui->InputScatterTrashTo->value()>max)
@@ -263,70 +231,146 @@ void IndicatorDRL::on_SelectScale_clicked()
     ui->InputScatterTrashTo->setMaximum(max);
 }
 
-void IndicatorDRL::on_ChangeIndicatorBrightnessButton_clicked()
+void IndicatorDRL::on_ChangeIndicatorBrightnessButton_pressed()
 {
-    if(ui->ChangeIndicatorBrightness->isHidden())
-        ui->ChangeIndicatorBrightness->show();
+    ui->ChangeIndicatorBrightness->show();
+    ui->ChangeIndicatorBrightness->setEnabled(true);
+    ui->ChangeIndicatorBrightnessButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorBrightness_sliderPressed()
+{
+    ui->ChangeIndicatorBrightness->setCursor(Qt::ClosedHandCursor);
 }
 
 void IndicatorDRL::on_ChangeIndicatorBrightness_sliderReleased()
 {
     ui->ChangeIndicatorBrightness->hide();
+    ui->ChangeIndicatorBrightness->setDisabled(true);
+    ui->ChangeIndicatorBrightness->setCursor(Qt::OpenHandCursor);
+    ui->ChangeIndicatorBrightnessButton->setCursor(Qt::OpenHandCursor);
 }
 
-void IndicatorDRL::on_ChangeDisplayLightningButton_clicked()
+void IndicatorDRL::on_ChangeIndicatorBrightness_valueChanged(int value)
 {
-    if(ui->ChangeDisplayLightning->isHidden())
-        ui->ChangeDisplayLightning->show();
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->ChangeIndicatorBrightnessButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeIndicatorBrightness->maximum())));
 }
 
-void IndicatorDRL::on_ChangeDisplayLightning_sliderReleased()
+void IndicatorDRL::on_ChangeIndicatorLightningButton_pressed()
 {
-    ui->ChangeDisplayLightning->hide();
+    ui->ChangeIndicatorLightning->show();
+    ui->ChangeIndicatorLightning->setEnabled(true);
+    ui->ChangeIndicatorLightningButton->setCursor(Qt::ClosedHandCursor);
 }
 
-void IndicatorDRL::on_ChangeIndicatorFocusButton_clicked()
+void IndicatorDRL::on_ChangeIndicatorLightning_sliderPressed()
 {
-    if(ui->ChangeIndicatorFocus->isHidden())
-        ui->ChangeIndicatorFocus->show();
+    ui->ChangeIndicatorLightning->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorLightning_sliderReleased()
+{
+    ui->ChangeIndicatorLightning->hide();
+    ui->ChangeIndicatorLightning->setDisabled(true);
+    ui->ChangeIndicatorLightning->setCursor(Qt::OpenHandCursor);
+    ui->ChangeIndicatorLightningButton->setCursor(Qt::OpenHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorLightning_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->ChangeIndicatorLightningButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeIndicatorLightning->maximum())));
+}
+
+void IndicatorDRL::on_ChangeIndicatorFocusButton_pressed()
+{
+    ui->ChangeIndicatorFocus->show();
+    ui->ChangeIndicatorFocus->setEnabled(true);
+    ui->ChangeIndicatorFocusButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorFocus_sliderPressed()
+{
+    ui->ChangeIndicatorFocus->setCursor(Qt::ClosedHandCursor);
 }
 
 void IndicatorDRL::on_ChangeIndicatorFocus_sliderReleased()
 {
     ui->ChangeIndicatorFocus->hide();
+    ui->ChangeIndicatorFocus->setDisabled(true);
+    ui->ChangeIndicatorFocus->setCursor(Qt::OpenHandCursor);
+    ui->ChangeIndicatorFocusButton->setCursor(Qt::OpenHandCursor);
 }
 
-void IndicatorDRL::on_ChangeIndicatorVARUButton_clicked()
+void IndicatorDRL::on_ChangeIndicatorFocus_valueChanged(int value)
 {
-    if(ui->ChangeIndicatorVARU->isHidden())
-        ui->ChangeIndicatorVARU->show();
+    ui->ChangeIndicatorFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeIndicatorFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderMainLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void IndicatorDRL::on_ChangeIndicatorVARUButton_pressed()
+{
+    ui->ChangeIndicatorVARU->show();
+    ui->ChangeIndicatorVARU->setEnabled(true);
+    ui->ChangeIndicatorVARUButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorVARU_sliderPressed()
+{
+    ui->ChangeIndicatorVARU->setCursor(Qt::ClosedHandCursor);
 }
 
 void IndicatorDRL::on_ChangeIndicatorVARU_sliderReleased()
 {
     ui->ChangeIndicatorVARU->hide();
+    ui->ChangeIndicatorVARU->setDisabled(true);
+    ui->ChangeIndicatorVARU->setCursor(Qt::OpenHandCursor);
+    ui->ChangeIndicatorVARUButton->setCursor(Qt::OpenHandCursor);
+}
+
+void IndicatorDRL::on_ChangeIndicatorVARU_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ChangeIndicatorVARUButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeIndicatorVARU->maximum())));
 }
 
 void IndicatorDRL::on_SelectWorkVariant_clicked()
 {
-    static qint8 status=0;
-    if(status<0 || status>1)
-        status=0;
+    static quint8 status=0u;
+
+    if(status>1u)
+        status=0u;
     else
         status++;
+
+    qint16 degree=0u;
+
     switch(status)
     {
-        case 0:
-            ui->LabelSelectWorkVariantValue->setText("АКТ");
-            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+        case 0u:
+            //ui->LabelSelectWorkVariantValue->setText("АКТ");
+            degree=-60;
+            //ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
+            /*
             if(ui->BoxTrashSettings->isEnabled())
                 ui->BoxTrashSettings->setEnabled(false);
             if(ui->BoxActiveTrashSettings->isEnabled())
                 ui->BoxActiveTrashSettings->setEnabled(false);
+            */
             break;
-        case 1:
-            ui->LabelSelectWorkVariantValue->setText("ПАСС");
-            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+        case 1u:
+            //ui->LabelSelectWorkVariantValue->setText("ПАСС");
+            degree=0;
+            //ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
+            /*
             if(!ui->BoxTrashSettings->isEnabled())
                 ui->BoxTrashSettings->setEnabled(true);
             if(!ui->BoxActiveTrashSettings->isEnabled())
@@ -339,10 +383,13 @@ void IndicatorDRL::on_SelectWorkVariant_clicked()
             ui->CheckActiveNoiseShow->stateChanged(ui->CheckActiveNoiseShow->checkState());
             ui->CheckActiveAnswerShow->stateChanged(ui->CheckActiveAnswerShow->checkState());
             ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+            */
             break;
-        case 2:
-            ui->LabelSelectWorkVariantValue->setText("СДЦ");
-            ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+        case 2u:
+            degree=60;
+            //ui->LabelSelectWorkVariantValue->setText("СДЦ");
+            //ui->SelectWorkVariant->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
+            /*
             if(!ui->BoxActiveTrashSettings->isEnabled())
                 ui->BoxActiveTrashSettings->setEnabled(true);
             if(!ui->BoxActiveTrashSettings->isEnabled())
@@ -353,59 +400,143 @@ void IndicatorDRL::on_SelectWorkVariant_clicked()
                 ui->BoxTrashSettings->setEnabled(false);
             ui->CheckActiveAnswerShow->stateChanged(ui->CheckActiveAnswerShow->checkState());
             ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+            */
             break;
     }
-    ui->RenderIndicator->SetSettings("system","mode",static_cast<quint8>(status));
+    ui->SelectWorkVariant->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderMainLocator->SetSettings("system","mode",static_cast<quint8>(status));
 }
 
-void IndicatorDRL::on_SelectRangeMarks_clicked()
+void IndicatorDRL::on_ChangeViewStateAll_clicked()
 {
-    static qint8 status=0;
-    if(status<0 || status>1)
-        status=0;
-    else
-        status++;
-
-    switch(status)
+    if(ui->RenderMainLocator->show)
     {
-        case 0:
-            ui->LabelSelectRangeMarksValue->setText("НЕТ");
-            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
-            break;
-        case 1:
-            ui->LabelSelectRangeMarksValue->setText("10 км.");
-            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
-            break;
-        case 2:
-            ui->LabelSelectRangeMarksValue->setText("50 км.");
-            ui->SelectRangeMarks->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
-            break;
+        ui->ChangeViewStateAll->setText("Отобразить все\nскрытые метки");
+        ui->RenderMainLocator->SetSettings("system","show",false);
     }
-    ui->RenderIndicator->SetSettings("system","range",static_cast<quint16>(status));
+    else
+    {
+        ui->ChangeViewStateAll->setText("Вернуть состояние\nскрытых меток");
+        ui->RenderMainLocator->SetSettings("system","show",true);
+    }
 }
 
-void IndicatorDRL::on_SelectAzimuthMarks_clicked()
+void IndicatorDRL::on_ChangeLocatorState_clicked()
 {
-    static qint8 status=0;
-    if(status<0 || status>1)
-        status=0;
-    else
-        status++;
-
-    switch(status)
+    if(ui->RenderMainLocator->IsActive())
     {
-        case 0:
-            ui->LabelSelectAzimuthMarksValue->setText("НЕТ");
-            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob2);background-repeat: no-repeat;background-position: center;");
-            break;
-        case 1:
-            ui->LabelSelectAzimuthMarksValue->setText("30°");
-            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob);background-repeat: no-repeat;background-position: center;");
-            break;
-        case 2:
-            ui->LabelSelectAzimuthMarksValue->setText("10°");
-            ui->SelectAzimuthMarks->setStyleSheet("border-image: url(:/buttons/knob1);background-repeat: no-repeat;background-position: center;");
-            break;
+        ui->RenderMainLocator->ChangeFPS(0u);
+        ui->ChangeLocatorState->setText("Продолжить");
     }
-    ui->RenderIndicator->SetSettings("system","azimuth",static_cast<quint16>(status));
+    else
+    {
+        ui->RenderMainLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+        ui->ChangeLocatorState->setText("Стоп");
+    }
+}
+
+void IndicatorDRL::on_SetTargetsSettings_clicked()
+{
+    tsettings=new TargetsSettings;
+    tsettings->show();
+}
+
+void IndicatorDRL::on_ChangeTrashIntensityButton_pressed()
+{
+    ui->ChangeTrashIntensity->show();
+    ui->ChangeTrashIntensity->setEnabled(true);
+    ui->ChangeTrashIntensityButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeTrashIntensity_sliderPressed()
+{
+    ui->ChangeTrashIntensity->setCursor(Qt::ClosedHandCursor);
+}
+
+void IndicatorDRL::on_ChangeTrashIntensity_sliderReleased()
+{
+    ui->ChangeTrashIntensity->hide();
+    ui->ChangeTrashIntensity->setDisabled(true);
+    ui->ChangeTrashIntensity->setCursor(Qt::OpenHandCursor);
+    ui->ChangeTrashIntensityButton->setCursor(Qt::OpenHandCursor);
+}
+
+void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderMainLocator->SetSettings("trash","show",value>0);
+    ui->ChangeTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeTrashIntensity->maximum())));
+}
+
+void IndicatorDRL::on_InputScatterTrashFrom_valueChanged(double arg1)
+{
+    qreal from=static_cast<qreal>(arg1),
+          to=static_cast<qreal>(ui->InputScatterTrashTo->value());
+    if(from>=to)
+        ui->InputScatterTrashFrom->setMaximum(to);
+    ui->InputScatterTrashTo->setMinimum(from);
+    ui->RenderMainLocator->SetSettings("trash","begin",from);
+}
+
+void IndicatorDRL::on_InputScatterTrashTo_valueChanged(double arg1)
+{
+    qreal from=static_cast<qreal>(ui->InputScatterTrashFrom->value()),
+          to=static_cast<qreal>(arg1);
+    if(to<=from)
+        ui->InputScatterTrashTo->setMinimum(from);
+    ui->InputScatterTrashFrom->setMaximum(to);
+    ui->RenderMainLocator->SetSettings("trash","end",to);
+}
+
+void IndicatorDRL::on_RegenerateTrash_clicked()
+{
+    ui->RenderMainLocator->GenerationTrash();
+    ui->RenderMainLocator->GenerationMeteo();
+}
+
+void IndicatorDRL::on_CheckShowLocalItems_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("local_items","show",arg1==2);
+}
+
+void IndicatorDRL::on_CheckShowMeteo_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("meteo","show",arg1==2);
+}
+
+void IndicatorDRL::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
+}
+
+void IndicatorDRL::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
+}
+
+void IndicatorDRL::on_CheckActiveNoiseShow_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","show",arg1==2);
+}
+
+void IndicatorDRL::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_answer_trash","azimuth",static_cast<quint16>(arg1));
+}
+
+void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_answer_trash","distance",static_cast<qreal>(arg1));
+}
+
+void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
+{
+    //ui->RenderMainLocator->show_active_atrash=arg1==2;
+}
+
+void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
+{
+    //ui->RenderMainLocator->show_active_isynctrash=arg1==2;
 }

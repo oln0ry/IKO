@@ -4,11 +4,6 @@
 
 MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
 {
-    FS=nullptr;
-    clockwise=true; //По часовой стрелке
-    not_clean=false;
-    show=false;
-    targets_df=true;
     Color=new QColorDialog(this);
     qsrand(QTime(0u,0u,0u).secsTo(QTime::currentTime()));
 
@@ -57,7 +52,7 @@ void MainLocator::resizeGL(int width, int height)
     glEnable(GL_MULTISAMPLE);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(.0f, .0f, .0f, 1.0, 1.0, -1.0f);
+    glOrtho(.0f,.0f,.0f,1.0,1.0,-1.0f);
     if(width>height)
         glViewport(static_cast<GLint>(0u),static_cast<GLint>(0u),static_cast<GLint>(height),static_cast<GLint>(height));
     else
@@ -112,6 +107,16 @@ void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
     //w.showFullScreen();
     //this->resize(QApplication::desktop()->size());
     //this->parentWidget()->showFullScreen();
+
+    if(parentWidget()->isFullScreen())
+    {
+        parentWidget()->eventFilter(this,event);
+    }
+    else if(parent()->isWidgetType() && parentWidget()->parent()->inherits("QMainWindow"))
+    {
+        parentWidget()->parent()->eventFilter(this,event);
+    }
+    /*
     if(FS==nullptr)
     {
         FS=new QMainWindow;
@@ -126,6 +131,10 @@ void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
         delete FS;
         FS=nullptr;
     }
+    */
+
+
+
 
 
     /*if(parentWidget()->isMaximized())
@@ -151,7 +160,7 @@ void MainLocator::ChangeFPS(qreal fps)
     }
 }
 
-bool MainLocator::IsActive() const
+bool MainLocator::IsActive()const
 {
     return timer.isActive();
 }
@@ -181,7 +190,7 @@ void MainLocator::GenerationRay(qint16 angle)
     while(i<end)ray.append(clockwise ? end-- : i++);
 }
 
-qreal MainLocator::CalcAlpha(qreal angle) const
+qreal MainLocator::CalcAlpha(qreal angle)const
 {
     qreal alpha;
     if(settings["system"]["show"].toBool())
@@ -239,7 +248,7 @@ void MainLocator::GenerationRange()
  * Отрисовка отметок дальности
  * @brief MainLocator::DrawRange
  */
-void MainLocator::DrawRange() const
+void MainLocator::DrawRange()const
 {
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
@@ -290,7 +299,7 @@ void MainLocator::GenerationAzimuth()
  * Отрисовка меток азимута
  * @brief MainLocator::DrawAzimuth
  */
-void MainLocator::DrawAzimuth() const
+void MainLocator::DrawAzimuth()const
 {
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
@@ -354,7 +363,7 @@ void MainLocator::CreateEllipseTrashArea(QVector<PointsPath>&storage,qreal begin
     }
 }
 
-void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u) const
+void MainLocator::DrawEllipseTrashArea(QVector<PointsPath>storage,quint8 size=8u)const
 {
     glPointSize(size*settings["system"]["focus"].toDouble());
     glEnable(GL_ALPHA_TEST);
@@ -383,7 +392,7 @@ void MainLocator::GenerationTrash()
  * Отрисовка пассивных помех
  * @brief MainLocator::DrawTrash
  */
-void MainLocator::DrawTrash() const
+void MainLocator::DrawTrash()const
 {
     DrawEllipseTrashArea(Cache.trash,2u);
 }
@@ -393,7 +402,7 @@ void MainLocator::GenerationLocalItems()
     CreateEllipseTrashArea(Cache.local_items,.0f,15.0f,.0f,.0f);
 }
 
-void MainLocator::DrawLocalItems() const
+void MainLocator::DrawLocalItems()const
 {
     DrawEllipseTrashArea(Cache.local_items);
 }
@@ -406,7 +415,7 @@ void MainLocator::GenerationMeteo()
     CreateEllipseTrashArea(Cache.meteo,-50.0f,-10.0f,3u,true,false);
 }
 
-void MainLocator::DrawMeteo() const
+void MainLocator::DrawMeteo()const
 {
     DrawEllipseTrashArea(Cache.meteo,5);
 }
@@ -502,7 +511,7 @@ void MainLocator::GenerationActiveNoiseTrash()
     }
 }
 
-void MainLocator::DrawActiveNoiseTrash() const
+void MainLocator::DrawActiveNoiseTrash()const
 {
     qreal alpha;
     for(QVector<LineEntity>::const_iterator it=Cache.active_noise_trash.begin();it<Cache.active_noise_trash.end();it++)
@@ -531,7 +540,7 @@ void MainLocator::GenerationActiveInSyncTrash()
 
 }
 
-qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign) const
+qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign)const
 {
     //Фикс странного бага, наблюдающегося под виндой
     if(accuracy>4u)
@@ -543,14 +552,14 @@ qreal MainLocator::GetRandomCoord(quint8 accuracy,const bool rsign) const
     return a;
 }
 
-qint8 MainLocator::GetRandomSign() const
+qint8 MainLocator::GetRandomSign()const
 {
     if(rand()%2u)
         return 1u;
     return-1;
 }
 
-void MainLocator::LocatorArea() const
+void MainLocator::LocatorArea()const
 {
     color["locator"].isValid() ? qglColor(color["locator"]) : qglColor(Qt::black);
     glBegin(GL_TRIANGLE_FAN);
@@ -563,7 +572,7 @@ void MainLocator::LocatorArea() const
  * @brief MainLocator::DrawStation
  * Отрисуем прямоугольник
  */
-void MainLocator::DrawStation() const
+void MainLocator::DrawStation()const
 {
     glRotatef(30.0f,.0f,.0f,1.0f);
     glLineWidth(2.0f*settings["system"]["focus"].toDouble());
@@ -727,4 +736,19 @@ void MainLocator::ChangeTargetsState()
         targets_pos=0;
     else
         targets_pos=-1;
+}
+
+QPixmap MainLocator::RotateResourceImage(QString resource_path,qint16 degree)
+{
+    QPixmap original=QPixmap(resource_path),
+            pixmap(original.size());
+    pixmap.fill(Qt::transparent);
+
+    QPainter p(&pixmap);
+    p.translate(pixmap.size().width()/2,pixmap.size().height()/2);
+    p.rotate(degree);
+    p.translate(-pixmap.size().width()/2,-pixmap.size().height()/ 2);
+    p.drawPixmap(0,0,original);
+    p.end();
+    return original=pixmap;
 }

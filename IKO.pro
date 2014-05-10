@@ -15,31 +15,31 @@ TEMPLATE = app
 SOURCES += main.cpp\
         menu.cpp \
     mainlocator.cpp \
-    indicatordrl.cpp \
     targetssettings.cpp \
     indicatorprl.cpp \
     equiangulartrianglelocator.cpp \
     righttrianglelocator.cpp \
     rspindicators.cpp \
-    commonview.cpp
+    commonview.cpp \
+    indicatordrl.cpp
 
 HEADERS  += menu.h \
     mainlocator.h \
-    indicatordrl.h \
     targetssettings.h \
     indicatorprl.h \
     equiangulartrianglelocator.h \
     righttrianglelocator.h \
     rspindicators.h \
     helper.h \
-    commonview.h
+    commonview.h \
+    indicatordrl.h
 
 FORMS    += menu.ui \
-    indicatordrl.ui \
     targetssettings.ui \
     indicatorprl.ui \
     rspindicators.ui \
-    commonview.ui
+    commonview.ui \
+    indicatordrl.ui
 
 RESOURCES += \
     Common.qrc
