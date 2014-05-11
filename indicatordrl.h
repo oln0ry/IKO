@@ -51,19 +51,12 @@ class IndicatorDRL : public QMainWindow
         void on_RegenerateTrash_clicked();
         void on_CheckShowLocalItems_stateChanged(int arg1);
         void on_CheckShowMeteo_stateChanged(int arg1);
-
         void on_InputActiveNoiseAzimuth_valueChanged(int arg1);
-
         void on_SelectActiveNoiseIntensity_currentIndexChanged(int index);
-
         void on_CheckActiveNoiseShow_stateChanged(int arg1);
-
         void on_InputActiveAnswerAzimuth_valueChanged(int arg1);
-
         void on_InputActiveAnswerDistance_valueChanged(double arg1);
-
         void on_CheckActiveAnswerShow_stateChanged(int arg1);
-
         void on_CheckActiveInSyncShow_stateChanged(int arg1);
 
 protected:
@@ -73,7 +66,7 @@ protected:
 private:
         Ui::IndicatorDRL *ui;
         QPointer<TargetsSettings>tsettings;
-        unsigned int change_view_bottom;
+        unsigned int change_view_bottom=0;
 };
 
 #endif // INDICATORDRL_H

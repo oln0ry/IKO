@@ -5,9 +5,8 @@
 IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::IndicatorDRL)
 {
     ui->setupUi(this);
+    ui->ShowRightPanel->hide();
     //###Инициализация
-    change_view_bottom=0;
-
     ui->SelectAzimuthMarks->clicked(); //Отметки азимута
     ui->SelectRangeMarks->clicked(); //Отметки дальности
 
@@ -56,7 +55,6 @@ IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::Indic
 
     ui->SelectWorkVariant->clicked(); //Режим индикатора кругового обзора
     //###\Инициализация
-
     ui->ChangeLocatorState->clicked(); //Запуск индикатора
 }
 
@@ -124,6 +122,8 @@ bool IndicatorDRL::eventFilter(QObject *O, QEvent *E)
         {
             ui->gridLayout_3->addWidget(ui->RenderMainLocator,0,0,0,0);
             ui->RenderMainLocator->raise();
+            ui->gridLayout_3->addWidget(ui->ShowRightPanel,1,3,1,1);
+            ui->ShowRightPanel->show();
             showFullScreen();
         }
         activateWindow();

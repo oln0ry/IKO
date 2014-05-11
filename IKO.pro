@@ -16,30 +16,30 @@ SOURCES += main.cpp\
         menu.cpp \
     mainlocator.cpp \
     targetssettings.cpp \
-    indicatorprl.cpp \
     equiangulartrianglelocator.cpp \
     righttrianglelocator.cpp \
     rspindicators.cpp \
     commonview.cpp \
-    indicatordrl.cpp
+    indicatordrl.cpp \
+    indicatorprl.cpp
 
 HEADERS  += menu.h \
     mainlocator.h \
     targetssettings.h \
-    indicatorprl.h \
     equiangulartrianglelocator.h \
     righttrianglelocator.h \
     rspindicators.h \
     helper.h \
     commonview.h \
-    indicatordrl.h
+    indicatordrl.h \
+    indicatorprl.h
 
 FORMS    += menu.ui \
     targetssettings.ui \
-    indicatorprl.ui \
     rspindicators.ui \
     commonview.ui \
-    indicatordrl.ui
+    indicatordrl.ui \
+    indicatorprl.ui
 
 RESOURCES += \
     Common.qrc

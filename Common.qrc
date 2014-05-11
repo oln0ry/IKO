@@ -12,4 +12,7 @@
     <qresource prefix="/patterns" lang="ru">
         <file>background.png</file>
     </qresource>
+    <qresource prefix="/extra">
+        <file>arrow_left.png</file>
+    </qresource>
 </RCC>
