@@ -71,6 +71,8 @@ void MainLocator::paintGL()
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_BLEND);
     LocatorArea();
+    glTranslatef(settings["offset"]["horizontal"].toDouble(),settings["offset"]["vertical"].toDouble(),.0f);
+    //glTranslatef(-GRID_OFFSET+settings["offset"]["vertical"].toDouble()/100,.0f+settings["offset"]["horizontal"].toDouble()/100,.0f);
     DrawStation();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),settings["system"]["brightness"].toFloat());//перерисовка линии
     glRotatef(90.0f,.0f,.0f,1.0);
@@ -250,10 +252,11 @@ void MainLocator::GenerationRange()
  */
 void MainLocator::DrawRange()const
 {
-    qreal alpha;
+    qreal alpha,brightness;
+    brightness=settings["brightness"]["range"].isValid() ? settings["brightness"]["range"].toDouble() : 1.0f;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
     {
-        glLineWidth(it->width*settings["system"]["focus"].toDouble());
+        glLineWidth(it->width*settings["system"]["focus"].toDouble()*brightness);
         glBegin(GL_LINE_STRIP);
         for(Points *i=it->Coordinates,*end=it->Coordinates+radians_size;i<end;i++)
         {
@@ -301,13 +304,14 @@ void MainLocator::GenerationAzimuth()
  */
 void MainLocator::DrawAzimuth()const
 {
-    qreal alpha;
+    qreal alpha,brightness;
+    brightness=settings["brightness"]["azimuth"].isValid() ? settings["brightness"]["azimuth"].toDouble() : 1.0f;
     for(QVector<LineEntity>::const_iterator it=azimuth.begin();it<azimuth.end();it++)
     {
         alpha=CalcAlpha(it->Coordinates->angle);
         if(alpha>.0f)
         {
-            glLineWidth(it->width*settings["system"]["focus"].toDouble());
+            glLineWidth(it->width*settings["system"]["focus"].toDouble()*brightness);
             alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
             glBegin(GL_LINES);
             glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble());

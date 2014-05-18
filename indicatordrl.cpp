@@ -54,6 +54,10 @@ IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::Indic
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
 
     ui->SelectWorkVariant->clicked(); //Режим индикатора кругового обзора
+
+    //Статика
+    ui->RenderMainLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderMainLocator->SetSettings("offset","vertical",.0f);
     //###\Инициализация
     ui->ChangeLocatorState->clicked(); //Запуск индикатора
 }

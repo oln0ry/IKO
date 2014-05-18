@@ -92,6 +92,10 @@ RSPIndicators::RSPIndicators(QWidget *parent) : QMainWindow(parent),ui(new Ui::R
     ui->ChangeRightVARU->valueChanged(ui->ChangeMainVARU->value());
     ui->ChangeRightVARU->hide();
     ui->ChangeRightVARU->setDisabled(true);
+
+    //Статика
+    ui->RenderMainLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderMainLocator->SetSettings("offset","vertical",.0f);
     //###\Инициализация
 
     ui->ChangeMainLocatorState->clicked(); //Запуск индикатора

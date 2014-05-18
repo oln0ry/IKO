@@ -116,7 +116,7 @@ background-repeat: no-repeat;</string>
                 <number>100</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>60</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -186,7 +186,7 @@ background-repeat: no-repeat;</string>
                 <number>100</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -286,11 +286,14 @@ background-repeat: no-repeat;</string>
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
                </property>
+               <property name="minimum">
+                <number>-200</number>
+               </property>
                <property name="maximum">
-                <number>100</number>
+                <number>200</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -346,11 +349,14 @@ background-repeat: no-repeat;</string>
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
                </property>
+               <property name="minimum">
+                <number>-200</number>
+               </property>
                <property name="maximum">
-                <number>100</number>
+                <number>200</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -438,6 +444,9 @@ background-repeat: no-repeat;</string>
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
                </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
                <property name="maximum">
                 <number>100</number>
                </property>
@@ -505,6 +514,9 @@ background-repeat: no-repeat;</string>
               <widget class="QSlider" name="ChangeMainBrightnessAzimuth">
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
+               </property>
+               <property name="minimum">
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>100</number>
@@ -960,10 +972,10 @@ background-repeat: no-repeat;</string>
                     <cursorShape>OpenHandCursor</cursorShape>
                    </property>
                    <property name="maximum">
-                    <number>100</number>
+                    <number>30</number>
                    </property>
                    <property name="value">
-                    <number>100</number>
+                    <number>5</number>
                    </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1028,10 +1040,10 @@ background-repeat: no-repeat;</string>
                     <cursorShape>OpenHandCursor</cursorShape>
                    </property>
                    <property name="maximum">
-                    <number>100</number>
+                    <number>30</number>
                    </property>
                    <property name="value">
-                    <number>100</number>
+                    <number>5</number>
                    </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -1914,10 +1926,10 @@ background-repeat: no-repeat;</string>
                       <cursorShape>OpenHandCursor</cursorShape>
                      </property>
                      <property name="maximum">
-                      <number>100</number>
+                      <number>30</number>
                      </property>
                      <property name="value">
-                      <number>100</number>
+                      <number>5</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -1982,10 +1994,10 @@ background-repeat: no-repeat;</string>
                       <cursorShape>OpenHandCursor</cursorShape>
                      </property>
                      <property name="maximum">
-                      <number>100</number>
+                      <number>30</number>
                      </property>
                      <property name="value">
-                      <number>100</number>
+                      <number>5</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -2050,10 +2062,10 @@ background-repeat: no-repeat;</string>
                       <cursorShape>OpenHandCursor</cursorShape>
                      </property>
                      <property name="maximum">
-                      <number>100</number>
+                      <number>30</number>
                      </property>
                      <property name="value">
-                      <number>100</number>
+                      <number>5</number>
                      </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
@@ -2272,7 +2284,7 @@ background-repeat: no-repeat;</string>
       <x>1130</x>
       <y>90</y>
       <width>239</width>
-      <height>320</height>
+      <height>341</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_84">
