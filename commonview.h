@@ -159,6 +159,54 @@ private slots:
 
     void on_SelectEquingularMode_clicked();
 
+    void on_ChangeEquingularScanAmpVerticalButton_pressed();
+
+    void on_ChangeEquingularScanAmpVertical_sliderPressed();
+
+    void on_ChangeEquingularScanAmpVertical_sliderReleased();
+
+    void on_ChangeEquingularScanAmpVertical_valueChanged(int value);
+
+    void on_ChangeEquingularScanAmpHorizontalButton_pressed();
+
+    void on_ChangeEquingularScanAmpHorizontal_sliderPressed();
+
+    void on_ChangeEquingularScanAmpHorizontal_sliderReleased();
+
+    void on_ChangeEquingularScanAmpHorizontal_valueChanged(int value);
+
+    void on_ChangeEquingularOffsetVerticalButton_pressed();
+
+    void on_ChangeEquingularOffsetVertical_sliderPressed();
+
+    void on_ChangeEquingularOffsetVertical_sliderReleased();
+
+    void on_ChangeEquingularOffsetVertical_valueChanged(int value);
+
+    void on_ChangeEquingularOffsetHorizontalButton_pressed();
+
+    void on_ChangeEquingularOffsetHorizontal_sliderPressed();
+
+    void on_ChangeEquingularOffsetHorizontal_sliderReleased();
+
+    void on_ChangeEquingularOffsetHorizontal_valueChanged(int value);
+
+    void on_ChangeEquingularDirectionTrackButton_pressed();
+
+    void on_ChangeEquingularDirectionTrack_sliderPressed();
+
+    void on_ChangeEquingularDirectionTrack_sliderReleased();
+
+    void on_ChangeEquingularDirectionTrack_valueChanged(int value);
+
+    void on_ChangeEquingularDirectionGlideButton_pressed();
+
+    void on_ChangeEquingularDirectionGlide_sliderPressed();
+
+    void on_ChangeEquingularDirectionGlide_sliderReleased();
+
+    void on_ChangeEquingularDirectionGlide_valueChanged(int value);
+
 private:
     Ui::CommonView *ui;
 };

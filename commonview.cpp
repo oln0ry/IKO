@@ -15,15 +15,33 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeMainScanEqua->hide();
     ui->ChangeMainScanEqua->setDisabled(true);
 
+    //Амплитуда развёртки (вертикальное)
+    ui->ChangeEquingularScanAmpVertical->valueChanged(ui->ChangeEquingularScanAmpVertical->value());
+    ui->ChangeEquingularScanAmpVertical->hide();
+    ui->ChangeEquingularScanAmpVertical->setDisabled(true);
+
+    //Амплитуда развёртки (горизонтальное)
+    ui->ChangeEquingularScanAmpHorizontal->valueChanged(ui->ChangeEquingularScanAmpHorizontal->value());
+    ui->ChangeEquingularScanAmpHorizontal->hide();
+    ui->ChangeEquingularScanAmpHorizontal->setDisabled(true);
+
     //Смещение (вертикальное)
     ui->ChangeMainOffsetVertical->valueChanged(ui->ChangeMainOffsetVertical->value());
     ui->ChangeMainOffsetVertical->hide();
     ui->ChangeMainOffsetVertical->setDisabled(true);
 
+    ui->ChangeEquingularOffsetVertical->valueChanged(ui->ChangeEquingularOffsetVertical->value());
+    ui->ChangeEquingularOffsetVertical->hide();
+    ui->ChangeEquingularOffsetVertical->setDisabled(true);
+
     //Смещение (горизонтальное)
     ui->ChangeMainOffsetHorizontal->valueChanged(ui->ChangeMainOffsetHorizontal->value());
     ui->ChangeMainOffsetHorizontal->hide();
     ui->ChangeMainOffsetHorizontal->setDisabled(true);
+
+    ui->ChangeEquingularOffsetHorizontal->valueChanged(ui->ChangeEquingularOffsetHorizontal->value());
+    ui->ChangeEquingularOffsetHorizontal->hide();
+    ui->ChangeEquingularOffsetHorizontal->setDisabled(true);
 
     //Яркость меток (дальность)
     ui->ChangeMainBrightnessRange->valueChanged(ui->ChangeMainBrightnessRange->value());
@@ -44,6 +62,16 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeMainNullSetHorizontal->valueChanged(ui->ChangeMainNullSetHorizontal->value());
     ui->ChangeMainNullSetHorizontal->hide();
     ui->ChangeMainNullSetHorizontal->setDisabled(true);
+
+    //Уровень курса
+    ui->ChangeEquingularDirectionTrack->valueChanged(ui->ChangeEquingularDirectionTrack->value());
+    ui->ChangeEquingularDirectionTrack->hide();
+    ui->ChangeEquingularDirectionTrack->setDisabled(true);
+
+    //Уровень глиссады
+    ui->ChangeEquingularDirectionGlide->valueChanged(ui->ChangeEquingularDirectionGlide->value());
+    ui->ChangeEquingularDirectionGlide->hide();
+    ui->ChangeEquingularDirectionGlide->setDisabled(true);
 
     //Фокус
     ui->ChangeMainFocus->valueChanged(ui->ChangeMainFocus->value());
@@ -694,4 +722,172 @@ void CommonView::on_SelectEquingularMode_clicked()
     }
     ui->SelectEquingularMode->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
     ui->RenderEquingularTriangleLocator->SetSettings("system","mode",static_cast<quint8>(max));
+}
+
+void CommonView::on_ChangeEquingularScanAmpVerticalButton_pressed()
+{
+    ui->ChangeEquingularScanAmpVertical->show();
+    ui->ChangeEquingularScanAmpVertical->setEnabled(true);
+    ui->ChangeEquingularScanAmpVerticalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpVertical_sliderPressed()
+{
+    ui->ChangeEquingularScanAmpVertical->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpVertical_sliderReleased()
+{
+    ui->ChangeEquingularScanAmpVertical->hide();
+    ui->ChangeEquingularScanAmpVertical->setDisabled(true);
+    ui->ChangeEquingularScanAmpVertical->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularScanAmpVerticalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpVertical_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularScanAmpVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularScanAmpVertical->maximum())));
+}
+
+void CommonView::on_ChangeEquingularScanAmpHorizontalButton_pressed()
+{
+    ui->ChangeEquingularScanAmpHorizontal->show();
+    ui->ChangeEquingularScanAmpHorizontal->setEnabled(true);
+    ui->ChangeEquingularScanAmpHorizontalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpHorizontal_sliderPressed()
+{
+    ui->ChangeEquingularScanAmpHorizontal->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpHorizontal_sliderReleased()
+{
+    ui->ChangeEquingularScanAmpHorizontal->hide();
+    ui->ChangeEquingularScanAmpHorizontal->setDisabled(true);
+    ui->ChangeEquingularScanAmpHorizontal->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularScanAmpHorizontalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularScanAmpHorizontal_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularScanAmpHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularScanAmpHorizontal->maximum())));
+}
+
+void CommonView::on_ChangeEquingularOffsetVerticalButton_pressed()
+{
+    ui->ChangeEquingularOffsetVertical->show();
+    ui->ChangeEquingularOffsetVertical->setEnabled(true);
+    ui->ChangeEquingularOffsetVerticalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetVertical_sliderPressed()
+{
+    ui->ChangeEquingularOffsetVertical->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetVertical_sliderReleased()
+{
+    ui->ChangeEquingularOffsetVertical->hide();
+    ui->ChangeEquingularOffsetVertical->setDisabled(true);
+    ui->ChangeEquingularOffsetVertical->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularOffsetVerticalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetVertical_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","vertical",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularOffsetVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularOffsetVertical->maximum())));
+}
+
+void CommonView::on_ChangeEquingularOffsetHorizontalButton_pressed()
+{
+    ui->ChangeEquingularOffsetHorizontal->show();
+    ui->ChangeEquingularOffsetHorizontal->setEnabled(true);
+    ui->ChangeEquingularOffsetHorizontalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetHorizontal_sliderPressed()
+{
+    ui->ChangeEquingularOffsetHorizontal->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetHorizontal_sliderReleased()
+{
+    ui->ChangeEquingularOffsetHorizontal->hide();
+    ui->ChangeEquingularOffsetHorizontal->setDisabled(true);
+    ui->ChangeEquingularOffsetHorizontal->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularOffsetHorizontalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularOffsetHorizontal_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","horizontal",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularOffsetHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularOffsetHorizontal->maximum())));
+}
+
+void CommonView::on_ChangeEquingularDirectionTrackButton_pressed()
+{
+    ui->ChangeEquingularDirectionTrack->show();
+    ui->ChangeEquingularDirectionTrack->setEnabled(true);
+    ui->ChangeEquingularDirectionTrackButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionTrack_sliderPressed()
+{
+    ui->ChangeEquingularDirectionTrack->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionTrack_sliderReleased()
+{
+    ui->ChangeEquingularDirectionTrack->hide();
+    ui->ChangeEquingularDirectionTrack->setDisabled(true);
+    ui->ChangeEquingularDirectionTrack->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularDirectionTrackButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionTrack_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("direction","track",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularDirectionTrackButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularDirectionTrack->maximum())));
+}
+
+void CommonView::on_ChangeEquingularDirectionGlideButton_pressed()
+{
+    ui->ChangeEquingularDirectionGlide->show();
+    ui->ChangeEquingularDirectionGlide->setEnabled(true);
+    ui->ChangeEquingularDirectionGlideButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionGlide_sliderPressed()
+{
+    ui->ChangeEquingularDirectionGlide->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionGlide_sliderReleased()
+{
+    ui->ChangeEquingularDirectionGlide->hide();
+    ui->ChangeEquingularDirectionGlide->setDisabled(true);
+    ui->ChangeEquingularDirectionGlide->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquingularDirectionGlideButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeEquingularDirectionGlide_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderEquingularTriangleLocator->SetSettings("direction","track",static_cast<qreal>(value)/100);
+    ui->ChangeEquingularDirectionGlideButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularDirectionGlide->maximum())));
 }
