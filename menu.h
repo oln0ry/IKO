@@ -34,7 +34,7 @@ private:
         QPointer<IndicatorDRL>DRL;
         QPointer<IndicatorPRL>PRL;
         QPointer<RSPIndicators>DRLPRL;
-        QPointer<commonview>RSP;
+        QPointer<CommonView>RSP;
 };
 
 #endif // MENU_H

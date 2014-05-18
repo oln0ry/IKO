@@ -1,204 +1,166 @@
 #ifndef COMMONVIEW_H
 #define COMMONVIEW_H
 
-#include<QWidget>
-#include<QPointer>
-#include"targetssettings.h"
+#include<QMainWindow>
 
-namespace Ui {
-class commonview;
+namespace Ui
+{
+    class CommonView;
 }
 
-class commonview : public QWidget
+class CommonView : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit commonview(QWidget *parent = 0);
-    ~commonview();
+    explicit CommonView(QWidget *parent = 0);
+    ~CommonView();
 
 private slots:
-    void on_ChangeMainLocatorFocus_pressed();
+    void on_ChangeMainScanAmpButton_pressed();
 
-    void on_ChangeMainLocatorFocusSlider_valueChanged(int value);
+    void on_ChangeMainScanAmp_sliderPressed();
 
-    void on_ChangeMainLocatorFocusSlider_sliderReleased();
+    void on_ChangeMainScanAmp_sliderReleased();
 
-    void on_ChangeMainLocatorFocusSlider_sliderPressed();
+    void on_ChangeMainScanAmp_valueChanged(int value);
 
-    void on_ChangeMainLocatorBrightness_pressed();
+    void on_ChangeMainScanEquaButton_pressed();
 
-    void on_ChangeMainLocatorBrightnessSlider_sliderPressed();
+    void on_ChangeMainScanEqua_sliderPressed();
 
-    void on_ChangeMainLocatorBrightnessSlider_valueChanged(int value);
+    void on_ChangeMainScanEqua_sliderReleased();
 
-    void on_ChangeMainLocatorBrightnessSlider_sliderReleased();
+    void on_ChangeMainScanEqua_valueChanged(int value);
 
-    void on_ChangeMainLocatorMagnificationAKT_pressed();
+    void on_ChangeMainOffsetVerticalButton_pressed();
 
-    void on_ChangeMainLocatorMagnificationAKTSlider_valueChanged(int value);
+    void on_ChangeMainOffsetVertical_sliderPressed();
 
-    void on_ChangeMainLocatorMagnificationAKTSlider_sliderReleased();
+    void on_ChangeMainOffsetVertical_sliderReleased();
 
-    void on_ChangeMainLocatorMagnificationAKTSlider_sliderPressed();
+    void on_ChangeMainOffsetVertical_valueChanged(int value);
 
-    void on_ChangeMainLocatorMagnificationPASSSlider_valueChanged(int value);
+    void on_ChangeMainOffsetHorizontalButton_pressed();
 
-    void on_ChangeMainLocatorMagnificationPASS_pressed();
+    void on_ChangeMainOffsetHorizontal_sliderPressed();
 
-    void on_ChangeMainLocatorMagnificationPASSSlider_sliderReleased();
+    void on_ChangeMainOffsetHorizontal_sliderReleased();
 
-    void on_ChangeMainLocatorMagnificationPASSSlider_sliderPressed();
+    void on_ChangeMainOffsetHorizontal_valueChanged(int value);
 
-    void on_ChangeMainLocatorScale_clicked();
+    void on_ChangeMainBrightnessRangeButton_pressed();
 
-    void on_ChangeEquingularLocatorMagnificationSDC_pressed();
+    void on_ChangeMainBrightnessRange_sliderPressed();
 
-    void on_ChangeEquingularLocatorMagnificationSDCSlider_valueChanged(int value);
+    void on_ChangeMainBrightnessRange_sliderReleased();
 
-    void on_ChangeEquingularLocatorMagnificationSDCSlider_sliderReleased();
+    void on_ChangeMainBrightnessRange_valueChanged(int value);
 
-    void on_ChangeEquingularLocatorMagnificationSDCSlider_sliderPressed();
+    void on_ChangeMainBrightnessAzimuthButton_pressed();
 
-    void on_ChangeMainLocatorScale_pressed();
+    void on_ChangeMainBrightnessAzimuth_sliderPressed();
 
-    void on_ChangeMainLocatorScale_released();
+    void on_ChangeMainBrightnessAzimuth_sliderReleased();
 
-    void on_ChangeEquingularLocatorScale_clicked();
+    void on_ChangeMainBrightnessAzimuth_valueChanged(int value);
 
-    void on_ChangeEquingularLocatorScale_pressed();
+    void on_ChangeMainNullSetVerticalButton_pressed();
 
-    void on_ChangeEquingularLocatorScale_released();
+    void on_ChangeMainNullSetVertical_sliderPressed();
 
-    void on_ChangeEquingularLocatorMode_clicked();
+    void on_ChangeMainNullSetVertical_sliderReleased();
 
-    void on_ChangeEquingularLocatorMode_pressed();
+    void on_ChangeMainNullSetVertical_valueChanged(int value);
 
-    void on_ChangeEquingularLocatorMode_released();
+    void on_ChangeMainNullSetHorizontalButton_pressed();
 
-    void on_ChangeRightTriangleBrightnessMarksRange_pressed();
+    void on_ChangeMainNullSetHorizontal_sliderPressed();
 
-    void on_ChangeRightTriangleBrightnessMarksRangeSlider_valueChanged(int value);
+    void on_ChangeMainNullSetHorizontal_sliderReleased();
 
-    void on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderPressed();
+    void on_ChangeMainNullSetHorizontal_valueChanged(int value);
 
-    void on_ChangeRightTriangleBrightnessMarksRangeSlider_sliderReleased();
+    void on_ChangeMainFocusButton_pressed();
 
-    void on_ChangeRightTriangleBrightnessMarksAzimuth_pressed();
+    void on_ChangeMainFocus_sliderPressed();
 
-    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_valueChanged(int value);
+    void on_ChangeMainFocus_sliderReleased();
 
-    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderPressed();
+    void on_ChangeMainFocus_valueChanged(int value);
 
-    void on_ChangeRightTriangleBrightnessMarksAzimuthSlider_sliderReleased();
+    void on_ChangeMainFocusBrightnessButton_pressed();
 
-    void on_ChangeRightTriangleFocus_pressed();
+    void on_ChangeMainFocusBrightness_sliderPressed();
 
-    void on_ChangeRightTriangleFocusSlider_valueChanged(int value);
+    void on_ChangeMainFocusBrightness_sliderReleased();
 
-    void on_ChangeRightTriangleFocusSlider_sliderPressed();
+    void on_ChangeMainFocusBrightness_valueChanged(int value);
 
-    void on_ChangeRightTriangleFocusSlider_sliderReleased();
+    void on_ChangeMainTrashAKTButton_pressed();
 
-    void on_ChangeRightTriangleBrightness_pressed();
+    void on_ChangeMainTrashAKT_sliderPressed();
 
-    void on_ChangeRightTriangleBrightnessSlider_valueChanged(int value);
+    void on_ChangeMainTrashAKT_sliderReleased();
 
-    void on_ChangeRightTriangleBrightnessSlider_sliderPressed();
+    void on_ChangeMainTrashAKT_valueChanged(int value);
 
-    void on_ChangeRightTriangleBrightnessSlider_sliderReleased();
+    void on_ChangeMainTrashPASSButton_pressed();
 
-    void on_SetTargetsSettings_clicked();
+    void on_ChangeMainTrashPASS_sliderPressed();
 
-    void on_ChangeEquingularLocatorMagnificationPASS_pressed();
+    void on_ChangeMainTrashPASS_sliderReleased();
 
-    void on_ChangeEquingularLocatorMagnificationPASSSlider_valueChanged(int value);
+    void on_ChangeMainTrashPASS_valueChanged(int value);
 
-    void on_ChangeEquingularLocatorMagnificationPASSSlider_sliderPressed();
+    void on_SelectMainScale_clicked();
 
-    void on_ChangeEquingularLocatorMagnificationPASSSlider_sliderReleased();
+    void on_ChangeEquingularFocusButton_pressed();
 
-    void on_ChangeEquingularLocatorMagnificationAKT_pressed();
+    void on_ChangeEquingularFocus_sliderPressed();
 
-    void on_ChangeEquingularLocatorMagnificationAKTSlider_valueChanged(int value);
+    void on_ChangeEquingularFocus_sliderReleased();
 
-    void on_ChangeEquingularLocatorMagnificationAKTSlider_sliderPressed();
+    void on_ChangeEquingularFocus_valueChanged(int value);
 
-    void on_ChangeEquingularLocatorMagnificationAKTSlider_sliderReleased();
+    void on_ChangeEquingularBrightnessButton_pressed();
 
-    void on_CheckActiveNoiseShow_stateChanged(int arg1);
+    void on_ChangeEquingularBrightness_sliderPressed();
 
-    void on_InputActiveNoiseAzimuth_valueChanged(int arg1);
+    void on_ChangeEquingularBrightness_sliderReleased();
 
-    void on_SelectActiveNoiseIntensity_currentIndexChanged(int index);
+    void on_ChangeEquingularBrightness_valueChanged(int value);
 
-    void on_ChangeRightTriangleAmplVertical_pressed();
+    void on_ChangeEquingularTrashSDCButton_pressed();
 
-    void on_ChangeRightTriangleAmplVerticalSlider_valueChanged(int value);
+    void on_ChangeEquingularTrashSDC_sliderPressed();
 
-    void on_ChangeRightTriangleAmplVerticalSlider_sliderPressed();
+    void on_ChangeEquingularTrashSDC_sliderReleased();
 
-    void on_ChangeRightTriangleAmplVerticalSlider_sliderReleased();
+    void on_ChangeEquingularTrashSDC_valueChanged(int value);
 
-    void on_ChangeRightTriangleAmplHorizontal_pressed();
-    
-    void on_ChangeRightTriangleAmplHorizontalSlider_sliderPressed();
+    void on_ChangeEquingularTrashPASSButton_pressed();
 
-    void on_ChangeRightTriangleAmplHorizontalSlider_valueChanged(int value);
+    void on_ChangeEquingularTrashPASS_sliderPressed();
 
-    void on_ChangeRightTriangleAmplHorizontalSlider_sliderReleased();
+    void on_ChangeEquingularTrashPASS_sliderReleased();
 
-    void on_ChangeRightTriangleOffsetlVertical_pressed();
+    void on_ChangeEquingularTrashPASS_valueChanged(int value);
 
-    void on_ChangeRightTriangleOffsetlVerticalSlider_valueChanged(int value);
+    void on_ChangeEquingularTrashAKTButton_pressed();
 
-    void on_ChangeRightTriangleOffsetlVerticalSlider_sliderPressed();
+    void on_ChangeEquingularTrashAKT_sliderPressed();
 
-    void on_ChangeRightTriangleOffsetlVerticalSlider_sliderReleased();
+    void on_ChangeEquingularTrashAKT_sliderReleased();
 
-    void on_ChangeRightTriangleOffsetlHorizontal_pressed();
+    void on_ChangeEquingularTrashAKT_valueChanged(int value);
 
-    void on_ChangeRightTriangleOffsetlHorizontalSlider_valueChanged(int value);
+    void on_SelectEquingularScale_clicked();
 
-    void on_ChangeRightTriangleOffsetlHorizontalSlider_sliderPressed();
-
-    void on_ChangeRightTriangleOffsetlHorizontalSlider_sliderReleased();
-
-    void on_ChangeEquingularTriangleAmplVertical_pressed();
-
-    void on_ChangeEquingularTriangleAmplVerticalSlider_valueChanged(int value);
-
-    void on_ChangeEquingularTriangleAmplVerticalSlider_sliderPressed();
-
-    void on_ChangeEquingularTriangleAmplVerticalSlider_sliderReleased();
-
-    void on_ChangeEquingularTriangleAmplHorizontal_pressed();
-
-    void on_ChangeEquingularTriangleAmplHorizontalSlider_valueChanged(int value);
-
-    void on_ChangeEquingularTriangleAmplHorizontalSlider_sliderPressed();
-
-    void on_ChangeEquingularTriangleAmplHorizontalSlider_sliderReleased();
-
-    void on_ChangeEquingularTriangleOffsetVertical_pressed();
-
-    void on_ChangeEquingularTriangleOffsetVerticalSlider_valueChanged(int value);
-
-    void on_ChangeEquingularTriangleOffsetVerticalSlider_sliderPressed();
-
-    void on_ChangeEquingularTriangleOffsetVerticalSlider_sliderReleased();
-
-    void on_ChangeEquingularTriangleOffsetHorizontal_pressed();
-
-    void on_ChangeEquingularTriangleOffsetHorizontalSlider_valueChanged(int value);
-
-    void on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderPressed();
-
-    void on_ChangeEquingularTriangleOffsetHorizontalSlider_sliderReleased();
+    void on_SelectEquingularMode_clicked();
 
 private:
-    QPointer<TargetsSettings>tsettings;
-    Ui::commonview *ui;
+    Ui::CommonView *ui;
 };
 
 #endif // COMMONVIEW_H

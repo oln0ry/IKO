@@ -28,7 +28,7 @@ void Menu::on_ButtonIndicatorPRL_clicked()
 
 void Menu::on_ButtonRSP_clicked()
 {
-    RSP=new commonview;
+    RSP=new CommonView;
     RSP->show();
 }
 
