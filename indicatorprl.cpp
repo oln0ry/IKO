@@ -304,6 +304,9 @@ void IndicatorPRL::on_SelectEquingularScale_clicked()
     ui->SelectEquingularScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
     ui->RenderEquingularTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
 
+    //Усиление приёмника
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","begin",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
     /*
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
@@ -540,6 +543,9 @@ void IndicatorPRL::on_SelectRightScale_clicked()
     ui->SelectRightScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
     ui->RenderRightTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
 
+    //Усиление приёмника
+    ui->RenderRightTriangleLocator->SetSettings("trash","begin",.0f);
+    ui->RenderRightTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
     /*
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);

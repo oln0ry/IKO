@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>897</width>
-    <height>656</height>
+    <width>875</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@
             <property name="spacing">
              <number>0</number>
             </property>
-            <item row="0" column="1">
+            <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignVCenter">
              <widget class="QLabel" name="LabelRightScale30">
               <property name="text">
                <string>30 км.</string>
@@ -79,8 +79,8 @@
               </property>
               <property name="iconSize">
                <size>
-                <width>25</width>
-                <height>25</height>
+                <width>20</width>
+                <height>20</height>
                </size>
               </property>
               <property name="flat">
@@ -199,8 +199,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -268,8 +268,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -286,7 +286,7 @@
              <number>100</number>
             </property>
             <property name="value">
-             <number>60</number>
+             <number>15</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -366,8 +366,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -405,8 +405,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -460,8 +460,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -545,8 +545,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -636,6 +636,13 @@
     </item>
     <item row="2" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="Line" name="line_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="2">
        <layout class="QGridLayout" name="LayoutEquingularSettingsButtons">
         <item row="0" column="1">
@@ -678,8 +685,8 @@
               </property>
               <property name="iconSize">
                <size>
-                <width>25</width>
-                <height>25</height>
+                <width>20</width>
+                <height>20</height>
                </size>
               </property>
               <property name="flat">
@@ -687,7 +694,7 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignVCenter">
              <widget class="QLabel" name="LabelEquingularScale30">
               <property name="text">
                <string>30 км.</string>
@@ -848,8 +855,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -904,8 +911,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -976,8 +983,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -1048,8 +1055,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -1066,7 +1073,7 @@
              <number>100</number>
             </property>
             <property name="value">
-             <number>60</number>
+             <number>15</number>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1120,7 +1127,7 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
+              <width>20</width>
               <height>25</height>
              </size>
             </property>
@@ -1195,8 +1202,8 @@
             </property>
             <property name="iconSize">
              <size>
-              <width>25</width>
-              <height>25</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
             <property name="flat">
@@ -1223,13 +1230,6 @@
          </layout>
         </item>
        </layout>
-      </item>
-      <item row="0" column="1">
-       <widget class="Line" name="line_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>

@@ -118,7 +118,7 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
-        <string>ДРЛ+ПРЛ</string>
+        <string>ДРЛ + ПРЛ</string>
        </property>
       </widget>
      </item>

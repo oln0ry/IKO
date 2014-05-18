@@ -1,70 +1,102 @@
 #include"rspindicators.h"
 #include"ui_rspindicators.h"
 
-RSPIndicators::RSPIndicators(QWidget *parent):QWidget(parent),ui(new Ui::RSPIndicators)
+RSPIndicators::RSPIndicators(QWidget *parent) : QMainWindow(parent),ui(new Ui::RSPIndicators)
 {
     ui->setupUi(this);
-    QStringList azimuth_marks,range_marks,scale,range_marks_triangles,scale_triangles,work_variants,intensity;
-    azimuth_marks<<"Не отображать"<<"30°"<<"10°";
-    ui->SelectAzimuthMarks->addItems(azimuth_marks);
-    ui->SelectAzimuthMarks->setCurrentIndex(1);
-    range_marks<<"Не отображать"<<"10 километров"<<"50 километров";
-    ui->SelectRangeMarks->addItems(range_marks);
-    ui->SelectRangeMarks->setCurrentIndex(1);
-    scale<<"45 километров"<<"90 километров"<<"150 километров";
-    ui->SelectScale->addItems(scale);
-    ui->SelectScale->setCurrentIndex(0);
-    work_variants<<"Активный"<<"Пассивный"<<"СДЦ";
-    ui->SelectWorkVariant->addItems(work_variants);
-    ui->SelectWorkVariant->setCurrentIndex(1);
+    //###Инициализация
+    //Интенсивность усиления приёмника
+    ui->ChangeMainTrashIntensity->valueChanged(ui->ChangeMainTrashIntensity->value());
+    ui->ChangeMainTrashIntensity->hide();
+    ui->ChangeMainTrashIntensity->setDisabled(true);
 
-    range_marks_triangles<<"Не отображать"<<"5 километров"<<"10 километров";
-    ui->SelectRangeMarksEquiangular->addItems(range_marks_triangles);
-    ui->SelectRangeMarksEquiangular->setCurrentIndex(1);
-    ui->SelectRangeMarksRightTriangle->addItems(range_marks_triangles);
-    ui->SelectRangeMarksRightTriangle->setCurrentIndex(1);
-    scale_triangles<<"20 километров"<<"30 километров"<<"60 километров";
-    ui->SelectScaleEquiangular->addItems(scale_triangles);
-    ui->SelectScaleEquiangular->setCurrentIndex(1);
-    ui->SelectScaleRightTriangle->addItems(scale_triangles);
-    ui->SelectScaleRightTriangle->setCurrentIndex(1);
+    ui->ChangeEquiangularTrashIntensity->valueChanged(ui->ChangeEquiangularTrashIntensity->value());
+    ui->ChangeEquiangularTrashIntensity->hide();
+    ui->ChangeEquiangularTrashIntensity->setDisabled(true);
 
-    //Настроим индикатор кругового обзора
+    ui->ChangeRightTrashIntensity->valueChanged(ui->ChangeRightTrashIntensity->value());
+    ui->ChangeRightTrashIntensity->hide();
+    ui->ChangeRightTrashIntensity->setDisabled(true);
 
-    intensity<<"Слабая"<<"Средняя"<<"Сильная";
-    ui->SelectActiveNoiseTrashIntensity->addItems(intensity);
-    ui->SelectActiveNoiseTrashIntensity->setCurrentIndex(1);
+    //Отметки азимута
+    ui->SelectMainAzimuthMarks->clicked();
 
-    //Ползунки
-    ui->ChangeIndicatorBrightness->valueChanged(ui->ChangeIndicatorBrightness->value());
-    ui->ChangeDisplayLightning->valueChanged(ui->ChangeDisplayLightning->value());
-    ui->ChangeIndicatorFocus->valueChanged(ui->ChangeIndicatorFocus->value());
-    ui->ChangeIndicatorVARU->valueChanged(ui->ChangeIndicatorVARU->value());
-    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+    //Отметки дальности
+    ui->SelectMainRangeMarks->clicked();
 
-    //Чекбоксы
-    ui->CheckActiveNoiseShow->stateChanged(ui->CheckActiveNoiseShow->checkState());
-    ui->CheckActiveAnswerShow->stateChanged(ui->CheckActiveAnswerShow->checkState());
-    ui->CheckActiveInSyncShow->stateChanged(ui->CheckActiveInSyncShow->checkState());
+    ui->SelectEquiangularRangeMarks->clicked();
 
-    //Настройки глиссадного индикатора
-    ui->ChangeTrashIntensityEquiangular->valueChanged(ui->ChangeTrashIntensityEquiangular->value());
-    ui->ChangeIndicatorBrightnessEquiangular->valueChanged(ui->ChangeIndicatorBrightnessEquiangular->value());
-    ui->ChangeLightningEquiangular->valueChanged(ui->ChangeLightningEquiangular->value());
-    ui->ChangeIndicatorFocusEquiangular->valueChanged(ui->ChangeIndicatorFocusEquiangular->value());
-    ui->ChangeIndicatorVARUEquiangular->valueChanged(ui->ChangeIndicatorVARUEquiangular->value());
+    ui->SelectRightRangeMarks->clicked();
 
-    //Настройки курсового индикатора
-    ui->ChangeTrashIntensityRightTriangle->valueChanged(ui->ChangeTrashIntensityRightTriangle->value());
-    ui->ChangeIndicatorBrightnessRightTriangle->valueChanged(ui->ChangeIndicatorBrightnessRightTriangle->value());
-    ui->ChangeLightningRightTriangle->valueChanged(ui->ChangeLightningRightTriangle->value());
-    ui->ChangeIndicatorFocusRightTriangle->valueChanged(ui->ChangeIndicatorFocusRightTriangle->value());
-    ui->ChangeIndicatorVARURightTriangle->valueChanged(ui->ChangeIndicatorVARURightTriangle->value());
+    //Масштаб
+    ui->SelectMainScale->clicked();
+    ui->SelectMainScale->clicked();
+    ui->SelectMainScale->clicked();
 
-    //Запуск индикаторов
-    ui->FirstIndicator->ChangeFPS(1000/24);
-    ui->SecondIndicator->ChangeFPS(1000/24);
-    ui->ThirdIndicator->ChangeFPS(1000/24);
+    ui->SelectEquiangularScale->clicked();
+    ui->SelectEquiangularScale->clicked();
+    ui->SelectEquiangularScale->clicked();
+
+    ui->SelectRightScale->clicked();
+    ui->SelectRightScale->clicked();
+    ui->SelectRightScale->clicked();
+
+    //Яркость индикаторов
+    ui->ChangeMainBrightness->valueChanged(ui->ChangeMainBrightness->value());
+    ui->ChangeMainBrightness->hide();
+    ui->ChangeMainBrightness->setDisabled(true);
+
+    ui->ChangeEquiangularBrightness->valueChanged(ui->ChangeEquiangularBrightness->value());
+    ui->ChangeEquiangularBrightness->hide();
+    ui->ChangeEquiangularBrightness->setDisabled(true);
+
+    ui->ChangeRightBrightness->valueChanged(ui->ChangeRightBrightness->value());
+    ui->ChangeRightBrightness->hide();
+    ui->ChangeRightBrightness->setDisabled(true);
+
+    //Подсветка луча индикаторов (остаточное изображение)
+    ui->ChangeMainLightning->valueChanged(ui->ChangeMainLightning->value());
+    ui->ChangeMainLightning->hide();
+    ui->ChangeMainLightning->setDisabled(true);
+
+    ui->ChangeEquiangularLightning->valueChanged(ui->ChangeEquiangularLightning->value());
+    ui->ChangeEquiangularLightning->hide();
+    ui->ChangeEquiangularLightning->setDisabled(true);
+
+    ui->ChangeRightLightning->valueChanged(ui->ChangeRightLightning->value());
+    ui->ChangeRightLightning->hide();
+    ui->ChangeRightLightning->setDisabled(true);
+
+    //Фокус изображения, отображаемого на индикаторах
+    ui->ChangeMainFocus->valueChanged(ui->ChangeMainFocus->value());
+    ui->ChangeMainFocus->hide();
+    ui->ChangeMainFocus->setDisabled(true);
+
+    ui->ChangeEquiangularFocus->valueChanged(ui->ChangeEquiangularFocus->value());
+    ui->ChangeEquiangularFocus->hide();
+    ui->ChangeEquiangularFocus->setDisabled(true);
+
+    ui->ChangeRightFocus->valueChanged(ui->ChangeRightFocus->value());
+    ui->ChangeRightFocus->hide();
+    ui->ChangeRightFocus->setDisabled(true);
+
+    //Автоматическая регулировка усиления индикатора
+    ui->ChangeMainVARU->valueChanged(ui->ChangeMainVARU->value());
+    ui->ChangeMainVARU->hide();
+    ui->ChangeMainVARU->setDisabled(true);
+
+    ui->ChangeEquiangularVARU->valueChanged(ui->ChangeMainVARU->value());
+    ui->ChangeEquiangularVARU->hide();
+    ui->ChangeEquiangularVARU->setDisabled(true);
+
+    ui->ChangeRightVARU->valueChanged(ui->ChangeMainVARU->value());
+    ui->ChangeRightVARU->hide();
+    ui->ChangeRightVARU->setDisabled(true);
+    //###\Инициализация
+
+    ui->ChangeMainLocatorState->clicked(); //Запуск индикатора
+    ui->ChangeEquingularState->clicked();
+    ui->ChangeRightState->clicked();
 }
 
 RSPIndicators::~RSPIndicators()
@@ -72,362 +104,802 @@ RSPIndicators::~RSPIndicators()
     delete ui;
 }
 
-void RSPIndicators::on_ChangeLocatorState_clicked()
+/**
+ * Этот метод является чистой воды диким шаманством
+ */
+bool RSPIndicators::eventFilter(QObject *O, QEvent *E)
 {
-    quint16 fps;
-    if(ui->FirstIndicator->IsActive())
+    if((O->objectName()=="MainLocator" || O->inherits("MainLocator")) && E->type()==QEvent::MouseButtonDblClick)
     {
-        ui->FirstIndicator->ChangeFPS(0);
-        ui->ChangeLocatorState->setText("Продолжить");
-    }
-    else
-    {
-        fps=static_cast<quint8>(24);
-        ui->FirstIndicator->ChangeFPS(1000/fps);
-        ui->ChangeLocatorState->setText("Стоп");
+        if(isFullScreen())
+        {
+            ui->gridLayout_52->addWidget(ui->RenderMainLocator,0,0,1,1);
+            ui->gridLayout_52->addWidget(ui->RenderEquingularTriangleLocator,0,1,1,1);
+            ui->gridLayout_52->addWidget(ui->RenderRightTriangleLocator,0,2,1,1);
+            ui->centralwidget->raise();
+            showNormal();
+        }
+        else
+        {
+            if(O->objectName()=="RenderEquingularTriangleLocator" && O->inherits("EquiangularTriangleLocator"))
+            {
+                ui->gridLayout_52->addWidget(ui->RenderEquingularTriangleLocator,0,0,0,0);
+                ui->RenderEquingularTriangleLocator->raise();
+            }
+            else if(O->objectName()=="RenderRightTriangleLocator" && O->inherits("RightTriangleLocator"))
+            {
+                ui->gridLayout_52->addWidget(ui->RenderRightTriangleLocator,0,0,0,0);
+                ui->RenderRightTriangleLocator->raise();
+            }
+            else
+            {
+                ui->gridLayout_52->addWidget(ui->RenderMainLocator,0,0,0,0);
+                ui->RenderMainLocator->raise();
+            }
+            showFullScreen();
+        }
+        activateWindow();
     }
 }
 
-void RSPIndicators::on_ChangeLocatorStateEquiangular_clicked()
+void RSPIndicators::on_ChangeMainTrashIntensityButton_pressed()
 {
-    quint16 fps;
-    if(ui->SecondIndicator->IsActive())
-    {
-        ui->SecondIndicator->ChangeFPS(0);
-        ui->ChangeLocatorStateEquiangular->setText("Продолжить");
-    }
-    else
-    {
-        fps=static_cast<quint8>(24);
-        ui->SecondIndicator->ChangeFPS(1000/fps);
-        ui->ChangeLocatorStateEquiangular->setText("Стоп");
-    }
+    ui->ChangeMainTrashIntensity->show();
+    ui->ChangeMainTrashIntensity->setEnabled(true);
+    ui->ChangeMainTrashIntensityButton->setCursor(Qt::ClosedHandCursor);
 }
 
-void RSPIndicators::on_ChangeLocatorStateRightTriangle_clicked()
+void RSPIndicators::on_ChangeMainTrashIntensity_sliderPressed()
 {
-    quint16 fps;
-    if(ui->ThirdIndicator->IsActive())
-    {
-        ui->ThirdIndicator->ChangeFPS(0);
-        ui->ChangeLocatorStateRightTriangle->setText("Продолжить");
-    }
-    else
-    {
-        fps=static_cast<quint8>(24);
-        ui->ThirdIndicator->ChangeFPS(1000/fps);
-        ui->ChangeLocatorStateRightTriangle->setText("Стоп");
-    }
+    ui->ChangeMainTrashIntensity->setCursor(Qt::ClosedHandCursor);
 }
 
-void RSPIndicators::on_ChangeViewStateAll_clicked()
+void RSPIndicators::on_ChangeMainTrashIntensity_sliderReleased()
 {
-    if(ui->FirstIndicator->show)
-    {
-        ui->ChangeViewStateAll->setText("Все отметки");
-        ui->FirstIndicator->SetSettings("system","show",false);
-    }
-    else
-    {
-        ui->ChangeViewStateAll->setText("Скрыть");
-        ui->FirstIndicator->SetSettings("system","show",true);
-    }
+    ui->ChangeMainTrashIntensity->hide();
+    ui->ChangeMainTrashIntensity->setDisabled(true);
+    ui->ChangeMainTrashIntensity->setCursor(Qt::OpenHandCursor);
+    ui->ChangeMainTrashIntensityButton->setCursor(Qt::OpenHandCursor);
 }
 
-void RSPIndicators::on_ChangeViewStateAllEquiangular_clicked()
+void RSPIndicators::on_ChangeMainTrashIntensity_valueChanged(int value)
 {
-    if(ui->SecondIndicator->show)
-    {
-        ui->ChangeViewStateAllEquiangular->setText("Отобразить все скрытые метки");
-        ui->SecondIndicator->SetSettings("system","show",false);
-    }
-    else
-    {
-        ui->ChangeViewStateAllEquiangular->setText("Скрыть");
-        ui->SecondIndicator->SetSettings("system","show",true);
-    }
-}
-
-void RSPIndicators::on_ChangeViewStateAllRightTriangle_clicked()
-{
-    if(ui->ThirdIndicator->show)
-    {
-        ui->ChangeViewStateAllRightTriangle->setText("Отобразить все скрытые метки");
-        ui->ThirdIndicator->SetSettings("system","show",false);
-    }
-    else
-    {
-        ui->ChangeViewStateAllRightTriangle->setText("Скрыть");
-        ui->ThirdIndicator->SetSettings("system","show",true);
-    }
-}
-
-void RSPIndicators::on_ButtonTargetsSettings_clicked()
-{
-    tsettings=new TargetsSettings;
-    tsettings->show();
-}
-
-void RSPIndicators::on_SelectRangeMarksEquiangular_currentIndexChanged(int index)
-{
-    if(index<0)
+    if(value<0)
         return;
-    ui->SecondIndicator->SetSettings("system","range",static_cast<quint16>(index));
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderMainLocator->SetSettings("trash","show",value>0);
+    ui->ChangeMainTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainTrashIntensity->maximum())));
 }
 
-void RSPIndicators::on_SelectRangeMarksRightTriangle_currentIndexChanged(int index)
+void RSPIndicators::on_SelectMainAzimuthMarks_clicked()
 {
-    if(index<0)
-        return;
-    ui->ThirdIndicator->SetSettings("system","range",static_cast<quint16>(index));
+    static quint8 status=0u;
+
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qint16 degree=0;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelSelectAzimuthMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectAzimuthMarksValue->setText("10°");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectAzimuthMarksValue->setText("30°");
+            degree=60u;
+            break;
+    }
+    ui->SelectMainAzimuthMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderMainLocator->SetSettings("system","azimuth",static_cast<quint16>(status));
+
 }
 
-void RSPIndicators::on_SelectScaleEquiangular_currentIndexChanged(int index)
+void RSPIndicators::on_SelectMainRangeMarks_clicked()
 {
-    if(index<0)
-        return;
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qint16 degree=0u;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelSelectRangeMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectRangeMarksValue->setText("10 км.");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectRangeMarksValue->setText("50 км.");
+            degree=60u;
+            break;
+    }
+    ui->SelectMainRangeMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderMainLocator->SetSettings("system","range",static_cast<quint16>(status));
+}
+
+void RSPIndicators::on_SelectMainScale_clicked()
+{
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
     qreal max;
-    switch(index)
+    qint16 degree=0u;
+
+    switch(status)
     {
-        case 2:
-            max=60.0f;
+        case 0u:
+            //ui->LabelScaleValue->setText("45 км.");
+            degree=0u;
+            max=45.0f;
             break;
-        case 1:
-            max=30.0f;
-            break;
-        default:
-            max=20.0f;
-
-    }
-    ui->SecondIndicator->SetSettings("system","scale",static_cast<quint8>(max));
-    ui->SecondIndicator->SetSettings("trash","end",max);
-    ui->SecondIndicator->SetSettings("trash","begin",0);
-}
-
-void RSPIndicators::on_SelectScaleRightTriangle_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    qreal max;
-    switch(index)
-    {
-        case 2:
-            max=60.0f;
-            break;
-        case 1:
-            max=30.0f;
-            break;
-        default:
-            max=20.0f;
-
-    }
-    ui->ThirdIndicator->SetSettings("system","scale",static_cast<quint8>(max));
-    ui->ThirdIndicator->SetSettings("trash","end",max);
-    ui->ThirdIndicator->SetSettings("trash","begin",0);
-}
-
-void RSPIndicators::on_SelectRangeMarks_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    ui->FirstIndicator->SetSettings("system","range",static_cast<quint16>(index));
-}
-
-void RSPIndicators::on_SelectScale_currentIndexChanged(int index)
-{
-    if(index<0)
-        return;
-    qreal max;
-    switch(index)
-    {
-        case 2:
-            max=150.0f;
-            break;
-        case 1:
+        case 1u:
+            //ui->LabelScaleValue->setText("90 км.");
+            degree=45u;
             max=90.0f;
             break;
-        default:
-            max=45.0f;
-
+        case 2u:
+            //ui->LabelScaleValue->setText("150 км.");
+            degree=180u;
+            max=150.0f;
+            break;
     }
-    ui->FirstIndicator->SetSettings("system","scale",static_cast<quint8>(max));
-    ui->FirstIndicator->SetSettings("trash","end",max);
-    ui->FirstIndicator->SetSettings("trash","begin",0);
+
+    ui->SelectMainScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
+    ui->RenderMainLocator->SetSettings("system","scale",static_cast<quint8>(max));
+
+    //Усиление приёмника
+    ui->RenderMainLocator->SetSettings("trash","begin",.0f);
+    ui->RenderMainLocator->SetSettings("trash","end",static_cast<qreal>(max));
+    /*
+    if(ui->InputScatterTrashFrom->value()>max)
+        ui->InputScatterTrashFrom->setValue(max);
+    if(ui->InputScatterTrashTo->value()>max)
+        ui->InputScatterTrashTo->setValue(max);
+    ui->InputScatterTrashFrom->setMaximum(max);
+    ui->InputScatterTrashTo->setMaximum(max);
+    */
 }
 
-void RSPIndicators::on_SelectWorkVariant_currentIndexChanged(int index)
+void RSPIndicators::on_ChangeMainBrightnessButton_pressed()
 {
-    if(index<0)
+    ui->ChangeMainBrightness->show();
+    ui->ChangeMainBrightness->setEnabled(true);
+    ui->ChangeMainBrightnessButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainBrightness_sliderPressed()
+{
+    ui->ChangeMainBrightness->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainBrightness_sliderReleased()
+{
+    ui->ChangeMainBrightness->hide();
+    ui->ChangeMainBrightness->setDisabled(true);
+    ui->ChangeMainBrightness->setCursor(Qt::OpenHandCursor);
+    ui->ChangeMainBrightnessButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainBrightness_valueChanged(int value)
+{
+    if(value<0)
         return;
-    switch(index)
+    ui->RenderMainLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->ChangeMainBrightnessButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainBrightness->maximum())));
+}
+
+void RSPIndicators::on_ChangeMainLightningButton_pressed()
+{
+    ui->ChangeMainLightning->show();
+    ui->ChangeMainLightning->setEnabled(true);
+    ui->ChangeMainLightningButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainLightning_sliderPressed()
+{
+    ui->ChangeMainLightning->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainLightning_sliderReleased()
+{
+    ui->ChangeMainLightning->hide();
+    ui->ChangeMainLightning->setDisabled(true);
+    ui->ChangeMainLightning->setCursor(Qt::OpenHandCursor);
+    ui->ChangeMainLightningButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainLightning_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->ChangeMainLightningButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainLightning->maximum())));
+}
+
+void RSPIndicators::on_ChangeMainFocusButton_pressed()
+{
+    ui->ChangeMainFocus->show();
+    ui->ChangeMainFocus->setEnabled(true);
+    ui->ChangeMainFocusButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainFocus_sliderPressed()
+{
+    ui->ChangeMainFocus->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainFocus_sliderReleased()
+{
+    ui->ChangeMainFocus->hide();
+    ui->ChangeMainFocus->setDisabled(true);
+    ui->ChangeMainFocus->setCursor(Qt::OpenHandCursor);
+    ui->ChangeMainFocusButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainFocus_valueChanged(int value)
+{
+    ui->ChangeMainFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderMainLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeMainVARUButton_pressed()
+{
+    ui->ChangeMainVARU->show();
+    ui->ChangeMainVARU->setEnabled(true);
+    ui->ChangeMainVARUButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainVARU_sliderPressed()
+{
+    ui->ChangeMainVARU->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainVARU_sliderReleased()
+{
+    ui->ChangeMainVARU->hide();
+    ui->ChangeMainVARU->setDisabled(true);
+    ui->ChangeMainVARU->setCursor(Qt::OpenHandCursor);
+    ui->ChangeMainVARUButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeMainVARU_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderMainLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ChangeMainVARUButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainVARU->maximum())));
+}
+
+void RSPIndicators::on_ChangeMainViewStateAll_clicked()
+{
+    if(ui->RenderMainLocator->show)
     {
-        case 0:
-            if(ui->ChangeTrashIntensity->isEnabled())
-                ui->ChangeTrashIntensity->setEnabled(false);
-            if(ui->ChangeTrashIntensityEquiangular->isEnabled())
-                ui->ChangeTrashIntensityEquiangular->setEnabled(false);
-            if(ui->ChangeTrashIntensityRightTriangle->isEnabled())
-                ui->ChangeTrashIntensityRightTriangle->setEnabled(false);
-            if(ui->CheckActiveNoiseShow->isEnabled())
-                ui->CheckActiveNoiseShow->setEnabled(false);
-            if(ui->CheckActiveAnswerShow->isEnabled())
-                ui->CheckActiveAnswerShow->setEnabled(false);
-            if(ui->CheckActiveInSyncShow->isEnabled())
-                ui->CheckActiveInSyncShow->setEnabled(false);
-            break;
-        case 1:
-            if(!ui->ChangeTrashIntensity->isEnabled())
-                ui->ChangeTrashIntensity->setEnabled(true);
-            if(!ui->ChangeTrashIntensityEquiangular->isEnabled())
-                ui->ChangeTrashIntensityEquiangular->setEnabled(true);
-            if(!ui->ChangeTrashIntensityRightTriangle->isEnabled())
-                ui->ChangeTrashIntensityRightTriangle->setEnabled(true);
-            if(!ui->CheckActiveNoiseShow->isEnabled())
-                ui->CheckActiveNoiseShow->setEnabled(true);
-            if(!ui->CheckActiveAnswerShow->isEnabled())
-                ui->CheckActiveAnswerShow->setEnabled(true);
-            if(!ui->CheckActiveInSyncShow->isEnabled())
-                ui->CheckActiveInSyncShow->setEnabled(true);
-            break;
-        case 2:
-            if(ui->ChangeTrashIntensity->isEnabled())
-                ui->ChangeTrashIntensity->setEnabled(false);
-            if(ui->ChangeTrashIntensityEquiangular->isEnabled())
-                ui->ChangeTrashIntensityEquiangular->setEnabled(false);
-            if(ui->ChangeTrashIntensityRightTriangle->isEnabled())
-                ui->ChangeTrashIntensityRightTriangle->setEnabled(false);
-            if(ui->CheckActiveNoiseShow->isEnabled())
-                ui->CheckActiveNoiseShow->setEnabled(false);
-            if(!ui->CheckActiveAnswerShow->isEnabled())
-                ui->CheckActiveAnswerShow->setEnabled(true);
-            if(!ui->CheckActiveInSyncShow->isEnabled())
-                ui->CheckActiveInSyncShow->setEnabled(true);
-
+        ui->ChangeMainViewStateAll->setText("Отобразить все скрытые метки");
+        ui->RenderMainLocator->SetSettings("system","show",false);
     }
-    ui->FirstIndicator->SetSettings("system","mode",static_cast<quint8>(index));
-    ui->SecondIndicator->SetSettings("system","mode",static_cast<quint8>(index));
-    ui->ThirdIndicator->SetSettings("system","mode",static_cast<quint8>(index));
+    else
+    {
+        ui->ChangeMainViewStateAll->setText("Вернуть состояние скрытых меток");
+        ui->RenderMainLocator->SetSettings("system","show",true);
+    }
 }
 
-void RSPIndicators::on_SelectAzimuthMarks_currentIndexChanged(int index)
+void RSPIndicators::on_ChangeMainLocatorState_clicked()
 {
-    if(index<0)
-        return;
-    ui->FirstIndicator->SetSettings("system","azimuth",static_cast<quint16>(index));
+    if(ui->RenderMainLocator->IsActive())
+    {
+        ui->RenderMainLocator->ChangeFPS(0u);
+        ui->ChangeMainLocatorState->setText("Продолжить");
+    }
+    else
+    {
+        ui->RenderMainLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+        ui->ChangeMainLocatorState->setText("Стоп");
+    }
 }
 
-void RSPIndicators::on_ChangeIndicatorVARU_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularTrashIntensityButton_pressed()
 {
-    if(value<0)
-        return;
-    ui->FirstIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ChangeEquiangularTrashIntensity->show();
+    ui->ChangeEquiangularTrashIntensity->setEnabled(true);
+    ui->ChangeEquiangularTrashIntensityButton->setCursor(Qt::ClosedHandCursor);
 }
 
-void RSPIndicators::on_ChangeIndicatorFocusEquiangular_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularTrashIntensity_sliderPressed()
 {
-    if(value<0)
-        return;
-    ui->SecondIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-
+    ui->ChangeEquiangularTrashIntensity->setCursor(Qt::ClosedHandCursor);
 }
 
-void RSPIndicators::on_ChangeIndicatorFocusRightTriangle_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularTrashIntensity_sliderReleased()
 {
-    if(value<0)
-        return;
-    ui->ThirdIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-
+    ui->ChangeEquiangularTrashIntensity->hide();
+    ui->ChangeEquiangularTrashIntensity->setDisabled(true);
+    ui->ChangeEquiangularTrashIntensity->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquiangularTrashIntensityButton->setCursor(Qt::OpenHandCursor);
 }
 
-void RSPIndicators::on_ChangeIndicatorFocus_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->FirstIndicator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-}
-
-void RSPIndicators::on_ChangeIndicatorBrightnessEquiangular_valueChanged(int value)
-{
-    if(value<0)
-        return;
-    ui->SecondIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
-
-}
-
-void RSPIndicators::on_ChangeIndicatorBrightnessRightTriangle_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->ThirdIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
+    ui->ChangeEquiangularTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquiangularTrashIntensity->maximum())));
 }
 
-void RSPIndicators::on_ChangeIndicatorBrightness_valueChanged(int value)
+void RSPIndicators::on_SelectEquiangularRangeMarks_clicked()
+{
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qint16 degree=0u;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelSelectRangeMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectRangeMarksValue->setText("10 км.");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectRangeMarksValue->setText("50 км.");
+            degree=60u;
+            break;
+    }
+    ui->SelectEquiangularRangeMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderEquingularTriangleLocator->SetSettings("system","range",static_cast<quint16>(status));
+}
+
+void RSPIndicators::on_SelectEquiangularScale_clicked()
+{
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qreal max;
+    qint16 degree=0u;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelScaleValue->setText("45 км.");
+            degree=0u;
+            max=20.0f;
+            break;
+        case 1u:
+            //ui->LabelScaleValue->setText("90 км.");
+            degree=45u;
+            max=30.0f;
+            break;
+        case 2u:
+            //ui->LabelScaleValue->setText("150 км.");
+            degree=180u;
+            max=60.0f;
+            break;
+    }
+
+    ui->SelectEquiangularScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
+    ui->RenderEquingularTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
+
+    //Усиление приёмника
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","begin",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
+
+    /*
+    if(ui->InputScatterTrashFrom->value()>max)
+        ui->InputScatterTrashFrom->setValue(max);
+    if(ui->InputScatterTrashTo->value()>max)
+        ui->InputScatterTrashTo->setValue(max);
+    ui->InputScatterTrashFrom->setMaximum(max);
+    ui->InputScatterTrashTo->setMaximum(max);
+    */
+}
+
+void RSPIndicators::on_ChangeEquiangularBrightnessButton_pressed()
+{
+    ui->ChangeEquiangularBrightness->show();
+    ui->ChangeEquiangularBrightness->setEnabled(true);
+    ui->ChangeEquiangularBrightnessButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularBrightness_sliderPressed()
+{
+    ui->ChangeEquiangularBrightness->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularBrightness_sliderReleased()
+{
+    ui->ChangeEquiangularBrightness->hide();
+    ui->ChangeEquiangularBrightness->setDisabled(true);
+    ui->ChangeEquiangularBrightness->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquiangularBrightnessButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularBrightness_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->FirstIndicator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->ChangeEquiangularBrightnessButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquiangularBrightness->maximum())));
 }
 
-void RSPIndicators::on_ChangeDisplayLightning_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularLightningButton_pressed()
+{
+    ui->ChangeEquiangularLightning->show();
+    ui->ChangeEquiangularLightning->setEnabled(true);
+    ui->ChangeEquiangularLightningButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularLightning_sliderPressed()
+{
+    ui->ChangeEquiangularLightning->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularLightning_sliderReleased()
+{
+    ui->ChangeEquiangularLightning->hide();
+    ui->ChangeEquiangularLightning->setDisabled(true);
+    ui->ChangeEquiangularLightning->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquiangularLightningButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularLightning_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->FirstIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->ChangeEquiangularLightningButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquiangularLightning->maximum())));
 }
 
-void RSPIndicators::on_ChangeTrashIntensityEquiangular_valueChanged(int value)
+void RSPIndicators::on_ChangeEquiangularFocusButton_pressed()
+{
+    ui->ChangeEquiangularFocus->show();
+    ui->ChangeEquiangularFocus->setEnabled(true);
+    ui->ChangeEquiangularFocusButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularFocus_sliderPressed()
+{
+    ui->ChangeEquiangularFocus->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularFocus_sliderReleased()
+{
+    ui->ChangeEquiangularFocus->hide();
+    ui->ChangeEquiangularFocus->setDisabled(true);
+    ui->ChangeEquiangularFocus->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquiangularFocusButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularFocus_valueChanged(int value)
+{
+    ui->ChangeEquiangularFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquiangularFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeEquiangularVARUButton_pressed()
+{
+    ui->ChangeEquiangularVARU->show();
+    ui->ChangeEquiangularVARU->setEnabled(true);
+    ui->ChangeEquiangularVARUButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularVARU_sliderPressed()
+{
+    ui->ChangeEquiangularVARU->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularVARU_sliderReleased()
+{
+    ui->ChangeEquiangularVARU->hide();
+    ui->ChangeEquiangularVARU->setDisabled(true);
+    ui->ChangeEquiangularVARU->setCursor(Qt::OpenHandCursor);
+    ui->ChangeEquiangularVARUButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeEquiangularVARU_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->SecondIndicator->SetSettings("trash","show",value>0);
-    ui->SecondIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderEquingularTriangleLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ChangeEquiangularVARUButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquiangularVARU->maximum())));
 }
 
-void RSPIndicators::on_ChangeTrashIntensityRightTriangle_valueChanged(int value)
+void RSPIndicators::on_ChangeEquingularViewStateAll_clicked()
+{
+    if(ui->RenderEquingularTriangleLocator->show)
+    {
+        ui->ChangeEquingularViewStateAll->setText("Отобразить все скрытые метки");
+        ui->RenderEquingularTriangleLocator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeEquingularViewStateAll->setText("Вернуть состояние скрытых меток");
+        ui->RenderEquingularTriangleLocator->SetSettings("system","show",true);
+    }
+}
+
+void RSPIndicators::on_ChangeEquingularState_clicked()
+{
+    if(ui->RenderEquingularTriangleLocator->IsActive())
+    {
+        ui->RenderEquingularTriangleLocator->ChangeFPS(0u);
+        ui->ChangeEquingularState->setText("Продолжить");
+    }
+    else
+    {
+        ui->RenderEquingularTriangleLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+        ui->ChangeEquingularState->setText("Стоп");
+    }
+}
+
+void RSPIndicators::on_ChangeRightTrashIntensityButton_pressed()
+{
+    ui->ChangeRightTrashIntensity->show();
+    ui->ChangeRightTrashIntensity->setEnabled(true);
+    ui->ChangeRightTrashIntensityButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightTrashIntensity_sliderPressed()
+{
+    ui->ChangeRightTrashIntensity->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightTrashIntensity_sliderReleased()
+{
+    ui->ChangeRightTrashIntensity->hide();
+    ui->ChangeRightTrashIntensity->setDisabled(true);
+    ui->ChangeRightTrashIntensity->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightTrashIntensityButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->ThirdIndicator->SetSettings("trash","show",value>0);
-    ui->ThirdIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
+    ui->ChangeRightTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightTrashIntensity->maximum())));
 }
 
-void RSPIndicators::on_ChangeTrashIntensity_valueChanged(int value)
+void RSPIndicators::on_SelectRightRangeMarks_clicked()
+{
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qint16 degree=0u;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelSelectRangeMarksValue->setText("НЕТ");
+            degree=-60;
+            break;
+        case 1u:
+            //ui->LabelSelectRangeMarksValue->setText("10 км.");
+            degree=0u;
+            break;
+        case 2u:
+            //ui->LabelSelectRangeMarksValue->setText("50 км.");
+            degree=60u;
+            break;
+    }
+    ui->SelectRightRangeMarks->setIcon(QIcon(degree==0u ? QPixmap(":/buttons/knob") : MainLocator::RotateResourceImage(":/buttons/knob",degree)));
+    ui->RenderRightTriangleLocator->SetSettings("system","range",static_cast<quint16>(status));
+}
+
+void RSPIndicators::on_SelectRightScale_clicked()
+{
+    static quint8 status=0u;
+    if(status>1u)
+        status=0u;
+    else
+        status++;
+
+    qreal max;
+    qint16 degree=0u;
+
+    switch(status)
+    {
+        case 0u:
+            //ui->LabelScaleValue->setText("45 км.");
+            degree=0u;
+            max=20.0f;
+            break;
+        case 1u:
+            //ui->LabelScaleValue->setText("90 км.");
+            degree=45u;
+            max=30.0f;
+            break;
+        case 2u:
+            //ui->LabelScaleValue->setText("150 км.");
+            degree=180u;
+            max=60.0f;
+            break;
+    }
+
+    ui->SelectRightScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
+    ui->RenderRightTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
+
+    //Усиление приёмника
+    ui->RenderRightTriangleLocator->SetSettings("trash","begin",.0f);
+    ui->RenderRightTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
+
+    /*
+    if(ui->InputScatterTrashFrom->value()>max)
+        ui->InputScatterTrashFrom->setValue(max);
+    if(ui->InputScatterTrashTo->value()>max)
+        ui->InputScatterTrashTo->setValue(max);
+    ui->InputScatterTrashFrom->setMaximum(max);
+    ui->InputScatterTrashTo->setMaximum(max);
+    */
+}
+
+void RSPIndicators::on_ChangeRightBrightnessButton_pressed()
+{
+    ui->ChangeRightBrightness->show();
+    ui->ChangeRightBrightness->setEnabled(true);
+    ui->ChangeRightBrightness->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightBrightness_sliderPressed()
+{
+    ui->ChangeRightBrightness->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightBrightness_sliderReleased()
+{
+    ui->ChangeRightBrightness->hide();
+    ui->ChangeRightBrightness->setDisabled(true);
+    ui->ChangeRightBrightness->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightBrightnessButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightBrightness_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->FirstIndicator->SetSettings("trash","show",value>0);
-    ui->FirstIndicator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->ChangeRightBrightnessButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightBrightness->maximum())));
 }
 
-void RSPIndicators::on_ChangeLightningEquiangular_valueChanged(int value)
+void RSPIndicators::on_ChangeRightLightningButton_pressed()
+{
+    ui->ChangeRightLightning->show();
+    ui->ChangeRightLightning->setEnabled(true);
+    ui->ChangeRightLightningButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightLightning_sliderPressed()
+{
+    ui->ChangeRightLightning->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightLightning_sliderReleased()
+{
+    ui->ChangeRightLightning->hide();
+    ui->ChangeRightLightning->setDisabled(true);
+    ui->ChangeRightLightning->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightLightningButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightLightning_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->SecondIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->RenderRightTriangleLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->ChangeRightLightningButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightLightning->maximum())));
 }
 
-void RSPIndicators::on_ChangeLightningRightTriangle_valueChanged(int value)
+void RSPIndicators::on_ChangeRightFocusButton_pressed()
+{
+    ui->ChangeRightFocus->show();
+    ui->ChangeRightFocus->setEnabled(true);
+    ui->ChangeRightFocusButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightFocus_sliderPressed()
+{
+    ui->ChangeRightFocus->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightFocus_sliderReleased()
+{
+    ui->ChangeRightFocus->hide();
+    ui->ChangeRightFocus->setDisabled(true);
+    ui->ChangeRightFocus->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightFocusButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightFocus_valueChanged(int value)
+{
+    ui->ChangeRightFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderRightTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void RSPIndicators::on_ChangeRightVARUButton_pressed()
+{
+    ui->ChangeRightVARU->show();
+    ui->ChangeRightVARU->setEnabled(true);
+    ui->ChangeRightVARUButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightVARU_sliderPressed()
+{
+    ui->ChangeRightVARU->setCursor(Qt::ClosedHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightVARU_sliderReleased()
+{
+    ui->ChangeRightVARU->hide();
+    ui->ChangeRightVARU->setDisabled(true);
+    ui->ChangeRightVARU->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightVARUButton->setCursor(Qt::OpenHandCursor);
+}
+
+void RSPIndicators::on_ChangeRightVARU_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->ThirdIndicator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    ui->RenderRightTriangleLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    ui->ChangeRightVARUButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightVARU->maximum())));
 }
 
-void RSPIndicators::on_ChangeIndicatorVARUEquiangular_valueChanged(int value)
+void RSPIndicators::on_ChangeRightViewStateAll_clicked()
 {
-    if(value<0)
-        return;
-    ui->SecondIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    if(ui->RenderRightTriangleLocator->show)
+    {
+        ui->ChangeRightViewStateAll->setText("Отобразить все скрытые метки");
+        ui->RenderRightTriangleLocator->SetSettings("system","show",false);
+    }
+    else
+    {
+        ui->ChangeRightViewStateAll->setText("Вернуть состояние скрытых меток");
+        ui->RenderRightTriangleLocator->SetSettings("system","show",true);
+    }
 }
 
-void RSPIndicators::on_ChangeIndicatorVARURightTriangle_valueChanged(int value)
+void RSPIndicators::on_ChangeRightState_clicked()
 {
-    if(value<0)
-        return;
-    ui->ThirdIndicator->SetSettings("system","varu",static_cast<qreal>(value)/100);
-}
-
-void RSPIndicators::on_SelectActiveNoiseTrashIntensity_currentIndexChanged(int index)
-{
-
+    if(ui->RenderRightTriangleLocator->IsActive())
+    {
+        ui->RenderRightTriangleLocator->ChangeFPS(0u);
+        ui->ChangeRightState->setText("Продолжить");
+    }
+    else
+    {
+        ui->RenderRightTriangleLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+        ui->ChangeRightState->setText("Стоп");
+    }
 }
