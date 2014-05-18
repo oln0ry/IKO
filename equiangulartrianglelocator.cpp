@@ -60,7 +60,7 @@ void EquiangularTriangleLocator::paintGL()
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
     glRotatef(270.0f,.0f,.0f,1.0f);
-    glTranslatef(-GRID_OFFSET+settings["offset"]["vertical"].toDouble()/100,.0f+settings["offset"]["horizontal"].toDouble()/100,.0f);
+    glTranslatef(-GRID_OFFSET+settings["offset"]["vertical"].toDouble(),.0f+settings["offset"]["horizontal"].toDouble(),.0f);
     DrawStation();
     glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
@@ -112,7 +112,7 @@ void EquiangularTriangleLocator::GenerationRay()
 void EquiangularTriangleLocator::DrawStation() const
 {
     //settings["disposition"]["vertical"].toDouble()/100
-    glLineWidth(2.0f);
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
 
     glBegin(GL_LINES);
         glVertex2f(.0f,.0f);
@@ -205,10 +205,11 @@ void EquiangularTriangleLocator::GenerationRange()
 
 void EquiangularTriangleLocator::DrawRange() const
 {
-    qreal alpha;
+    qreal alpha,brightness;
+    brightness=settings["brightness"]["range"].isValid() ? settings["brightness"]["range"].toDouble() : 1.0f;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
     {
-        glLineWidth(it->width*settings["system"]["focus"].toDouble());
+        glLineWidth(it->width*settings["system"]["focus"].toDouble()*brightness);
         glBegin(GL_LINE_STRIP);
         for(Points *i=it->Coordinates,*end=it->Coordinates+2*TRIANGLE_ANGLE;i<end;i++)
         {

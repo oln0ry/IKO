@@ -96,6 +96,12 @@ RSPIndicators::RSPIndicators(QWidget *parent) : QMainWindow(parent),ui(new Ui::R
     //Статика
     ui->RenderMainLocator->SetSettings("offset","horizontal",.0f);
     ui->RenderMainLocator->SetSettings("offset","vertical",.0f);
+
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","vertical",.0f);
+
+    ui->RenderRightTriangleLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderRightTriangleLocator->SetSettings("offset","vertical",.0f);
     //###\Инициализация
 
     ui->ChangeMainLocatorState->clicked(); //Запуск индикатора

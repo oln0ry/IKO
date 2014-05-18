@@ -169,9 +169,17 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     //Статика
     ui->RenderMainLocator->SetSettings("system","azimuth",2u);
     ui->RenderMainLocator->SetSettings("system","range",1u);
+
+    ui->RenderEquingularTriangleLocator->SetSettings("system","azimuth",2u);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","range",1u);
+
+    ui->RenderRightTriangleLocator->SetSettings("system","azimuth",2u);
+    ui->RenderRightTriangleLocator->SetSettings("system","range",1u);
     //###\Инициализация
 
     ui->RenderMainLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+    ui->RenderEquingularTriangleLocator->ChangeFPS(static_cast<qreal>(1000)/24);
+    ui->RenderRightTriangleLocator->ChangeFPS(static_cast<qreal>(1000)/24);
 }
 
 CommonView::~CommonView()
@@ -638,6 +646,10 @@ void CommonView::on_ChangeEquingularTrashSDC_valueChanged(int value)
         return;
     ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
     ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
+
+    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
+
     ui->ChangeEquingularTrashSDCButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularTrashSDC->maximum())));
 }
 
@@ -667,6 +679,10 @@ void CommonView::on_ChangeEquingularTrashPASS_valueChanged(int value)
         return;
     ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
     ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
+
+    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
+
     ui->ChangeEquingularTrashPASSButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularTrashPASS->maximum())));
 }
 
@@ -696,6 +712,10 @@ void CommonView::on_ChangeEquingularTrashAKT_valueChanged(int value)
         return;
     ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
     ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
+
+    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
+
     ui->ChangeEquingularTrashAKTButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularTrashAKT->maximum())));
 }
 
@@ -714,24 +734,28 @@ void CommonView::on_SelectEquingularScale_clicked()
     {
         case 0u:
             degree=0u;
-            max=20.0f;
+            max=60.0f;
             break;
         case 1u:
             degree=45u;
-            max=30.0f;
+            max=20.0f;
             break;
         case 2u:
             degree=180u;
-            max=60.0f;
+            max=30.0f;
             break;
     }
 
     ui->SelectEquingularScale->setIcon(QIcon(degree==45u ? QPixmap(":/buttons/switch_base") : MainLocator::RotateResourceImage(":/buttons/switch_up",degree)));
     ui->RenderEquingularTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
+    ui->RenderRightTriangleLocator->SetSettings("system","scale",static_cast<quint8>(max));
 
     //Усиление приёмника
     ui->RenderEquingularTriangleLocator->SetSettings("trash","begin",.0f);
     ui->RenderEquingularTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
+
+    ui->RenderRightTriangleLocator->SetSettings("trash","begin",.0f);
+    ui->RenderRightTriangleLocator->SetSettings("trash","end",static_cast<qreal>(max));
     /*
     if(ui->InputScatterTrashFrom->value()>max)
         ui->InputScatterTrashFrom->setValue(max);
@@ -796,7 +820,8 @@ void CommonView::on_ChangeEquingularScanAmpVertical_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderEquingularTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
+    //ui->RenderEquingularTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
     ui->ChangeEquingularScanAmpVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularScanAmpVertical->maximum())));
 }
 
@@ -824,7 +849,8 @@ void CommonView::on_ChangeEquingularScanAmpHorizontal_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderEquingularTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
+    //ui->RenderEquingularTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
     ui->ChangeEquingularScanAmpHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularScanAmpHorizontal->maximum())));
 }
 
@@ -850,8 +876,6 @@ void CommonView::on_ChangeEquingularOffsetVertical_sliderReleased()
 
 void CommonView::on_ChangeEquingularOffsetVertical_valueChanged(int value)
 {
-    if(value<0)
-        return;
     ui->RenderEquingularTriangleLocator->SetSettings("offset","vertical",static_cast<qreal>(value)/100);
     ui->ChangeEquingularOffsetVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularOffsetVertical->maximum())));
 }
@@ -878,8 +902,6 @@ void CommonView::on_ChangeEquingularOffsetHorizontal_sliderReleased()
 
 void CommonView::on_ChangeEquingularOffsetHorizontal_valueChanged(int value)
 {
-    if(value<0)
-        return;
     ui->RenderEquingularTriangleLocator->SetSettings("offset","horizontal",static_cast<qreal>(value)/100);
     ui->ChangeEquingularOffsetHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularOffsetHorizontal->maximum())));
 }
@@ -1019,7 +1041,8 @@ void CommonView::on_ChangeRightScanAmpVertical_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderRightTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
+    ui->RenderRightTriangleLocator->SetSettings("system","lightning",static_cast<qreal>(value)/100);
+    //ui->RenderRightTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
     ui->ChangeRightScanAmpVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightScanAmpVertical->maximum())));
 }
 
@@ -1047,7 +1070,8 @@ void CommonView::on_ChangeRightScanAmpHorizontal_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderRightTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
+    ui->RenderRightTriangleLocator->SetSettings("system","varu",static_cast<qreal>(value)/100);
+    //ui->RenderRightTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
     ui->ChangeRightScanAmpHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightScanAmpHorizontal->maximum())));
 }
 
@@ -1073,8 +1097,6 @@ void CommonView::on_ChangeRightOffsetVertical_sliderReleased()
 
 void CommonView::on_ChangeRightOffsetVertical_valueChanged(int value)
 {
-    if(value<0)
-        return;
     ui->RenderRightTriangleLocator->SetSettings("offset","vertical",static_cast<qreal>(value)/100);
     ui->ChangeRightOffsetVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightOffsetVertical->maximum())));
 }
@@ -1101,8 +1123,6 @@ void CommonView::on_ChangeRightOffsetHorizontal_sliderReleased()
 
 void CommonView::on_ChangeRightOffsetHorizontal_valueChanged(int value)
 {
-    if(value<0)
-        return;
     ui->RenderRightTriangleLocator->SetSettings("offset","horizontal",static_cast<qreal>(value)/100);
     ui->ChangeRightOffsetHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightOffsetHorizontal->maximum())));
 }

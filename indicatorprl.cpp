@@ -63,6 +63,12 @@ IndicatorPRL::IndicatorPRL(QWidget *parent) : QMainWindow(parent),ui(new Ui::Ind
     ui->SelectRightScale->clicked();
     ui->SelectRightScale->clicked();
     ui->SelectRightScale->clicked();
+    //Статика
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderEquingularTriangleLocator->SetSettings("offset","vertical",.0f);
+
+    ui->RenderRightTriangleLocator->SetSettings("offset","horizontal",.0f);
+    ui->RenderRightTriangleLocator->SetSettings("offset","vertical",.0f);
     //###\Инициализация
 
     //Запуск индикаторов

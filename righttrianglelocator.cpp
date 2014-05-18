@@ -59,8 +59,7 @@ void RightTriangleLocator::paintGL()
     LocatorArea();
     glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),1/*settings["system"]["brightness"].toFloat()*/);//перерисовка линии
     glRotatef(.0f,.0f,.0f,1.0f);
-    //qDebug()<<settings["disposition"]["vertical"].toDouble()/100;
-    glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE))+settings["disposition"]["horizontal"].toDouble()/100,qFastSin(GetRadianValue(-TRIANGLE_ANGLE))+settings["disposition"]["vertical"].toDouble()/100,.0f);
+    glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE))+settings["offset"]["horizontal"].toDouble(),qFastSin(GetRadianValue(-TRIANGLE_ANGLE))+settings["offset"]["vertical"].toDouble(),.0f);
     DrawStation();
     glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
@@ -95,7 +94,7 @@ void RightTriangleLocator::GenerationRay()
 void RightTriangleLocator::DrawStation() const
 {
     //glTranslatef(-qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(-TRIANGLE_ANGLE)),.0f);
-    glLineWidth(2.0f);
+    glLineWidth(2.0f*settings["system"]["focus"].toDouble());
     glBegin(GL_LINES);
         glVertex2d(.0f,.0f);
         glVertex2d(2*qFastCos(GetRadianValue(-TRIANGLE_ANGLE)),qFastSin(GetRadianValue(0)));
@@ -191,10 +190,11 @@ void RightTriangleLocator::GenerationRange()
 
 void RightTriangleLocator::DrawRange() const
 {
-    qreal alpha;
+    qreal alpha,brightness;
+    brightness=settings["brightness"]["range"].isValid() ? settings["brightness"]["range"].toDouble() : 1.0f;
     for(QVector<LineEntity>::const_iterator it=range.begin();it<range.end();it++)
     {
-        glLineWidth(it->width*settings["system"]["focus"].toDouble());
+        glLineWidth(it->width*settings["system"]["focus"].toDouble()*brightness);
         glBegin(GL_LINE_STRIP);
         for(Points *i=it->Coordinates,*end=it->Coordinates+TRIANGLE_ANGLE;i<end;i++)
         {
