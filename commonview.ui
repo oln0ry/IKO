@@ -773,11 +773,14 @@ background-repeat: no-repeat;</string>
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
                </property>
+               <property name="minimum">
+                <number>-300</number>
+               </property>
                <property name="maximum">
-                <number>100</number>
+                <number>300</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -1803,11 +1806,14 @@ background-repeat: no-repeat;</string>
                <property name="cursor">
                 <cursorShape>OpenHandCursor</cursorShape>
                </property>
+               <property name="minimum">
+                <number>-300</number>
+               </property>
                <property name="maximum">
-                <number>100</number>
+                <number>300</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -2266,7 +2272,7 @@ background-repeat: no-repeat;</string>
       <x>1130</x>
       <y>90</y>
       <width>239</width>
-      <height>314</height>
+      <height>320</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_84">
@@ -2441,7 +2447,7 @@ background-repeat: no-repeat;</string>
        </item>
        <item row="2" column="0">
         <layout class="QGridLayout" name="gridLayout_78">
-         <property name="spacing">
+         <property name="verticalSpacing">
           <number>0</number>
          </property>
          <item row="0" column="0">
@@ -2456,9 +2462,6 @@ background-repeat: no-repeat;</string>
          </item>
          <item row="1" column="0">
           <layout class="QGridLayout" name="gridLayout_77">
-           <property name="spacing">
-            <number>0</number>
-           </property>
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_75">
              <property name="spacing">
@@ -2605,9 +2608,6 @@ background-repeat: no-repeat;</string>
        </item>
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_70">
-         <property name="spacing">
-          <number>0</number>
-         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="LabelRightScanAmp">
            <property name="text">
@@ -2789,9 +2789,6 @@ background-repeat: no-repeat;</string>
        </item>
        <item row="1" column="0">
         <layout class="QGridLayout" name="gridLayout_82">
-         <property name="spacing">
-          <number>0</number>
-         </property>
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_80">
            <property name="spacing">
@@ -3073,11 +3070,14 @@ background-repeat: no-repeat;</string>
        <property name="cursor">
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
+       <property name="minimum">
+        <number>-300</number>
+       </property>
        <property name="maximum">
-        <number>100</number>
+        <number>300</number>
        </property>
        <property name="value">
-        <number>100</number>
+        <number>0</number>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

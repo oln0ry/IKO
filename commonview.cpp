@@ -20,10 +20,18 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularScanAmpVertical->hide();
     ui->ChangeEquingularScanAmpVertical->setDisabled(true);
 
+    ui->ChangeRightScanAmpVertical->valueChanged(ui->ChangeRightScanAmpVertical->value());
+    ui->ChangeRightScanAmpVertical->hide();
+    ui->ChangeRightScanAmpVertical->setDisabled(true);
+
     //Амплитуда развёртки (горизонтальное)
     ui->ChangeEquingularScanAmpHorizontal->valueChanged(ui->ChangeEquingularScanAmpHorizontal->value());
     ui->ChangeEquingularScanAmpHorizontal->hide();
     ui->ChangeEquingularScanAmpHorizontal->setDisabled(true);
+
+    ui->ChangeRightScanAmpHorizontal->valueChanged(ui->ChangeRightScanAmpHorizontal->value());
+    ui->ChangeRightScanAmpHorizontal->hide();
+    ui->ChangeRightScanAmpHorizontal->setDisabled(true);
 
     //Смещение (вертикальное)
     ui->ChangeMainOffsetVertical->valueChanged(ui->ChangeMainOffsetVertical->value());
@@ -34,6 +42,11 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularOffsetVertical->hide();
     ui->ChangeEquingularOffsetVertical->setDisabled(true);
 
+    ui->ChangeRightOffsetVertical->valueChanged(ui->ChangeRightOffsetVertical->value());
+    ui->ChangeRightOffsetVertical->hide();
+    ui->ChangeRightOffsetVertical->setDisabled(true);
+
+
     //Смещение (горизонтальное)
     ui->ChangeMainOffsetHorizontal->valueChanged(ui->ChangeMainOffsetHorizontal->value());
     ui->ChangeMainOffsetHorizontal->hide();
@@ -43,15 +56,27 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularOffsetHorizontal->hide();
     ui->ChangeEquingularOffsetHorizontal->setDisabled(true);
 
+    ui->ChangeRightOffsetHorizontal->valueChanged(ui->ChangeRightOffsetHorizontal->value());
+    ui->ChangeRightOffsetHorizontal->hide();
+    ui->ChangeRightOffsetHorizontal->setDisabled(true);
+
     //Яркость меток (дальность)
     ui->ChangeMainBrightnessRange->valueChanged(ui->ChangeMainBrightnessRange->value());
     ui->ChangeMainBrightnessRange->hide();
     ui->ChangeMainBrightnessRange->setDisabled(true);
 
+    ui->ChangeRightBrightnessRange->valueChanged(ui->ChangeRightBrightnessRange->value());
+    ui->ChangeRightBrightnessRange->hide();
+    ui->ChangeRightBrightnessRange->setDisabled(true);
+
     //Яркость меток (азимут)
     ui->ChangeMainBrightnessAzimuth->valueChanged(ui->ChangeMainBrightnessAzimuth->value());
     ui->ChangeMainBrightnessAzimuth->hide();
     ui->ChangeMainBrightnessAzimuth->setDisabled(true);
+
+    ui->ChangeRightBrightnessAzimuth->valueChanged(ui->ChangeRightBrightnessAzimuth->value());
+    ui->ChangeRightBrightnessAzimuth->hide();
+    ui->ChangeRightBrightnessAzimuth->setDisabled(true);
 
     //Установка нуля (вертикальная составляющая)
     ui->ChangeMainNullSetVertical->valueChanged(ui->ChangeMainNullSetVertical->value());
@@ -68,10 +93,19 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularDirectionTrack->hide();
     ui->ChangeEquingularDirectionTrack->setDisabled(true);
 
+    ui->ChangeRightDirectionTrack->valueChanged(ui->ChangeRightDirectionTrack->value());
+    ui->ChangeRightDirectionTrack->hide();
+    ui->ChangeRightDirectionTrack->setDisabled(true);
+
+
     //Уровень глиссады
     ui->ChangeEquingularDirectionGlide->valueChanged(ui->ChangeEquingularDirectionGlide->value());
     ui->ChangeEquingularDirectionGlide->hide();
     ui->ChangeEquingularDirectionGlide->setDisabled(true);
+
+    ui->ChangeRightDirectionGlide->valueChanged(ui->ChangeRightDirectionGlide->value());
+    ui->ChangeRightDirectionGlide->hide();
+    ui->ChangeRightDirectionGlide->setDisabled(true);
 
     //Фокус
     ui->ChangeMainFocus->valueChanged(ui->ChangeMainFocus->value());
@@ -82,6 +116,10 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularFocus->hide();
     ui->ChangeEquingularFocus->setDisabled(true);
 
+    ui->ChangeRightFocus->valueChanged(ui->ChangeRightFocus->value());
+    ui->ChangeRightFocus->hide();
+    ui->ChangeRightFocus->setDisabled(true);
+
     //Яркость
     ui->ChangeMainFocusBrightness->valueChanged(ui->ChangeMainFocusBrightness->value());
     ui->ChangeMainFocusBrightness->hide();
@@ -90,6 +128,10 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->ChangeEquingularBrightness->valueChanged(ui->ChangeEquingularBrightness->value());
     ui->ChangeEquingularBrightness->hide();
     ui->ChangeEquingularBrightness->setDisabled(true);
+
+    ui->ChangeRightFocusBrightness->valueChanged(ui->ChangeRightFocusBrightness->value());
+    ui->ChangeRightFocusBrightness->hide();
+    ui->ChangeRightFocusBrightness->setDisabled(true);
 
     //Усиление приёмника (активный режим)
     ui->ChangeMainTrashAKT->valueChanged(ui->ChangeMainTrashAKT->value());
@@ -377,10 +419,9 @@ void CommonView::on_ChangeMainFocus_sliderReleased()
 
 void CommonView::on_ChangeMainFocus_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    ui->ChangeMainFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderMainLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-    ui->ChangeMainFocusButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeMainFocus->maximum())));
 }
 
 void CommonView::on_ChangeMainFocusBrightnessButton_pressed()
@@ -530,10 +571,9 @@ void CommonView::on_ChangeEquingularFocus_sliderReleased()
 
 void CommonView::on_ChangeEquingularFocus_valueChanged(int value)
 {
-    if(value<0)
-        return;
+    ui->ChangeEquingularFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
     ui->RenderEquingularTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
-    ui->ChangeEquingularFocusButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularFocus->maximum())));
 }
 
 void CommonView::on_ChangeEquingularBrightnessButton_pressed()
@@ -888,6 +928,285 @@ void CommonView::on_ChangeEquingularDirectionGlide_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderEquingularTriangleLocator->SetSettings("direction","track",static_cast<qreal>(value)/100);
+    ui->RenderEquingularTriangleLocator->SetSettings("direction","glide",static_cast<qreal>(value)/100);
     ui->ChangeEquingularDirectionGlideButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeEquingularDirectionGlide->maximum())));
+}
+
+void CommonView::on_ChangeRightFocusButton_pressed()
+{
+    ui->ChangeRightFocus->show();
+    ui->ChangeRightFocus->setEnabled(true);
+    ui->ChangeRightFocusButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightFocus_sliderPressed()
+{
+    ui->ChangeRightFocus->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightFocus_sliderReleased()
+{
+    ui->ChangeRightFocus->hide();
+    ui->ChangeRightFocus->setDisabled(true);
+    ui->ChangeRightFocus->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightFocusButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightFocus_valueChanged(int value)
+{
+    ui->ChangeRightFocusButton->setIcon(QIcon(value%100u==0 || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightFocus->maximum())));
+    value=value>=0 ? value+100 : 100-value;
+    ui->RenderRightTriangleLocator->SetSettings("system","focus",static_cast<qreal>(value)/100);
+}
+
+void CommonView::on_ChangeRightFocusBrightnessButton_pressed()
+{
+    ui->ChangeRightFocusBrightness->show();
+    ui->ChangeRightFocusBrightness->setEnabled(true);
+    ui->ChangeRightFocusBrightnessButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightFocusBrightness_sliderPressed()
+{
+    ui->ChangeRightFocusBrightness->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightFocusBrightness_sliderReleased()
+{
+    ui->ChangeRightFocusBrightness->hide();
+    ui->ChangeRightFocusBrightness->setDisabled(true);
+    ui->ChangeRightFocusBrightness->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightFocusBrightnessButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightFocusBrightness_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("system","brightness",static_cast<qreal>(value)/100);
+    ui->ChangeRightFocusBrightnessButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightFocusBrightness->maximum())));
+}
+
+void CommonView::on_ChangeRightScanAmpVerticalButton_pressed()
+{
+    ui->ChangeRightScanAmpVertical->show();
+    ui->ChangeRightScanAmpVertical->setEnabled(true);
+    ui->ChangeRightScanAmpVerticalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpVertical_sliderPressed()
+{
+    ui->ChangeRightScanAmpVertical->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpVertical_sliderReleased()
+{
+    ui->ChangeRightScanAmpVertical->hide();
+    ui->ChangeRightScanAmpVertical->setDisabled(true);
+    ui->ChangeRightScanAmpVertical->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightScanAmpVerticalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpVertical_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("scan","vertical",static_cast<qreal>(value)/100);
+    ui->ChangeRightScanAmpVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightScanAmpVertical->maximum())));
+}
+
+void CommonView::on_ChangeRightScanAmpHorizontalButton_pressed()
+{
+    ui->ChangeRightScanAmpHorizontal->show();
+    ui->ChangeRightScanAmpHorizontal->setEnabled(true);
+    ui->ChangeRightScanAmpHorizontalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpHorizontal_sliderPressed()
+{
+    ui->ChangeRightScanAmpHorizontal->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpHorizontal_sliderReleased()
+{
+    ui->ChangeRightScanAmpHorizontal->hide();
+    ui->ChangeRightScanAmpHorizontal->setDisabled(true);
+    ui->ChangeRightScanAmpHorizontal->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightScanAmpHorizontalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightScanAmpHorizontal_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("scan","horizontal",static_cast<qreal>(value)/100);
+    ui->ChangeRightScanAmpHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightScanAmpHorizontal->maximum())));
+}
+
+void CommonView::on_ChangeRightOffsetVerticalButton_pressed()
+{
+    ui->ChangeRightOffsetVertical->show();
+    ui->ChangeRightOffsetVertical->setEnabled(true);
+    ui->ChangeRightOffsetVerticalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetVertical_sliderPressed()
+{
+    ui->ChangeRightOffsetVertical->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetVertical_sliderReleased()
+{
+    ui->ChangeRightOffsetVertical->hide();
+    ui->ChangeRightOffsetVertical->setDisabled(true);
+    ui->ChangeRightOffsetVertical->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightOffsetVerticalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetVertical_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("offset","vertical",static_cast<qreal>(value)/100);
+    ui->ChangeRightOffsetVerticalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightOffsetVertical->maximum())));
+}
+
+void CommonView::on_ChangeRightOffsetHorizontalButton_pressed()
+{
+    ui->ChangeRightOffsetHorizontal->show();
+    ui->ChangeRightOffsetHorizontal->setEnabled(true);
+    ui->ChangeRightOffsetHorizontalButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetHorizontal_sliderPressed()
+{
+    ui->ChangeRightOffsetHorizontal->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetHorizontal_sliderReleased()
+{
+    ui->ChangeRightOffsetHorizontal->hide();
+    ui->ChangeRightOffsetHorizontal->setDisabled(true);
+    ui->ChangeRightOffsetHorizontal->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightOffsetHorizontalButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightOffsetHorizontal_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("offset","horizontal",static_cast<qreal>(value)/100);
+    ui->ChangeRightOffsetHorizontalButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightOffsetHorizontal->maximum())));
+}
+
+void CommonView::on_ChangeRightDirectionTrackButton_pressed()
+{
+    ui->ChangeRightDirectionTrack->show();
+    ui->ChangeRightDirectionTrack->setEnabled(true);
+    ui->ChangeRightDirectionTrackButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionTrack_sliderPressed()
+{
+    ui->ChangeRightDirectionTrack->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionTrack_sliderReleased()
+{
+    ui->ChangeRightDirectionTrack->hide();
+    ui->ChangeRightDirectionTrack->setDisabled(true);
+    ui->ChangeRightDirectionTrack->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightDirectionTrackButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionTrack_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("direction","track",static_cast<qreal>(value)/100);
+    ui->ChangeRightDirectionTrackButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightDirectionTrack->maximum())));
+}
+
+void CommonView::on_ChangeRightDirectionGlideButton_pressed()
+{
+    ui->ChangeRightDirectionGlide->show();
+    ui->ChangeRightDirectionGlide->setEnabled(true);
+    ui->ChangeRightDirectionGlideButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionGlide_sliderPressed()
+{
+    ui->ChangeRightDirectionGlide->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionGlide_sliderReleased()
+{
+    ui->ChangeRightDirectionGlide->hide();
+    ui->ChangeRightDirectionGlide->setDisabled(true);
+    ui->ChangeRightDirectionGlide->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightDirectionGlideButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightDirectionGlide_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("direction","glide",static_cast<qreal>(value)/100);
+    ui->ChangeRightDirectionGlideButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/p_rotator.png") : MainLocator::RotateResourceImage(":/buttons/p_rotator.png",value*360/ui->ChangeRightDirectionGlide->maximum())));
+}
+
+void CommonView::on_ChangeRightBrightnessRangeButton_pressed()
+{
+    ui->ChangeRightBrightnessRange->show();
+    ui->ChangeRightBrightnessRange->setEnabled(true);
+    ui->ChangeRightBrightnessRangeButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessRange_sliderPressed()
+{
+    ui->ChangeRightBrightnessRange->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessRange_sliderReleased()
+{
+    ui->ChangeRightBrightnessRange->hide();
+    ui->ChangeRightBrightnessRange->setDisabled(true);
+    ui->ChangeRightBrightnessRange->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightBrightnessRangeButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessRange_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("brightness","range",static_cast<qreal>(value)/100);
+    ui->ChangeRightBrightnessRangeButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightBrightnessRange->maximum())));
+}
+
+void CommonView::on_ChangeRightBrightnessAzimuthButton_pressed()
+{
+    ui->ChangeRightBrightnessAzimuth->show();
+    ui->ChangeRightBrightnessAzimuth->setEnabled(true);
+    ui->ChangeRightBrightnessAzimuthButton->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessAzimuth_sliderPressed()
+{
+    ui->ChangeRightBrightnessAzimuth->setCursor(Qt::ClosedHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessAzimuth_sliderReleased()
+{
+    ui->ChangeRightBrightnessAzimuth->hide();
+    ui->ChangeRightBrightnessAzimuth->setDisabled(true);
+    ui->ChangeRightBrightnessAzimuth->setCursor(Qt::OpenHandCursor);
+    ui->ChangeRightBrightnessAzimuthButton->setCursor(Qt::OpenHandCursor);
+}
+
+void CommonView::on_ChangeRightBrightnessAzimuth_valueChanged(int value)
+{
+    if(value<0)
+        return;
+    ui->RenderRightTriangleLocator->SetSettings("brightness","azimuth",static_cast<qreal>(value)/100);
+    ui->ChangeRightBrightnessAzimuthButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightBrightnessAzimuth->maximum())));
 }

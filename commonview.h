@@ -207,6 +207,86 @@ private slots:
 
     void on_ChangeEquingularDirectionGlide_valueChanged(int value);
 
+    void on_ChangeRightFocusButton_pressed();
+
+    void on_ChangeRightFocus_sliderPressed();
+
+    void on_ChangeRightFocus_sliderReleased();
+
+    void on_ChangeRightFocus_valueChanged(int value);
+
+    void on_ChangeRightFocusBrightnessButton_pressed();
+
+    void on_ChangeRightFocusBrightness_sliderPressed();
+
+    void on_ChangeRightFocusBrightness_sliderReleased();
+
+    void on_ChangeRightFocusBrightness_valueChanged(int value);
+
+    void on_ChangeRightScanAmpVerticalButton_pressed();
+
+    void on_ChangeRightScanAmpVertical_sliderPressed();
+
+    void on_ChangeRightScanAmpVertical_sliderReleased();
+
+    void on_ChangeRightScanAmpVertical_valueChanged(int value);
+
+    void on_ChangeRightScanAmpHorizontalButton_pressed();
+
+    void on_ChangeRightScanAmpHorizontal_sliderPressed();
+
+    void on_ChangeRightScanAmpHorizontal_sliderReleased();
+
+    void on_ChangeRightScanAmpHorizontal_valueChanged(int value);
+
+    void on_ChangeRightOffsetVerticalButton_pressed();
+
+    void on_ChangeRightOffsetVertical_sliderPressed();
+
+    void on_ChangeRightOffsetVertical_sliderReleased();
+
+    void on_ChangeRightOffsetVertical_valueChanged(int value);
+
+    void on_ChangeRightOffsetHorizontalButton_pressed();
+
+    void on_ChangeRightOffsetHorizontal_sliderPressed();
+
+    void on_ChangeRightOffsetHorizontal_sliderReleased();
+
+    void on_ChangeRightOffsetHorizontal_valueChanged(int value);
+
+    void on_ChangeRightDirectionTrackButton_pressed();
+
+    void on_ChangeRightDirectionTrack_sliderPressed();
+
+    void on_ChangeRightDirectionTrack_sliderReleased();
+
+    void on_ChangeRightDirectionTrack_valueChanged(int value);
+
+    void on_ChangeRightDirectionGlideButton_pressed();
+
+    void on_ChangeRightDirectionGlide_sliderPressed();
+
+    void on_ChangeRightDirectionGlide_sliderReleased();
+
+    void on_ChangeRightDirectionGlide_valueChanged(int value);
+
+    void on_ChangeRightBrightnessRangeButton_pressed();
+
+    void on_ChangeRightBrightnessRange_sliderPressed();
+
+    void on_ChangeRightBrightnessRange_sliderReleased();
+
+    void on_ChangeRightBrightnessRange_valueChanged(int value);
+
+    void on_ChangeRightBrightnessAzimuthButton_pressed();
+
+    void on_ChangeRightBrightnessAzimuth_sliderPressed();
+
+    void on_ChangeRightBrightnessAzimuth_sliderReleased();
+
+    void on_ChangeRightBrightnessAzimuth_valueChanged(int value);
+
 private:
     Ui::CommonView *ui;
 };
