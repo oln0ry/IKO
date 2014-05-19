@@ -104,50 +104,10 @@ void MainLocator::paintGL()
  */
 void MainLocator::mouseDoubleClickEvent(QMouseEvent  *event)
 {
-    //MainLocator::MainLocator(QWidget *parent) : QGLWidget(QGLFormat(QGL::SampleBuffers),parent)
-    //QGLWidget w(0L,Qt::SplashScreen);
-    //w.showFullScreen();
-    //this->resize(QApplication::desktop()->size());
-    //this->parentWidget()->showFullScreen();
-
     if(parentWidget()->isFullScreen())
-    {
         parentWidget()->eventFilter(this,event);
-    }
     else if(parent()->isWidgetType() && parentWidget()->parent()->inherits("QMainWindow"))
-    {
         parentWidget()->parent()->eventFilter(this,event);
-    }
-    /*
-    if(FS==nullptr)
-    {
-        FS=new QMainWindow;
-        Old=parentWidget();
-        parentWidget()->hide();
-        FS->setCentralWidget(this);
-        FS->showFullScreen();
-    }
-    else
-    {
-        Old->show();
-        delete FS;
-        FS=nullptr;
-    }
-    */
-
-
-
-
-
-    /*if(parentWidget()->isMaximized())
-    {
-        resize(300,300);
-    }
-    else
-    {
-        resize(height,height);
-    }*/
-    //updateGL();
 }
 
 void MainLocator::ChangeFPS(qreal fps)
@@ -502,16 +462,22 @@ void MainLocator::GenerationActiveNoiseTrash()
             }
             break;
         case 2:
-            for(Points*i=radians+settings["active_noise_trash"]["azimuth"].toUInt()+260,*k=radians+settings["active_noise_trash"]["azimuth"].toUInt()+280;i<k;i++)
-            {
-                cache.Coordinates=new Points[1];
-                cache.Coordinates->angle=i->angle;
-                cache.Coordinates->x=i->x;
-                cache.Coordinates->y=i->y;
-                cache.width=GetRandomCoord(4)*density;
-                Cache.active_noise_trash.append(cache);
-            }
-            break;
+        /*
+         Этот кусок кода я написал в семь утра, сидя в электричке после бессонной ночи, плохо понимая, что я вообще делаю.
+         Я не имею ни малейшего представления как и почему оно работает, но вроде работает =)
+        */
+            angle=settings["active_noise_trash"]["azimuth"].toUInt();
+            for(quint16 a=0;a<360;a+=40)
+                for(Points*i=radians+radians_size-angle+a,*k=radians+radians_size-angle+a+20;i<k;i++)
+                {
+                    cache.Coordinates=new Points[1];
+                    cache.Coordinates->angle=i->angle;
+                    cache.Coordinates->x=i->x;
+                    cache.Coordinates->y=i->y;
+                    cache.width=GetRandomCoord(4)*density;
+                    Cache.active_noise_trash.append(cache);
+                }
+        break;
     }
 }
 
