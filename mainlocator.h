@@ -92,7 +92,7 @@ class MainLocator : public QGLWidget
         Points radians[ANGLE_RANGE];
         struct Coordinates
         {
-            QVector<PointsPath>trash,local_items,meteo;
+            QVector<PointsPath>trash,local_items,meteo,active_answer_trash;
             QVector<LineEntity>active_noise_trash;
         }Cache;
         QVector<LineEntity>range,azimuth;
@@ -175,6 +175,11 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
     {
         if(name=="azimuth" || name=="intensity")
             GenerationActiveNoiseTrash();
+    }
+    else if(group=="active_answer_trash")
+    {
+        if(name=="azimuth" || name=="distance")
+            GenerationActiveAnswerTrash();
     }
     if(group!="common")
         updateGL();

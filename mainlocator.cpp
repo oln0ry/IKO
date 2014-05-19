@@ -93,6 +93,8 @@ void MainLocator::paintGL()
         DrawMeteo();
     if(settings["active_noise_trash"]["show"].toBool() && !Cache.active_noise_trash.isEmpty())
         DrawActiveNoiseTrash();
+    if(settings["active_answer_trash"]["show"].toBool() && !Cache.active_answer_trash.isEmpty())
+        DrawActiveNoiseTrash();
     if(!TargetsSettings::targets.isEmpty())
         DrawTargets();
 

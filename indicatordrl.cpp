@@ -52,8 +52,11 @@ IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::Indic
     intensity<<"Слабая"<<"Средняя"<<"Сильная";
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
-
     ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
+
+    //Активные ответно-импульсные помехи
+    ui->InputActiveAnswerAzimuth->valueChanged(ui->InputActiveAnswerAzimuth->value());
+    ui->InputActiveAnswerDistance->valueChanged(ui->InputActiveAnswerDistance->value());
 
     ui->SelectWorkVariant->clicked(); //Режим индикатора кругового обзора
 
