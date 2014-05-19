@@ -150,6 +150,7 @@ bool RSPIndicators::eventFilter(QObject *O, QEvent *E)
         }
         activateWindow();
     }
+    return QMainWindow::eventFilter(O,E);
 }
 
 void RSPIndicators::on_ChangeMainTrashIntensityButton_pressed()

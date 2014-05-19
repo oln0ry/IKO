@@ -198,6 +198,47 @@ CommonView::~CommonView()
     delete ui;
 }
 
+/**
+ * Этот метод является чистой воды диким шаманством
+ */
+bool CommonView::eventFilter(QObject *O, QEvent *E)
+{
+    if((O->objectName()=="MainLocator" || O->inherits("MainLocator")) && E->type()==QEvent::MouseButtonDblClick)
+    {
+        if(isFullScreen())
+        {
+            ui->gridLayout_61->addWidget(ui->RenderMainLocator,0,0,1,1);
+            ui->gridLayout_59->addWidget(ui->RenderEquingularTriangleLocator,0,0,1,1);
+            ui->gridLayout_99->addWidget(ui->RenderRightTriangleLocator,0,0,1,1);
+
+            ui->centralwidget->raise();
+            showNormal();
+        }
+        else
+        {
+            if(O->objectName()=="RenderEquingularTriangleLocator" && O->inherits("EquiangularTriangleLocator"))
+            {
+                ui->gridLayout_104->addWidget(ui->RenderEquingularTriangleLocator,0,0,0,0);
+                ui->RenderEquingularTriangleLocator->raise();
+            }
+            else if(O->objectName()=="RenderRightTriangleLocator" && O->inherits("RightTriangleLocator"))
+            {
+                ui->gridLayout_104->addWidget(ui->RenderRightTriangleLocator,0,0,0,0);
+                ui->RenderRightTriangleLocator->raise();
+            }
+            else
+            {
+                ui->gridLayout_104->addWidget(ui->RenderMainLocator,0,0,0,0);
+                ui->RenderMainLocator->raise();
+                showFullScreen();
+            }
+            showFullScreen();
+        }
+        activateWindow();
+    }
+    return QMainWindow::eventFilter(O,E);
+}
+
 void CommonView::on_ChangeMainScanAmpButton_pressed()
 {
     ui->ChangeMainScanAmp->show();

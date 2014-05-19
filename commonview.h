@@ -165,6 +165,9 @@ private slots:
     void on_CheckShowMeteo_stateChanged(int arg1);
     void on_SetTargetsSettings_clicked();
 
+protected:
+    bool eventFilter(QObject *O,QEvent *E);
+
 private:
     Ui::CommonView *ui;
     QPointer<TargetsSettings>tsettings;

@@ -539,7 +539,7 @@ void IndicatorDRL::on_InputActiveAnswerDistance_valueChanged(double arg1)
 
 void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
 {
-    //ui->RenderMainLocator->show_active_atrash=arg1==2;
+    ui->RenderMainLocator->SetSettings("active_answer_trash","show",arg1==2);
 }
 
 void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
