@@ -1109,41 +1109,6 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="3" alignment="Qt::AlignVCenter">
-     <widget class="QPushButton" name="ShowRightPanel">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::TabFocus</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset resource="Common.qrc">
-        <normaloff>:/extra/arrow_left.png</normaloff>:/extra/arrow_left.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>25</width>
-        <height>25</height>
-       </size>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="MainLocator" name="RenderMainLocator" native="true">
       <property name="sizePolicy">
@@ -1168,7 +1133,6 @@
    <zorder>BoxIndicatorSettings</zorder>
    <zorder>BoxTrashSettings</zorder>
    <zorder>BoxActiveTrashSettings</zorder>
-   <zorder>ShowRightPanel</zorder>
   </widget>
  </widget>
  <customwidgets>

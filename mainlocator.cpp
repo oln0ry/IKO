@@ -417,6 +417,7 @@ void MainLocator::GenerationActiveNoiseTrash()
                 }
             break;
         case 1:
+            /*
             angle=settings["active_noise_trash"]["azimuth"].toUInt();
             for(Points*i=radians+radians_size-angle,*k=radians+radians_size-angle+30;i<k;i++)
             {
@@ -460,14 +461,13 @@ void MainLocator::GenerationActiveNoiseTrash()
                 cache.width-=4*density/5;
                 Cache.active_noise_trash.append(cache);
             }
-            break;
-        case 2:
+            */
         /*
          Этот кусок кода я написал в семь утра, сидя в электричке после бессонной ночи, плохо понимая, что я вообще делаю.
          Я не имею ни малейшего представления как и почему оно работает, но вроде работает =)
         */
             angle=settings["active_noise_trash"]["azimuth"].toUInt();
-            for(quint16 a=0;a<360;a+=40)
+            for(quint16 a=0,j=0;a<360;a+=100,j++)
                 for(Points*i=radians+radians_size-angle+a,*k=radians+radians_size-angle+a+20;i<k;i++)
                 {
                     cache.Coordinates=new Points[1];
@@ -475,6 +475,27 @@ void MainLocator::GenerationActiveNoiseTrash()
                     cache.Coordinates->x=i->x;
                     cache.Coordinates->y=i->y;
                     cache.width=GetRandomCoord(4)*density;
+                    if(j%3==0)
+                        cache.width/=5;
+                    Cache.active_noise_trash.append(cache);
+                }
+            break;
+        case 2:
+        /*
+         Этот кусок кода я написал в семь утра, сидя в электричке после бессонной ночи, плохо понимая, что я вообще делаю.
+         Я не имею ни малейшего представления как и почему оно работает, но вроде работает =)
+        */
+            angle=settings["active_noise_trash"]["azimuth"].toUInt();
+            for(quint16 a=0,j=0;a<360;a+=40,j++)
+                for(Points*i=radians+radians_size-angle+a,*k=radians+radians_size-angle+a+20;i<k;i++)
+                {
+                    cache.Coordinates=new Points[1];
+                    cache.Coordinates->angle=i->angle;
+                    cache.Coordinates->x=i->x;
+                    cache.Coordinates->y=i->y;
+                    cache.width=GetRandomCoord(4)*density;
+                    if(j%3==0)
+                        cache.width/=5;
                     Cache.active_noise_trash.append(cache);
                 }
         break;

@@ -5,7 +5,7 @@
 IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::IndicatorDRL)
 {
     ui->setupUi(this);
-    ui->ShowRightPanel->hide();
+    //ui->ShowRightPanel->hide();
     //###Инициализация
     ui->SelectAzimuthMarks->clicked(); //Отметки азимута
     ui->SelectRangeMarks->clicked(); //Отметки дальности
@@ -128,8 +128,8 @@ bool IndicatorDRL::eventFilter(QObject *O, QEvent *E)
         {
             ui->gridLayout_3->addWidget(ui->RenderMainLocator,0,0,0,0);
             ui->RenderMainLocator->raise();
-            ui->gridLayout_3->addWidget(ui->ShowRightPanel,1,3,1,1);
-            ui->ShowRightPanel->show();
+            //ui->gridLayout_3->addWidget(ui->ShowRightPanel,1,3,1,1);
+            //ui->ShowRightPanel->show();
             showFullScreen();
         }
         activateWindow();
