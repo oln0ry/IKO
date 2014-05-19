@@ -5,6 +5,11 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
 {
     ui->setupUi(this);
     //###Инициализация
+    QStringList intensity;
+    intensity<<"Слабая"<<"Средняя"<<"Сильная";
+    ui->SelectActiveNoiseIntensity->addItems(intensity);
+    ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
+
     //Развёртка (амплитуда)
     ui->ChangeMainScanAmp->valueChanged(ui->ChangeMainScanAmp->value());
     ui->ChangeMainScanAmp->hide();
@@ -167,6 +172,8 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
     ui->SelectEquingularMode->clicked();
 
     //Статика
+    ui->RenderMainLocator->SetSettings("local_items","show",true);
+
     ui->RenderMainLocator->SetSettings("system","azimuth",2u);
     ui->RenderMainLocator->SetSettings("system","range",1u);
 
@@ -175,6 +182,10 @@ CommonView::CommonView(QWidget *parent) : QMainWindow(parent),ui(new Ui::CommonV
 
     ui->RenderRightTriangleLocator->SetSettings("system","azimuth",2u);
     ui->RenderRightTriangleLocator->SetSettings("system","range",1u);
+
+    //Помехи
+    ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
+
     //###\Инициализация
 
     ui->RenderMainLocator->ChangeFPS(static_cast<qreal>(1000)/24);
@@ -1237,4 +1248,50 @@ void CommonView::on_ChangeRightBrightnessAzimuth_valueChanged(int value)
         return;
     ui->RenderRightTriangleLocator->SetSettings("brightness","azimuth",static_cast<qreal>(value)/100);
     ui->ChangeRightBrightnessAzimuthButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightBrightnessAzimuth->maximum())));
+}
+
+void CommonView::on_InputActiveNoiseAzimuth_valueChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","azimuth",static_cast<quint16>(arg1));
+}
+
+void CommonView::on_SelectActiveNoiseIntensity_currentIndexChanged(int index)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","intensity",static_cast<quint16>(index));
+}
+
+void CommonView::on_CheckActiveNoiseShow_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_noise_trash","show",arg1==2);
+}
+
+void CommonView::on_InputActiveAnswerAzimuth_valueChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_answer_trash","azimuth",static_cast<quint16>(arg1));
+}
+
+void CommonView::on_InputActiveAnswerDistance_valueChanged(double arg1)
+{
+    ui->RenderMainLocator->SetSettings("active_answer_trash","distance",static_cast<qreal>(arg1));
+}
+
+void CommonView::on_CheckActiveAnswerShow_stateChanged(int arg1)
+{
+    //ui->RenderMainLocator->show_active_atrash=arg1==2;
+}
+
+void CommonView::on_CheckActiveInSyncShow_stateChanged(int arg1)
+{
+    //ui->RenderMainLocator->show_active_isynctrash=arg1==2;
+}
+
+void CommonView::on_CheckShowMeteo_stateChanged(int arg1)
+{
+    ui->RenderMainLocator->SetSettings("meteo","show",arg1==2);
+}
+
+void CommonView::on_SetTargetsSettings_clicked()
+{
+    tsettings=new TargetsSettings;
+    tsettings->show();
 }

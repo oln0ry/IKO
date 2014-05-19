@@ -53,6 +53,8 @@ IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::Indic
     ui->SelectActiveNoiseIntensity->addItems(intensity);
     ui->SelectActiveNoiseIntensity->setCurrentIndex(1);
 
+    ui->InputActiveNoiseAzimuth->valueChanged(ui->InputActiveNoiseAzimuth->value());
+
     ui->SelectWorkVariant->clicked(); //Режим индикатора кругового обзора
 
     //Статика
