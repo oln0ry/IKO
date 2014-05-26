@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1336</width>
-    <height>908</height>
+    <height>794</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
                <property name="title">
                 <string>Активные помехи</string>
                </property>
-               <widget class="QWidget" name="">
+               <widget class="QWidget" name="layoutWidget">
                 <property name="geometry">
                  <rect>
                   <x>10</x>
@@ -1794,7 +1794,6 @@ background-repeat: no-repeat;</string>
                 <property name="cursor">
                  <cursorShape>PointingHandCursor</cursorShape>
                 </property>
-                <zorder>BoxEmulation</zorder>
                </widget>
               </item>
              </layout>
@@ -3338,7 +3337,7 @@ background-repeat: no-repeat;</string>
      <layout class="QVBoxLayout" name="verticalLayout"/>
     </item>
    </layout>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -3349,7 +3348,7 @@ background-repeat: no-repeat;</string>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout"/>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -3360,150 +3359,15 @@ background-repeat: no-repeat;</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_96"/>
    </widget>
-   <zorder>ChangeMainScanAmp</zorder>
-   <zorder>ChangeMainScanAmpButton</zorder>
-   <zorder>LabelMainScan</zorder>
-   <zorder>LabelMainScanAmp</zorder>
-   <zorder>LabelMainScanEqua</zorder>
-   <zorder>ChangeMainScanEquaButton</zorder>
-   <zorder>ChangeMainScanEqua</zorder>
-   <zorder>LabelMainOffsetHorizontal</zorder>
-   <zorder>ChangeMainOffsetVerticalButton</zorder>
-   <zorder>LabelMainOffsetVertical</zorder>
-   <zorder>ChangeMainOffsetHorizontal</zorder>
-   <zorder>ChangeMainOffsetHorizontalButton</zorder>
-   <zorder>ChangeMainOffsetVertical</zorder>
-   <zorder>LabelMainOffset</zorder>
-   <zorder>ChangeMainBrightnessRange</zorder>
-   <zorder>ChangeMainBrightnessRangeButton</zorder>
-   <zorder>LabelMainBrightness</zorder>
-   <zorder>ChangeMainBrightnessAzimuth</zorder>
-   <zorder>ChangeMainBrightnessAzimuthButton</zorder>
-   <zorder>LabelMainBrightnessAzimuth</zorder>
-   <zorder>LabelMainBrightnessRange</zorder>
-   <zorder></zorder>
-   <zorder>ChangeMainNullSetHorizontalButton</zorder>
-   <zorder>ChangeMainNullSetVerticalButton</zorder>
-   <zorder>LabelMainNullSetHorizontal</zorder>
-   <zorder>LabelMainNullSetVertical</zorder>
-   <zorder>ChangeMainNullSetHorizontal</zorder>
-   <zorder>ChangeMainNullSetVertical</zorder>
-   <zorder>LabelMainNullSet</zorder>
-   <zorder>ChangeMainFocus</zorder>
-   <zorder>ChangeMainFocusButton</zorder>
-   <zorder>LabelMainFocus</zorder>
-   <zorder>LabelMainTrashAKT</zorder>
-   <zorder>ChangeMainTrashAKT</zorder>
-   <zorder>ChangeMainTrashAKTButton</zorder>
-   <zorder>LabelMainTrashPASS</zorder>
-   <zorder>ChangeMainTrashPASS</zorder>
-   <zorder>ChangeMainTrashPASSButton</zorder>
-   <zorder>LabelMainTrash</zorder>
-   <zorder>LabelMainFocusBrightness</zorder>
-   <zorder>ChangeMainFocusBrightness</zorder>
-   <zorder>ChangeMainFocusBrightnessButton</zorder>
-   <zorder>SelectMainScale</zorder>
-   <zorder>LabelMainScale40</zorder>
-   <zorder>LabelMainScale90</zorder>
-   <zorder>LabelMainScale150</zorder>
-   <zorder>RenderEquingularTriangleLocator</zorder>
-   <zorder>LabelEquingularFocus</zorder>
-   <zorder>ChangeEquingularFocus</zorder>
-   <zorder>ChangeEquingularFocusButton</zorder>
-   <zorder>LabelEquingularTrashSDC</zorder>
-   <zorder>ChangeEquingularTrashSDC</zorder>
-   <zorder>ChangeEquingularTrashSDCButton</zorder>
-   <zorder>LabelEquingularTrashPASS</zorder>
-   <zorder>ChangeEquingularTrashPASS</zorder>
-   <zorder>ChangeEquingularTrashPASSButton</zorder>
-   <zorder>LabelEquingularTrashAKT</zorder>
-   <zorder>ChangeEquingularTrashAKT</zorder>
-   <zorder>ChangeEquingularTrashAKTButton</zorder>
-   <zorder>LabelEquingularTrash</zorder>
-   <zorder>SelectEquingularScale</zorder>
-   <zorder>LabelEquingularScale20</zorder>
-   <zorder>LabelEquingularScale30</zorder>
-   <zorder>LabelEquingularScale60</zorder>
-   <zorder>LabelEquingularScale</zorder>
-   <zorder>LabelEquingularBrightness</zorder>
-   <zorder>ChangeEquingularBrightness</zorder>
-   <zorder>ChangeEquingularBrightnessButton</zorder>
-   <zorder>SelectEquingularMode</zorder>
-   <zorder>LabelEquingularModePASS</zorder>
-   <zorder>LabelEquingularModeMixed</zorder>
-   <zorder>LabelEquingularModeAKT</zorder>
-   <zorder>LabelEquingularMode</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer_2</zorder>
-   <zorder>horizontalSpacer_3</zorder>
-   <zorder>horizontalSpacer</zorder>
-   <zorder>horizontalSpacer_4</zorder>
-   <zorder>horizontalSpacer_5</zorder>
-   <zorder>ChangeEquingularScanAmpHorizontalButton</zorder>
-   <zorder>ChangeEquingularScanAmpVerticalButton</zorder>
-   <zorder>LabelEquingularScanAmpHorizontal</zorder>
-   <zorder>LabelEquingularScanAmpVertical</zorder>
-   <zorder>ChangeEquingularScanAmpHorizontal</zorder>
-   <zorder>ChangeEquingularScanAmpVertical</zorder>
-   <zorder>LabelEquingularScanAmp</zorder>
-   <zorder>LabelEquingularOffset</zorder>
-   <zorder>LabelEquingularOffsetHorizontal</zorder>
-   <zorder>LabelEquingularOffsetVertical</zorder>
-   <zorder>ChangeEquingularOffsetHorizontalButton</zorder>
-   <zorder>ChangeEquingularOffsetVerticalButton</zorder>
-   <zorder>ChangeEquingularOffsetHorizontal</zorder>
-   <zorder>ChangeEquingularOffsetVertical</zorder>
-   <zorder>ChangeEquingularDirectionTrack</zorder>
-   <zorder>ChangeEquingularDirectionGlide</zorder>
-   <zorder>LabelEquingularDirectionGlide</zorder>
-   <zorder>LabelEquingularDirectionTrack</zorder>
-   <zorder>ChangeEquingularDirectionTrackButton</zorder>
-   <zorder>ChangeEquingularDirectionGlideButton</zorder>
-   <zorder>LabelEquingularDirection</zorder>
-   <zorder>horizontalSpacer_6</zorder>
-   <zorder>horizontalSpacer_7</zorder>
-   <zorder>RenderRightTriangleLocator</zorder>
-   <zorder>ChangeRightFocus</zorder>
-   <zorder>ChangeRightFocusButton</zorder>
-   <zorder>LabelRightFocus</zorder>
-   <zorder>ChangeRightFocusBrightness</zorder>
-   <zorder>ChangeRightFocusBrightnessButton</zorder>
-   <zorder>LabelRightFocusBrightness</zorder>
-   <zorder>ChangeRightDirectionGlide</zorder>
-   <zorder>ChangeRightOffsetVertical</zorder>
-   <zorder>ChangeRightOffsetHorizontalButton</zorder>
-   <zorder>ChangeRightOffsetHorizontal</zorder>
-   <zorder>LabelRightDirectionTrack</zorder>
-   <zorder>ChangeRightScanAmpVertical</zorder>
-   <zorder>LabelRightOffsetVertical</zorder>
-   <zorder>LabelRightDirection</zorder>
-   <zorder>ChangeRightScanAmpVerticalButton</zorder>
-   <zorder>ChangeRightOffsetVerticalButton</zorder>
-   <zorder>ChangeRightScanAmpHorizontalButton</zorder>
-   <zorder>ChangeRightDirectionGlideButton</zorder>
-   <zorder>LabelRightScanAmpHorizontal</zorder>
-   <zorder>ChangeRightDirectionTrackButton</zorder>
-   <zorder>LabelRightDirectionGlide</zorder>
-   <zorder>ChangeRightScanAmpHorizontal</zorder>
-   <zorder>LabelRightOffset</zorder>
-   <zorder>LabelRightScanAmp</zorder>
-   <zorder>ChangeRightDirectionTrack</zorder>
-   <zorder>LabelRightOffsetHorizontal</zorder>
-   <zorder>LabelRightScanAmpVertical</zorder>
-   <zorder></zorder>
-   <zorder>ChangeRightBrightnessRange</zorder>
-   <zorder>ChangeRightBrightnessRangeButton</zorder>
-   <zorder>LabelRightBrightnessRange</zorder>
-   <zorder>ChangeRightBrightnessAzimuth</zorder>
-   <zorder>ChangeRightBrightnessAzimuthButton</zorder>
-   <zorder>LabelRightBrightnessAzimuth</zorder>
-   <zorder>LabelRightBrightness</zorder>
-   <zorder>BoxEmulation</zorder>
-   <zorder>horizontalSpacer_5</zorder>
-   <zorder>horizontalSpacer_6</zorder>
   </widget>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>MainLocator</class>
+   <extends>QWidget</extends>
+   <header>mainlocator.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>EquiangularTriangleLocator</class>
    <extends>QWidget</extends>
@@ -3514,12 +3378,6 @@ background-repeat: no-repeat;</string>
    <class>RightTriangleLocator</class>
    <extends>QWidget</extends>
    <header>righttrianglelocator.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>MainLocator</class>
-   <extends>QWidget</extends>
-   <header>mainlocator.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

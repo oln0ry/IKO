@@ -92,8 +92,9 @@ class MainLocator : public QGLWidget
         Points radians[ANGLE_RANGE];
         struct Coordinates
         {
-            QVector<PointsPath>trash,local_items,meteo,active_answer_trash;
+            QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
+            QVector<LineEntityR>active_answer_trash;
         }Cache;
         QVector<LineEntity>range,azimuth;
         QVector<Points*>::const_iterator ray_position;
@@ -135,6 +136,8 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
                 GenerationMeteo();
             if(Cache.active_noise_trash.isEmpty())
                 GenerationActiveNoiseTrash();
+            if(Cache.active_answer_trash.isEmpty())
+                GenerationActiveAnswerTrash();
         }
         else if(name=="range")
             GenerationRange();

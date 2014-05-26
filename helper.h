@@ -7,6 +7,11 @@
 #define GetRadianValue(radian) M_PI*radian/180
 #endif
 
+#ifndef TARGET_LENGTH
+#define TARGET_LENGTH 30
+#endif
+
+
 struct Daddy
 {
     qreal x,angle;
@@ -24,6 +29,11 @@ struct LineEntity
 {
     qreal width;
     Points *Coordinates;
+};
+struct LineEntityR
+{
+    qreal width;
+    PointsPath *Coordinates;
 };
 
 struct Targets
