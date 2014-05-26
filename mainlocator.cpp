@@ -565,7 +565,7 @@ void MainLocator::GenerationActiveAnswerTrash()
     }
 }
 
-void MainLocator::DrawActiveAnswerTrash()
+void MainLocator::DrawActiveAnswerTrash()const
 {
     qreal alpha,brightness;
     brightness=1.0f;
@@ -579,7 +579,7 @@ void MainLocator::DrawActiveAnswerTrash()
             if(alpha>.0f)
             {
                 alpha=alpha<settings["system"]["lightning"].toDouble() ? 1.0f : settings["system"]["lightning"].toDouble()/alpha;
-                glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*settings["system"]["brightness"].toDouble()+i->r-settings["system"]["varu"].toDouble());
+                glColor4f(static_cast<GLfloat>(.925),static_cast<GLfloat>(.714),static_cast<GLfloat>(.262),alpha*(settings["system"]["brightness"].toDouble()+i->r-settings["system"]["varu"].toDouble()));
                 glVertex2d(i->x,i->y);
             }
         }

@@ -80,7 +80,7 @@ class MainLocator : public QGLWidget
         void DrawAzimuth()const;
         void DrawLocalItems()const;
         void DrawActiveNoiseTrash()const;
-        void DrawActiveAnswerTrash();
+        void DrawActiveAnswerTrash()const;
         void DrawActiveInSyncTrash();
         void DrawMeteo()const;
         void DrawTargets();
