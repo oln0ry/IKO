@@ -11,11 +11,14 @@ IndicatorPRL::IndicatorPRL(QWidget *parent) : QMainWindow(parent),ui(new Ui::Ind
     ui->SelectRightRangeMarks->clicked();
 
     //Интенсивность усиления приёмника
-    ui->ChangeEquingularTrashIntensity->valueChanged(ui->ChangeEquingularTrashIntensity->value());
+
+    //ui->ChangeEquingularTrashIntensity->valueChanged(ui->ChangeEquingularTrashIntensity->value());
+    ui->ChangeEquingularTrashIntensity->sliderReleased();
     ui->ChangeEquingularTrashIntensity->hide();
     ui->ChangeEquingularTrashIntensity->setDisabled(true);
 
-    ui->ChangeRightTrashIntensity->valueChanged(ui->ChangeRightTrashIntensity->value());
+    //ui->ChangeRightTrashIntensity->valueChanged(ui->ChangeRightTrashIntensity->value());
+    ui->ChangeRightTrashIntensity->sliderReleased();
     ui->ChangeRightTrashIntensity->hide();
     ui->ChangeRightTrashIntensity->setDisabled(true);
 
@@ -158,14 +161,18 @@ void IndicatorPRL::on_ChangeEquingularTrashIntensity_sliderReleased()
     ui->ChangeEquingularTrashIntensity->setDisabled(true);
     ui->ChangeEquingularTrashIntensity->setCursor(Qt::OpenHandCursor);
     ui->ChangeEquingularTrashIntensityButton->setCursor(Qt::OpenHandCursor);
+
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(ui->ChangeEquingularTrashIntensity->value()));
+    ui->RenderEquingularTriangleLocator->SetSettings("trash","show",ui->ChangeEquingularTrashIntensity->value()>0);
 }
 
 void IndicatorPRL::on_ChangeEquingularTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
-    ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
+    //Slow fix
+    //ui->RenderEquingularTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    //ui->RenderEquingularTriangleLocator->SetSettings("trash","show",value>0);
     ui->ChangeEquingularTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeEquingularTrashIntensity->maximum())));
 }
 
@@ -395,14 +402,17 @@ void IndicatorPRL::on_ChangeRightTrashIntensity_sliderReleased()
     ui->ChangeRightTrashIntensity->setDisabled(true);
     ui->ChangeRightTrashIntensity->setCursor(Qt::OpenHandCursor);
     ui->ChangeRightTrashIntensityButton->setCursor(Qt::OpenHandCursor);
+
+    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(ui->ChangeRightTrashIntensity->value()));
+    ui->RenderRightTriangleLocator->SetSettings("trash","show",ui->ChangeRightTrashIntensity->value()>0);
 }
 
 void IndicatorPRL::on_ChangeRightTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
-    ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
-    ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
+    //ui->RenderRightTriangleLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
+    //ui->RenderRightTriangleLocator->SetSettings("trash","show",value>0);
     ui->ChangeRightTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeRightTrashIntensity->maximum())));
 }
 

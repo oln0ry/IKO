@@ -36,7 +36,8 @@ IndicatorDRL::IndicatorDRL(QWidget *parent):QMainWindow(parent),ui(new Ui::Indic
     ui->ChangeIndicatorVARU->setDisabled(true);
 
     //Интенсивность усиления приёмника
-    ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+    //ui->ChangeTrashIntensity->valueChanged(ui->ChangeTrashIntensity->value());
+    ui->ChangeTrashIntensity->sliderReleased();
     ui->ChangeTrashIntensity->hide();
     ui->ChangeTrashIntensity->setDisabled(true);
 
@@ -468,14 +469,20 @@ void IndicatorDRL::on_ChangeTrashIntensity_sliderReleased()
     ui->ChangeTrashIntensity->setDisabled(true);
     ui->ChangeTrashIntensity->setCursor(Qt::OpenHandCursor);
     ui->ChangeTrashIntensityButton->setCursor(Qt::OpenHandCursor);
+    //---------------------------
+    ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(ui->ChangeTrashIntensity->value()));
+    ui->RenderMainLocator->SetSettings("trash","show",ui->ChangeTrashIntensity->value()>0);
 }
 
 void IndicatorDRL::on_ChangeTrashIntensity_valueChanged(int value)
 {
     if(value<0)
         return;
+
+    /*
     ui->RenderMainLocator->SetSettings("trash","intensity",static_cast<quint8>(value));
     ui->RenderMainLocator->SetSettings("trash","show",value>0);
+    */
     ui->ChangeTrashIntensityButton->setIcon(QIcon(value==100u || value==0u ? QPixmap(":/buttons/reo_knob.png") : MainLocator::RotateResourceImage(":/buttons/reo_knob.png",value*360/ui->ChangeTrashIntensity->maximum())));
 }
 
