@@ -81,7 +81,7 @@ class MainLocator : public QGLWidget
         void DrawLocalItems()const;
         void DrawActiveNoiseTrash()const;
         void DrawActiveAnswerTrash()const;
-        void DrawActiveInSyncTrash();
+        void DrawActiveInSyncTrash()const;
         void DrawMeteo()const;
         void DrawTargets();
         qreal GetRandomCoord(quint8,const bool rsign=false)const;
@@ -94,7 +94,8 @@ class MainLocator : public QGLWidget
         {
             QVector<PointsPath>trash,local_items,meteo;
             QVector<LineEntity>active_noise_trash;
-            QVector<LineEntityR>active_answer_trash;
+            QVector<LineEntityR>active_answer_trash,active_insync_trash;
+            //QVector<QVector<LineEntityR> >active_insync_trash;
         }Cache;
         QVector<LineEntity>range,azimuth;
         QVector<Points*>::const_iterator ray_position;
@@ -138,6 +139,8 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
                 GenerationActiveNoiseTrash();
             if(Cache.active_answer_trash.isEmpty())
                 GenerationActiveAnswerTrash();
+            if(Cache.active_insync_trash.isEmpty())
+                GenerationActiveInSyncTrash();
         }
         else if(name=="range")
             GenerationRange();
@@ -183,6 +186,11 @@ template<typename OptionType>void MainLocator::SetSettings(const QString group,c
     {
         if(name=="azimuth" || name=="distance")
             GenerationActiveAnswerTrash();
+    }
+    else if(group=="active_insync_trash")
+    {
+        if(name=="azimuth" || name=="distance")
+            GenerationActiveInSyncTrash();
     }
     if(group!="common")
         updateGL();

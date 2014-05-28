@@ -547,5 +547,5 @@ void IndicatorDRL::on_CheckActiveAnswerShow_stateChanged(int arg1)
 
 void IndicatorDRL::on_CheckActiveInSyncShow_stateChanged(int arg1)
 {
-    //ui->RenderMainLocator->show_active_isynctrash=arg1==2;
+    ui->RenderMainLocator->SetSettings("active_insync_trash","show",arg1==2);
 }
