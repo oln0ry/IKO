@@ -639,7 +639,8 @@ void MainLocator::DrawActiveInSyncTrash()const
 {
     qreal alpha,brightness;
     brightness=1.0f;
-    for(QVector<LineEntityR>::const_iterator it=Cache.active_insync_trash.begin();it<Cache.active_insync_trash.end();it++)
+    //for(QVector<LineEntityR>::const_iterator it=Cache.active_insync_trash.begin();it<Cache.active_insync_trash.end();it++)
+    QVector<LineEntityR>::const_iterator it=Cache.active_insync_trash.begin();
     {
         glLineWidth(it->width*settings["system"]["focus"].toDouble()*brightness);
         glBegin(GL_LINE_STRIP);
@@ -725,6 +726,10 @@ void MainLocator::ContinueSearch()
             not_clean=true;
         ray_position=ray.begin();
         targets_df=true;
+
+        //Impulse (Temporary: It's time to hitrozhop hacks)
+        if(!Cache.active_insync_trash.isEmpty())
+            Cache.active_insync_trash.pop_front();
     }
     ray_position++;
 }
